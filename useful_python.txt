@@ -1,0 +1,26 @@
+Python all useful package and things:
+
+- List []
+    l = []                               ## Initial a empty list
+    l.append(ele)                        ## Append an element into the list
+
+- File I/O
+    file = open(file_path, 'r')          ## Open file for reading
+    file = open(file_path, 'w')          ## Open file for writing
+    l = file.readline()                  ## Read a line from current open file
+    file.write(l)                        ## Write a line into a open file
+
+- os
+    os.listdir(path)                     ## List folder of a given path
+    os.path.join(path1, path2, ...)      ## Join paths by using '/'
+
+- string s
+    fields = s.split(" ")                ## Split the string into fields by " "(Can change to other delimiter)
+
+
+- set
+    s = set(['a','b'])                   ## Init a set
+    s.add('c')                           ## Add an element into a set
+    s.update(['d', 'e'])
+    s.remove('a')                        ## Remove an element from a set
+    set(list1) == set(list2)             ## Compare whether 2 unordered lists are identical
