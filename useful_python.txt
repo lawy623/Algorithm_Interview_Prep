@@ -16,6 +16,7 @@ Python all useful package and things:
 
 - string s
     fields = s.split(" ")                ## Split the string into fields by " "(Can change to other delimiter)
+    '|'.join(list)                       ## Join the list separate by '|'. Like '1|2|3|4'
 
 
 - set
@@ -24,3 +25,14 @@ Python all useful package and things:
     s.update(['d', 'e'])
     s.remove('a')                        ## Remove an element from a set
     set(list1) == set(list2)             ## Compare whether 2 unordered lists are identical
+
+
+- package [collections]
+    - from collections import defaultdict       ## Import the defaultdic package
+        a = defaultdict(int)                    ## Init dic, specify the default type of the value. No key pair will have value that is default in that type.
+        a.items()                               ## Print all k-v pairs in the dict
+
+- package [argparse]
+    parser = argparse.ArgumentParser(description='des', usage='use')  ## Create the parser
+    parser.add_argument('-w','--work', default=, type=, choices, actionmetavar=, help=)   ## Define the corresponding arg.
+    args = parser.parse_args()        ## Parse the args
