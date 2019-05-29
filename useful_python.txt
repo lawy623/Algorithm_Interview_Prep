@@ -17,6 +17,7 @@ Python all useful package and things:
 - string s
     fields = s.split(" ")                ## Split the string into fields by " "(Can change to other delimiter)
     '|'.join(list)                       ## Join the list separate by '|'. Like '1|2|3|4'
+    s.replace('a','b')                   ## Replace all 'a' into 'b'.
 
 
 - set
