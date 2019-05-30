@@ -1,0 +1,11 @@
+c++ all useful package and things:
+
+- vector<dtype>
+    vec.size()                          ## vector size
+    sort(vec.begin(), vec.end())        ## sort the vector
+
+- array []
+    int arr [5] = {1,2,3,4,5}       ## Init an array
+
+- array<int>
+    array<int,3> myarr {1,2,3}     ## Init an array
