@@ -4,21 +4,10 @@ Python all useful package and things:
     l = []                               ## Initial a empty list
     l.append(ele)                        ## Append an element into the list
 
-- File I/O
-    file = open(file_path, 'r')          ## Open file for reading
-    file = open(file_path, 'w')          ## Open file for writing
-    l = file.readline()                  ## Read a line from current open file
-    file.write(l)                        ## Write a line into a open file
-
-- os
-    os.listdir(path)                     ## List folder of a given path
-    os.path.join(path1, path2, ...)      ## Join paths by using '/'
-
 - string s
     fields = s.split(" ")                ## Split the string into fields by " "(Can change to other delimiter)
     '|'.join(list)                       ## Join the list separate by '|'. Like '1|2|3|4'
     s.replace('a','b')                   ## Replace all 'a' into 'b'.
-
 
 - set
     s = set(['a','b'])                   ## Init a set
@@ -27,6 +16,39 @@ Python all useful package and things:
     s.remove('a')                        ## Remove an element from a set
     set(list1) == set(list2)             ## Compare whether 2 unordered lists are identical
 
+- class
+
+- iter
+
+- generator
+
+- dir
+    dir(obj)				 ## Return the methods, attributes of object.
+
+- help
+    help(method)			 ## See the usage of method
+
+- File I/O
+    file = open(file_path, 'r')          ## Open file for reading
+    file = open(file_path, 'w')          ## Open file for writing
+    file = open(file_path, 'a')          ## Open file for append writing
+    l = file.readline()                  ## Read a line from current open file
+    file.write(l)                        ## Write a line into a open file
+
+- os
+    os.listdir(path)                     ## List folder of a given path
+    os.path.join(path1, path2, ...)      ## Join paths by using '/'
+    os.path.exists(path)		 ## Whether path exists
+    os.path.remove(path)		 ## remove the object
+
+- shutil
+    shutil.copy(src, dst)	 	 ## copy the file src to dst
+    shutil.copytree(src, dst)		 ## Copy the whole folder recursively
+    shutil.move(src, dst)		 ## Move the whole folder/file
+    shutil.rmtree(src)			 ## Remove the whole folder recursively
+
+- package [glob]
+    glob.glob(exp)			 ## parse the reg expression and list all files matched.
 
 - package [collections]
     - from collections import defaultdict       ## Import the defaultdic package
@@ -37,3 +59,27 @@ Python all useful package and things:
     parser = argparse.ArgumentParser(description='des', usage='use')  ## Create the parser
     parser.add_argument('-w','--work', default=, type=, choices, actionmetavar=, help=)   ## Define the corresponding arg.
     args = parser.parse_args()        ## Parse the args
+
+- id [obj]
+    addr = id(x)			 ## Return the memory address of object x
+
+- package [numpy]
+    - import numpy as np		 ## Import the lib
+    - x = np.zeros((2,3))		 ## Init zero matrix
+    - y = np.zeros_like(x)		 ## Zero matrix with same shape as x
+    - x = np.arange(8)			 ## Init using range
+    - x.ndim				 ## Dimension of np array
+    - x.shape			  	 ## Shape of np array
+    - x.size				 ## num of elements in np array
+    - x[4], x[4:5,:], x[6,-1]		 ## Indexing of np array
+    - x.take(ind)			 ## Indexing using index
+    - x.reshape((4,5)) or (4,-1)	 ## Reshape the np array
+    - x.flatten(order='C')		 ## Flatten the array('C':row base;'F': col base)
+    - x.ravel()				 ## Flatten as row base
+    - x.transpose()			 ## Transpose
+    - x.swapaxes(axis1, axis2)		 ## Swap two axis(will change dimension order)
+    - x.squeeze(axis)			 ## Remove the axis with dim=1
+    - x.expand_dims(axis)		 ## Expand a dim with 1
+    - np.broadcast(x,y)			 ## Broadcast the shape
+    - np.concatenate((x1,x2..),axis)	 ## Concatenate along an axis
+    - np.stack((x1,x2),axis)		 ## Stack two array along an axis(vstack and hstack)
