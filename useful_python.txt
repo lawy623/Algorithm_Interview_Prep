@@ -102,12 +102,9 @@ Python all useful package and things:
     os.listdir(path)                     ## List folder of a given path
     os.path.join(path1, path2, ...)      ## Join paths by using '/'
     os.path.exists(path)		 ## Whether path exists
-<<<<<<< HEAD
     os.path.remove(path)		 ## remove the object
     os.mkdir(dir)			 ## make a directory
-=======
     os.remove(path)		         ## remove the object
->>>>>>> 641d6fcb7926819981047f0260a6efb93976bed7
 
 - shutil
     shutil.copy(src, dst)	 	 ## copy the file src to dst
