@@ -3,11 +3,53 @@ Python all useful package and things:
 - List []
     l = []                               ## Initial a empty list
     l.append(ele)                        ## Append an element into the list
+    l.extend(list)			 ## Combine two list
+    l.insert(i, x)			 ## insert x at pos i
+    l.remove(x)				 ## remove the first x
+    l.pop([i])				 ## pop and remove the i-th one (No specify will return the last)
+    l.index(x)				 ## return the first index of x
+    l.count(x)				 ## count the number of x
+    l.reverse()				 ## inplace reverse
+    l.sort()				 ## sort list
+    len(list)				 ## length
+    sum(list)				 ## sum of all elements
+
+- List as Stack
+    stack = [...]            ## Init a stack. Last item is like the top of stack
+    stack.append(7)          ## Add to last
+    stack.pop()              ## Pop the last
+
+- List as Queue
+    queue = []               ## Init a queue. New items will be at later pos.
+    queue.append(a)          ## Add to last
+    queue.pop([0])           ## Pop the first (oldest) -- This is slow because it needs to move all.
+
+- from collections import deque
+    queue = deque([a,b,c])   ## Init a queue
+    queue.append(d)          ## Add to last
+    queue.popleft()          ## Pop the oldest
+
+- Tuple ()
+    tuple = ("a", "b", "c")              ## Init a tuple
 
 - string s
     fields = s.split(" ")                ## Split the string into fields by " "(Can change to other delimiter)
     '|'.join(list)                       ## Join the list separate by '|'. Like '1|2|3|4'
     s.replace('a','b')                   ## Replace all 'a' into 'b'.
+    x in s                               ## Check whether x is in string s
+    s.strip('\n')                        ## Trim \n or other
+    s.capitalize()                       ## Change to upper cases
+    s.casefold()                         ## Change to lower cases
+    s.count('x')                         ## Count the number of x
+    endwith(str)                         ## Return whether s is endwith str
+    s.find(str)                          ## Find the first place of str in s
+    s.format()                           ## Format string({} place in string)
+    s.isalnum()                          ## string is all num or alpha
+    s.isalpha()                          ## string is all alpha
+    s.isdigit()                          ## string is all digits
+    s.islower()                          ## string is all lowercases
+    s.isspace()                          ## string is all whitespaces
+    s.isupper()                          ## string is all uppercases
 
 - set
     s = set(['a','b'])                   ## Init a set
@@ -15,18 +57,39 @@ Python all useful package and things:
     s.update(['d', 'e'])
     s.remove('a')                        ## Remove an element from a set
     set(list1) == set(list2)             ## Compare whether 2 unordered lists are identical
+    set1 op set2                         ## use operations +,-,|,&,^
+
+- dict
+    s = {'a':1, 'b':2}                   ## Init a dict
+    s.keys()                             ## list all keys
+    s.values()                           ## list all values
+    s.items()                            ## list all k-v pairs
+    s.get(key)                           ## get the value from a key
+    s.pop(key)                           ## remove key
+    s.popitem()                          ## remove the last item
 
 - class
 
 - iter
+    x = iter(list)           ## Change to iterable (you can use 'for' now)
+    next(x)                  ## Get the next value
+    __iter__(self)           ## Need to implement in the class
+    __next__(self)           ## Need to implement in the class(raise StopIteration)
 
-- generator
+- generator (It returns an iter)
+    yield                   ## use it in function to yield the item. Now you can use next or for like an iter. Last one may raise StopIteration. (good for dataloader)
 
 - dir
     dir(obj)				 ## Return the methods, attributes of object.
 
 - help
     help(method)			 ## See the usage of method
+
+- id [obj]
+    addr = id(x)			 ## Return the memory address of object x
+
+- type
+    type(obj)                ## return type of an object
 
 - File I/O
     file = open(file_path, 'r')          ## Open file for reading
@@ -40,6 +103,7 @@ Python all useful package and things:
     os.path.join(path1, path2, ...)      ## Join paths by using '/'
     os.path.exists(path)		 ## Whether path exists
     os.path.remove(path)		 ## remove the object
+    os.mkdir(dir)			 ## make a directory
 
 - shutil
     shutil.copy(src, dst)	 	 ## copy the file src to dst
@@ -59,9 +123,6 @@ Python all useful package and things:
     parser = argparse.ArgumentParser(description='des', usage='use')  ## Create the parser
     parser.add_argument('-w','--work', default=, type=, choices, actionmetavar=, help=)   ## Define the corresponding arg.
     args = parser.parse_args()        ## Parse the args
-
-- id [obj]
-    addr = id(x)			 ## Return the memory address of object x
 
 - package [numpy]
     - import numpy as np		 ## Import the lib
