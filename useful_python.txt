@@ -69,6 +69,33 @@ Python all useful package and things:
     s.popitem()                          ## remove the last item
 
 - class
+    def __init__(self, args)             ## Init a class obj
+    def func(self, args)                 ## Define a public method
+    __private_att = 0                    ## Private var. But can be accessed by _classname__private
+    def __private_method                 ## Private method
+    isinstance(obj, class)               ## Return whether obj is an instance of class
+    super(class, self).func()            ## Call parent's function
+    __str__                              ## By default is the address
+    __del__                              ## Use when delete the obj
+    __call__                             ## Use the classname as a function directly
+    __lt__                               ## Implement and you can compare with a value
+    __hasattr__                          ## Whether obj has att/method
+    __setattr__                          ## Set an attr with value
+    __getattr__                          ## Return an att
+    __len__                              ## Length
+    __setitem__                          ## Set item by index
+    __getitem__                          ## Get item by index
+    __slots__                            ## Set limit for dynamics blinding att and method
+    __dict__                             ## Info of all method/att of an obj class
+    @property                            ## Getter of an att. Use to decorate a func
+    @att.setter                          ## Setter of an att. (Not set it means it is private att)
+    @staticmethod                        ## Can use the class method to call the method(e.g. math.log)
+    @classmethod func(cls, arg)          ## Like staticmethod, but need arg 'cls' at first
+
+- map
+    map(func, iterable)                  ## map a function to all things in an iterable(list, dict)
+    f = lambda x: x ** 2                 ## lambda function to avoid set the function name. Can be use as func in map.
+    map(f, list)                         ## Sample of the usage
 
 - iter
     x = iter(list)           ## Change to iterable (you can use 'for' now)
@@ -77,7 +104,10 @@ Python all useful package and things:
     __next__(self)           ## Need to implement in the class(raise StopIteration)
 
 - generator (It returns an iter)
-    yield                   ## use it in function to yield the item. Now you can use next or for like an iter. Last one may raise StopIteration. (good for dataloader)
+    yield                    ## use it in function to yield the item. Now you can use next or for like an iter. Last one may raise StopIteration. (good for dataloader)
+
+- zip
+    zip(a, b)                ## Pack two iterable into a tuple.
 
 - dir
     dir(obj)				 ## Return the methods, attributes of object.
@@ -102,7 +132,6 @@ Python all useful package and things:
     os.listdir(path)                     ## List folder of a given path
     os.path.join(path1, path2, ...)      ## Join paths by using '/'
     os.path.exists(path)		 ## Whether path exists
-    os.path.remove(path)		 ## remove the object
     os.mkdir(dir)			 ## make a directory
     os.remove(path)		         ## remove the object
 
@@ -112,6 +141,16 @@ Python all useful package and things:
     shutil.move(src, dst)		 ## Move the whole folder/file
     shutil.rmtree(src)			 ## Remove the whole folder recursively
 
+- decorator                      ## Let the foo function has both its own content and the decorator's add.
+    def use_decorator(func):
+        def wrapper(*args, **kwargs):
+            ## Add new content
+            return func(*args)
+        return wrapper
+    @use_decorator               ## This also allows args inside. So wrapper can be more flexible. / You can use multiple decorators as well.
+    def foo():
+        ## Methods
+
 - package [glob]
     glob.glob(exp)			 ## parse the reg expression and list all files matched.
 
@@ -120,6 +159,11 @@ Python all useful package and things:
         a = defaultdict(int)                    ## Init dic, specify the default type of the value. No key pair will have value that is default in that type.
         a.items()                               ## Print all k-v pairs in the dict
 
+- package [enum]
+    - from enum import Enum                     ## Import  an enum
+        Enum('name',('val1', 'val2'....))       ## Set values
+        name.val1                               ## Get value.
+        name.__members__.items()                ## Get the name and value
 - package [argparse]
     parser = argparse.ArgumentParser(description='des', usage='use')  ## Create the parser
     parser.add_argument('-w','--work', default=, type=, choices, actionmetavar=, help=)   ## Define the corresponding arg.
