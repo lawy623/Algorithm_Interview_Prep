@@ -151,6 +151,20 @@ Python all useful package and things:
     def foo():
         ## Methods
 
+- Bit manipulation
+	0b111			 ## 0b tells following are binary
+	bin(int)		 ## Tells the binary code of an int
+	>>			 ## Shfit right(add the leftmost bit of original)
+	<<			 ## Shift left(positive add 0, negative needs more steps). Exceed will change to Long(64 bits)
+	|                        ## OR
+	&			 ## And
+	^			 ## Exclusive OR
+	~			 ## NOT
+	from bitarray import bitarray
+		- a = bitarray(10)		 ## Init bitarray
+		- a[2:5] = 1			 ## Set some bits
+		- a.all()			 ## return if all are 1
+
 - package [glob]
     glob.glob(exp)			 ## parse the reg expression and list all files matched.
 
