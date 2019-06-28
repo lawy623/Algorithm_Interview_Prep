@@ -3,6 +3,7 @@ c++ all useful package and things:
 - vector<dtype>
     vec.size()                          ## vector size
     sort(vec.begin(), vec.end())        ## sort the vector
+    vector<vector<int>> vec             ## vector of vector(matrix), access by vec[i][j]
 
 - array []
     int arr [5] = {1,2,3,4,5}       ## Init an array
