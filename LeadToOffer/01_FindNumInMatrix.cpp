@@ -1,4 +1,4 @@
-//1.cpp版本
+//1.cpp version
 class Solution {
 public:
     bool Find(int target, vector<vector<int> > array) {
@@ -6,7 +6,7 @@ public:
         if (array[0].size() == 0) {
             return false;
         }
- 
+
         int row = 0;
         int col = n-1;
         while (row < n && col >= 0) {

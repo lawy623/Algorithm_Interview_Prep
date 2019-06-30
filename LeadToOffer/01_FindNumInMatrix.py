@@ -1,6 +1,7 @@
-//1. 递增二维数组中查找
-//一开始使用左上角开始，并不work
-//从右上角开始则可
+//1. search in acsending matrix
+//First try to start from left top but not work.
+//For right top is then ok
+
 class Solution:
     def Find(self, target, array):
         n = len(array)
