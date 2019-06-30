@@ -1,12 +1,44 @@
 c++ all useful package and things:
 
-- vector<dtype>
-    vec.size()                          ## vector size
-    sort(vec.begin(), vec.end())        ## sort the vector
-    vector<vector<int>> vec             ## vector of vector(matrix), access by vec[i][j]
+- vector<dtype> vec
+    vector<int> v {1,2,3};                                      ## init vector by value
+    vector<int> v(10);                                          ## init vector by length
+    vector<int> vec (arr, arr+(sizeof(arr)/sizeof(arr[0])) )    ## init by an array
+    vector<int> v1 (v2.begin(), v2.end())                       ## init by another vector
+    vec.size();                                                 ## vector size
+    vec.push_back(10);                                          ## push back value at the end.
+    sort(vec.begin(), vec.end());                               ## sort the vector
+    vector<vector<int>> vec;                                    ## vector of vector(matrix), access by vec[i][j]
+    for (auto x : vec) {}                                       ## access by auto var though the vector
 
 - array []
-    int arr [5] = {1,2,3,4,5}       ## Init an array
+    int arr [5] = {1,2,3,4,5};                                  ## Init an array
 
 - array<int>
-    array<int,3> myarr {1,2,3}     ## Init an array
+    array<int,3> myarr {1,2,3};                                 ## Init an array
+
+- char *s
+    char *s = "I am string.";                                   ## Init string. Last char always '\0'
+    s[5] = '0';                                                 ## Access by index and assign char value.
+
+
+
+
+------------ cpp template --------------
+#include <iostream>
+using namespace std;
+int main() {
+    int n;
+    cin >> n;
+
+    int a, b;
+    while(n--) {
+        cin >> a >> b;
+    }
+    //you implementation or use func
+    // func(a, b)
+
+    return 0;
+}
+-------- compiled by -----------
+g++ -o temp template.cpp -Wall
