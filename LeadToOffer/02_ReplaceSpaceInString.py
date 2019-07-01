@@ -1,4 +1,5 @@
 ## Use python str package for easy replace.
+## O(n) time.
 class Solution:
     def replaceSpace(self, s):
         words = s.split(' ')

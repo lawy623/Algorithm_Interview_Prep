@@ -1,4 +1,4 @@
-//1.cpp version
+//1.cpp version. O(n) time, O(1) space.
 class Solution {
 public:
     bool Find(int target, vector<vector<int> > array) {

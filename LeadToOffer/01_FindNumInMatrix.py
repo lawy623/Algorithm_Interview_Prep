@@ -1,6 +1,6 @@
-//1. search in acsending matrix
-//First try to start from left top but not work.
-//For right top is then ok
+## 1. search in acsending matrix
+## First try to start from left top but not work.
+## For right top is then ok. O(n) time, O(1) space.
 
 class Solution:
     def Find(self, target, array):

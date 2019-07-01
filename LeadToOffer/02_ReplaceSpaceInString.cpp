@@ -1,4 +1,5 @@
 // cpp version. Loop to count the space first. Then fill backward.
+// O(n) time, O(1) space.
 void replaceSpace(char *str,int length) {
     if (length <= 0 || str == NULL)
         return;
