@@ -1,26 +1,66 @@
 c++ all useful package and things:
 
+- address and value
+    &x                                                          ## get the address of x. Pass-by-Reference in function
+    *x                                                          ## return the value
+
+- array []
+    int arr [5] = {1,2,3,4,5}                                   ## Init an array
+    int arr [] = {1,2,3,4,5}                                    ## Init an array without declare the length
+    arr[idx]                                                    ## acces the idx
+    int *ptr = arr                                              ## init a pointer of array
+
+- array<int>
+    array<int,3> arr {1,2,3}                                    ## Init an array
+    arr[idx]                                                    ## access the idx
+    sort(arr.begin(), arr.end())                                ## sort the array
+    for(auto s : arr) {}                                        ## loop through the array
+    array.size()                                                ## return the size
+    array.empty()                                               ## return whether the array is empty
+
 - vector<dtype> vec
-    vector<int> v {1,2,3};                                      ## init vector by value
-    vector<int> v(10);                                          ## init vector by length
+    vector<int> v {1,2,3}                                       ## init vector by value
+    vector<int> v(10)                                           ## init vector by length
     vector<int> vec (arr, arr+(sizeof(arr)/sizeof(arr[0])) )    ## init by an array
     vector<int> v1 (v2.begin(), v2.end())                       ## init by another vector
-    vec.size();                                                 ## vector size
-    vec.push_back(10);                                          ## push back value at the end.
+    vec[idx]                                                    ## access the idx
+    vec.clear()                                                 ## clear the vector
+    vec.size()                                                  ## vector size
+    vec.push_back(10)                                           ## push back value at the end.
+    vec.front()                                                 ## return the first val
+    vec.back()                                                  ## return the last val
+    vec.pop_back()                                              ## remove the last val
+    vec.at(idx)                                                 ## access by index. same as vec[idx]
     sort(vec.begin(), vec.end());                               ## sort the vector
     vector<vector<int>> vec;                                    ## vector of vector(matrix), access by vec[i][j]
     for (auto x : vec) {}                                       ## access by auto var though the vector
+    vector<int>::iterator it;                                   ## create iterator
+        for(it=vec.begin(); it!=vec.end(); it++) {cout<<*it}    ## loop through using iterator
+    vec.insert(vec.begin()+i, x)                                ## insert x at i+1 pos
+    vec.erase(vec.begin()+i)                                    ## remove the i+i val
+    vec.erase(vec.begin()+i, vec.begin()+j)                     ## remove from i+1 to j
+    reverse(vec.begin(), vec.end())                             ## reverse the vector
 
-- array []
-    int arr [5] = {1,2,3,4,5};                                  ## Init an array
+- queue<dtype> queue
+    queue.push(x)                                               ## push a value at back
+    queue.pop()                                                 ## pop the first value (FIFO), will not return value
+    queue.front()                                               ## return the first value
+    queue.back()                                                ## return the last value
+    q.empty()                                                   ## return whether the queue is empty
+    q.size()                                                    ## return the size
 
-- array<int>
-    array<int,3> myarr {1,2,3};                                 ## Init an array
+- stack<dtype> stack
+    stack.push(x)                                               ## push a value at top
+    stack.pop()                                                 ## pop the top value, will not return
+    stack.top()                                                 ## return the top value
+    stack.size()                                                ## return the size
+    stack.empty()                                               ## return whether the queue is empty
 
 - char *s
     char *s = "I am string.";                                   ## Init string. Last char always '\0'
     s[5] = '0';                                                 ## Access by index and assign char value.
 
+- map
 
 
 
