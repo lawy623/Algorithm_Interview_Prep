@@ -4,6 +4,10 @@ c++ all useful package and things:
     &x                                                          ## get the address of x. Pass-by-Reference in function
     *x                                                          ## return the value
 
+- float and double
+    abs(float) <= 1e-6                                          ## whether float value is 0
+    abs(double) <= 1e-15                                        ## whether double value is 0
+
 - array []
     int arr [5] = {1,2,3,4,5}                                   ## Init an array
     int arr [] = {1,2,3,4,5}                                    ## Init an array without declare the length
