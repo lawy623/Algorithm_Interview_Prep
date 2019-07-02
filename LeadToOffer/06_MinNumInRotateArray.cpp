@@ -15,6 +15,8 @@ public:
         int mid = int( (start+end)/2 );
         if (array[mid]>array[end])
             return minNum(array, mid+1, end);
+        else if (array[mid] == array[start] && array[mid] == array[end])
+            return minNum(array, start+1, end-1);
         else
             return minNum(array, start, mid);
     }

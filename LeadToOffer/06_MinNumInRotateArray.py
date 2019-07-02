@@ -24,5 +24,7 @@ class Solution:
         mid = int( (start+end) /2)
         if array[mid] > array[end]:
             return self.minNum(array, mid+1, end)
+        elif array[mid] == array[start] and array[mid] == array[end]:
+            return self.minNum(array, start+1, end-1)
         else:
             return self.minNum(array, start, mid)
