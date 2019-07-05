@@ -5,9 +5,18 @@ c++ all useful package and things:
     *x                                                          ## return the value
 
 - clock()
-    #include <time.h>                                           # include lib
-    clock_t start = clock()                                     # record start clock
-    (double)(start-end) / CLOCKS_PER_SEC                        # different clock time to seconds
+    #include <time.h>                                           ## include lib
+    clock_t start = clock()                                     ## record start clock
+    (double)(start-end) / CLOCKS_PER_SEC                        ## different clock time to seconds
+    ## in OpenMP mode, the clock_time will sum up. So it does not represent the real clock time.
+
+- time using other:
+    #include <sys/time.h>                                       ## import lib
+    struct timeval start, end;                                  ## time struct
+    gettimeofday(&start, NULL);                                 ## get start time
+    gettimeofday(&end, NULL);                                   ## get end time
+    double delta = ((end.tv_sec  - start.tv_sec) * 1000000u +
+         end.tv_usec - start.tv_usec) / 1.e6;                   ## time difference
 
 - float and double
     abs(float) <= 1e-6                                          ## whether float value is 0
