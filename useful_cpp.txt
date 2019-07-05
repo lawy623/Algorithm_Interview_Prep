@@ -4,6 +4,11 @@ c++ all useful package and things:
     &x                                                          ## get the address of x. Pass-by-Reference in function
     *x                                                          ## return the value
 
+- clock()
+    #include <time.h>                                           # include lib
+    clock_t start = clock()                                     # record start clock
+    (double)(start-end) / CLOCKS_PER_SEC                        # different clock time to seconds
+
 - float and double
     abs(float) <= 1e-6                                          ## whether float value is 0
     abs(double) <= 1e-15                                        ## whether double value is 0
