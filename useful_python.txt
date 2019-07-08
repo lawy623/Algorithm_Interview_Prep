@@ -22,7 +22,7 @@ Python all useful package and things:
 - List as Queue
     queue = []               ## Init a queue. New items will be at later pos.
     queue.append(a)          ## Add to last
-    queue.pop([0])           ## Pop the first (oldest) -- This is slow because it needs to move all.
+    queue.pop(0)           ## Pop the first (oldest) -- This is slow because it needs to move all.
 
 - from collections import deque
     queue = deque([a,b,c])   ## Init a queue
