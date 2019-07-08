@@ -53,7 +53,7 @@ c++ all useful package and things:
     vector<vector<int>> vec;                                    ## vector of vector(matrix), access by vec[i][j]
     for (auto x : vec) {}                                       ## access by auto var though the vector
     vector<int>::iterator it;                                   ## create iterator
-        for(it=vec.begin(); it!=vec.end(); it++) {cout<<*it}    ## loop through using iterator
+        for(it=vec.begin(); it!=vec.end(); it++) {cout<<*it}    ## loop through using iterator, *it is the val
     vec.insert(vec.begin()+i, x)                                ## insert x at i+1 pos
     vec.erase(vec.begin()+i)                                    ## remove the i+i val
     vec.erase(vec.begin()+i, vec.begin()+j)                     ## remove from i+1 to j
@@ -78,7 +78,35 @@ c++ all useful package and things:
     char *s = "I am string.";                                   ## Init string. Last char always '\0'
     s[5] = '0';                                                 ## Access by index and assign char value.
 
-- map
+- map       (using RedBlack Tree)
+    map<int, int> m;                                            ## init a map, with key-value specify
+    m[1] = 10                                                   ## assign value
+    map.insert({key, val})                                      ## insert value
+    map.insert(pair<int,int>(3,3))                              ## insert by specify a pair
+    map.insert(m2.begin(), m2.end())                            ## insert by copying map2
+    map<int,int>::iterator it;                                  ## iterator
+        it -> first                                             ## iter -> key
+        it -> second                                            ## iter -> val
+    map.size()                                                  ## number of pairs in map
+    map.empty()                                                 ## whether map is empty
+    map.find(key)                                               ## return an iterator。 return map.end() is not found
+    map.count(key)                                              ## number of times key appear
+    map.erase(key)                                              ## remove pair by key
+    map.erase(map.find(key))                                    ## remove pair by iterator
+    iter = map.equal_range(key)                                 ## equal range finder
+        iter.first -> first/second                              ## lower bound (not bigger than key)
+        iter.second -> first/second                             ## upper bound (first bigger than key)
+
+- unordered_map  (using hash table)
+    unordered_map<int, int> m;                                  ## init. Other methods are the same as 'map'
+
+- unordered_multimap
+    unordered_multimap<int, pair<int, int>> map;                ## one key with two values
+    unordered_multimap<int, tuple<int, int, int>> map;          ## one key with multiple values
+    map.insert(make_pair(key, make_pair(v1, v2)));              ## insert value
+    iter -> first                                               ## get key from iterator
+    iter -> second.first                                        ## get first val in pair from iterator
+    iter -> second.second                                       ## get second val in pair from iterator
 
 
 
