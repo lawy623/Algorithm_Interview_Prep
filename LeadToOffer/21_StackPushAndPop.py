@@ -8,15 +8,10 @@ class Solution:
         res = []
         i,j = 0,0
         while i<len(pushV):
-            if len(res)!=0 and res[-1]==popV[j]:
+            res.append(pushV[i])
+            while len(res)!=0 and res[-1]==popV[j]:
                 res.pop()
                 j += 1
-            else:
-                res.append(pushV[i])
-                i += 1
-        while len(res)>0:
-            if res[-1]!= popV[j]:
-                return False
-            res.pop()
-            j += 1
-        return True
+            i += 1
+
+        return len(res)==0

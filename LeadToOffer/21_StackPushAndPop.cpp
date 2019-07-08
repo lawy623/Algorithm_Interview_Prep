@@ -10,20 +10,14 @@ public:
         int i = 0;
         int j = 0;
         while (i<pushV.size()) {
-            if (!temp.empty() && popV[j]==temp.top()) {
+            temp.push(pushV[i]);
+            i++;
+            while (!temp.empty() && popV[j]==temp.top()) {
                 temp.pop();
                 j++;
-            } else {
-                temp.push(pushV[i]);
-                i++;
             }
         }
-        while (!temp.empty()) {
-            if (popV[j]!=temp.top())
-                return false;
-            temp.pop();
-            j++;
-        }
-        return true;
+
+        return temp.empty();
     }
 };
