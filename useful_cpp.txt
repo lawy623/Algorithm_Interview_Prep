@@ -108,6 +108,16 @@ c++ all useful package and things:
     iter -> second.first                                        ## get first val in pair from iterator
     iter -> second.second                                       ## get second val in pair from iterator
 
+- struct
+    struct TreeNode {                                           ## sample of defining a struct
+        int val;
+        struct TreeNode *left;
+        struct TreeNode *right;
+        TreeNode(int x) :
+                val(x), left(NULL), right(NULL) {
+        }
+    };
+
 
 
 ------------ cpp template --------------
@@ -126,5 +136,6 @@ int main() {
 
     return 0;
 }
+
 -------- compiled by -----------
 g++ -o temp template.cpp -Wall
