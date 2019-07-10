@@ -60,14 +60,15 @@ c++ all useful package and things:
     reverse(vec.begin(), vec.end())                             ## reverse the vector
 
 - heap (operation on vector)
-    make_heap(vec.begin(), vec.end())                           ## make the heap to be the max heap. 'greater<int>' as last argument turn it to min heap.
+    make_heap(vec.begin(), vec.end())                           ## make the heap to be the max heap. 'greater<int>()' as last argument turn it to min heap.
     vec.front()                                                 ## get the first val(max) from max heap
     vec.push_back(40); push_heap(vec.begin(), vec.end())        ## push a value
     pop_heap(v.begin(), v.end()); v.pop_back()                  ## remove the max
+    sort_heap(v.begin(), v.end());                              ## need to sort heap after pop_back()
 
 - priority_queue (max_heap)
     priority_queue<int> q(vec.begin(),vec.end());               ## max heap
-    priority_queue<int, vector<int>, greater<int> >p;           ## min heap
+    priority_queue<int, vector<int>, greater<int> >q;           ## min heap. Can init by q(vec.begin(),vec.end())
     q.pop()                                                     ## pop the heap's top
     q.top()                                                     ## get the heap's top
     q.push(val)                                                 ## push value
