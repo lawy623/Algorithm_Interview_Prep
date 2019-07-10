@@ -78,6 +78,22 @@ c++ all useful package and things:
     char *s = "I am string.";                                   ## Init string. Last char always '\0'
     s[5] = '0';                                                 ## Access by index and assign char value.
 
+- string
+    string s（“sss")                                             ## init string
+    s.substr(start, length)                                      ## substring from start with length
+    str.insert(pos, str2, start, length)                         ## insert at position with part of str2
+    str.erase(start, length)                                     ## erase from start with length
+    str.append(str2, start, length)                              ## append part of str2
+    str.replace(start, length, str2, start2, length2)            ## replace part of str by part of str2
+    str.assign(base)                                             ## assign base to str
+    str.find(str2, start, length)                                ## find part of str2. Not found return string::npos
+    str.rfind(str2, start, length)                               ## find from right.
+    str.compare(start, length, str2, start2, length2)            ## compare part of str with part of str2
+    to_string(val)                                               ## val to string
+    stoi(str)                                                    ## string to int
+    stof(Str)                                                    ## string to float
+
+
 - map       (using RedBlack Tree)
     map<int, int> m;                                            ## init a map, with key-value specify
     m[1] = 10                                                   ## assign value
