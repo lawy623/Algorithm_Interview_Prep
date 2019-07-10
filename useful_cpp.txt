@@ -59,6 +59,12 @@ c++ all useful package and things:
     vec.erase(vec.begin()+i, vec.begin()+j)                     ## remove from i+1 to j
     reverse(vec.begin(), vec.end())                             ## reverse the vector
 
+- heap (operation on vector)
+    make_heap(vec.begin(), vec.end())                           ## make the heap to be the max heap. 'greater<int>()' as last argument turn it to min heap.
+    vec.front()                                                 ## get the first val(max) from max heap
+    vec.push_back(40); push_heap(vec.begin(), vec.end())        ## push a value
+    pop_heap(v.begin(), v.end()); v.pop_back()                 ## remove the max
+
 - queue<dtype> queue
     queue.push(x)                                               ## push a value at back
     queue.pop()                                                 ## pop the first value (FIFO), will not return value
@@ -80,6 +86,7 @@ c++ all useful package and things:
 
 - string
     string s（“sss")                                             ## init string
+    s.length()                                                   ## length of string
     s.substr(start, length)                                      ## substring from start with length
     str.insert(pos, str2, start, length)                         ## insert at position with part of str2
     str.erase(start, length)                                     ## erase from start with length
