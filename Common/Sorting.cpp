@@ -21,7 +21,7 @@ void merge(vector<int>& arr, int first, int mid, int last){
 	for(int k=first;k<last;k++){
 		if(l[a]<=r[b]){arr[k]=l[a++];}
 		else{arr[k]=r[b++];}
-	}		
+	}
 }
 void mergeSort(vector<int>& arr, int first, int last){
 	if(first<last){
@@ -46,11 +46,11 @@ void quickSort(vecotr<int>& nums, int low, int high){
 int partition(vector<int>& nums,int low, int high){
 	int pivot = nums[high];
 	int i=low-1;
-	for(int j=low;j<high;i++){
+	for(int j=low;j<high;j++){
 		if(nums[j]<=pivot){
 			swap(nums[++i],nums[j]);
 		}
 	}
-	swap(nums[i+1],nums[high]);
-	return i+1;
+	swap(nums[++i],nums[high]);
+	return i;
 }
