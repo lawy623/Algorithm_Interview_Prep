@@ -183,6 +183,7 @@ Python all useful package and things:
     parser = argparse.ArgumentParser(description='des', usage='use')  ## Create the parser
     parser.add_argument('-w','--work', default=, type=, choices, actionmetavar=, help=)   ## Define the corresponding arg.
     args = parser.parse_args()        ## Parse the args
+    len( vars(args) )                 ## Get length of parser's variables
 
 -package [heapq]
     h = []                           ## init
