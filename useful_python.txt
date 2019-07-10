@@ -178,35 +178,45 @@ Python all useful package and things:
         Enum('name',('val1', 'val2'....))       ## Set values
         name.val1                               ## Get value.
         name.__members__.items()                ## Get the name and value
+
 - package [argparse]
     parser = argparse.ArgumentParser(description='des', usage='use')  ## Create the parser
     parser.add_argument('-w','--work', default=, type=, choices, actionmetavar=, help=)   ## Define the corresponding arg.
     args = parser.parse_args()        ## Parse the args
 
+-package [heapq]
+    h = []                           ## init
+    heappush(h, val)                 ## push val to heap h
+    heappop(h)                       ## pop the min and return
+    heapify(a)                      ## build min heap from list a
+    _heapify_max(a)                  ## build max heap from list a
+    _heappop_max(a)                  ## pop for max heap
+    _heappush_max(a, val)            ## push for max heap
+
 - package [numpy]
-    - import numpy as np		 ## Import the lib
-    - x = np.zeros((2,3))		 ## Init zero matrix
-    - y = np.zeros_like(x)		 ## Zero matrix with same shape as x
-    - x = np.arange(8)			 ## Init using range
-    - x.ndim				 ## Dimension of np array
-    - x.shape			  	 ## Shape of np array
-    - x.size				 ## num of elements in np array
-    - x[4], x[4:5,:], x[6,-1]		 ## Indexing of np array
-    - x.take(ind)			 ## Indexing using index
-    - x.reshape((4,5)) or (4,-1)	 ## Reshape the np array
-    - x.flatten(order='C')		 ## Flatten the array('C':row base;'F': col base)
-    - x.ravel()				 ## Flatten as row base
-    - x.transpose()			 ## Transpose
-    - x.swapaxes(axis1, axis2)		 ## Swap two axis(will change dimension order)
-    - x.squeeze(axis)			 ## Remove the axis with dim=1
-    - x.expand_dims(axis)		 ## Expand a dim with 1
-    - np.broadcast(x,y)			 ## Broadcast the shape
-    - np.concatenate((x1,x2..),axis)	 ## Concatenate along an axis
-    - np.stack((x1,x2),axis)		 ## Stack two array along an axis(vstack and hstack)
-    - np.tile(x, repr)           ## Tile(repeat) x in each dim following repr
-    - np.repeat(x, times, axis)  ## Repeate x in some axis for times
-    - np.logical_and(x1,x2)      ## Logical and
-    - np.ufunc.reduce((x1,x2,x3))## Apply ufunc along the axis and reduce the final dimension
-    - np.argsort(array)		 ## Return the index that can sort the array
-    - np.sort(array)		 ## Sort the numpy array
-    - np.linalg			 ## Linear Algebra Op. You can use .norm, .det, .inv, ...
+    - import numpy as np		     ## Import the lib
+        x = np.zeros((2,3))		     ## Init zero matrix
+        y = np.zeros_like(x)		 ## Zero matrix with same shape as x
+        x = np.arange(8)			 ## Init using range
+        x.ndim				         ## Dimension of np array
+        x.shape			  	         ## Shape of np array
+        x.size				         ## num of elements in np array
+        x[4], x[4:5,:], x[6,-1]		 ## Indexing of np array
+        x.take(ind)			         ## Indexing using index
+        x.reshape((4,5)) or (4,-1)	 ## Reshape the np array
+        x.flatten(order='C')		 ## Flatten the array('C':row base;'F': col base)
+        x.ravel()				     ## Flatten as row base
+        x.transpose()			     ## Transpose
+        x.swapaxes(axis1, axis2)	 ## Swap two axis(will change dimension order)
+        x.squeeze(axis)			     ## Remove the axis with dim=1
+        x.expand_dims(axis)		     ## Expand a dim with 1
+        np.broadcast(x,y)			 ## Broadcast the shape
+        np.concatenate((x1,x2..),axis)	 ## Concatenate along an axis
+        np.stack((x1,x2),axis)		 ## Stack two array along an axis(vstack and hstack)
+        np.tile(x, repr)             ## Tile(repeat) x in each dim following repr
+        np.repeat(x, times, axis)    ## Repeate x in some axis for times
+        np.logical_and(x1,x2)        ## Logical and
+        np.ufunc.reduce((x1,x2,x3))  ## Apply ufunc along the axis and reduce the final dimension
+        np.argsort(array)		     ## Return the index that can sort the array
+        np.sort(array)		         ## Sort the numpy array
+        np.linalg			         ## Linear Algebra Op. You can use .norm, .det, .inv, ...
