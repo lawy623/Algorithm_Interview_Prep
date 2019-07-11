@@ -11,6 +11,7 @@ Python all useful package and things:
     l.count(x)				 ## count the number of x
     l.reverse()				 ## inplace reverse
     l.sort()				 ## sort list
+    l.sort(cmp=lamba x,y: x-y) ## sort by cmp (smaller first)
     len(list)				 ## length
     sum(list)				 ## sum of all elements
 
@@ -105,7 +106,7 @@ Python all useful package and things:
 
 - inf
     float('Inf')             ## infinite large. -float('Inf') is smallest
-    
+
 - generator (It returns an iter)
     yield                    ## use it in function to yield the item. Now you can use next or for like an iter. Last one may raise StopIteration. (good for dataloader)
 

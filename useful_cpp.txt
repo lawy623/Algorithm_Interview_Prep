@@ -50,6 +50,8 @@ c++ all useful package and things:
     vec.pop_back()                                              ## remove the last val
     vec.at(idx)                                                 ## access by index. same as vec[idx]
     sort(vec.begin(), vec.end());                               ## sort the vector
+        static bool comp(int a, int b)                          ## sort by self defined static cmp func
+        sort(v.begin(), v.end(), comp)
     vector<vector<int>> vec;                                    ## vector of vector(matrix), access by vec[i][j]
     for (auto x : vec) {}                                       ## access by auto var though the vector
     vector<int>::iterator it;                                   ## create iterator
@@ -104,6 +106,7 @@ c++ all useful package and things:
     str.insert(pos, str2, start, length)                         ## insert at position with part of str2
     str.erase(start, length)                                     ## erase from start with length
     str.append(str2, start, length)                              ## append part of str2
+    str += str2                                                  ## same as appending
     str.replace(start, length, str2, start2, length2)            ## replace part of str by part of str2
     str.assign(base)                                             ## assign base to str
     str.find(str2, start, length)                                ## find part of str2. Not found return string::npos
