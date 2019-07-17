@@ -1,4 +1,4 @@
-## 1. Use map. Store the appearance time. O(n) time, O(n) space.
+## 1. Use map. Store the appearance time. O(n) time, O(1) space.
 class Solution:
     def FirstNotRepeatingChar(self, s):
         if len(s)==0:

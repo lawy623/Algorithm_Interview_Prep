@@ -1,4 +1,4 @@
-// 1. Use map. Store the first position. O(n) time, O(n) space.
+// 1. Use map. Store the first position. O(n) time, O(1) space.
 class Solution {
 public:
     int FirstNotRepeatingChar(string str) {
@@ -22,7 +22,7 @@ public:
 };
 
 // 2. Use array as map to store at most 256 char.
-// The value at pos is the appreance time. O(n) space, O(n) time.
+// The value at pos is the appreance time. O(1) space, O(n) time.
 class Solution {
 public:
     int FirstNotRepeatingChar(string str) {
