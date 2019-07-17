@@ -19,7 +19,9 @@ void merge(vector<int>& arr, int first, int mid, int last){
 	for(int i=mid+1;i<last;i++) r.push_back(arr[i]);
 		int a=0,b=0;
 	for(int k=first;k<last;k++){
-		if(l[a]<=r[b]){arr[k]=l[a++];}
+		if(b==r.size()) {arr[k]=l[a++];}
+		else if (a==l.size()) rr[k]=r[b++];
+		else if(l[a]<=r[b]){arr[k]=l[a++];}
 		else{arr[k]=r[b++];}
 	}
 }
