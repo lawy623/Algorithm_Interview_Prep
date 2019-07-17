@@ -1,4 +1,4 @@
-//1. binary count. O(nlogn) time.
+//1. binary count. O(logn) time.
 class Solution {
 public:
     int binaryCount(vector<int> data, int k, int start, int end) {
