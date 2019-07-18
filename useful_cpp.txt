@@ -61,6 +61,28 @@ c++ all useful package and things:
     vec.erase(vec.begin()+i, vec.begin()+j)                     ## remove from i+1 to j
     reverse(vec.begin(), vec.end())                             ## reverse the vector
 
+- list
+    list<int> l                                                 ## init list
+    list<int>::iterator it                                      ## list iterator
+    l.back()                                                    ## last element
+    l.front()                                                   ## first element
+    l.erase(iter)                                               ## erase a node by iter
+    l.pop_back()                                                ## pop the last node out
+    l.pop_front()                                               ## pop the first out
+    l.push_front(3)                                             ## push back a node
+    l.push_back(4)                                              ## push a node at front
+    l.sort()                                                    ## sort the list
+    l.unique()                                                  ## remove duplicate
+    l.size()                                                    ## return size
+    l.empty()                                                   ## check empty
+    l.assign(1,2,3)                                             ## assign value
+    l.assign(l2.begin(), l2.end())                              ## assign value by other list
+    l.assign(array, array+3)                                    ## assign value by arr[]
+    l.insert(it, 2, 3)                                          ## insert at iter for some values
+    l.reverse()                                                 ## reverse list
+    l.remove(target)                                            ## remove the target number
+    l.merge(l2)                                                 ## merge two sorted list
+
 - max/min
     max_element(vec.begin(), vec.end())                         ## return the max
     min_element(vec.begin(), vec.end())                         ## return the min
