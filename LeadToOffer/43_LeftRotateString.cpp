@@ -9,7 +9,7 @@ public:
         return;
     }
     string LeftRotateString(string str, int n) {
-        if (n==0 || str=="")
+        if (n<=0 || str=="" || n>str.length())
             return str;
 
         Reverse(str, 0, n-1);
