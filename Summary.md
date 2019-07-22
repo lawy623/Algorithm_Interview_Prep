@@ -233,6 +233,10 @@ to_string(val)                                               ## val to string
 stoi(str)                                                    ## string to int
 stof(Str)                                                    ## string to float
 ```
+```c++
+char* str													 ## String by char pointer. Then end is always '\0'
+```
+凡是字符串，可以考虑用 "unsigned int table[256]={0}" 来储存每个char的信息。
 ### Python用法
 ```python
 fields = s.split(" ")                ## Split the string into fields by " "(Can change to other delimiter)
@@ -287,6 +291,18 @@ s.isupper()                          ## string is all uppercases
 
 	方法1: 注意第一位为+/-，溢出，invalid char，“”的情况
 	复杂度： O(1) space, O(n) time.
+	
+> 5.正则表达式匹配 ([剑指offer Q52](https://www.nowcoder.com/practice/45327ae22b7b413ea21df13ee7d6429c?tpId=13&tqId=11205&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+
+	方法1: 递归判断。注意到字符串尾时=='\0'
+			下一位不为'*'时，只有*str==*pattern或者*str!='\0'&&*pattern=='.'，将两个都向前一位递归判断
+			下一位是‘*’时：
+				同样的条件满足时，判断match(str+1,pattern)或match(str,pattern+2) --不match或者match一至多位
+				不满足只判断match(str,pattern+2) -- 则没有match上该位
+				
+> 6.表示数值的字符串 ([剑指offer Q53](https://www.nowcoder.com/practice/6f8c901d091949a5837e24bb82a731f2?tpId=13&tqId=11206&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+
+	方法1: 分为e/E前后判断。后面的只能是整数。前面的最多只能有一个dot。注意边界检查条件。
 
 
 ---
@@ -383,7 +399,21 @@ l.merge(l2)                                                 ## merge two sorted 
 	
 	方法2: 归纳法。推出f(n,m) = (f(n-1,m)+m)%n。f(1,m)=0. 再dp求得
 	复杂度： O(1) space, O(n) time.
+	
+> 8.链表中环的入口结点 ([剑指offer Q55](https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)) ([Leetcode Q142](https://leetcode.com/problems/linked-list-cycle-ii/))
 
+	方法1: 主要为数学推导。双指针，快指针每次两步，慢指针每次一步。
+			若有环，快慢指针会相遇。假设到环入口要a步，环长r步。慢指针走了k步与快指针相遇，慢指针在环上走了t步。
+			则有a+t=k -> 2k = 2a+2t = a + nr + t， n为快指针额外走的圈数
+			nr = a+t = k -> (n-1)r + r-t = a
+			所以此时在安排一个指针从头与慢指针一起走，两个经过a步之后必定相遇在入口
+	复杂度： O(1) space, O(n) time.
+	相关问题：链表是否有环（=快慢指针是否相遇）
+	
+> 9.删除链表中重复的结点 ([剑指offer Q56](https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+
+	方法1: 递归判断是否遇到重复节点。是的话跳过这一段。注意下一节点为null的情况。
+	复杂度： O(1) space, O(n) time.
 	
 ---
 <br />
@@ -479,6 +509,15 @@ l.merge(l2)                                                 ## merge two sorted 
 	- 若为二叉搜索树，假设两个节点的值分别为min_v, max_v, 则可以从root找到第一个min_v < node < max_v的节点。若node等于其中某个值，则其中一个节点为另一节点的子孙
 	- 若节点包含指向父节点的指针，则可将问题转化为找两个链表的第一个公共节点
 	- 若都不满足（不一定为二叉树，不是搜索树，没有指向父节点的指针），则先从root找到到达两个节点的path（递归+深搜），然后比较两个path，求出两条路径的最后公共节点
+
+> 11.二叉树的下一个结点([剑指offer Q57](https://www.nowcoder.com/practice/9023a0c988684a53960365b889ceaf5e?tpId=13&tqId=11210&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+
+	方法1: 多种情况判断
+			- node为空时，返回NULL
+			- node右子树存在时，返回右子树最左下的叶节点
+			- node不为root时，找到第一个 节点是-父节点的左节点的-父节点。
+				即 if (pNode->next->left==pNode)
+                	return pNode->next;
 
 ---
 <br />
@@ -638,9 +677,29 @@ s.popitem()                          ## remove the last item
 
 ### 问题及思路
 
-> 1. 
+> 1.和为S的两个数字 ([剑指offer Q42](https://www.nowcoder.com/practice/390da4f7a00f44bea7c2f3d19491311b?tpId=13&tqId=11195&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+	
+	方法1: 排序后使用前后两个pointer查找
+	复杂度： O(1) space, O(nlogn) time.
+	
+	方法2: 使用hash。保存遍历的数字，新数字判断差值是否在hash中
+	复杂度： O(n) space, O(n) time.
+	
+> 2.数组中重复的数字 ([剑指offer Q50](https://www.nowcoder.com/practice/623a5ac0ea5b4e5f95552655361ae0a8?tpId=13&tqId=11203&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+	
+	方法1: 使用hash table储存，直到遇到第一个重复的数字
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 将每个数字i移动到第i个位置。
+	复杂度： O(1) space, O(n) time.
+	
+> 3.第一个只出现一次的字符 ([剑指offer Q34](https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
-	方法1: 
+	方法1: 使用hash table保存遍历结果，value为出现次数。再扫描一次字符串输出第一个value=1的字符
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 因为字符个数有限，使用一个unsigned int table[256]保存每个char的出现个数。每个字符对应位置为int(str[i])。
+	复杂度： O(1) space, O(n) time.
 ---
 <br />
 
