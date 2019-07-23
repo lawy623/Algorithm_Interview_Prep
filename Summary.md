@@ -17,7 +17,8 @@
 #### [13.数值计算（Numerical Calculation）](#13)
 #### [14.贪心算法（Greedy Algorithm）](#14)
 #### [15.排序算法（Sorting）](#15)
-#### [16.其他（Other）](#16)
+#### [16.大数据问题（Big Data）](#16)
+#### [17.其他（Other）](#17)
 ---
 
 # <h2 id="1">数组(Array)</h2>
@@ -471,6 +472,7 @@ l.merge(l2)                                                 ## merge two sorted 
 
 	方法1: 使用queue，每次弹出队列的头，将左右子树推入队尾
 	复杂度： O(n) space, O(n) time.
+	相关问题：把二叉树打印成多行（每次要记录queue的大小，每次pop掉一层的节点）
 	
 > 5.二叉搜索树的后序遍历序列 ([剑指offer Q23](https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&tqId=11176&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -518,6 +520,21 @@ l.merge(l2)                                                 ## merge two sorted 
 			- node不为root时，找到第一个 节点是-父节点的左节点的-父节点。
 				即 if (pNode->next->left==pNode)
                 	return pNode->next;
+                	
+> 12.对称的二叉树([剑指offer Q58](https://www.nowcoder.com/practice/ff05d44dfdb04e1d83bdbdab320efbcb?tpId=13&tqId=11211&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+
+	方法1: 求出pRoot的镜像树pRoot_mirror,对比两个树是否完全一致
+	复杂度： O(n) space, O(n) time, and need repeative visit.
+	
+	方法2: 对比root的两个子树是否对称，可递归判断(left->right,right->left) && (left->left,right->right) 是否都对称
+	复杂度： O(1) space, O(n) time.
+	
+> 13.按之字形顺序打印二叉树([剑指offer Q59](https://www.nowcoder.com/practice/91b69814117f4e8097390d107d2efbe0?tpId=13&tqId=11212&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+
+	方法1: 用两个stack记录每层结果，用一个bool记录是向左还是向右遍历。
+		  每次将一个stack中的子节点向另一个方向传输。通过方向确定先传左还是先传右
+	复杂度： O(n) space, O(n) time
+
 
 ---
 <br />
@@ -910,7 +927,25 @@ sum(list)				 ## sum of all elements in list
 ---
 <br />
 
-# <h2 id="16">其他（Other）</h2>
+# <h2 id="16">大数据问题（Big Data）</h2>
+### C++用法
+```c++
+
+```
+### Python用法
+```python
+
+```
+
+### 问题及思路
+
+> 1. 
+	
+	方法1: 
+---
+<br />
+
+# <h2 id="17">其他（Other）</h2>
 ### C++用法
 ```c++
 
