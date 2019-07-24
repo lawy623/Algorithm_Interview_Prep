@@ -138,6 +138,14 @@ c++ all useful package and things:
     stoi(str)                                                    ## string to int
     stof(Str)                                                    ## string to float
 
+- istringstream / ostringstream
+    istringstream is(str)                                        ## init istringstream by string
+        string s;                                                ## read in each string segment, seperate by " "
+        while (is >> s) {}
+    ostringstream os;                                            ## init ostringstream
+        os.str("")                                               ## clear stream
+        while () {os << "str "}                                  ## assign values to ostringstream
+        return os.str()                                          ## change the ostringstream to string
 
 - map       (using RedBlack Tree)
     map<int, int> m;                                            ## init a map, with key-value specify
