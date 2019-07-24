@@ -61,6 +61,21 @@ c++ all useful package and things:
     vec.erase(vec.begin()+i, vec.begin()+j)                     ## remove from i+1 to j
     reverse(vec.begin(), vec.end())                             ## reverse the vector
 
+- deque
+    deque<int> dq                                               ## init deque, which is like vector but can add/rm bidirectional
+    dq.size()                                                   ## size of deque
+    dq.empty()                                                  ## whether is empty
+    dq.front()                                                  ## first elem
+    dq.back()                                                   ## last elem
+    dq.at(idx)                                                  ## access at idx
+    dq.push_back(v)                                             ## push to last
+    dq.push_front(v)                                            ## push to first
+    dq.pop_back()                                               ## remove the last
+    dq.pop_front()                                              ## remove the first
+    dq.insert(iter, v)                                          ## insert at iter
+    dq.erase(iter)                                              ## remove by iter
+    dq.clear()                                                  ## clear
+
 - list
     list<int> l                                                 ## init list
     list<int>::iterator it                                      ## list iterator
