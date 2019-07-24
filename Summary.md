@@ -237,6 +237,15 @@ stof(Str)                                                    ## string to float
 ```c++
 char* str													 ## String by char pointer. Then end is always '\0'
 ```
+```c++
+istringstream is(str)                                        ## init istringstream by string
+	string s;                                                ## read in each string segment, seperate by " "
+	while (is >> s) {}
+ostringstream os;                                            ## init ostringstream
+	os.str("")                                               ## clear stream
+	while () {os << "str "}                                  ## assign values to ostringstream
+	return os.str()                                          ## change the ostringstream to string
+```
 凡是字符串，可以考虑用 "unsigned int table[256]={0}" 来储存每个char的信息。
 ### Python用法
 ```python
@@ -474,7 +483,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	复杂度： O(n) space, O(n) time.
 	相关问题：把二叉树打印成多行（每次要记录queue的大小，每次pop掉一层的节点）
 	
-> 5.二叉搜索树的后序遍历序列 ([剑指offer Q23](https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&tqId=11176&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 5.二叉搜索树的后序遍历序列构造二叉树 ([剑指offer Q23](https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&tqId=11176&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 后序遍历数组[左子树节点，右子树节点，根结点]
 			每次通过根节点找到数组前面第一个比根节点大的数作为右子树开始（找不到则返回自己的位置）。
@@ -534,6 +543,30 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1: 用两个stack记录每层结果，用一个bool记录是向左还是向右遍历。
 		  每次将一个stack中的子节点向另一个方向传输。通过方向确定先传左还是先传右
 	复杂度： O(n) space, O(n) time
+	
+> 14.序列化二叉树([Leetcode 297](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/))
+
+	方法1: 用queue进行层级遍历，用#表示null，用空格隔开不同节点。使用istringstream与ostringstream便于序列化。
+	复杂度： O(1) space, O(n) time
+	
+> 15.二叉树的中序遍历([Leetcode 94](https://leetcode.com/problems/binary-tree-inorder-traversal/))
+
+	方法1: 递归。传入一个可修改的vector，左子树先调用，root推入值，右子树在调用。
+	复杂度： O(1) space, O(n) time
+	
+	方法2: 使用stack。p不为空时，推入自己，p指向p->left。p为空时，p=stack.top()，将p的值推入结果vector，stack pop()，再让p指向p->right
+	复杂度： O(n) space, O(n) time
+	
+> 16.二叉树搜索树的第k个节点([Leetcode 62](https://leetcode.com/problems/binary-tree-inorder-traversal/))
+
+	方法1: 递归。先用一个函数递归求树的节点数目。如果左节点数目等于k-1，返回root；大于k-1则返回左子树的第k个；否则返回右子树的k-leftcount-1个节点
+	复杂度： O(1) space, O(n) time，但是多次递归开销很大
+	
+	方法2: 先用15的方法1求出vector，在返回vector的第k-1个数
+	复杂度： O(1) space, O(n) time，但是多次递归开销很大
+	
+	方法3: 使用15的方法2的stack，在推入的时候改为记录count，返回第k个count的时候的值
+	复杂度： O(n) space, O(n) time
 
 
 ---
@@ -587,6 +620,21 @@ queue.back()                                                ## return the last v
 q.empty()                                                   ## return whether the queue is empty
 q.size()                                                    ## return the size
 ```
+```c++
+deque<int> dq                                               ## init deque, which is like queue but can add/rm bidirectional
+dq.size()                                                   ## size of deque
+dq.empty()                                                  ## whether is empty
+dq.front()                                                  ## first elem
+dq.back()                                                   ## last elem
+dq.at(idx)                                                  ## access at idx
+dq.push_back(v)                                             ## push to last
+dq.push_front(v)                                            ## push to first
+dq.pop_back()                                               ## remove the last
+dq.pop_front()                                              ## remove the first
+dq.insert(iter, v)                                          ## insert at iter
+dq.erase(iter)                                              ## remove by iter
+dq.clear()                                                  ## clear
+```
 ### Python用法
 ```python
 - List as Queue
@@ -602,9 +650,17 @@ q.size()                                                    ## return the size
 ```
 ### 问题及思路
 
-> 1. 
+> 1.滑动窗口的最大值([剑指offer Q64](https://www.nowcoder.com/practice/1624bc35a45c42c0bc17d17fa0cba788?tpId=13&tqId=11217&rp=2&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tPage=4))
 
-	方法1: 
+	方法1: 暴力搜索每个slidingwindow。可以用dp思想稍微减少一点对比
+	复杂度： O(1) space, O(nk) time.
+	
+	方法2: 使用一个动态维护的deque来构建每个窗口的slidingwindow。保证deque的头部永远是该windows内的最大值
+		  每次加入的新的数之前，需要从尾部删除比新加的小的数。
+		  然后从头删除已经不在slidingwindow内的数（所以deque存index而不存数字）
+		  最后输出头部的数当作该窗口结果
+	复杂度： O(k) space, O(n) time.
+		
 ---
 <br />
 
@@ -640,10 +696,21 @@ q.push(val)                                                 ## push value
 
 ### 问题及思路
 
-> 1.最小的K个数([剑指offer Q29](https://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&tqId=11182&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 1.最小的K个数 ([剑指offer Q29](https://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&tqId=11182&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 	
 	方法1: 使用最小堆。构建堆，再推出直到第k个数
 	复杂度： O(n) space, O(n+klogn) time. 当n>>k时效率高
+	
+> 2.数据流中的中位数 ([剑指offer Q63](https://www.nowcoder.com/practice/9be0172896bd43948f8a32fb954e1be1?tpId=13&tqId=11216&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+	
+	方法1: 内置vector，每次insert都保证sorted(插入排序)。
+	复杂度： O(n) space, O(n) time for insertion. O(1) for getMedian
+	
+	方法2: 采用min heap + max heap. 保证min heap的数都比max heap大。且max heap的数总比min heap多。记录目前的count
+			若现在count为偶数，插入是先进min heap，得到的min heap最小值释放并推入max heap。
+			若现在count为奇数，插入是先进max heap，得到的max heap最大值释放并推入min heap。
+			奇数的median返回max heap的最大，偶数的median返回min heap和max heap顶的平均值
+	复杂度： O(n) space, O(logn) time for insertion. O(1) for getMedian
 	
 ---
 <br />
