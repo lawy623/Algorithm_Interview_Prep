@@ -789,20 +789,33 @@ s.popitem()                          ## remove the last item
 
 
 # <h2 id="10">图（Graph）</h2>
+### 知识
+- 深度优先搜索(DFS): 递归 或 用stack
+- 广度优先搜索(BFS): 递归 或 用queue
+- 最短路径算法 (Shortest Path Algorithm): Dijkstra 算法, Floyd 算法
+- 最小生成树 (Minimum Spanning Trees MST): Prim 算法, Kruskal 算法
+- 网络流 (Network Flow)
+
 ### C++用法
 ```c++
-
+int graph[][]					# Use Adjacency matrix. You can also design Node and use Adjacency List.
 ```
 ### Python用法
 ```python
-
+list = [[]]					# Use Adjacency matrix
 ```
 
 ### 问题及思路
 
-> 1. 
+> 1.矩阵中的路径 ([剑指offer Q65](https://www.nowcoder.com/practice/c61c6999eecb4b8f88a98f66b273a3cc?tpId=13&tqId=11218&rp=2&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tPage=4))
 	
-	方法1: 
+	方法1: 深搜，注意visit的表需要修改。注意传入函数的方式(dfs(int *&visit...))
+	复杂度： O(n) space, O(n) time.
+	
+> 2.机器人的运动范围 ([剑指offer Q66](https://www.nowcoder.com/practice/6e5207314b5241fb83f2329e89fdecc8?tpId=13&tqId=11219&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+	
+	方法1: 深搜. 判断时多加了条件而已。
+	复杂度： O(n) space, O(n) time.
 ---
 <br />
 
