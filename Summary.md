@@ -1097,13 +1097,21 @@ sum(list)				 ## sum of all elements in list
 # <h2 id="16">大数据问题（Big Data）</h2>
 ### 常见方法
 1.hash进行分块求解（通常适用于内存不够的情况）/ 或者直接分段
+
 2.使用堆求最大的k 相关问题
+
 3.map-reduce
+
 4.Locality Sensetive Hashing(LSH)
+
 5.随机算法(Randomized Algorithm) 
+
 6.bitmap
+
 7.Bloom Filter
+
 8.字典树(Trie)
+
 9.Count-Min Sketch
 ### 问题及思路
 
@@ -1154,6 +1162,11 @@ sum(list)				 ## sum of all elements in list
 	
 	使用count-min sketch。用多个hash table保存。
 	多个数字可以进入到一个hash bucket中，每次进入都在此bucket加1。当求一个数字的频率时，可求该bucket的值，返回误差在可接受范围内的值
+	
+> 10.元素计数 [Blog](http://www.mit.edu/~andoni)
+	
+	设一个值X=0. 对每个新来的值，X+=1 with Pr=1/2^X,不然不变。
+	返回2^X-1. 可用归纳法证明E(2^X-1)=n. 且variance小。用median trick可保证90%准确率。
 
 <br />
 
