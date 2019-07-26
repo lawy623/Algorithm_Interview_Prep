@@ -99,6 +99,9 @@ sum(list)				 	## sum of all elements
 	方法2: 冒泡排序的方法，每次前为偶数后卫奇数则交换，每次把偶数放到最后
 	复杂度： O(1) space, O(n^2) time.
 	
+	方法3: 双指针，从头和尾分别遍历。当前为偶数后为奇数时交换。否则向中间移动指针
+	复杂度： O(1) space, O(n) time.
+	
 > 3.数组中出现次数超过一半的数字 ([剑指offer Q28](https://www.nowcoder.com/practice/e8a1b01a2df14cb2b228b30ee6a92163?tpId=13&tqId=11181&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 排序，在找median的值。需要判断该值是否真的出现超过一半次数（出现超过一半必为排序中位数，但中位数未必超过一半）
@@ -178,6 +181,19 @@ sum(list)				 	## sum of all elements
 	
 	方法2: 用两个数组分别表示从左/右开始到某位置i的累积乘积，dp方式求解
 	复杂度： O(n) space, O(n) time.
+	
+> 13.荷兰旗问题（三色分离） ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/02.07.html))
+	
+	方法1: Sorting counting
+	复杂度： O(1) space, O(n) time.
+	
+	方法1: 使用三个指针l1,l2,l3。l1&l2指向头，l3指向尾
+			当l2==0时，交换l1，l2的值，l1,l2各加1
+			当l2==1时，l2加1
+			当l2==2时，交换l3，l2的值，l3减1
+			直到l2==l3
+	复杂度： O(1) space, O(n) time.
+
 	
 ---
 <br />
@@ -295,17 +311,18 @@ s.isupper()                          ## string is all uppercases
 
 	方法1: 先反转[:n],再翻转[n:],最后整体翻转
 	复杂度： O(1) space, O(n) time.
-	相关问题：翻转单词顺序列
+	相关问题：翻转单词顺序列。旋转链表（同样分别旋转两部分最后一起翻转）
 	
 > 4.把字符串转换成整数 ([剑指offer Q49](https://www.nowcoder.com/practice/1277c681251b4372bdef344468e4f26e?tpId=13&tqId=11202&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
-	方法1: 注意第一位为+/-，溢出，invalid char，“”的情况
+	方法1: 注意第一位为+/-，溢出，invalid char，“”的情况。
+		   判断溢出即可以用long long表示值与MAX_INT对比，也可以再乘10前对比n与MAX_INT/10.
 	复杂度： O(1) space, O(n) time.
 	
 > 5.正则表达式匹配 ([剑指offer Q52](https://www.nowcoder.com/practice/45327ae22b7b413ea21df13ee7d6429c?tpId=13&tqId=11205&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归判断。注意到字符串尾时=='\0'
-			下一位不为'*'时，只有*str==*pattern或者*str!='\0'&&*pattern=='.'，将两个都向前一位递归判断
+			下一位不为'*'时，只有*str==*pattern或者*str!='\0'&&*pattern=='.'，将两个都向前一位递归判断match(str+1,pattern+1)
 			下一位是‘*’时：
 				同样的条件满足时，判断match(str+1,pattern)或match(str,pattern+2) --不match或者match一至多位
 				不满足只判断match(str,pattern+2) -- 则没有match上该位
@@ -313,7 +330,37 @@ s.isupper()                          ## string is all uppercases
 > 6.表示数值的字符串 ([剑指offer Q53](https://www.nowcoder.com/practice/6f8c901d091949a5837e24bb82a731f2?tpId=13&tqId=11206&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 分为e/E前后判断。后面的只能是整数。前面的最多只能有一个dot。注意边界检查条件。
+	
+> 7.字符串包含 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/01.02.html))
 
+	方法1: 暴力查找
+	复杂度： O(1) space, O(mn) time.
+	
+	方法2: 先排序，后双指针查找
+	复杂度： O(1) space, O(mlogm+nlogn) time.
+	
+	方法3: 使用hashtable。字符串有限所以额外空间为O(1)。因为数量=26，使用一个int更好。
+	复杂度： O(1) space, O(m+n) time.
+	
+> 8.回文判断 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/01.04.html))
+
+	方法1: 使用stack，全部推入栈中。如果再次推出相等则为回文
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 双指针从两端/中间双向查询
+	复杂度： O(1) space, O(n) time.
+	相关问题：链表是否回文（使用栈/快慢指针，慢指针到达终点后翻转链表）
+	
+> 9.最长回文子串 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/01.05.html)) ([Leetcode Q5](https://leetcode.com/problems/longest-palindromic-substring/))
+
+	方法1: 从每个位置开始，向两侧进行扩展并判断。需要饱含奇偶两种长度情况
+	复杂度： O(1) space, O(n^2) time.
+	
+	方法2: Manacher算法 （to be understand）
+	复杂度： O(1) space, O(n) time.
+
+	
+	
 
 ---
 <br />
@@ -420,10 +467,17 @@ l.merge(l2)                                                 ## merge two sorted 
 	复杂度： O(1) space, O(n) time.
 	相关问题：链表是否有环（=快慢指针是否相遇）
 	
-> 9.删除链表中重复的结点 ([剑指offer Q56](https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 9.删除排序链表中重复的结点 ([剑指offer Q56](https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归判断是否遇到重复节点。是的话跳过这一段。注意下一节点为null的情况。
 	复杂度： O(1) space, O(n) time.
+	
+> 10.删除链表节点 
+
+	方法1: 将指向节点的下一个节点的值copy至指向节点。再删除下一个节点
+			如果该节点是尾节点，则必须要遍历
+			
+	复杂度： O(1) space, O(1) time. O(n) for ending node
 	
 ---
 <br />
@@ -557,7 +611,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法2: 使用stack。p不为空时，推入自己，p指向p->left。p为空时，p=stack.top()，将p的值推入结果vector，stack pop()，再让p指向p->right
 	复杂度： O(n) space, O(n) time
 	
-> 16.二叉树搜索树的第k个节点([Leetcode 62](https://leetcode.com/problems/binary-tree-inorder-traversal/))
+> 16.二叉树搜索树的第k个节点([Leetcode 230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/))
 
 	方法1: 递归。先用一个函数递归求树的节点数目。如果左节点数目等于k-1，返回root；大于k-1则返回左子树的第k个；否则返回右子树的k-leftcount-1个节点
 	复杂度： O(1) space, O(n) time，但是多次递归开销很大
@@ -862,6 +916,7 @@ from bitarray import bitarray
 	方法1: 使用xor（a xor a = 0）. 将所有数字xor一遍。找到结果中不为0的一位，则两个数字在这一位必不同
 			按照该位将数字分为两组。分别进行xor并输出两个结果
 	复杂度： O(1) space, O(n) time.
+	相关问题：只出现一次的三个数字（同样用某一位分组，产生一个奇数分组和一个偶数分组。奇数分组先得到，偶数再做）
 	
 >3.不用加减乘除做加法([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -882,9 +937,40 @@ from bitarray import bitarray
 	
 > 2.连续子数组的最大和 ([剑指offer Q30](https://www.nowcoder.com/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&tqId=11183&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
-	方法1:，使用一个额外的sum保存到该数的最大sum。如果sum为负则定义改出的sum为自身（最大sum必然不包括前面的负数和）
+	方法1: 使用一个额外的sum保存到该数的最大sum。如果sum为负则定义改出的sum为自身（最大sum必然不包括前面的负数和）
 	复杂度： O(1) space, O(n) time.
+	
+> 3.连续子数组的最大积 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.01.html))
 
+	方法1: 由于有负数的存在，同时需要保存有负数的情况。
+			状态转移: max[i] = max(max[i-1]*A[i], min[i-1]*A[i], A[i]) -> 结果在此数组中更新
+					 min[i] = min(max[i-1]*A[i], min[i-1]*A[i], A[i])
+	复杂度： O(n) space (O(1) if you use two var only), O(n) time.
+	
+> 4.字符串的最小编辑距离 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.02.html))
+
+	方法1: dp[i][j]表示从S[:i]到T[:j]的转换. dp[i][0]=i; dp[0][j]=j.
+			状态转移: dp[i][j] =min{
+					dp[i-1][j] + 1, S[i]不在T[0…j]中，删除操作
+					dp[i-1][j-1] + 1/0, S[i]是否等于0T[j]，替换操作
+					dp[i][j-1] + 1 , S[i]在T[0…j-1]中增加操作
+			即 dp[i][j] = min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + (S[i]==T[j]))
+	复杂度： O(nm) space, O(mn) time.
+
+> 5.交替字符串 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.04.html))
+
+	方法1: dp[i][j]表示C[:i+j]由A[:i],B[:j]交替而得
+			状态转移: dp[i][j] = 1 if:
+							dp[i][j-1]==1 && C[i+j]==B[j] ||
+							dp[i-1][j]==1 && C[i+j]==A[i]
+					dp[i][j] = 0 otherwise
+	复杂度： O(nm) space, O(nm) time.
+	
+> 6.最长递增子序列 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.06.html))
+
+	方法1: dp[i]表示以A[i]结尾的序列的最长递增子序列. dp[0]=1
+			状态转移: dp[j] = max(A[i] for 0<=i<j and A[i]<A[j]). If not exist. A[j]=0
+	复杂度： O(n) space, O(n^2) time. 
 
 ---
 <br />
