@@ -1,18 +1,68 @@
-vector<int> nums;
-
-//1. Insertion Sort. O(N^2). Stable.
-if(nums.size()<=1) return nums;
-for(int i=1; i <nums.size(); i++){
-	int key = nums[i];
-	int j = i-1;
-	while(i>0 && nums[i]>key){
-		nums[i+1]=nums[i];
-		i--;
+// 1. Bubble Sort
+int len = nums.size()
+int temp = 0;
+for (int i = 0; i < len - 1; i++) {
+	for (int j = 0; j < len - 1 - i; j++) {
+		if (nums[j] > nums[j+1]) {
+			temp = nums[j+1];
+			nums[j+1] = nums[j];
+			nums[j] = temp;
+		}
 	}
-	A[i+1] = key;
 }
 
-//2. MergeSort. O(NlogN). Stable.
+// 2. Selection Sort
+int minIndex=0, temp=0;
+int len = nums.size()
+for (int i = 0; i < len - 1; i++) {
+    minIndex = i;
+    for (int j = i + 1; j < len; j++) {
+        if (nums[j] < nums[minIndex]) {
+            minIndex = j;
+        }
+    }
+    temp = nums[i];
+    nums[i] = nums[minIndex];
+    nums[minIndex] = temp;
+}
+
+// 3. Insertion Sort.
+int key = 0;
+int j = 0;
+for(int i=1; i<nums.size(); i++){
+	key = nums[i];
+	j = i-1;
+	while(j>0 && nums[j]>key){
+		nums[j+1]=nums[j];
+		j--;
+	}
+	nums[j+1] = key;
+}
+
+// 4. quicksort.
+void quickSort(vector<int>& nums){
+	quickSort(nums,0,nums.size());
+}
+void quickSort(vecotr<int>& nums, int low, int high){
+	if(low<high){
+		int p = partition(nums,low,high);
+		quickSort(nums,low,p-1);
+		quickSort(nums,p,high);
+	}
+}
+int partition(vector<int>& nums,int low, int high){
+	int pivot = nums[high];
+	int i=low-1;
+	for(int j=low;j<high;j++){
+		if(nums[j]<=pivot){
+			swap(nums[++i],nums[j]);
+		}
+	}
+	swap(nums[++i],nums[high]);
+	return i;
+}
+
+// 5. MergeSort.
 void merge(vector<int>& arr, int first, int mid, int last){
 	vector<int> l,r;
 	for(int i=first;i<mid;i++) l.push_back(arr[i]);
@@ -32,27 +82,4 @@ void mergeSort(vector<int>& arr, int first, int last){
 		mergeSort(arr,mid+1,last);
 		merge(arr,first,mid,last);
 	}
-}
-
-//3. quicksort. O(NlgN). Worest case could be O(N^2). Unstable.
-void quickSort(vector<int>& nums){
-	quickSort(nums,0,nums.size());
-}
-void quickSort(vecotr<int>& nums, int low, int high){
-	if(low<high){
-		p = partition(nums,low,high);
-		quickSort(nums,low,p-1);
-		quickSort(nums,p,high);
-	}
-}
-int partition(vector<int>& nums,int low, int high){
-	int pivot = nums[high];
-	int i=low-1;
-	for(int j=low;j<high;j++){
-		if(nums[j]<=pivot){
-			swap(nums[++i],nums[j]);
-		}
-	}
-	swap(nums[++i],nums[high]);
-	return i;
 }

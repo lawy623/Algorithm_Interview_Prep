@@ -959,7 +959,7 @@ from bitarray import bitarray
 
 > 5.交替字符串 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.04.html))
 
-	方法1: dp[i][j]表示C[:i+j]由A[:i],B[:j]交替而得
+	方法1: dp[i][j]表示C[:i+j]由A[:i], B[:j]交替而得
 			状态转移: dp[i][j] = 1 if:
 							dp[i][j-1]==1 && C[i+j]==B[j] ||
 							dp[i-1][j]==1 && C[i+j]==A[i]
@@ -1077,20 +1077,181 @@ sum(list)				 ## sum of all elements in list
 <br />
 
 # <h2 id="15">排序算法（Sorting）</h2>
-### C++用法
-```c++
+### 十大排序算法
+参考地址([blog](https://www.cnblogs.com/onepixel/p/7674659.html))
 
-```
-### Python用法
-```python
+不稳定的算法：选择排序/快速排序/堆排序/希尔排序 （基本是因为不相邻的交换导致）
 
-```
-
-### 问题及思路
-
-> 1. 
+> 1.冒泡排序(Bubble Sort) <br>
+> 
+> 简述：每次将最大的数冒泡至最后 <br>
+> 平均时间复杂度: O(n^2) <br>
+> 最差时间复杂度: O(n^2) <br>
+> 空间复杂度: O(1) <br>
+> 稳定性: 稳定，因为冒泡时相同数字不交换
 	
-	方法1: 
+	int len = nums.size()
+	int temp = 0;
+	for (int i = 0; i < len - 1; i++) {
+	    for (int j = 0; j < len - 1 - i; j++) {
+	        if (nums[j] > nums[j+1]) {
+	            temp = nums[j+1];
+	            nums[j+1] = nums[j];
+	            nums[j] = temp;
+	        }
+	    }
+	}
+	
+> 2.选择排序(Selection Sort) <br>
+> 
+> 简述：每次挑选出剩余数组中最小的数，交换至开头 <br>
+> 平均时间复杂度: O(n^2) <br>
+> 最差时间复杂度: O(n^2) <br>
+> 空间复杂度: O(1) <br>
+> 稳定性: 不稳定，因为交换的时候可能会把原本顺序打乱（用链表稳定因为直接插入开头不需要交换）
+	
+	int minIndex=0, temp=0;
+	int len = nums.size()
+	for (int i = 0; i < len - 1; i++) {
+	    minIndex = i;
+	    for (int j = i + 1; j < len; j++) {
+	        if (nums[j] < nums[minIndex]) {
+	            minIndex = j;
+	        }
+	    }
+	    temp = nums[i];
+	    nums[i] = nums[minIndex];
+	    nums[minIndex] = temp;
+	}
+	
+> 3.插入排序(Insertion Sort) <br>
+> 
+> 简述：每次挑选出剩余数组中最小的数，交换至开头 <br>
+> 平均时间复杂度: O(n^2) <br>
+> 最差时间复杂度: O(n^2) <br>
+> 空间复杂度: O(1) <br>
+> 稳定性: 稳定，因为插入从后面进行，相同数字只会插到后面
+	
+	int key = 0;
+	int j = 0;
+	for(int i=1; i<nums.size(); i++){
+		key = nums[i];
+		j = i-1;
+		while(j>0 && nums[j]>key){
+			nums[j+1]=nums[j];
+			j--;
+		}
+		nums[j+1] = key;
+	}
+	
+> 4.快速排序(Quick Sort) <br>
+> 
+> 简述：每次选取最后一个数作为pivot，小的放前面，大的放后面，再递归 <br>
+> 平均时间复杂度: O(nlogn) <br>
+> 最差时间复杂度: O(n^2) -- 当本来就排好序时 <br>
+> 空间复杂度: O(logn) --递归导致 <br>
+> 稳定性: 不稳定，交换pivot时可能把中间位置的数移动改变顺序
+	
+	void quickSort(vector<int>& nums){
+		quickSort(nums,0,nums.size());
+	}
+	void quickSort(vecotr<int>& nums, int low, int high){
+		if(low<high){
+			int p = partition(nums,low,high);
+			quickSort(nums,low,p-1);
+			quickSort(nums,p,high);
+		}
+	}
+	int partition(vector<int>& nums,int low, int high){
+		int pivot = nums[high];
+		int i=low-1;
+		for(int j=low;j<high;j++){
+			if(nums[j]<=pivot){
+				swap(nums[++i],nums[j]);
+			}
+		}
+		swap(nums[++i],nums[high]);
+		return i;
+	}
+	
+> 5.归并排序(Merge Sort) <br>
+> 
+> 简述：每次递归merge两个排好序的数列 <br>
+> 平均时间复杂度: O(nlogn) <br>
+> 最差时间复杂度: O(nlogn) <br>
+> 空间复杂度: O(n) <br>
+> 稳定性: 稳定
+	
+	void merge(vector<int>& arr, int first, int mid, int last){
+		vector<int> l,r;
+		for(int i=first;i<mid;i++) l.push_back(arr[i]);
+		for(int i=mid+1;i<last;i++) r.push_back(arr[i]);
+			int a=0,b=0;
+		for(int k=first;k<last;k++){
+			if(b==r.size()) {arr[k]=l[a++];}
+			else if (a==l.size()) rr[k]=r[b++];
+			else if(l[a]<=r[b]){arr[k]=l[a++];}
+			else{arr[k]=r[b++];}
+		}
+	}
+	void mergeSort(vector<int>& arr, int first, int last){
+		if(first<last){
+			int mid = (first + last) /2
+			mergeSort(arr,first,mid);
+			mergeSort(arr,mid+1,last);
+			merge(arr,first,mid,last);
+		}
+	}
+	
+> 6.堆排序(Heap Sort) <br>
+> 
+> 简述：构建一个最大堆，每次将堆顶数字与尾部数字交换 <br>
+> 平均时间复杂度: O(nlogn) <br>
+> 最差时间复杂度: O(nlogn) <br>
+> 空间复杂度: O(1) <br>
+> 稳定性: 不稳定
+	
+	 Pass
+	 
+> 7.希尔排序(Shell Sort) <br>
+> 
+> 简述：缩小增量排序，每次按照不同的gap分组排序,组内插入排序 <br>
+> 平均时间复杂度: O(nlogn) <br>
+> 最差时间复杂度: O(n^2) -- 当本来就排好序时 <br>
+> 空间复杂度: O(1) <br>
+> 稳定性: 不稳定，不同组内排序的交换可能打乱顺序
+ 
+	Pass
+	
+> 8.计数排序(Counting Sort) <br>
+> 
+> 简述：当数字范围有限时，记录每个数字出现记录 <br>
+> 平均时间复杂度: O(n+m) <br>
+> 最差时间复杂度: O(n+m) <br>
+> 空间复杂度: O(n+m) <br>
+> 稳定性: 稳定
+
+	Pass
+ 	
+> 9.桶排序(Bucket Sort) <br>
+> 
+> 简述：使用多个桶，将数字放到不同的桶里，分别排序。桶的分组有顺序，merge按顺序即可 <br>
+> 平均时间复杂度: O(n) <br>
+> 最差时间复杂度: O(n) <br>
+> 空间复杂度: O(m) <br>
+> 稳定性: 稳定
+
+	Pass
+ 
+> 10.基数排序(Radix Sort) <br>
+> 
+> 简述：按照低位先排序，再依次按照高位排序 <br>
+> 平均时间复杂度: O(kn)，k为位数 <br>
+> 最差时间复杂度: O(n^2) <br>
+> 稳定性: 稳定
+	
+
+	
 ---
 <br />
 
@@ -1222,6 +1383,47 @@ sum(list)				 ## sum of all elements in list
 	5、共享内存：共享内存就是映射一段能被其它进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的IPC方式，它是针对其它进程间通信方式运行效率低而专门设计的。它往往与其它通信机制（如信号量）配合使用，来实现进程间的同步和通信。
 	6、套接字：套接字也是一种进程间通信机制，与其它通信机制不同的是，它可用于不同机器间的进程通信
 	
+## 编译
+### 问题及思路
+来自([github](https://github.com/lawy623/interview))
+
+> 1.编译链接过程：
+
+	1. 预编译（预编译器处理如 #include、#define 等预编译指令，生成 .i 或 .ii 文件）
+	2. 编译（编译器进行词法分析、语法分析、语义分析、中间代码生成、目标代码生成、优化，生成 .s 文件）
+	3. 汇编（汇编器把汇编码翻译成机器码，生成 .o 文件）
+	4. 链接（连接器进行地址和空间分配、符号决议、重定位，生成 .out 文件）
+
+> 2.内存、栈、堆
+
+	一般应用程序内存空间有如下区域：
+
+	- 栈：由操作系统自动分配释放，存放函数的参数值、局部变量等的值，用于维护函数调用的上下文
+	- 堆：一般由程序员分配释放，若程序员不释放，程序结束时可能由操作系统回收，用来容纳应用程序动态分配的内存区域
+	- 可执行文件映像：存储着可执行文件在内存中的映像，由装载器装载是将可执行文件的内存读取或映射到这里
+	- 保留区：保留区并不是一个单一的内存区域，而是对内存中受到保护而禁止访问的内存区域的总称，如通常 C 语言讲无效指针赋值为 0（NULL），因此 0 地址正常情况下不可能有效的访问数据
+
+## C++
+### 问题及思路
+来自([github](https://github.com/lawy623/interview))
+
+> 1.const 作用
+
+	1.修饰变量，说明该变量不可以被改变；
+	2.修饰指针，分为指向常量的指针和指针常量；
+	3.常量引用，经常用于形参类型，即避免了拷贝，又避免了函数对值的修改；
+	4.修饰成员函数，说明该成员函数内不能修改成员变量。
+	
+> 2.static 作用
+
+	1.修饰普通变量，修改变量的存储区域和生命周期，使变量存储在静态区，在 main 函数运行前就分配了空间，如果有初始值就用初始值初始化它，如果没有初始值系统用默认值初始化它。
+	2.修饰普通函数，表明函数的作用范围，仅在定义该函数的文件内才能使用。在多人开发项目时，为了防止与他人命名空间里的函数重名，可以将函数定位为 static。
+	3.修饰成员变量，修饰成员变量使所有的对象只保存一个该变量，而且不需要生成对象就可以访问该成员。
+	4.修饰成员函数，修饰成员函数使得不需要生成对象就可以访问该函数，但是在 static 函数内不能访问非静态成员。
+
+
+
+
 ---
 <br />
 
