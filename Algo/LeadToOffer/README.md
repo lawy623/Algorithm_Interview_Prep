@@ -1,3 +1,1 @@
-solution for <<剑指offer>>
-
-online judgement can be done [here](https://www.nowcoder.com/ta/coding-interviews?page=1).
+My implementation of the [LeadToOffer(剑指Offer)](https://www.nowcoder.com/ta/coding-interviews) problems.
