@@ -84,109 +84,109 @@ sum(list)				 	## sum of all elements
 
 	方法1: 直接扫描，当后面小于前面则返回
 	复杂度： O(1) space, O(n) time.
-	
+
 	方法2: 二分查找。每次对比mid与头尾的值。注意start一定大于等于end，否为不为旋转数组而是排序数组
 	· mid == end && mid == start, 则查找[start+1, end-1] <--(注意[1,0,1,1,1]与[1,1,1,0,0]的特殊case)
 	· mid>=start, 则查找[mid, end];
 	· mid<=end,则查找[start, mid]
 	复杂度： O(1) space, O(logn) time.
-	
+
 > 2.调整数组顺序使奇数位于偶数前面 ([剑指offer Q13](https://www.nowcoder.com/practice/beb5aa231adc45b2a5dcc5b62c93f593?tpId=13&tqId=11166&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 直接扫描，分别保存奇数与偶数数组，再合并
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 冒泡排序的方法，每次前为偶数后卫奇数则交换，每次把偶数放到最后
 	复杂度： O(1) space, O(n^2) time.
-	
+
 	方法3: 双指针，从头和尾分别遍历。当前为偶数后为奇数时交换。否则向中间移动指针
 	复杂度： O(1) space, O(n) time.
-	
+
 > 3.数组中出现次数超过一半的数字 ([剑指offer Q28](https://www.nowcoder.com/practice/e8a1b01a2df14cb2b228b30ee6a92163?tpId=13&tqId=11181&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 排序，在找median的值。需要判断该值是否真的出现超过一半次数（出现超过一半必为排序中位数，但中位数未必超过一半）
 	复杂度： O(1) space, O(nlogn) time.
-	
+
 	方法2: 使用最大/最小堆。构建堆，再推出找到中位数
 	复杂度： O(n) space, O(n+klogn) time. 当n>>k时效率高
-	
+
 	方法3: QuickSelect通过找到第k小的数找到中位数
-	复杂度： O(1) space, O(n) time（On average）. 
-	
+	复杂度： O(1) space, O(n) time（On average）.
+
 > 4.最小的K个数 ([剑指offer Q29](https://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&tqId=11182&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 使用最小堆。构建堆，再推出直到第k个数
 	复杂度： O(n) space, O(n+klogn) time. 当n>>k时效率高
-	
+
 	方法2: QuickSelect通过找到第k小的数找到中位数。同快排，通过partition找到中间pivot的位置
 			如果pivot是第k个则返回。大于k则partition前面的数组，小于k则partition后面的数组
-	复杂度： O(1) space, O(n) time（On average）. 
-	
+	复杂度： O(1) space, O(n) time（On average）.
+
 > 5.把数组排成最小的数 ([剑指offer Q32](https://www.nowcoder.com/practice/8fecd3f8ba334add803bf2a06af1b993?tpId=13&tqId=11185&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 定义一种排序方式。当“前+后”比“后+前”小时，前<后。排序后返回即可
 			需要证明该排序定义的A1A2A3....An是最小的。可用反证法证明
 	复杂度： O(1) space, O(nlogn) time.
-	
+
 > 6.数组中的逆序对 ([剑指offer Q35](https://www.nowcoder.com/practice/96bd6684e04a44eb80e6a68efc0ec6c5?tpId=13&tqId=11188&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
-	方法1: 暴力搜索 
+
+	方法1: 暴力搜索
 	复杂度： O(1) space, O(n^2) time.
-	
+
 	方法2: MergeSort思想，每次合并两个数列，返回的count=前数列count+后数列count+merge产生的count。
 			注意count可能会特别大，使用long long来保存
 	复杂度： O(n) space, O(nlogn) time.
-	
+
 > 7.数字在排序数组中出现的次数 ([剑指offer Q37](https://www.nowcoder.com/practice/70610bf967994b22bb1c26f9ae901fa2?tpId=13&tqId=11190&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
-	方法1: 暴力查找 
+
+	方法1: 暴力查找
 	复杂度： O(1) space, O(n) time.
-	
-	方法2: binaryCount. 
+
+	方法2: binaryCount.
 			如果mid>target,返回binaryCount(前段）
 			如果mid<target,返回binaryCount(后段）
 			如果mid>=target,返回binaryCount(前段）+binaryCount(后段）+1
 	复杂度： O(n) space, O(logn) time.
-	
+
 > 8.和为S的两个数字 ([剑指offer Q42](https://www.nowcoder.com/practice/390da4f7a00f44bea7c2f3d19491311b?tpId=13&tqId=11195&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 排序后使用前后两个pointer查找
 	复杂度： O(1) space, O(nlogn) time.
-	
+
 	方法2: 使用hash。保存遍历的数字，新数字判断差值是否在hash中
 	复杂度： O(n) space, O(n) time.
-	
+
 > 9.和为S的连续正数序列 ([剑指offer Q41](https://www.nowcoder.com/practice/c451a3fd84b64cb19485dad758a55ebe?tpId=13&tqId=11194&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
-	方法1: 前后双指针。根据和的情况分别移动两个指针。 
+
+	方法1: 前后双指针。根据和的情况分别移动两个指针。
 	复杂度： O(1) space, O(n) time.
-	
+
 > 10.扑克牌顺子 ([剑指offer Q45](https://www.nowcoder.com/practice/762836f4d43d43ca9deb273b3de8e1f4?tpId=13&tqId=11198&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 先排序，计算大小王（0）的个数，当n_0<4时，剩余的最大值-最小值<=4.（注意判断数值是否在[0,13]）
 	复杂度： O(1) space, O(1) time.
-	
+
 > 11.数组中重复的数字 ([剑指offer Q50](https://www.nowcoder.com/practice/623a5ac0ea5b4e5f95552655361ae0a8?tpId=13&tqId=11203&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 使用hash table储存，直到遇到第一个重复的数字
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 将每个数字i移动到第i个位置。
 	复杂度： O(1) space, O(n) time.
 
 > 12.不用除法构建乘积数组 ([剑指offer Q51](https://www.nowcoder.com/practice/94a4d381a68b47b7a8bed86f2975db46?tpId=13&tqId=11204&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 暴力构建，两个for loop
 	复杂度： O(n^2) space, O(1) time.
-	
+
 	方法2: 用两个数组分别表示从左/右开始到某位置i的累积乘积，dp方式求解
 	复杂度： O(n) space, O(n) time.
-	
+
 > 13.荷兰旗问题（三色分离） ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/02.07.html))
-	
+
 	方法1: Sorting counting
 	复杂度： O(1) space, O(n) time.
-	
+
 	方法1: 使用三个指针l1,l2,l3。l1&l2指向头，l3指向尾
 			当l2==0时，交换l1，l2的值，l1,l2各加1
 			当l2==1时，l2加1
@@ -194,7 +194,7 @@ sum(list)				 	## sum of all elements
 			直到l2==l3
 	复杂度： O(1) space, O(n) time.
 
-	
+
 ---
 <br />
 
@@ -219,7 +219,7 @@ arr[row][col]                           ## acces the idx
 
 	方法1: 从右上角开始判断，小了往下， 大了往左。
 	复杂度： O(1) space, O(n) time.
-	
+
 > 2.顺时针打印矩阵 ([剑指offer Q19](https://www.nowcoder.com/practice/9b4c81a02cd34f76be2659fa0d54342a?tpId=13&tqId=11172&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 每次开始都是(0,0)->(1,1)->(2,2)->...->(k,k)，直到2k>=n_row或2k>=n_col
@@ -289,7 +289,7 @@ s.isupper()                          ## string is all uppercases
 
 	方法1: 扫描一遍计算空格个数，提前分配string，在扫描一遍双指针替换
 	复杂度： O(n) time.
-	
+
 	方法2: python使用split(" ") 与 "%20".join()函数
 	复杂度: O(n) time.
 
@@ -298,27 +298,27 @@ s.isupper()                          ## string is all uppercases
 	方法1: 先递归返回str[1:]的全排列，再将该数字插入每个全排列的不同位置，推入队列/数组，并将原来的全排列弹出
 			最后需要通过hashtable去除重复的排列
 	复杂度： O(n) space, O(n^2) time.
-	
+
 > 3.第一个只出现一次的字符 ([剑指offer Q34](https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 使用hash table保存遍历结果，value为出现次数。再扫描一次字符串输出第一个value=1的字符
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 因为字符个数有限，使用一个unsigned int table[256]保存每个char的出现个数。每个字符对应位置为int(str[i])。
 	复杂度： O(1) space, O(n) time.
-	
+
 > 3.左旋转字符串 ([剑指offer Q43](https://www.nowcoder.com/practice/12d959b108cb42b1ab72cef4d36af5ec?tpId=13&tqId=11196&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 先反转[:n],再翻转[n:],最后整体翻转
 	复杂度： O(1) space, O(n) time.
 	相关问题：翻转单词顺序列。旋转链表（同样分别旋转两部分最后一起翻转）
-	
+
 > 4.把字符串转换成整数 ([剑指offer Q49](https://www.nowcoder.com/practice/1277c681251b4372bdef344468e4f26e?tpId=13&tqId=11202&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 注意第一位为+/-，溢出，invalid char，“”的情况。
 		   判断溢出即可以用long long表示值与MAX_INT对比，也可以再乘10前对比n与MAX_INT/10.
 	复杂度： O(1) space, O(n) time.
-	
+
 > 5.正则表达式匹配 ([剑指offer Q52](https://www.nowcoder.com/practice/45327ae22b7b413ea21df13ee7d6429c?tpId=13&tqId=11205&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归判断。注意到字符串尾时=='\0'
@@ -326,41 +326,41 @@ s.isupper()                          ## string is all uppercases
 			下一位是‘*’时：
 				同样的条件满足时，判断match(str+1,pattern)或match(str,pattern+2) --不match或者match一至多位
 				不满足只判断match(str,pattern+2) -- 则没有match上该位
-				
+
 > 6.表示数值的字符串 ([剑指offer Q53](https://www.nowcoder.com/practice/6f8c901d091949a5837e24bb82a731f2?tpId=13&tqId=11206&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 分为e/E前后判断。后面的只能是整数。前面的最多只能有一个dot。注意边界检查条件。
-	
+
 > 7.字符串包含 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/01.02.html))
 
 	方法1: 暴力查找
 	复杂度： O(1) space, O(mn) time.
-	
+
 	方法2: 先排序，后双指针查找
 	复杂度： O(1) space, O(mlogm+nlogn) time.
-	
+
 	方法3: 使用hashtable。字符串有限所以额外空间为O(1)。因为数量=26，使用一个int更好。
 	复杂度： O(1) space, O(m+n) time.
-	
+
 > 8.回文判断 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/01.04.html))
 
 	方法1: 使用stack，全部推入栈中。如果再次推出相等则为回文
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 双指针从两端/中间双向查询
 	复杂度： O(1) space, O(n) time.
 	相关问题：链表是否回文（使用栈/快慢指针，慢指针到达终点后翻转链表）
-	
+
 > 9.最长回文子串 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/01.05.html)) ([Leetcode Q5](https://leetcode.com/problems/longest-palindromic-substring/))
 
 	方法1: 从每个位置开始，向两侧进行扩展并判断。需要饱含奇偶两种长度情况
 	复杂度： O(1) space, O(n^2) time.
-	
+
 	方法2: Manacher算法 （to be understand）
 	复杂度： O(1) space, O(n) time.
 
-	
-	
+
+
 
 ---
 <br />
@@ -414,49 +414,49 @@ l.merge(l2)                                                 ## merge two sorted 
 
 	方法1: 反转链表再返回
 	复杂度： O(1) space, O(n) time.
-	
+
 	方法2: 用额外的stack储存，再返回
 	复杂度： O(n) space, O(n) time.
-	
+
 > 2.链表中倒数第k个结点 ([剑指offer Q14](https://www.nowcoder.com/practice/529d3ae5a407492994ad2a246518148a?tpId=13&tqId=11167&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 双指针，让头指针先走k步，再让前后指针一起走
 	复杂度： O(1) space, O(n) time.
-	
+
 > 3.反转链表 ([剑指offer Q15](https://www.nowcoder.com/practice/75e878df47f24fdc9dc3e400ec6058ca?tpId=13&tqId=11168&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 常规操作
 	复杂度： O(1) space, O(n) time.
-	
+
 > 4.合并两个排序链表 ([剑指offer Q16](https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归。若有一个指针为空，返回另一个指针，否则指向数值较小的指针，并移动该指针头，递归得到
 	复杂度： O(1) space, O(n) time.
-	
+
 > 5.复杂链表的复制 ([剑指offer Q25](https://www.nowcoder.com/practice/f836b2c43afc4b35ad6adc41ec941dba?tpId=13&tqId=11178&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 先复制所有的next节点，并用map保存两个链表1on1的对应。然后复制random指针，通过map找到对应的值
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 现在同一个链表中每个节点后面添加一个复制节点。在扫描一次将后面的复印节点random指针指向对应的复制节点
 	复杂度： O(1) space, O(n) time.
-	
+
 > 6.两个链表的第一个公共结点 ([剑指offer Q36](https://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=13&tqId=11189&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 使用一个map保存链表1的结果。链表2扫描找到第一个在map中的数
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 计算两个链表的长度，找到长度差d。长链表先走d步，两个再一起走知道相等
 	复杂度： O(1) space, O(n) time.
-	
+
 > 7.圆圈中最后剩下的数(约瑟夫环问题) ([剑指offer Q46](https://www.nowcoder.com/practice/f78a359491e64a50bce2d89cff857eb6?tpId=13&tqId=11199&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 从数组构建链表，然后loop返回
 	复杂度： O(n) space, O(mn) time.
-	
+
 	方法2: 归纳法。推出f(n,m) = (f(n-1,m)+m)%n。f(1,m)=0. 再dp求得
 	复杂度： O(1) space, O(n) time.
-	
+
 > 8.链表中环的入口结点 ([剑指offer Q55](https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)) ([Leetcode Q142](https://leetcode.com/problems/linked-list-cycle-ii/))
 
 	方法1: 主要为数学推导。双指针，快指针每次两步，慢指针每次一步。
@@ -466,19 +466,19 @@ l.merge(l2)                                                 ## merge two sorted 
 			所以此时在安排一个指针从头与慢指针一起走，两个经过a步之后必定相遇在入口
 	复杂度： O(1) space, O(n) time.
 	相关问题：链表是否有环（=快慢指针是否相遇）
-	
+
 > 9.删除排序链表中重复的结点 ([剑指offer Q56](https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归判断是否遇到重复节点。是的话跳过这一段。注意下一节点为null的情况。
 	复杂度： O(1) space, O(n) time.
-	
-> 10.删除链表节点 
+
+> 10.删除链表节点
 
 	方法1: 将指向节点的下一个节点的值copy至指向节点。再删除下一个节点
 			如果该节点是尾节点，则必须要遍历
-			
+
 	复杂度： O(1) space, O(1) time. O(n) for ending node
-	
+
 ---
 <br />
 
@@ -518,36 +518,36 @@ l.merge(l2)                                                 ## merge two sorted 
 
 	方法1: 前序遍历数组[根结点，左子树节点，右子树节点] && 中序遍历数组[左子树节点，根结点，右子树节点]
 		于是通过前序的第一个root，将中序分隔开来，递归重建左右子树
-	
+
 > 2.树的子结构 ([剑指offer Q17](https://www.nowcoder.com/practice/6e196c44c7004d15b1610b9afca8bd88?tpId=13&tqId=11170&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归。如果root1==root2，递归判断左右子树是否完全相等；若不是，递归判断root1的左右子树是否是包含root2子树
-	
+
 > 3.二叉树的镜像 ([剑指offer Q18](https://www.nowcoder.com/practice/564f4c26aa584921bc75623e48ca3011?tpId=13&tqId=11171&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归。互换左右子树，再递归完成子树的替换
 	复杂度： O(1) space, O(n) time.
-	
+
 	方法2: 使用queue，每次互换最头上的节点的左右子树，再将左右子树的节点推入队列
 	复杂度： O(n) space, O(n) time.
-	
+
 > 4.从上往下打印二叉树（层级遍历） ([剑指offer Q22](https://www.nowcoder.com/practice/7fe2212963db4790b57431d9ed259701?tpId=13&tqId=11175&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 使用queue，每次弹出队列的头，将左右子树推入队尾
 	复杂度： O(n) space, O(n) time.
 	相关问题：把二叉树打印成多行（每次要记录queue的大小，每次pop掉一层的节点）
-	
+
 > 5.二叉搜索树的后序遍历序列构造二叉树 ([剑指offer Q23](https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&tqId=11176&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 后序遍历数组[左子树节点，右子树节点，根结点]
 			每次通过根节点找到数组前面第一个比根节点大的数作为右子树开始（找不到则返回自己的位置）。
 			判断断开的右子树是否全部比根节点大
 			再递归判断左右子树是否为二叉搜索树
-			
+
 > 6.二叉树中和为某一值的路径([剑指offer Q24](https://www.nowcoder.com/practice/b736e784e3e34731af99065031301bca?tpId=13&tqId=11177&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归。每次查找左右子树值为target-root的路径，存在则将自己推入路径。只有叶节点能直接放回路径。
-	
+
 > 7.二叉搜索树与双向链表([剑指offer Q26](https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&tqId=11179&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归。用一个自定义的TopEndNode保存左右子树恢复的双向链表的头尾。再与root节点融合成新的双向链表
@@ -556,19 +556,19 @@ l.merge(l2)                                                 ## merge two sorted 
         struct TreeNode* end;
         TopEndNode(): top(NULL), end(NULL) {}
     };
-    
+
 > 8.二叉树的深度([剑指offer Q38](https://www.nowcoder.com/practice/435fb86331474282a3499955f0a41e8b?tpId=13&tqId=11191&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归。叶节点返回深度为1.根节点返回1+max(左深度，右深度）
-	
+
 > 9.平衡二叉树判断([剑指offer Q39](https://www.nowcoder.com/practice/8b3b95850edb4115918ecebdf1b4d222?tpId=13&tqId=11192&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归求出左右子树的深度。如果深度相差不超过1则为平衡树。递归判断左右子树
-	
+
 	方法2: 方法1需要重复访问节点。于是从叶节点记录depth的深度并递归返回到根节点，相当于dp。
 	       int depth = 0;
            return IsBalanced(pRoot, &depth);
-           
+
 > 10.树中两个节点的最低公共祖先(剑指offer书中)
 
 	- 若为二叉搜索树，假设两个节点的值分别为min_v, max_v, 则可以从root找到第一个min_v < node < max_v的节点。若node等于其中某个值，则其中一个节点为另一节点的子孙
@@ -583,42 +583,42 @@ l.merge(l2)                                                 ## merge two sorted 
 			- node不为root时，找到第一个 节点是-父节点的左节点的-父节点。
 				即 if (pNode->next->left==pNode)
                 	return pNode->next;
-                	
+
 > 12.对称的二叉树([剑指offer Q58](https://www.nowcoder.com/practice/ff05d44dfdb04e1d83bdbdab320efbcb?tpId=13&tqId=11211&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 求出pRoot的镜像树pRoot_mirror,对比两个树是否完全一致
 	复杂度： O(n) space, O(n) time, and need repeative visit.
-	
+
 	方法2: 对比root的两个子树是否对称，可递归判断(left->right,right->left) && (left->left,right->right) 是否都对称
 	复杂度： O(1) space, O(n) time.
-	
+
 > 13.按之字形顺序打印二叉树([剑指offer Q59](https://www.nowcoder.com/practice/91b69814117f4e8097390d107d2efbe0?tpId=13&tqId=11212&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 用两个stack记录每层结果，用一个bool记录是向左还是向右遍历。
 		  每次将一个stack中的子节点向另一个方向传输。通过方向确定先传左还是先传右
 	复杂度： O(n) space, O(n) time
-	
+
 > 14.序列化二叉树([Leetcode 297](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/))
 
 	方法1: 用queue进行层级遍历，用#表示null，用空格隔开不同节点。使用istringstream与ostringstream便于序列化。
 	复杂度： O(1) space, O(n) time
-	
+
 > 15.二叉树的中序遍历([Leetcode 94](https://leetcode.com/problems/binary-tree-inorder-traversal/))
 
 	方法1: 递归。传入一个可修改的vector，左子树先调用，root推入值，右子树在调用。
 	复杂度： O(1) space, O(n) time
-	
+
 	方法2: 使用stack。p不为空时，推入自己，p指向p->left。p为空时，p=stack.top()，将p的值推入结果vector，stack pop()，再让p指向p->right
 	复杂度： O(n) space, O(n) time
-	
+
 > 16.二叉树搜索树的第k个节点([Leetcode 230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/))
 
 	方法1: 递归。先用一个函数递归求树的节点数目。如果左节点数目等于k-1，返回root；大于k-1则返回左子树的第k个；否则返回右子树的k-leftcount-1个节点
 	复杂度： O(1) space, O(n) time，但是多次递归开销很大
-	
+
 	方法2: 先用15的方法1求出vector，在返回vector的第k-1个数
 	复杂度： O(1) space, O(n) time，但是多次递归开销很大
-	
+
 	方法3: 使用15的方法2的stack，在推入的时候改为记录count，返回第k个count的时候的值
 	复杂度： O(n) space, O(n) time
 
@@ -649,12 +649,12 @@ stack.empty()                                               ## return whether th
 > 1.两个栈实现队列 ([剑指offer Q5](https://www.nowcoder.com/practice/54275ddae22f475981afa2244dd448c6?tpId=13&tqId=11158&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 往stack1中push; pop时如果stack2为空，先将stack1从顶pop过来，然后返回stack2的top，不为空则直接返回
-	
+
 > 2.包含min函数的栈 ([剑指offer Q20](https://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&tqId=11173&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 用一个额外的栈保存至今最小的树，与value栈同步。若新加的数更小，推入新树，否则推入栈顶的树
 	复杂度： O(n) space, O(1) time for min().
-	
+
 > 3.栈的压入、弹出序列 ([剑指offer Q21](https://www.nowcoder.com/practice/d77d11405cc7470d82554cb392585106?tpId=13&tqId=11174&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 用一个额外的栈按照压入的顺序不断推入，但当该栈顶的数等于弹出序列的头，弹出栈顶数与弹出序列的头（或移动index）
@@ -708,13 +708,13 @@ dq.clear()                                                  ## clear
 
 	方法1: 暴力搜索每个slidingwindow。可以用dp思想稍微减少一点对比
 	复杂度： O(1) space, O(nk) time.
-	
+
 	方法2: 使用一个动态维护的deque来构建每个窗口的slidingwindow。保证deque的头部永远是该windows内的最大值
 		  每次加入的新的数之前，需要从尾部删除比新加的小的数。
 		  然后从头删除已经不在slidingwindow内的数（所以deque存index而不存数字）
 		  最后输出头部的数当作该窗口结果
 	复杂度： O(k) space, O(n) time.
-		
+
 ---
 <br />
 
@@ -751,21 +751,21 @@ q.push(val)                                                 ## push value
 ### 问题及思路
 
 > 1.最小的K个数 ([剑指offer Q29](https://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&tqId=11182&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 使用最小堆。构建堆，再推出直到第k个数
 	复杂度： O(n) space, O(n+klogn) time. 当n>>k时效率高
-	
+
 > 2.数据流中的中位数 ([剑指offer Q63](https://www.nowcoder.com/practice/9be0172896bd43948f8a32fb954e1be1?tpId=13&tqId=11216&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 内置vector，每次insert都保证sorted(插入排序)。
 	复杂度： O(n) space, O(n) time for insertion. O(1) for getMedian
-	
+
 	方法2: 采用min heap + max heap. 保证min heap的数都比max heap大。且max heap的数总比min heap多。记录目前的count
 			若现在count为偶数，插入是先进min heap，得到的min heap最小值释放并推入max heap。
 			若现在count为奇数，插入是先进max heap，得到的max heap最大值释放并推入min heap。
 			奇数的median返回max heap的最大，偶数的median返回min heap和max heap顶的平均值
 	复杂度： O(n) space, O(logn) time for insertion. O(1) for getMedian
-	
+
 ---
 <br />
 
@@ -816,26 +816,26 @@ s.popitem()                          ## remove the last item
 ### 问题及思路
 
 > 1.和为S的两个数字 ([剑指offer Q42](https://www.nowcoder.com/practice/390da4f7a00f44bea7c2f3d19491311b?tpId=13&tqId=11195&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 排序后使用前后两个pointer查找
 	复杂度： O(1) space, O(nlogn) time.
-	
+
 	方法2: 使用hash。保存遍历的数字，新数字判断差值是否在hash中
 	复杂度： O(n) space, O(n) time.
-	
+
 > 2.数组中重复的数字 ([剑指offer Q50](https://www.nowcoder.com/practice/623a5ac0ea5b4e5f95552655361ae0a8?tpId=13&tqId=11203&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 使用hash table储存，直到遇到第一个重复的数字
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 将每个数字i移动到第i个位置。
 	复杂度： O(1) space, O(n) time.
-	
+
 > 3.第一个只出现一次的字符 ([剑指offer Q34](https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 使用hash table保存遍历结果，value为出现次数。再扫描一次字符串输出第一个value=1的字符
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 因为字符个数有限，使用一个unsigned int table[256]保存每个char的出现个数。每个字符对应位置为int(str[i])。
 	复杂度： O(1) space, O(n) time.
 ---
@@ -862,12 +862,12 @@ list = [[]]					# Use Adjacency matrix
 ### 问题及思路
 
 > 1.矩阵中的路径 ([剑指offer Q65](https://www.nowcoder.com/practice/c61c6999eecb4b8f88a98f66b273a3cc?tpId=13&tqId=11218&rp=2&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tPage=4))
-	
+
 	方法1: 深搜，注意visit的表需要修改。注意传入函数的方式(dfs(int *&visit...))
 	复杂度： O(n) space, O(n) time.
-	
+
 > 2.机器人的运动范围 ([剑指offer Q66](https://www.nowcoder.com/practice/6e5207314b5241fb83f2329e89fdecc8?tpId=13&tqId=11219&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-	
+
 	方法1: 深搜. 判断时多加了条件而已。
 	复杂度： O(n) space, O(n) time.
 ---
@@ -907,17 +907,17 @@ from bitarray import bitarray
 
 	方法1: for loop 查看每一位的是否为1
 	复杂度： O(1) space, O(1) time.
-	
+
 > 2.数组中只出现一次的两个数字 ([剑指offer Q40](https://www.nowcoder.com/practice/e02fdb54d7524710a7d664d082bb7811?tpId=13&tqId=11193&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 使用map记录每个数字出现的个数
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法1: 使用xor（a xor a = 0）. 将所有数字xor一遍。找到结果中不为0的一位，则两个数字在这一位必不同
 			按照该位将数字分为两组。分别进行xor并输出两个结果
 	复杂度： O(1) space, O(n) time.
 	相关问题：只出现一次的三个数字（同样用某一位分组，产生一个奇数分组和一个偶数分组。奇数分组先得到，偶数再做）
-	
+
 >3.不用加减乘除做加法([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 位运算。xor为sum， and 与 <<1为carry。直到carry不为0
@@ -934,19 +934,19 @@ from bitarray import bitarray
 	方法1: for loop 动态计算后面的值，注意溢出，long long保存结果
 	复杂度： O(1) space, O(n) time.
 	相关： 青蛙跳， 矩形覆盖
-	
+
 > 2.连续子数组的最大和 ([剑指offer Q30](https://www.nowcoder.com/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&tqId=11183&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 使用一个额外的sum保存到该数的最大sum。如果sum为负则定义改出的sum为自身（最大sum必然不包括前面的负数和）
 	复杂度： O(1) space, O(n) time.
-	
+
 > 3.连续子数组的最大积 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.01.html))
 
 	方法1: 由于有负数的存在，同时需要保存有负数的情况。
 			状态转移: max[i] = max(max[i-1]*A[i], min[i-1]*A[i], A[i]) -> 结果在此数组中更新
 					 min[i] = min(max[i-1]*A[i], min[i-1]*A[i], A[i])
 	复杂度： O(n) space (O(1) if you use two var only), O(n) time.
-	
+
 > 4.字符串的最小编辑距离 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.02.html))
 
 	方法1: dp[i][j]表示从S[:i]到T[:j]的转换. dp[i][0]=i; dp[0][j]=j.
@@ -965,12 +965,12 @@ from bitarray import bitarray
 							dp[i-1][j]==1 && C[i+j]==A[i]
 					dp[i][j] = 0 otherwise
 	复杂度： O(nm) space, O(nm) time.
-	
+
 > 6.最长递增子序列 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.06.html))
 
 	方法1: dp[i]表示以A[i]结尾的序列的最长递增子序列. dp[0]=1
 			状态转移: dp[j] = max(A[i] for 0<=i<j and A[i]<A[j]). If not exist. A[j]=0
-	复杂度： O(n) space, O(n^2) time. 
+	复杂度： O(n) space, O(n^2) time.
 	相关问题：最长公共子序列
 
 ---
@@ -1017,12 +1017,12 @@ sum(list)				 ## sum of all elements in list
 		  注意的是，对于c++，判断浮点数是否为0应留有error
 		  对于exp的计算，可以用二分法
 	复杂度： O(1) space, O(logn) time.
-	
+
 > 2.从1到n整数中1出现的次数([剑指offer Q31](https://www.nowcoder.com/practice/bd7f978302044eee894445e244c7eee6?tpId=13&tqId=11184&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 归纳法。对每一个数位上分别求出该数位上1出现的个数。
 	复杂度： O(1) space, O(logn) time.
-	
+
 	int count = 0;
     int a, b = 0;
     for(int m=1; m<=n; m*=10){
@@ -1034,14 +1034,14 @@ sum(list)				 ## sum of all elements in list
         // (a%10==1)*(b+1) is for counting the smaller fraction
     }
     return count;
-    
+
 > 3.丑数([剑指offer Q33](https://www.nowcoder.com/practice/6aa9e04fc3794f68acf8778237ba065b?tpId=13&tqId=11186&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 用三个队列分别表示x2,x3,x5的结果。每次讲三个队列最小的头推出加入输出数组（重复则一起推出）。
 			将该数x2,x3,x5之后分别推入三个队列的尾部
 			实现的时候可以只采用一个输出数组，并用3个指针指向该输出数组的位置，减少extra space。
 	复杂度： O(1) space, O(n) time.
-	
+
 >4.不使用加减乘除和判断语句求1～n的和([剑指offer Q47](https://www.nowcoder.com/practice/7a0da8fc483247ff8800059e12d7caf1?tpId=13&tqId=11200&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 采用递归. n==0时 n && 不再计算直接返回
@@ -1049,12 +1049,12 @@ sum(list)				 ## sum of all elements in list
 	 int res = n;
      n && (res += Sum_Solution(n-1));
      return res;
-     
+
 >5.不用加减乘除做加法([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 位运算。xor为sum， and 与 <<1为carry。直到carry不为0
 
-     
+
 ---
 <br />
 
@@ -1070,9 +1070,9 @@ sum(list)				 ## sum of all elements in list
 
 ### 问题及思路
 
-> 1. 
-	
-	方法1: 
+> 1.
+
+	方法1:
 ---
 <br />
 
@@ -1083,13 +1083,13 @@ sum(list)				 ## sum of all elements in list
 不稳定的算法：选择排序/快速排序/堆排序/希尔排序 （基本是因为不相邻的交换导致）
 
 > 1.冒泡排序(Bubble Sort) <br>
-> 
+>
 > 简述：每次将最大的数冒泡至最后 <br>
 > 平均时间复杂度: O(n^2) <br>
 > 最差时间复杂度: O(n^2) <br>
 > 空间复杂度: O(1) <br>
 > 稳定性: 稳定，因为冒泡时相同数字不交换
-	
+
 	int len = nums.size()
 	int temp = 0;
 	for (int i = 0; i < len - 1; i++) {
@@ -1101,15 +1101,15 @@ sum(list)				 ## sum of all elements in list
 	        }
 	    }
 	}
-	
+
 > 2.选择排序(Selection Sort) <br>
-> 
+>
 > 简述：每次挑选出剩余数组中最小的数，交换至开头 <br>
 > 平均时间复杂度: O(n^2) <br>
 > 最差时间复杂度: O(n^2) <br>
 > 空间复杂度: O(1) <br>
 > 稳定性: 不稳定，因为交换的时候可能会把原本顺序打乱（用链表稳定因为直接插入开头不需要交换）
-	
+
 	int minIndex=0, temp=0;
 	int len = nums.size()
 	for (int i = 0; i < len - 1; i++) {
@@ -1123,15 +1123,15 @@ sum(list)				 ## sum of all elements in list
 	    nums[i] = nums[minIndex];
 	    nums[minIndex] = temp;
 	}
-	
+
 > 3.插入排序(Insertion Sort) <br>
-> 
+>
 > 简述：每次挑选出剩余数组中最小的数，交换至开头 <br>
 > 平均时间复杂度: O(n^2) <br>
 > 最差时间复杂度: O(n^2) <br>
 > 空间复杂度: O(1) <br>
 > 稳定性: 稳定，因为插入从后面进行，相同数字只会插到后面
-	
+
 	int key = 0;
 	int j = 0;
 	for(int i=1; i<nums.size(); i++){
@@ -1143,15 +1143,15 @@ sum(list)				 ## sum of all elements in list
 		}
 		nums[j+1] = key;
 	}
-	
+
 > 4.快速排序(Quick Sort) <br>
-> 
+>
 > 简述：每次选取最后一个数作为pivot，小的放前面，大的放后面，再递归 <br>
 > 平均时间复杂度: O(nlogn) <br>
 > 最差时间复杂度: O(n^2) -- 当本来就排好序时 <br>
 > 空间复杂度: O(logn) --递归导致 <br>
 > 稳定性: 不稳定，交换pivot时可能把中间位置的数移动改变顺序
-	
+
 	void quickSort(vector<int>& nums){
 		quickSort(nums,0,nums.size());
 	}
@@ -1173,15 +1173,15 @@ sum(list)				 ## sum of all elements in list
 		swap(nums[++i],nums[high]);
 		return i;
 	}
-	
+
 > 5.归并排序(Merge Sort) <br>
-> 
+>
 > 简述：每次递归merge两个排好序的数列 <br>
 > 平均时间复杂度: O(nlogn) <br>
 > 最差时间复杂度: O(nlogn) <br>
 > 空间复杂度: O(n) <br>
 > 稳定性: 稳定
-	
+
 	void merge(vector<int>& arr, int first, int mid, int last){
 		vector<int> l,r;
 		for(int i=first;i<mid;i++) l.push_back(arr[i]);
@@ -1202,29 +1202,29 @@ sum(list)				 ## sum of all elements in list
 			merge(arr,first,mid,last);
 		}
 	}
-	
+
 > 6.堆排序(Heap Sort) <br>
-> 
+>
 > 简述：构建一个最大堆，每次将堆顶数字与尾部数字交换 <br>
 > 平均时间复杂度: O(nlogn) <br>
 > 最差时间复杂度: O(nlogn) <br>
 > 空间复杂度: O(1) <br>
 > 稳定性: 不稳定
-	
+
 	 Pass
-	 
+
 > 7.希尔排序(Shell Sort) <br>
-> 
+>
 > 简述：缩小增量排序，每次按照不同的gap分组排序,组内插入排序 <br>
 > 平均时间复杂度: O(nlogn) <br>
 > 最差时间复杂度: O(n^2) -- 当本来就排好序时 <br>
 > 空间复杂度: O(1) <br>
 > 稳定性: 不稳定，不同组内排序的交换可能打乱顺序
- 
+
 	Pass
-	
+
 > 8.计数排序(Counting Sort) <br>
-> 
+>
 > 简述：当数字范围有限时，记录每个数字出现记录 <br>
 > 平均时间复杂度: O(n+m) <br>
 > 最差时间复杂度: O(n+m) <br>
@@ -1232,9 +1232,9 @@ sum(list)				 ## sum of all elements in list
 > 稳定性: 稳定
 
 	Pass
- 	
+
 > 9.桶排序(Bucket Sort) <br>
-> 
+>
 > 简述：使用多个桶，将数字放到不同的桶里，分别排序。桶的分组有顺序，merge按顺序即可 <br>
 > 平均时间复杂度: O(n) <br>
 > 最差时间复杂度: O(n) <br>
@@ -1242,16 +1242,16 @@ sum(list)				 ## sum of all elements in list
 > 稳定性: 稳定
 
 	Pass
- 
+
 > 10.基数排序(Radix Sort) <br>
-> 
+>
 > 简述：按照低位先排序，再依次按照高位排序 <br>
 > 平均时间复杂度: O(kn)，k为位数 <br>
 > 最差时间复杂度: O(n^2) <br>
 > 稳定性: 稳定
-	
 
-	
+
+
 ---
 <br />
 
@@ -1265,7 +1265,7 @@ sum(list)				 ## sum of all elements in list
 
 4.Locality Sensetive Hashing(LSH)
 
-5.随机算法(Randomized Algorithm) 
+5.随机算法(Randomized Algorithm)
 
 6.bitmap
 
@@ -1277,55 +1277,55 @@ sum(list)				 ## sum of all elements in list
 ### 问题及思路
 
 > 1.海量日志数据，提取出某日访问百度次数最多的那个IP([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.02.html))
-	
+
 	数量过多，内存中无法放进全部。采用hash分而治之。
 	通过日期将ip提取，hash到每个机器上分别统计
 	取出每个机器上最大的结果（因为已经hash过了，相同ip都在同一个机器上）。可使用最大堆
-	
+
 > 2.寻找热门查询，300万个查询字符串中统计最热门的10个查询([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.02.html))
-	
+
 	内存中可以全部放的下。先通过O(n)扫描统计每个查询的次数。再用堆维护
 	时间为O(N) + N'*O(logk)， N'为去除重复之后的个数
 	相关问题：统计词频最高的100个词（也可使用Trie树），100万个数中最大的100个数
-	
+
 > 3.海量数据分布在100台电脑中，想个办法高效统计出这批数据的TOP10([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.02.html))
-	
+
 	由于数据已经分散。
 	方法1: 重新遍历，再hash分配，再用max heap
 	方法2: map-reduce，在每块上分别统计，再统一在一起求出现次数
-	
+
 > 4.2.5亿个整数中找出不重复的整数的个数，内存空间不足以容纳这2.5亿个整数([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.06.html))
-	
+
 	将数据分为多个区域（如2^8），每个中使用bitmap统计，内存够用（每个bit代表一个数字）
 
 > 5.5亿个int找它们的中位数([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.06.html))
-	
+
 	将数据从大到小分到不同的机器中。从小机器开始统计个数，不断累加，知道到达中位数
-	
+
 > 6.10万个长度不超过10的单词判断前面是否出现过([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.09.html))
-	
+
 	1.构建一个trie树（26叉树），每遇到一个词，插入和查询可以一起进行，都是O(1)时间（因为长度为10）
 	2.允许错误时也可以用bloom filter
-	
+
 > 7.两个大文件是否有相同url([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.08.html))
-	
+
 	1.若允许一定的错误率，可以使用bloom filter。将一个文件中的url全部映射到全部内存表示的bits（4G->340亿bit）中。在扫描第二个文件，使用filter看是否存在
 	2.可将文件1的url通过hash放到多个小文件中，然后将文件2遍历看是否在存在的小文件中
-	
+
 > 8.数据流采样/蓄水池算法 [Blog](https://soulmachine.gitbooks.io/system-design/content/cn/bigdata/data-stream-sampling.html)
-	
+
 	从stream中随机抽取k个整数。
 	- 当前k个到达时，全部保留
 	- 当第i>k个整数到达时，以k/i的概率丢弃任意一个留下的整数
 	- 归纳法可证明所有整数留下的概率相同
 
 > 9.频率估计 [Blog](https://soulmachine.gitbooks.io/system-design/content/cn/bigdata/frequency-estimation.html)
-	
+
 	使用count-min sketch。用多个hash table保存。
 	多个数字可以进入到一个hash bucket中，每次进入都在此bucket加1。当求一个数字的频率时，可求该bucket的值，返回误差在可接受范围内的值
-	
+
 > 10.元素计数 [Blog](http://www.mit.edu/~andoni)
-	
+
 	设一个值X=0. 对每个新来的值，X+=1 with Pr=1/2^X,不然不变。
 	返回2^X-1. 可用归纳法证明E(2^X-1)=n. 且variance小。用median trick可保证90%准确率。
 
@@ -1382,7 +1382,7 @@ sum(list)				 ## sum of all elements in list
 	4、信号：信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。
 	5、共享内存：共享内存就是映射一段能被其它进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的IPC方式，它是针对其它进程间通信方式运行效率低而专门设计的。它往往与其它通信机制（如信号量）配合使用，来实现进程间的同步和通信。
 	6、套接字：套接字也是一种进程间通信机制，与其它通信机制不同的是，它可用于不同机器间的进程通信
-	
+
 ## 编译
 ### 问题及思路
 来自([github](https://github.com/lawy623/interview))
@@ -1413,7 +1413,7 @@ sum(list)				 ## sum of all elements in list
 	2.修饰指针，分为指向常量的指针和指针常量；
 	3.常量引用，经常用于形参类型，即避免了拷贝，又避免了函数对值的修改；
 	4.修饰成员函数，说明该成员函数内不能修改成员变量。
-	
+
 > 2.static 作用
 
 	1.修饰普通变量，修改变量的存储区域和生命周期，使变量存储在静态区，在 main 函数运行前就分配了空间，如果有初始值就用初始值初始化它，如果没有初始值系统用默认值初始化它。
@@ -1421,14 +1421,14 @@ sum(list)				 ## sum of all elements in list
 	3.修饰成员变量，修饰成员变量使所有的对象只保存一个该变量，而且不需要生成对象就可以访问该成员。
 	4.修饰成员函数，修饰成员函数使得不需要生成对象就可以访问该函数，但是在 static 函数内不能访问非静态成员。
 
+> 3.虚函数、纯虚函数
 
+	类里如果声明了虚函数，这个函数是实现的，哪怕是空实现，它的作用就是为了能让这个函数在它的子类里面可以被覆盖，这样的话，编译器就可以使用后期绑定来达到多态了。纯虚函数只是一个接口，是个函数的声明而已，它要留到子类里去实现。
+	虚函数在子类里面也可以不重载的；但纯虚函数必须在子类去实现。
+	虚函数的类用于 “实作继承”，继承接口的同时也继承了父类的实现。当然大家也可以完成自己的实现。纯虚函数关注的是接口的统一性，实现由子类完成。
+	带纯虚函数的类叫抽象类，这种类不能直接生成对象，而只有被继承，并重写其虚函数后，才能使用。抽象类被继承后，子类可以继续是抽象类，也可以是普通类。
+	虚基类是虚继承中的基类，具体见下文虚继承。
 
 
 ---
 <br />
-
-
-
-
-
-
