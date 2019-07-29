@@ -235,6 +235,7 @@ arr[row][col]                           ## acces the idx
 ### C++用法
 ```c++
 string s（“sss")                                             ## init string
+string s（len, " ")	                                         ## init empty string by length
 s.length()                                                   ## length of string
 s.substr(start, length)                                      ## substring from start with length
 str.insert(pos, str2, start, length)                         ## insert at position with part of str2
@@ -249,6 +250,7 @@ str.compare(start, length, str2, start2, length2)            ## compare part of 
 to_string(val)                                               ## val to string
 stoi(str)                                                    ## string to int
 stof(Str)                                                    ## string to float
+sort(&str[0], &str[0]+str.length())	                         ## Sort a string
 ```
 ```c++
 char* str													 ## String by char pointer. Then end is always '\0'
@@ -263,6 +265,8 @@ ostringstream os;                                            ## init ostringstre
 	return os.str()                                          ## change the ostringstream to string
 ```
 凡是字符串，可以考虑用 "unsigned int table[256]={0}" 来储存每个char的信息。
+
+使用int arr[8]可以更少的使用空间。每一个char可有 arr[pos/32]<<(pos%32) 表示。
 ### Python用法
 ```python
 fields = s.split(" ")                ## Split the string into fields by " "(Can change to other delimiter)
@@ -358,6 +362,14 @@ s.isupper()                          ## string is all uppercases
 
 	方法2: Manacher算法 （to be understand）
 	复杂度： O(1) space, O(n) time.
+	
+> 10.两个字符串是否同构 ([CC150](https://www.nowcoder.com/practice/164929d4acd04de5b0ee2d93047b3b20?tpId=8&tqId=10996&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/06/1.4/))
+
+	方法1: 对两个字符串先排序，在比较是否完全一样
+	复杂度： O(1) space, O(nlogn) time.
+
+	方法2: 用额外数组记录出现a中字符出现次数，再依次通过b的减去判断是否为0
+	复杂度： O(n) space, O(n) time.
 
 
 

@@ -138,6 +138,7 @@ c++ all useful package and things:
 
 - string
     string s（“sss")                                             ## init string
+    string s（len, " ")	                                        ## init empty string by length
     s.length()                                                   ## length of string
     s.substr(start, length)                                      ## substring from start with length
     str.insert(pos, str2, start, length)                         ## insert at position with part of str2
@@ -152,6 +153,7 @@ c++ all useful package and things:
     to_string(val)                                               ## val to string
     stoi(str)                                                    ## string to int
     stof(Str)                                                    ## string to float
+    sort(&str[0], &str[0]+str.length())	                         ## Sort a string
 
 - istringstream / ostringstream
     istringstream is(str)                                        ## init istringstream by string
