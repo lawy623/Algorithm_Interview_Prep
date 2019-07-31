@@ -225,8 +225,18 @@ arr[row][col]                           ## acces the idx
 	方法1: 每次开始都是(0,0)->(1,1)->(2,2)->...->(k,k)，直到2k>=n_row或2k>=n_col
 			对每个(k,k)开始的circle，四个方向找到头尾断点打印（但要判断各方向上是否需要打印。）
 
+> 3.旋转矩阵 ([CC150 Q6](https://www.nowcoder.com/practice/17ab1e527c504df09a600e1af09d9a60?tpId=8&tqId=10999&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/08/1.6/))
 
+	方法1: 两个for loop直接copy
+	复杂度： O(n^2) space, O(n^2) time.
 
+	方法2: inplace交换，两次翻转。先对角线交换，再垂直方向交换
+	复杂度： O(1) space, O(n^2) time.
+	
+> 4.清除行列 ([CC150 Q7](https://www.nowcoder.com/practice/c95aac1506574dfc8ad44c3939c6739d?tpId=8&tqId=11000&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/09/1.7/))
+
+	方法1: 用两个一维数组分别表示这一行/列是否出现过0.再扫描一遍只要判断该点的行列是否出现过0即可
+	复杂度： O(n) space, O(n^2) time.
 
 ---
 <br />
@@ -363,14 +373,21 @@ s.isupper()                          ## string is all uppercases
 	方法2: Manacher算法 （to be understand）
 	复杂度： O(1) space, O(n) time.
 	
-> 10.两个字符串是否同构 ([CC150](https://www.nowcoder.com/practice/164929d4acd04de5b0ee2d93047b3b20?tpId=8&tqId=10996&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/06/1.4/))
+> 10.两个字符串是否同构 ([CC150 Q3](https://www.nowcoder.com/practice/164929d4acd04de5b0ee2d93047b3b20?tpId=8&tqId=10996&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/06/1.4/))
 
 	方法1: 对两个字符串先排序，在比较是否完全一样
 	复杂度： O(1) space, O(nlogn) time.
 
 	方法2: 用额外数组记录出现a中字符出现次数，再依次通过b的减去判断是否为0
 	复杂度： O(n) space, O(n) time.
+	
+> 11.是否为旋转字符串 ([CC150 Q8](https://www.nowcoder.com/practice/bc12808a2b0f445c96a64406d5513e96?tpId=8&tqId=11001&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1))([CC150 Sol](http://hawstein.com/2012/12/10/1.8/))
 
+	方法1: 对s1每一个break point，检查后+前的组合是否为s2
+	复杂度： O(1) space, O(n^2) time.
+
+	方法2: 构造一个O(n)时间的子串检查函数，如果s2是s1+s1的子串，则s2为s1的旋转
+	复杂度： O(n) space, O(n) time.
 
 
 
@@ -437,7 +454,7 @@ l.merge(l2)                                                 ## merge two sorted 
 
 > 3.反转链表 ([剑指offer Q15](https://www.nowcoder.com/practice/75e878df47f24fdc9dc3e400ec6058ca?tpId=13&tqId=11168&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
-	方法1: 常规操作
+	方法1: 常规操作,与1相同
 	复杂度： O(1) space, O(n) time.
 
 > 4.合并两个排序链表 ([剑指offer Q16](https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
@@ -469,7 +486,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法2: 归纳法。推出f(n,m) = (f(n-1,m)+m)%n。f(1,m)=0. 再dp求得
 	复杂度： O(1) space, O(n) time.
 
-> 8.链表中环的入口结点 ([剑指offer Q55](https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)) ([Leetcode Q142](https://leetcode.com/problems/linked-list-cycle-ii/))
+> 8.链表中环的入口结点 ([剑指offer Q55](https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)) ([Leetcode Q142](https://leetcode.com/problems/linked-list-cycle-ii/)) ([CC150 Sol](http://hawstein.com/2012/12/17/2.5/))
 
 	方法1: 主要为数学推导。双指针，快指针每次两步，慢指针每次一步。
 			若有环，快慢指针会相遇。假设到环入口要a步，环长r步。慢指针走了k步与快指针相遇，慢指针在环上走了t步。
@@ -478,19 +495,50 @@ l.merge(l2)                                                 ## merge two sorted 
 			所以此时在安排一个指针从头与慢指针一起走，两个经过a步之后必定相遇在入口
 	复杂度： O(1) space, O(n) time.
 	相关问题：链表是否有环（=快慢指针是否相遇）
+	
+	方法2: 用一个map保存是否遇到过相同指针。指针不停向前，若遇到相同map中存在证明有环且为环的入口 
+	复杂度： O(n) space, O(n) time.
 
-> 9.删除排序链表中重复的结点 ([剑指offer Q56](https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 9_1.删除排序链表中重复的结点 ([剑指offer Q56](https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归判断是否遇到重复节点。是的话跳过这一段。注意下一节点为null的情况。
 	复杂度： O(1) space, O(n) time.
 
-> 10.删除链表节点
+> 9_2.删除未排序链表中重复的结点 ([CC150 Sol](http://hawstein.com/2012/12/13/2.1/))
+
+	方法1: 双指针，每次遇到一个，删除后面所有相同的。
+	复杂度： O(1) space, O(n^2) time.
+
+	方法2: 用一个hash判断该节点是否曾经出现过
+	复杂度： O(n) space, O(n) time.
+
+> 10.删除链表节点 ([CC150 Q9](https://www.nowcoder.com/practice/6a668a3960e24d3ea04bba89109c6451?tpId=8&tqId=11003&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/15/2.3/))
+
 
 	方法1: 将指向节点的下一个节点的值copy至指向节点。再删除下一个节点
 			如果该节点是尾节点，则必须要遍历
-
 	复杂度： O(1) space, O(1) time. O(n) for ending node
+	
+> 10.分割链表 ([CC150 Q10](https://www.nowcoder.com/practice/0e27e0b064de4eacac178676ef9c9d70?tpId=8&tqId=11004&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
+
+	方法1: 使用大小两个链表进行添加。注意大链表最后next要指向null.
+	复杂度： O(1) space, O(n) time.
+	
+> 11.链表相加 ([CC150 Q11](https://www.nowcoder.com/practice/ed85a09f0df047119e94fb3e5569855a?tpId=8&tqId=11005&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/16/2.4/))([LeetCode Q2](https://leetcode.com/problems/add-two-numbers/))
+
+
+	方法1: 注意对while条件的判断，只要(a || b || carry)即可继续，赋值可用a?a->val:0进行。减少过多代码
+	复杂度： O(1) space, O(n) time.
+	
+> 12.回文链表 ([CC150 Q12](https://www.nowcoder.com/practice/baefd05def524a92bcfa6e1f113ed4f0?tpId=8&tqId=11006&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+
+	方法1: 使用一个stack，全部推入判断堆顶是否一次相等
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 使用一个stack和快慢指针，将慢指针经历的推入堆中，在慢指针一次里边。注意长度为奇偶时的区别
+	复杂度： O(n) space, O(n) time.
 ---
 <br />
 
@@ -610,12 +658,12 @@ l.merge(l2)                                                 ## merge two sorted 
 		  每次将一个stack中的子节点向另一个方向传输。通过方向确定先传左还是先传右
 	复杂度： O(n) space, O(n) time
 
-> 14.序列化二叉树([Leetcode 297](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/))
+> 14.序列化二叉树([Leetcode Q297](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/))
 
 	方法1: 用queue进行层级遍历，用#表示null，用空格隔开不同节点。使用istringstream与ostringstream便于序列化。
 	复杂度： O(1) space, O(n) time
 
-> 15.二叉树的中序遍历([Leetcode 94](https://leetcode.com/problems/binary-tree-inorder-traversal/))
+> 15.二叉树的中序遍历([Leetcode Q94](https://leetcode.com/problems/binary-tree-inorder-traversal/))
 
 	方法1: 递归。传入一个可修改的vector，左子树先调用，root推入值，右子树在调用。
 	复杂度： O(1) space, O(n) time
@@ -623,7 +671,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法2: 使用stack。p不为空时，推入自己，p指向p->left。p为空时，p=stack.top()，将p的值推入结果vector，stack pop()，再让p指向p->right
 	复杂度： O(n) space, O(n) time
 
-> 16.二叉树搜索树的第k个节点([Leetcode 230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/))
+> 16.二叉树搜索树的第k个节点([Leetcode Q230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/))
 
 	方法1: 递归。先用一个函数递归求树的节点数目。如果左节点数目等于k-1，返回root；大于k-1则返回左子树的第k个；否则返回右子树的k-leftcount-1个节点
 	复杂度： O(1) space, O(n) time，但是多次递归开销很大
@@ -664,7 +712,7 @@ stack.empty()                                               ## return whether th
 
 > 2.包含min函数的栈 ([剑指offer Q20](https://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&tqId=11173&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
-	方法1: 用一个额外的栈保存至今最小的树，与value栈同步。若新加的数更小，推入新树，否则推入栈顶的树
+	方法1: 用一个额外的栈保存至今最小的树，与value栈同步。若新加的数更小，推入新树，否则推入栈顶的树(事实上额外的栈不需要保存重复的最小值，如果新的值不小于栈顶的值则推入；如果pop的值==栈顶值)
 	复杂度： O(n) space, O(1) time for min().
 
 > 3.栈的压入、弹出序列 ([剑指offer Q21](https://www.nowcoder.com/practice/d77d11405cc7470d82554cb392585106?tpId=13&tqId=11174&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
