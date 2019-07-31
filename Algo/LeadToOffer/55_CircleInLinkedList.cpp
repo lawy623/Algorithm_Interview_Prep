@@ -1,3 +1,4 @@
+// two pointers.
 class Solution {
 public:
     ListNode* EntryNodeOfLoop(ListNode* pHead)
@@ -26,3 +27,21 @@ public:
 //k=a+t && 2k=a+nr+t. ->> nr = k = a+t.
 //(n-1)r + r = a+t.  -> a = r-t + (n-1)r.
 //If we use a slow2 pointer to go when slow&fast meet. We need (a) steps to the entrances. Slow one can go (r-t) + (n-1)r which will also get to the entrance. When they meet. return the entrance.
+
+
+//2 Use a map.
+class Solution {
+public:
+    ListNode* EntryNodeOfLoop(ListNode* pHead)
+    {
+        unordered_map<ListNode*, bool> m;
+        while (pHead) {
+            if (m.find(pHead)==m.end())
+                m[pHead] = true;
+            else
+                return pHead;
+            pHead = pHead->next;
+        }
+        return NULL;
+    }
+};
