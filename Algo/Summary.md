@@ -595,7 +595,9 @@ l.merge(l2)                                                 ## merge two sorted 
 
 	方法1: 使用queue，每次弹出队列的头，将左右子树推入队尾
 	复杂度： O(n) space, O(n) time.
-	相关问题：把二叉树打印成多行（每次要记录queue的大小，每次pop掉一层的节点）
+	相关问题：- 把二叉树打印成多行（每次要记录queue的大小，每次pop掉一层的节点）
+			- 将某一层输出成为链表 (CC150 Q20)
+
 
 > 5.二叉搜索树的后序遍历序列构造二叉树 ([剑指offer Q23](https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&tqId=11176&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -621,7 +623,7 @@ l.merge(l2)                                                 ## merge two sorted 
 
 	方法1: 递归。叶节点返回深度为1.根节点返回1+max(左深度，右深度）
 
-> 9.平衡二叉树判断([剑指offer Q39](https://www.nowcoder.com/practice/8b3b95850edb4115918ecebdf1b4d222?tpId=13&tqId=11192&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 9.平衡二叉树判断([剑指offer Q39](https://www.nowcoder.com/practice/8b3b95850edb4115918ecebdf1b4d222?tpId=13&tqId=11192&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))([CC150 Q17](https://www.nowcoder.com/practice/b6bbed48cd864cf09a34a6ca14a3976f?tpId=8&tqId=11011&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1))([CC150 Sol](http://hawstein.com/2012/12/24/4.1/))
 
 	方法1: 递归求出左右子树的深度。如果深度相差不超过1则为平衡树。递归判断左右子树
 
@@ -635,6 +637,14 @@ l.merge(l2)                                                 ## merge two sorted 
 	- 若节点包含指向父节点的指针，则可将问题转化为找两个链表的第一个公共节点
 	- 若都不满足（不一定为二叉树，不是搜索树，没有指向父节点的指针），则先从root找到到达两个节点的path（递归+深搜），然后比较两个path，求出两条路径的最后公共节点
 
+> 10_1.满二叉树的最低公共祖先([CC150 Q23](https://www.nowcoder.com/practice/70e00e490b454006976c1fdf47f155d9?tpId=8&tqId=11017&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+	方法1: 注意到每个节点的父亲编号都是自己的一半。用两个stack保存路径，查看最后相同的堆顶值
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 直接比较两个编号。若不相等，大的数除以2，直到相等。
+	复杂度： O(1) space, O(n) time.
+
 > 11.二叉树的下一个结点([剑指offer Q57](https://www.nowcoder.com/practice/9023a0c988684a53960365b889ceaf5e?tpId=13&tqId=11210&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 多种情况判断
@@ -643,7 +653,24 @@ l.merge(l2)                                                 ## merge two sorted 
 			- node不为root时，找到第一个 节点是-父节点的左节点的-父节点。
 				即 if (pNode->next->left==pNode)
                 	return pNode->next;
+                	
+> 11_1.二叉树的下一个结点(不存在父节点)([CC150 Q22](https://www.nowcoder.com/practice/60231d6931d543d4aadcb67851b21e4a?tpId=8&tqId=11016&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/28/4.5/))
 
+	方法1: 用一个vector保存中序遍历的结果，找到对应值的下一个节点
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 用一个stack记录中序遍历的结果。找到值时设一个flag=true，下一个遇到flag==true则输出
+	复杂度： O(n) space, O(n) time.
+	
+	方法3: 直接用一个flag传入函数递归来做。（假设所有值>=0）
+			如果root为null，返回-1.
+			对左节点调用函数。如果返回不为-1，证明在左子树找到，返回该值。
+			如果sign被设成了true，证明在左子树找到p，下一个恰好为root的值
+			如果root->val==p，将sign设为true，
+			返回右节点的递归结果（因为sign已经是true了，会直接输出下一个访问的节点的值）
+	复杂度： O(1) space, O(n) time.
+
+	
 > 12.对称的二叉树([剑指offer Q58](https://www.nowcoder.com/practice/ff05d44dfdb04e1d83bdbdab320efbcb?tpId=13&tqId=11211&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 求出pRoot的镜像树pRoot_mirror,对比两个树是否完全一致
@@ -677,14 +704,19 @@ l.merge(l2)                                                 ## merge two sorted 
 	复杂度： O(1) space, O(n) time，但是多次递归开销很大
 
 	方法2: 先用15的方法1求出vector，在返回vector的第k-1个数
-	复杂度： O(1) space, O(n) time，但是多次递归开销很大
+	复杂度： O(n) space, O(n) time，但是多次递归开销很大
 
 	方法3: 使用15的方法2的stack，在推入的时候改为记录count，返回第k个count的时候的值
 	复杂度： O(n) space, O(n) time
 
+> 17.递增数列构建最低二叉搜索树([CC150 Q19](https://www.nowcoder.com/practice/01a12f94988649e39b554d95c45bfa6f?tpId=8&tqId=11013&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/26/4.3/))
 
----
-<br />
+	方法1: 每次取mid，递归构建
+	
+> 18.判断二叉搜索树([CC150 Q21](https://www.nowcoder.com/practice/536c0199151245f897da2c5390930657?tpId=8&tqId=11015&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+	方法1: 使用15中stack版的中序遍历，每次访问到一个点的时候记录下值，保证下一个访问的点比他大，不断更新该值
+	复杂度： O(n) space, O(n) time
 
 
 # <h2 id="6">栈（Stack）</h2>
@@ -712,14 +744,18 @@ stack.empty()                                               ## return whether th
 
 > 2.包含min函数的栈 ([剑指offer Q20](https://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&tqId=11173&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
-	方法1: 用一个额外的栈保存至今最小的树，与value栈同步。若新加的数更小，推入新树，否则推入栈顶的树(事实上额外的栈不需要保存重复的最小值，如果新的值不小于栈顶的值则推入；如果pop的值==栈顶值)
+	方法1: 用一个额外的栈保存至今最小的树，与value栈同步。若新加的数更小，推入新树，否则推入栈顶的树(事实上额外的栈不需要保存重复的最小值，如果新的值不小于栈顶的值则推入；如果pop的值==栈顶值一同pop掉)
 	复杂度： O(n) space, O(1) time for min().
 
 > 3.栈的压入、弹出序列 ([剑指offer Q21](https://www.nowcoder.com/practice/d77d11405cc7470d82554cb392585106?tpId=13&tqId=11174&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 用一个额外的栈按照压入的顺序不断推入，但当该栈顶的数等于弹出序列的头，弹出栈顶数与弹出序列的头（或移动index）
 	复杂度： O(n) space, O(n) time.
+	
+> 4.双栈排序 ([CC150 Q15](https://www.nowcoder.com/practice/d0d0cddc1489476da6b782a6301e7dec?tpId=8&tqId=11009&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/23/3.6/))
 
+	方法1: Insertion sort的方法，每次把栈顶插到temp栈对应的地方，temp栈顶大的数先push回原来的栈即可
+	复杂度： O(n) space, O(n^2) time.
 
 ---
 <br />
@@ -930,8 +966,14 @@ list = [[]]					# Use Adjacency matrix
 
 	方法1: 深搜. 判断时多加了条件而已。
 	复杂度： O(n) space, O(n) time.
----
-<br />
+	
+> 3.检查路径 ([CC150 Q18](https://www.nowcoder.com/practice/1b83885969f14329bf9222c1c54469a7?tpId=8&tqId=11012&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/25/4.2/))
+
+	方法1: 深搜. 退出时可不将visit改为0，因为为有向图，不能到达则无需再次访问
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 广搜. 用queue来实现 
+	复杂度： O(n) space, O(n) time.
 
 # <h2 id="11">位运算（Bit Manipulation）</h2>
 ### C++用法
