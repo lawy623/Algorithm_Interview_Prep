@@ -717,6 +717,11 @@ l.merge(l2)                                                 ## merge two sorted 
 
 	方法1: 使用15中stack版的中序遍历，每次访问到一个点的时候记录下值，保证下一个访问的点比他大，不断更新该值
 	复杂度： O(n) space, O(n) time
+	
+> 19.二叉树的最长路径([Leetcode Q543](https://leetcode.com/problems/diameter-of-binary-tree))
+
+	方法1: 根节点最长路径=max(左节点最长路径，右节点最长路径，左深度+右深度）。深度可以传入函数递归
+	复杂度： O(1) space, O(n) time
 
 
 # <h2 id="6">栈（Stack）</h2>
