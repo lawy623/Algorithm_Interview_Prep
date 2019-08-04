@@ -186,6 +186,15 @@ c++ all useful package and things:
 - unordered_map  (using hash table)
     unordered_map<int, int> m;                                  ## init. Other methods are the same as 'map'
 
+- pair
+    pair<int, double> p                                         ## pair init
+    pair<int, double> p(1, 1.1)                                 ## pair init and assign
+    p = make_pair(1, 1.1)                                       ## assign using make pair
+    p.first                                                     ## first value
+    p.second                                                    ## second value
+    map<pair<int, int>, bool>                                   ## map with pair
+    map[make_pair(1,1)]                                         ## access by pair key
+
 - unordered_multimap
     unordered_multimap<int, pair<int, int>> map;                ## one key with two values
     unordered_multimap<int, tuple<int, int, int>> map;          ## one key with multiple values
