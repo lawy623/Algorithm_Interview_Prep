@@ -989,6 +989,7 @@ list = [[]]					# Use Adjacency matrix
 	&			 ## And
 	^			 ## Exclusive OR
 	~			 ## NOT
+	0xffffffff ## 32bit int in hex
 ```
 ### Python用法
 ```python
@@ -1025,10 +1026,21 @@ from bitarray import bitarray
 	复杂度： O(1) space, O(n) time.
 	相关问题：只出现一次的三个数字（同样用某一位分组，产生一个奇数分组和一个偶数分组。奇数分组先得到，偶数再做）
 
->3.不用加减乘除做加法([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+>3.不用加减乘除做加法([CC150 Q26](https://www.nowcoder.com/practice/743853af75fc4026939a682b86535f79?tpId=8&tqId=11020&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/02/5.2/))
 
-	方法1: 位运算。xor为sum， and 与 <<1为carry。直到carry不为0
+	方法1: 整数部分通过%2再/2一步步向前，小数部分对比1/2^i一步步向后
+	
+>4.最接近的数([CC150 Q27](https://www.nowcoder.com/practice/33ad4d168a3247b9b63f41e4eaded652?tpId=8&tqId=11021&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=2))([CC150 Sol](http://hawstein.com/2013/01/04/5.3/))
 
+	方法1: 对于0001100，更大的一个数是另左边第二次出现连续的0时成为1,后面补0->0010000
+		再将后面多加不足的1->0010001. 整个过程为x + 1<<c_0 + 1<<(c_01-1) - 1,c_0=2,c_01=2
+		对于1100011，更小的一个数是另左边第二次出现连续的1时成为0，后面补1->1011111
+		再将后面多余的1变成0->1011100. 整个过程为x - (1<<c_1) - 1<<(c_10-1) + 1, c_1=2,c_10=3
+	
+>5.交换奇偶数位([CC150 Q29](https://www.nowcoder.com/practice/ed7d014b42e740679c4bd69b9d9c49b9?tpId=8&tqId=11023&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/04/5.6/))
+	
+	方法1: 用mask表示奇数与偶数(0x55555555, 0xAAAAAAAA). 输出(odd<<1 | even>>1)
+	
 ---
 <br />
 
@@ -1161,6 +1173,10 @@ sum(list)				 ## sum of all elements in list
 
 	方法1: 位运算。xor为sum， and 与 <<1为carry。直到carry不为0
 
+>6.float二进制表达([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+
+	方法1: 位运算。xor为sum， and 与 <<1为carry。直到carry不为0
+	
 
 ---
 <br />
