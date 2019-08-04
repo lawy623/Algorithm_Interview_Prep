@@ -903,6 +903,15 @@ iter -> first                                               ## get key from iter
 iter -> second.first                                        ## get first val in pair from iterator
 iter -> second.second                                       ## get second val in pair from iterator
 ```
+```c++
+pair<int, double> p                                         ## pair init
+pair<int, double> p(1, 1.1)                                 ## pair init and assign
+p = make_pair(1, 1.1)                                       ## assign using make pair
+p.first                                                     ## first value
+p.second                                                    ## second value
+map<pair<int, int>, bool>                                   ## map with pair
+map[make_pair(1,1)]                                         ## access by pair key
+```
 ### Python用法
 ```python
 s = {'a':1, 'b':2}                   ## Init a dict
