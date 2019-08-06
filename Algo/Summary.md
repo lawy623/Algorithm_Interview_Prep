@@ -173,6 +173,7 @@ sum(list)				 	## sum of all elements
 
 	方法2: 将每个数字i移动到第i个位置。
 	复杂度： O(1) space, O(n) time.
+	相似问题: 魔术引索([CC150 Q42]-当A[i]>i时，i直接跳到A[i]，避免无用搜索
 
 > 12.不用除法构建乘积数组 ([剑指offer Q51](https://www.nowcoder.com/practice/94a4d381a68b47b7a8bed86f2975db46?tpId=13&tqId=11204&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -307,11 +308,14 @@ s.isupper()                          ## string is all uppercases
 	方法2: python使用split(" ") 与 "%20".join()函数
 	复杂度: O(n) time.
 
-> 2.字符串的排列 ([剑指offer Q27](https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&tqId=11180&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.字符串的排列 ([剑指offer Q27](https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&tqId=11180&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))([CC150 Q44](https://www.nowcoder.com/practice/8380c8cf28954a188362206b1991b5d6?tpId=8&tqId=11038&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 先递归返回str[1:]的全排列，再将该数字插入每个全排列的不同位置，推入队列/数组，并将原来的全排列弹出
 			最后需要通过hashtable去除重复的排列
-	复杂度： O(n) space, O(n^2) time.
+	
+	方法2: 递归。每一次将i>cur移到cur的位置做一次permutation。再swap回去
+	
+	方法3: 递归。每一次取其中的一位，将剩下的字符串premute之后，将该位放在开头
 
 > 3.第一个只出现一次的字符 ([剑指offer Q34](https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -761,6 +765,11 @@ stack.empty()                                               ## return whether th
 
 	方法1: Insertion sort的方法，每次把栈顶插到temp栈对应的地方，temp栈顶大的数先push回原来的栈即可
 	复杂度： O(n) space, O(n^2) time.
+	
+> 5.合法括号 ([CC150 Q45](https://www.nowcoder.com/practice/d8acfa0619814b2d98f12c071aef20d4?tpId=8&tqId=11039&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/12/8.5/))
+
+	方法1: 使用一个stack，当栈顶为'('且A字符为')'弹出栈顶，否则一次输入A的字符。如果合法，stack应为空。
+	复杂度： O(n) space, O(n) time.
 
 ---
 <br />
@@ -1034,21 +1043,22 @@ from bitarray import bitarray
 			按照该位将数字分为两组。分别进行xor并输出两个结果
 	复杂度： O(1) space, O(n) time.
 	相关问题：只出现一次的三个数字（同样用某一位分组，产生一个奇数分组和一个偶数分组。奇数分组先得到，偶数再做）
-
->3.不用加减乘除做加法([CC150 Q26](https://www.nowcoder.com/practice/743853af75fc4026939a682b86535f79?tpId=8&tqId=11020&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/02/5.2/))
-
-	方法1: 整数部分通过%2再/2一步步向前，小数部分对比1/2^i一步步向后
 	
->4.最接近的数([CC150 Q27](https://www.nowcoder.com/practice/33ad4d168a3247b9b63f41e4eaded652?tpId=8&tqId=11021&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=2))([CC150 Sol](http://hawstein.com/2013/01/04/5.3/))
+>3.最接近的数([CC150 Q27](https://www.nowcoder.com/practice/33ad4d168a3247b9b63f41e4eaded652?tpId=8&tqId=11021&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=2))([CC150 Sol](http://hawstein.com/2013/01/04/5.3/))
 
 	方法1: 对于0001100，更大的一个数是另左边第二次出现连续的0时成为1,后面补0->0010000
 		再将后面多加不足的1->0010001. 整个过程为x + 1<<c_0 + 1<<(c_01-1) - 1,c_0=2,c_01=2
 		对于1100011，更小的一个数是另左边第二次出现连续的1时成为0，后面补1->1011111
 		再将后面多余的1变成0->1011100. 整个过程为x - (1<<c_1) - 1<<(c_10-1) + 1, c_1=2,c_10=3
 	
->5.交换奇偶数位([CC150 Q29](https://www.nowcoder.com/practice/ed7d014b42e740679c4bd69b9d9c49b9?tpId=8&tqId=11023&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/04/5.6/))
+>4.交换奇偶数位([CC150 Q29](https://www.nowcoder.com/practice/ed7d014b42e740679c4bd69b9d9c49b9?tpId=8&tqId=11023&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/04/5.6/))
 	
 	方法1: 用mask表示奇数与偶数(0x55555555, 0xAAAAAAAA). 输出(odd<<1 | even>>1)
+	
+>5.集合的子集([CC150 Q43](https://www.nowcoder.com/practice/1f2700e2b1904254b55765479e9b8766?tpId=8&tqId=11037&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/10/8.3/))
+	
+	方法1: 一个集合的全排列可以用n个1表示，则最大为2^n-1, 最小为1(非空子集)。按照位置加入元素即可
+	复杂度： O(1) space, O(n) time.
 	
 ---
 <br />
@@ -1182,11 +1192,9 @@ sum(list)				 ## sum of all elements in list
 
 	方法1: 位运算。xor为sum， and 与 <<1为carry。直到carry不为0
 
->6.float二进制表达([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+>6.二进制float小数([CC150 Q26](https://www.nowcoder.com/practice/743853af75fc4026939a682b86535f79?tpId=8&tqId=11020&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/02/5.2/))
 
-	方法1: 位运算。xor为sum， and 与 <<1为carry。直到carry不为0
-	
-
+	方法1: 整数部分通过%2再/2一步步向前，小数部分对比1/2^i一步步向后
 ---
 <br />
 
