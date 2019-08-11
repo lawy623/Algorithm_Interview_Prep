@@ -203,6 +203,20 @@ c++ all useful package and things:
     iter -> second.first                                        ## get first val in pair from iterator
     iter -> second.second                                       ## get second val in pair from iterator
 
+- set (Actually a RedBlack Tree)
+    set<int> s                                                  ## init set
+    s.clear()                                                   ## clear the set
+    s.count(val)                                                ## count num of occur
+    s.empty()                                                   ## whether is umpty
+    s.insert(val)                                               ## insert val
+    s.erase(val)                                                ## erase val
+    s.find(val)                                                 ## find val and return iter
+    s.lower_bound(val)                                          ## return iter that is the first not less than val
+    s.upper_bound(val)                                          ## return iter that is the first larger than val
+    it = s.equal_range(val)                                     ## return iter that first&second are lower_bound and upper_bound
+        *it->first
+        *it->second
+
 - struct
     struct TreeNode {                                           ## sample of defining a struct
         int val;
