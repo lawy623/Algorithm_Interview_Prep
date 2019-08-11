@@ -90,6 +90,9 @@ sum(list)				 	## sum of all elements
 	· mid>=start, 则查找[mid, end];
 	· mid<=end,则查找[start, mid]
 	复杂度： O(1) space, O(logn) time.
+	相关问题：旋转数组的查找(CC150 053)：按照mid与target的值比较
+			A[mid]<target时，只有mid在右侧且x在左侧才向左查找，否则都向右
+			A[mid]>target时，只有mid在左侧且x在右侧才向右查找，否则都向左
 
 > 2.调整数组顺序使奇数位于偶数前面 ([剑指offer Q13](https://www.nowcoder.com/practice/beb5aa231adc45b2a5dcc5b62c93f593?tpId=13&tqId=11166&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -193,6 +196,16 @@ sum(list)				 	## sum of all elements
 			当l2==1时，l2加1
 			当l2==2时，交换l3，l2的值，l3减1
 			直到l2==l3
+	复杂度： O(1) space, O(n) time.
+	
+> 14.最小调整有序([CC150 Q65](https://www.nowcoder.com/practice/091c2f1cf441484f81696f08328b06cd?tpId=8&tqId=11059&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+	方法1: 用两个vector分别表示从左到右的最大值/从右到左的最小值。
+		从左到右遍历最小值，当最小值第一次不为自身，即右边有更小的数，一定要调整
+		从右到左遍历最大值，当最大值第一次不为自身，即左边有更小的数，一定要调整
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 不需要用vector保存所有的结果。只要记录从左到右最后一次最大值更改，和从右到左最后一次最小值更改即可。
 	复杂度： O(1) space, O(n) time.
 
 
@@ -726,6 +739,14 @@ l.merge(l2)                                                 ## merge two sorted 
 
 	方法1: 根节点最长路径=max(左节点最长路径，右节点最长路径，左深度+右深度）。深度可以传入函数递归
 	复杂度： O(1) space, O(n) time
+	
+> 20.维护数组的rank([CC150 Q58](https://www.nowcoder.com/practice/0ade0d95c85349beb934a90b1d9b02be?tpId=8&tqId=11052&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+	方法1: 暴力检查
+	复杂度： O(1) space, O(n^2) time
+	
+	方法2: 用二叉搜索树保存stream的结果，每次查找rank。
+	复杂度： O(n) space, O(logn) time
 
 
 # <h2 id="6">栈（Stack）</h2>
@@ -957,6 +978,12 @@ s.popitem()                          ## remove the last item
 
 	方法2: 因为字符个数有限，使用一个unsigned int table[256]保存每个char的出现个数。每个字符对应位置为int(str[i])。
 	复杂度： O(1) space, O(n) time.
+	
+> 4.变位词排序 ([CC150 Q52](https://www.nowcoder.com/practice/764edc8f2a6147429a098f422753853b?tpId=8&tqId=11046&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+	方法1: 所有的变位词按照字典序排序后都相同，可视为hash key。使用hash table保存看是否存在即可
+	复杂度： O(n) space, O(nlogn) time.
+
 ---
 <br />
 
@@ -997,7 +1024,16 @@ list = [[]]					# Use Adjacency matrix
 	
 	方法2: 广搜. 用queue来实现 
 	复杂度： O(n) space, O(n) time.
+	
+> 4.N皇后问题([CC150 Q48](https://www.nowcoder.com/practice/8b5d63163fbe48719f2dfe01fe9f7e54?tpId=8&tqId=11042&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/15/8.8/))
 
+	方法1: 回溯/dfs，用rows[i]表示每一行的assignment，每次assign一行里边所有可能性，如果valid就去assign下一行。
+			当八行都assign成功后，将传入的count++
+			
+> 5.迷宫([CC150 Q46](https://www.nowcoder.com/practice/365493766c514d0da0cd774d3d40fd49?tpId=8&tqId=11040&rp=3&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=3))
+
+	方法1: bfs. 将输入的map直接当作visit table。queue每次push一个pos(x*m+y)，向四个方向进行查找 
+		
 # <h2 id="11">位运算（Bit Manipulation）</h2>
 ### C++用法
 ```c++
@@ -1110,6 +1146,27 @@ from bitarray import bitarray
 			状态转移: dp[j] = max(A[i] for 0<=i<j and A[i]<A[j]). If not exist. A[j]=0
 	复杂度： O(n) space, O(n^2) time.
 	相关问题：最长公共子序列
+				Xm=Yn -> LCS(m,n)=LCS(m-1,n-1)+1; 
+				Xm!=Yn -> LCS(m,n)=max{LCS(m-1,n)+LCS(m,n-1)}
+	
+> 7.硬币组合 ([CC150 Q47](hhttps://www.nowcoder.com/practice/c0503ca0a12d4256af33fce2712d7b24?tpId=8&tqId=11041&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](https://www.cnblogs.com/python27/archive/2013/09/05/3303721.html))
+
+	不能直接使用dp进行规划，因为没有分硬币种类dp的时候会重复计算组合
+	方法1: dp[m][sum]表示前m个硬币组成sum的方法数。
+			状态转移: dp[m] = dp[m-1][sum-k*coins[m]] for k=0,...,sum/coins[m]. 
+			实际递归的时候可以用dp[m-1][sum]+dp[m][sum-coins[m]],但要保证sum>=coins
+	复杂度： O(kn) space, O(kn) time.
+	
+	方法2: 同方法1，但是可以只用一个O(n)的vec表示，每次加入新的coin只更新coins[m]~n的这部分，转移函数为
+			dp[j] = (dp[j]+dp[j-coins[i]]), for j=coins[i]~n, for i=1~4. dp[0]=0
+	复杂度： O(n) space, O(kn) time.
+	
+> 8.堆箱子的最大高度 ([CC150 Q48](https://www.nowcoder.com/practice/daaec37090484f4587d0e8f5b612cda1?tpId=8&tqId=11043&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+	方法1: 先将w, l, h都按照w的降序排列，然后求l中h最大递减子序列。同6中的方法
+	复杂度： O(n) space, O(n^2) time.
+	相关问题：最长递增子序列
+
 
 ---
 <br />
@@ -1180,7 +1237,7 @@ sum(list)				 ## sum of all elements in list
 			实现的时候可以只采用一个输出数组，并用3个指针指向该输出数组的位置，减少extra space。
 	复杂度： O(1) space, O(n) time.
 
->4.不使用加减乘除和判断语句求1～n的和([剑指offer Q47](https://www.nowcoder.com/practice/7a0da8fc483247ff8800059e12d7caf1?tpId=13&tqId=11200&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 4.不使用加减乘除和判断语句求1～n的和([剑指offer Q47](https://www.nowcoder.com/practice/7a0da8fc483247ff8800059e12d7caf1?tpId=13&tqId=11200&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 采用递归. n==0时 n && 不再计算直接返回
 	复杂度： O(1) space, O(logn) time.
@@ -1188,13 +1245,34 @@ sum(list)				 ## sum of all elements in list
      n && (res += Sum_Solution(n-1));
      return res;
 
->5.不用加减乘除做加法([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 5.不用加减乘除做加法([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 位运算。xor为sum， and 与 <<1为carry。直到carry不为0
 
->6.二进制float小数([CC150 Q26](https://www.nowcoder.com/practice/743853af75fc4026939a682b86535f79?tpId=8&tqId=11020&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/02/5.2/))
+> 6.二进制float小数([CC150 Q26](https://www.nowcoder.com/practice/743853af75fc4026939a682b86535f79?tpId=8&tqId=11020&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/02/5.2/))
 
 	方法1: 整数部分通过%2再/2一步步向前，小数部分对比1/2^i一步步向后
+	
+> 7.无缓存交换([CC150 Q60](https://www.nowcoder.com/practice/845ec89145b04b2b855d020d9c3ea2ef?tpId=8&tqId=11054&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/02/20/19.1/))
+
+	方法1: b = a - b
+		  a = a - b = b
+		  b = a + b = a
+	
+	方法2: a = a^b
+		  b = a^b = a^b^b = a
+		  a = a^b = a^b^a = b
+		  
+> 8.得到两数较大值([CC150 Q62](https://www.nowcoder.com/practice/b0a82250677a4fabb0bc41053fa05013?tpId=8&tqId=11056&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/02/21/19.4/))
+
+	方法1: b = a - b，令b>>31为mask.如果a<b,mask=11..11; 否则mask=00..00
+		   b&(b>>31) = a-b if a<b else 0. 返回 a-b&(b>>31) 即可
+		   
+> 9.阶乘末尾0的个数([CC150 Q64](https://www.nowcoder.com/practice/434922f9f4724b97b83c417e884008f1?tpId=8&tqId=11058&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/02/20/19.3/))
+
+	方法1: 等同于只需要计算5的因子数。n/5返回1一个5的个数，/25返回两个5的额外个数。所以loop让n/=5不停统计即可
+	复杂度： O(1) space, O(logn) time.
+
 ---
 <br />
 
