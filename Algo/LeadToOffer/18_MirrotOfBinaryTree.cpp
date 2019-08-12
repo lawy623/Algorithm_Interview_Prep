@@ -5,9 +5,7 @@ public:
         if (!pRoot)
             return;
 
-        TreeNode* temp = pRoot->left;
-        pRoot->left = pRoot->right;
-        pRoot->right = temp;
+        swap(pRoot->left, pRoot->right);
         Mirror(pRoot->left);
         Mirror(pRoot->right);
         return;
