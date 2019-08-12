@@ -28,6 +28,7 @@ int arr [5] = {1,2,3,4,5}             ## Init an array
 int arr [] = {1,2,3,4,5}              ## Init an array without declare the length
 arr[idx]                              ## acces the idx
 int *ptr = arr                        ## init a pointer of array
+int *ptr = new int[n]			      ## init array with size n
 ```
 ```c++
 array<int,3> arr {1,2,3}                                    ## Init an array
@@ -53,7 +54,6 @@ vec.at(idx)                                                 ## access by index. 
 sort(vec.begin(), vec.end());                               ## sort the vector
     static bool comp(int a, int b)                          ## sort by self defined static cmp func
     sort(v.begin(), v.end(), comp)
-vector<vector<int>> vec;                                    ## vector of vector(matrix), access by vec[i][j]
 for (auto x : vec) {}                                       ## access by auto var though the vector
 vector<int>::iterator it;                                   ## create iterator
     for(it=vec.begin(); it!=vec.end(); it++) {cout<<*it}    ## loop through using iterator, *it is the val
@@ -235,11 +235,14 @@ sum(list)				 	## sum of all elements
 # <h2 id="2">矩阵(Matrix)</h2>
 ### C++用法
 ```c++
-int arr[4][5] = {}						## init a empty matrix
+int arr[4][5] = {}						## init an empty matrix
 arr[row][col]                           ## acces the idx
+int** mat = new int*[n];            	## Init an empty matrix by pointer.
+	for(int i=0;i<n;i++)
+		mat[i] = new int[m];
 ```
 ```c++
-vector<vector<int>> v;                  ## init empty matrix
+vector<vector<int> > v;                  ## init empty matrix
 ```
 ### Python用法
 ```python
@@ -293,7 +296,7 @@ str.rfind(str2, start, length)                               ## find from right.
 str.compare(start, length, str2, start2, length2)            ## compare part of str with part of str2
 to_string(val)                                               ## val to string
 stoi(str)                                                    ## string to int
-stof(Str)                                                    ## string to float
+stof(str)                                                    ## string to float
 sort(&str[0], &str[0]+str.length())	                         ## Sort a string
 ```
 ```c++
@@ -400,14 +403,14 @@ s.isupper()                          ## string is all uppercases
 
 	方法2: 双指针从两端/中间双向查询
 	复杂度： O(1) space, O(n) time.
-	相关问题：链表是否回文（使用栈/快慢指针，慢指针到达终点后翻转链表）
+	相关问题：链表是否回文（使用栈/快慢指针，快指针到达终点后翻转链表）
 
 > 9.最长回文子串 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/01.05.html)) ([Leetcode Q5](https://leetcode.com/problems/longest-palindromic-substring/))
 
 	方法1: 从每个位置开始，向两侧进行扩展并判断。需要饱含奇偶两种长度情况
 	复杂度： O(1) space, O(n^2) time.
 
-	方法2: Manacher算法 （to be understand）
+	方法2: Manacher算法 （to be understand, not implement yet）
 	复杂度： O(1) space, O(n) time.
 	
 > 10.两个字符串是否同构 ([CC150 Q3](https://www.nowcoder.com/practice/164929d4acd04de5b0ee2d93047b3b20?tpId=8&tqId=10996&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/06/1.4/))
@@ -425,6 +428,7 @@ s.isupper()                          ## string is all uppercases
 
 	方法2: 构造一个O(n)时间的子串检查函数，如果s2是s1+s1的子串，则s2为s1的旋转
 	复杂度： O(n) space, O(n) time.
+	相关问题：子串判断
 	
 > 12.最长合成字符串 ([CC150 Q76](https://www.nowcoder.com/practice/92a6faa7377f4c049a18154b24458d2a?tpId=8&tqId=11070&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/03/04/20.7/))
 
@@ -434,7 +438,7 @@ s.isupper()                          ## string is all uppercases
 		  
 > 13.子串查找
 
-	方法1: 
+	方法1: to be done
 	
 > 13_1.字符串多模式匹配 ([CC150 Q77](https://www.nowcoder.com/practice/917a800d4de1423394827932f4725c68?tpId=8&tqId=11071&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/03/05/20.8/))
 
@@ -537,7 +541,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1: 从数组构建链表，然后loop返回
 	复杂度： O(n) space, O(mn) time.
 
-	方法2: 归纳法。推出f(n,m) = (f(n-1,m)+m)%n。f(1,m)=0. 再dp求得
+	方法2: 归纳法。推出f(n,m) = (f(n-1,m)+m)%n。f(1,m)=0. 再dp求得。如果起点为1则+1
 	复杂度： O(1) space, O(n) time.
 
 > 8.链表中环的入口结点 ([剑指offer Q55](https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)) ([Leetcode Q142](https://leetcode.com/problems/linked-list-cycle-ii/)) ([CC150 Sol](http://hawstein.com/2012/12/17/2.5/))
@@ -591,7 +595,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1: 使用一个stack，全部推入判断堆顶是否一次相等
 	复杂度： O(n) space, O(n) time.
 	
-	方法2: 使用一个stack和快慢指针，将慢指针经历的推入堆中，在慢指针一次里边。注意长度为奇偶时的区别
+	方法2: 使用一个stack和快慢指针，将慢指针经历的推入堆中，在慢指针一次遍历比较stack顶。注意长度为奇偶时的区别
 	复杂度： O(n) space, O(n) time.
 ---
 <br />
@@ -704,6 +708,8 @@ it = s.equal_range(val)                                     ## return iter that 
 > 8.二叉树的深度([剑指offer Q38](https://www.nowcoder.com/practice/435fb86331474282a3499955f0a41e8b?tpId=13&tqId=11191&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归。叶节点返回深度为1.根节点返回1+max(左深度，右深度）
+	
+	方法2: 将深度传入函数，避免多次重复调用
 
 > 9.平衡二叉树判断([剑指offer Q39](https://www.nowcoder.com/practice/8b3b95850edb4115918ecebdf1b4d222?tpId=13&tqId=11192&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))([CC150 Q17](https://www.nowcoder.com/practice/b6bbed48cd864cf09a34a6ca14a3976f?tpId=8&tqId=11011&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1))([CC150 Sol](http://hawstein.com/2012/12/24/4.1/))
 
@@ -735,6 +741,8 @@ it = s.equal_range(val)                                     ## return iter that 
 			- node不为root时，找到第一个 节点是-父节点的左节点的-父节点。
 				即 if (pNode->next->left==pNode)
                 	return pNode->next;
+   
+    方法2: 直接中序遍历
                 	
 > 11_1.二叉树的下一个结点(不存在父节点)([CC150 Q22](https://www.nowcoder.com/practice/60231d6931d543d4aadcb67851b21e4a?tpId=8&tqId=11016&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/28/4.5/))
 
