@@ -37,9 +37,7 @@ public:
                     *duplication = numbers[i];
                     return true;
                 }
-                int temp = numbers[numbers[i]];
-                numbers[numbers[i]] = numbers[i];
-                numbers[i] = temp;
+                swap(numbers[numbers[i]],numbers[i]);
             }
         }
         return false;
