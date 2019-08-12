@@ -207,6 +207,26 @@ sum(list)				 	## sum of all elements
 	
 	方法2: 不需要用vector保存所有的结果。只要记录从左到右最后一次最大值更改，和从右到左最后一次最小值更改即可。
 	复杂度： O(1) space, O(n) time.
+	
+> 15.下一个最大数([CC150 Q73](https://www.nowcoder.com/practice/11ae41035eef4ed9b354d0752f5abc6f?tpId=8&tqId=11067&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+	方法1: 用一个stack保存从后往前的值，当检查A[i]后的第一个最大，将stack pop至找到top>A[i]，再将A[i]推进去。
+		原理在于，后面比A[i]小的数都不用继续保存了，因为A[i]相对于他们总是下一个最大的数
+	复杂度： O(n) space, O(n) time.
+	
+> 16.下一个最大数II([CC150 Q74](https://www.nowcoder.com/practice/a0c19f3489774fe693d71490ce83b648?tpId=8&tqId=11068&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+	方法1: 用一个set当作二叉搜索树，每次从后insert并找到upper_bound.找不到返回-1
+	复杂度： O(n) space, O(logn) time插入和查找.
+	
+> 17.单词最近距离([CC150 Q74](https://www.nowcoder.com/practice/1a002eed40054042867eb1aa5b98fb11?tpId=8&tqId=11069&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/03/02/20.5/))
+
+	方法1: 每次遇到其中一个string就更新其pos，计算dis并更新最小距离
+	复杂度： O(1) space, O(n) time
+	
+	方法2: 如果想要对任意查找都快，可以将所有的pair调整顺序后保存进map
+	复杂度： O(n^2) space, O(n^2) time 预处理，O(1) time查找
+
 
 
 ---
@@ -405,6 +425,23 @@ s.isupper()                          ## string is all uppercases
 
 	方法2: 构造一个O(n)时间的子串检查函数，如果s2是s1+s1的子串，则s2为s1的旋转
 	复杂度： O(n) space, O(n) time.
+	
+> 12.最长合成字符串 ([CC150 Q76](https://www.nowcoder.com/practice/92a6faa7377f4c049a18154b24458d2a?tpId=8&tqId=11070&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/03/04/20.7/))
+
+	方法1: 先将字符串组按照长度排序。从长的开始，判断该字符串是否可以被后面的字符串构成。
+		  每次可将后面的字符串保存在map中确定是否出现。对该判断字符串，如果map出现return true，
+		  否则依次递归判断构成该字符串的前后两个子串是否可以被构成
+		  
+> 13.子串查找
+
+	方法1: 
+	
+> 13_1.字符串多模式匹配 ([CC150 Q77](https://www.nowcoder.com/practice/917a800d4de1423394827932f4725c68?tpId=8&tqId=11071&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/03/05/20.8/))
+
+	方法1: 对vector中每个子串，用s.find()判断其是否为一个子串
+	
+	方法2: 构造一个Trie树。将str所有的后缀插入树中。如果为子串，则必定在树中
+
 
 
 
@@ -579,6 +616,34 @@ l.merge(l2)                                                 ## merge two sorted 
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+```
+```c++
+/**
+ * Definition for Trie tree
+ * struct TrieNode {
+ *     char c;
+ *     struct TrieNode* ptr[26];
+ *     TrieNode(char c): c(c) {
+ *         memset(ptr, 0, sizeof(ptr));
+ *     }
+ * };
+ */
+```
+
+```c++
+- set (Actually a RedBlack Tree in C++)
+set<int> s                                                  ## init set
+s.clear()                                                   ## clear the set
+s.count(val)                                                ## count num of occur
+s.empty()                                                   ## whether is umpty
+s.insert(val)                                               ## insert val
+s.erase(val)                                                ## erase val
+s.find(val)                                                 ## find val and return iter
+s.lower_bound(val)                                          ## return iter that is the first not less than val
+s.upper_bound(val)                                          ## return iter that is the first larger than val
+it = s.equal_range(val)                                     ## return iter that first&second are lower_bound and upper_bound
+    *it->first
+    *it->second
 ```
 ### Python用法
 ```python
@@ -1034,7 +1099,12 @@ list = [[]]					# Use Adjacency matrix
 > 5.迷宫([CC150 Q46](https://www.nowcoder.com/practice/365493766c514d0da0cd774d3d40fd49?tpId=8&tqId=11040&rp=3&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=3))
 
 	方法1: bfs. 将输入的map直接当作visit table。queue每次push一个pos(x*m+y)，向四个方向进行查找。map直接保存到达该格的步数 
-		
+
+> 6.字符串变换最短路径 ([CC150 Q79](https://www.nowcoder.com/practice/4818ae796bbc4a85a8cdd8e155c06d46?tpId=8&tqId=11073&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)）
+
+	方法1: 使用bfs。相邻的定义即为两个字符串相差为1。用visit表示访问的距离。
+		   queue保存遍历的字符串，用一个map将字符串和idx对应起来。主要注意开始时的字符串没有idx。
+	
 # <h2 id="11">位运算（Bit Manipulation）</h2>
 ### C++用法
 ```c++
@@ -1044,7 +1114,7 @@ list = [[]]					# Use Adjacency matrix
 	&			 ## And
 	^			 ## Exclusive OR
 	~			 ## NOT
-	0xffffffff ## 32bit int in hex
+	0xffffffff   ## 32bit int in hex
 ```
 ### Python用法
 ```python
@@ -1114,6 +1184,7 @@ from bitarray import bitarray
 
 	方法1: 使用一个额外的sum保存到该数的最大sum。如果sum为负则定义改出的sum为自身（最大sum必然不包括前面的负数和）
 	复杂度： O(1) space, O(n) time.
+	相关问题：最大和子矩阵[CC150 Q81]: 每次将i～j行加起来，求连续字数组最大和。O(n)space，O(n^3) time.
 
 > 3.连续子数组的最大积 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.01.html))
 
@@ -1167,6 +1238,15 @@ from bitarray import bitarray
 	方法1: 先将w, l, h都按照w的降序排列，然后求l中h最大递减子序列。同6中的方法
 	复杂度： O(n) space, O(n^2) time.
 	相关问题：最长递增子序列
+	
+> 9.最大子方阵 ([CC150 Q80](https://www.nowcoder.com/practice/008759ec032e44c6b615f7b6a5b752aa?tpId=8&tqId=11074&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+
+	方法1: 暴力查找以每个顶点每个长度组成的方阵是否满足要求
+	复杂度： O(1) space, O(n^3) time.
+	
+	方法2: 用两个dp矩阵保存到某点的左边和上面的最长相等长度。可用dp来计算。
+	      求解时逐步遍历长度找到相对应的左和上点判断其上/左长度是否满足。
+	复杂度： O(^2) space, 最差O(n^3) time，但会稍好.
 
 
 ---
@@ -1570,15 +1650,7 @@ sum(list)				 ## sum of all elements in list
 	3、仔细地对资源进行动态分配，以避免死锁。
 	4、通过破除死锁四个必要条件之一，来防止死锁产生。
 
-
-> 3.请阐述动态链接库与静态链接库的区别。
-
-	- 静态链接库是.lib格式的文件，一般在工程的设置界面加入工程中，程序编译时会把lib文件的代码加入你的程序中因此会增加代码大小，你的程序一运行lib代码强制被装入你程序的运行空间，不能手动移除lib代码。
-	- 动态链接库是程序运行时动态装入内存的模块，格式*.dll，在程序运行时可以随意加载和移除，节省内存空间。
-	- 在大型的软件项目中一般要实现很多功能，如果把所有单独的功能写成一个个lib文件的话，程序运行的时候要占用很大的内存空间，导致运行缓慢；但是如果将功能写成dll文件，就可以在用到该功能的时候调用功能对应的dll文件，不用这个功能时将dll文件移除内存，这样可以节省内存空间。
-
-
-> 4.请阐述进程与线程的区别。
+> 3.请阐述进程与线程的区别。
 
 	①从概念上：
 		进程：一个程序对一个数据集的动态执行过程，是分配资源的基本单位。
@@ -1589,7 +1661,7 @@ sum(list)				 ## sum of all elements in list
 	③从逻辑角度来看（重要区别）：
 		多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但是，操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理及资源分配。
 
-> 5.用户进程间通信主要哪几种方式？
+> 4.用户进程间通信主要哪几种方式？
 
 	主要有以下6种：
 
@@ -1602,13 +1674,13 @@ sum(list)				 ## sum of all elements in list
 	5、共享内存：共享内存就是映射一段能被其它进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的IPC方式，它是针对其它进程间通信方式运行效率低而专门设计的。它往往与其它通信机制（如信号量）配合使用，来实现进程间的同步和通信。
 	6、套接字：套接字也是一种进程间通信机制，与其它通信机制不同的是，它可用于不同机器间的进程通信
 
-> 6.虚拟内存
+> 5.虚拟内存
 
 	虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存 （一个连续完整的地址空间），
 	而实际上，它通常是被分隔成多个物理内存碎片， 还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。 
 	与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易， 对真正的物理内存（例如RAM）的使用也更有效率。
 	
-> 7.缺页中断
+> 6.缺页中断
 
 	一个页(Page)是一个固定容量的内存区块，是物理内存和外部存储(如硬盘等) 传输的单位。当一个程序访问一个映射到地址空间却实际并未加载到物理内存的页（page）时， 硬件向软件发出的一次中断（或异常）就是一个缺页中断或叫页错误（page fault）。
 
@@ -1644,9 +1716,15 @@ sum(list)				 ## sum of all elements in list
 	- 可执行文件映像：存储着可执行文件在内存中的映像，由装载器装载是将可执行文件的内存读取或映射到这里
 	- 保留区：保留区并不是一个单一的内存区域，而是对内存中受到保护而禁止访问的内存区域的总称，如通常 C 语言讲无效指针赋值为 0（NULL），因此 0 地址正常情况下不可能有效的访问数据
 
+> 3.请阐述动态链接库与静态链接库的区别。
+
+	- 静态链接库是.lib格式的文件，一般在工程的设置界面加入工程中，程序编译时会把lib文件的代码加入你的程序中因此会增加代码大小，你的程序一运行lib代码强制被装入你程序的运行空间，不能手动移除lib代码。
+	- 动态链接库是程序运行时动态装入内存的模块，格式*.dll，在程序运行时可以随意加载和移除，节省内存空间。
+	- 在大型的软件项目中一般要实现很多功能，如果把所有单独的功能写成一个个lib文件的话，程序运行的时候要占用很大的内存空间，导致运行缓慢；但是如果将功能写成dll文件，就可以在用到该功能的时候调用功能对应的dll文件，不用这个功能时将dll文件移除内存，这样可以节省内存空间。
+
 ## C++
 ### 问题及思路
-来自([github](https://github.com/lawy623/interview))
+来自([github](https://github.com/lawy623/interview))([CC150](http://hawstein.com/2013/03/14/ctci-solutions-contents/))
 
 > 1.const 作用
 
