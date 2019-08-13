@@ -1433,7 +1433,7 @@ sum(list)				 ## sum of all elements in list
 
 > 3.插入排序(Insertion Sort) <br>
 >
-> 简述：每次挑选出剩余数组中最小的数，交换至开头 <br>
+> 简述：每次插入一个数，按照其大小插入对应的位置 <br>
 > 平均时间复杂度: O(n^2) <br>
 > 最差时间复杂度: O(n^2) <br>
 > 空间复杂度: O(1) <br>
