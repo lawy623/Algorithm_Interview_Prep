@@ -445,7 +445,13 @@ s.isupper()                          ## string is all uppercases
 	方法1: 对vector中每个子串，用s.find()判断其是否为一个子串
 	
 	方法2: 构造一个Trie树。将str所有的后缀插入树中。如果为子串，则必定在树中
+	
+> 14.最长无重复子串 ([Leetcode Q3](https://leetcode.com/problems/longest-substring-without-repeating-characters/))
 
+	方法1: 用一个前指针记录前一个当前最前面无重复的起始点。用一个map记录重复的情况。
+	      默认初始最前无重复的前指针位置为-1.
+	      当map发现新的字符串重复过，更新前指针到上次重复位置的后一位。
+	复杂度： O(n) space, O(n) time. O(1) space if using int[256]
 
 
 
