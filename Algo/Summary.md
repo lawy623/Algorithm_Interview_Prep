@@ -197,33 +197,33 @@ sum(list)				 	## sum of all elements
 			当l2==2时，交换l3，l2的值，l3减1
 			直到l2==l3
 	复杂度： O(1) space, O(n) time.
-	
+
 > 14.最小调整有序([CC150 Q65](https://www.nowcoder.com/practice/091c2f1cf441484f81696f08328b06cd?tpId=8&tqId=11059&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 用两个vector分别表示从左到右的最大值/从右到左的最小值。
 		从左到右遍历最小值，当最小值第一次不为自身，即右边有更小的数，一定要调整
 		从右到左遍历最大值，当最大值第一次不为自身，即左边有更小的数，一定要调整
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 不需要用vector保存所有的结果。只要记录从左到右最后一次最大值更改，和从右到左最后一次最小值更改即可。
 	复杂度： O(1) space, O(n) time.
-	
+
 > 15.下一个最大数([CC150 Q73](https://www.nowcoder.com/practice/11ae41035eef4ed9b354d0752f5abc6f?tpId=8&tqId=11067&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 用一个stack保存从后往前的值，当检查A[i]后的第一个最大，将stack pop至找到top>A[i]，再将A[i]推进去。
 		原理在于，后面比A[i]小的数都不用继续保存了，因为A[i]相对于他们总是下一个最大的数
 	复杂度： O(n) space, O(n) time.
-	
+
 > 16.下一个最大数II([CC150 Q74](https://www.nowcoder.com/practice/a0c19f3489774fe693d71490ce83b648?tpId=8&tqId=11068&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 用一个set当作二叉搜索树，每次从后insert并找到upper_bound.找不到返回-1
 	复杂度： O(n) space, O(logn) time插入和查找.
-	
+
 > 17.单词最近距离([CC150 Q74](https://www.nowcoder.com/practice/1a002eed40054042867eb1aa5b98fb11?tpId=8&tqId=11069&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/03/02/20.5/))
 
 	方法1: 每次遇到其中一个string就更新其pos，计算dis并更新最小距离
 	复杂度： O(1) space, O(n) time
-	
+
 	方法2: 如果想要对任意查找都快，可以将所有的pair调整顺序后保存进map
 	复杂度： O(n^2) space, O(n^2) time 预处理，O(1) time查找
 
@@ -269,7 +269,7 @@ arr[row][col]                           ## acces the idx
 
 	方法2: inplace交换，两次翻转。先对角线交换，再垂直方向交换
 	复杂度： O(1) space, O(n^2) time.
-	
+
 > 4.清除行列 ([CC150 Q7](https://www.nowcoder.com/practice/c95aac1506574dfc8ad44c3939c6739d?tpId=8&tqId=11000&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/09/1.7/))
 
 	方法1: 用两个一维数组分别表示这一行/列是否出现过0.再扫描一遍只要判断该点的行列是否出现过0即可
@@ -348,9 +348,9 @@ s.isupper()                          ## string is all uppercases
 
 	方法1: 先递归返回str[1:]的全排列，再将该数字插入每个全排列的不同位置，推入队列/数组，并将原来的全排列弹出
 			最后需要通过hashtable去除重复的排列
-	
+
 	方法2: 递归。每一次将i>cur移到cur的位置做一次permutation。再swap回去
-	
+
 	方法3: 递归。每一次取其中的一位，将剩下的字符串premute之后，将该位放在开头
 
 > 3.第一个只出现一次的字符 ([剑指offer Q34](https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
@@ -412,7 +412,7 @@ s.isupper()                          ## string is all uppercases
 
 	方法2: Manacher算法 （to be understand, not implement yet）
 	复杂度： O(1) space, O(n) time.
-	
+
 > 10.两个字符串是否同构 ([CC150 Q3](https://www.nowcoder.com/practice/164929d4acd04de5b0ee2d93047b3b20?tpId=8&tqId=10996&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/06/1.4/))
 
 	方法1: 对两个字符串先排序，在比较是否完全一样
@@ -420,7 +420,7 @@ s.isupper()                          ## string is all uppercases
 
 	方法2: 用额外数组记录出现a中字符出现次数，再依次通过b的减去判断是否为0
 	复杂度： O(n) space, O(n) time.
-	
+
 > 11.是否为旋转字符串 ([CC150 Q8](https://www.nowcoder.com/practice/bc12808a2b0f445c96a64406d5513e96?tpId=8&tqId=11001&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1))([CC150 Sol](http://hawstein.com/2012/12/10/1.8/))
 
 	方法1: 对s1每一个break point，检查后+前的组合是否为s2
@@ -429,23 +429,23 @@ s.isupper()                          ## string is all uppercases
 	方法2: 构造一个O(n)时间的子串检查函数，如果s2是s1+s1的子串，则s2为s1的旋转
 	复杂度： O(n) space, O(n) time.
 	相关问题：子串判断
-	
+
 > 12.最长合成字符串 ([CC150 Q76](https://www.nowcoder.com/practice/92a6faa7377f4c049a18154b24458d2a?tpId=8&tqId=11070&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/03/04/20.7/))
 
 	方法1: 先将字符串组按照长度排序。从长的开始，判断该字符串是否可以被后面的字符串构成。
 		  每次可将后面的字符串保存在map中确定是否出现。对该判断字符串，如果map出现return true，
 		  否则依次递归判断构成该字符串的前后两个子串是否可以被构成
-		  
+
 > 13.子串查找
 
 	方法1: to be done
-	
+
 > 13_1.字符串多模式匹配 ([CC150 Q77](https://www.nowcoder.com/practice/917a800d4de1423394827932f4725c68?tpId=8&tqId=11071&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/03/05/20.8/))
 
 	方法1: 对vector中每个子串，用s.find()判断其是否为一个子串
-	
+
 	方法2: 构造一个Trie树。将str所有的后缀插入树中。如果为子串，则必定在树中
-	
+
 > 14.最长无重复子串 ([Leetcode Q3](https://leetcode.com/problems/longest-substring-without-repeating-characters/))
 
 	方法1: 用一个前指针记录前一个当前最前面无重复的起始点。用一个map记录重复的情况。
@@ -559,8 +559,8 @@ l.merge(l2)                                                 ## merge two sorted 
 			所以此时在安排一个指针从头与慢指针一起走，两个经过a步之后必定相遇在入口
 	复杂度： O(1) space, O(n) time.
 	相关问题：链表是否有环（=快慢指针是否相遇）
-	
-	方法2: 用一个map保存是否遇到过相同指针。指针不停向前，若遇到相同map中存在证明有环且为环的入口 
+
+	方法2: 用一个map保存是否遇到过相同指针。指针不停向前，若遇到相同map中存在证明有环且为环的入口
 	复杂度： O(n) space, O(n) time.
 
 > 9_1.删除排序链表中重复的结点 ([剑指offer Q56](https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
@@ -582,25 +582,25 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1: 将指向节点的下一个节点的值copy至指向节点。再删除下一个节点
 			如果该节点是尾节点，则必须要遍历
 	复杂度： O(1) space, O(1) time. O(n) for ending node
-	
+
 > 10.分割链表 ([CC150 Q10](https://www.nowcoder.com/practice/0e27e0b064de4eacac178676ef9c9d70?tpId=8&tqId=11004&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 
 	方法1: 使用大小两个链表进行添加。注意大链表最后next要指向null.
 	复杂度： O(1) space, O(n) time.
-	
+
 > 11.链表相加 ([CC150 Q11](https://www.nowcoder.com/practice/ed85a09f0df047119e94fb3e5569855a?tpId=8&tqId=11005&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/16/2.4/))([LeetCode Q2](https://leetcode.com/problems/add-two-numbers/))
 
 
 	方法1: 注意对while条件的判断，只要(a || b || carry)即可继续，赋值可用a?a->val:0进行。减少过多代码
 	复杂度： O(1) space, O(n) time.
-	
+
 > 12.回文链表 ([CC150 Q12](https://www.nowcoder.com/practice/baefd05def524a92bcfa6e1f113ed4f0?tpId=8&tqId=11006&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 
 	方法1: 使用一个stack，全部推入判断堆顶是否一次相等
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 使用一个stack和快慢指针，将慢指针经历的推入堆中，在慢指针一次遍历比较stack顶。注意长度为奇偶时的区别
 	复杂度： O(n) space, O(n) time.
 ---
@@ -714,7 +714,7 @@ it = s.equal_range(val)                                     ## return iter that 
 > 8.二叉树的深度([剑指offer Q38](https://www.nowcoder.com/practice/435fb86331474282a3499955f0a41e8b?tpId=13&tqId=11191&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 递归。叶节点返回深度为1.根节点返回1+max(左深度，右深度）
-	
+
 	方法2: 将深度传入函数，避免多次重复调用
 
 > 9.平衡二叉树判断([剑指offer Q39](https://www.nowcoder.com/practice/8b3b95850edb4115918ecebdf1b4d222?tpId=13&tqId=11192&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))([CC150 Q17](https://www.nowcoder.com/practice/b6bbed48cd864cf09a34a6ca14a3976f?tpId=8&tqId=11011&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1))([CC150 Sol](http://hawstein.com/2012/12/24/4.1/))
@@ -735,7 +735,7 @@ it = s.equal_range(val)                                     ## return iter that 
 
 	方法1: 注意到每个节点的父亲编号都是自己的一半。用两个stack保存路径，查看最后相同的堆顶值
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 直接比较两个编号。若不相等，大的数除以2，直到相等。
 	复杂度： O(1) space, O(n) time.
 
@@ -747,17 +747,17 @@ it = s.equal_range(val)                                     ## return iter that 
 			- node不为root时，找到第一个 节点是-父节点的左节点的-父节点。
 				即 if (pNode->next->left==pNode)
                 	return pNode->next;
-   
+
     方法2: 直接中序遍历
-                	
+
 > 11_1.二叉树的下一个结点(不存在父节点)([CC150 Q22](https://www.nowcoder.com/practice/60231d6931d543d4aadcb67851b21e4a?tpId=8&tqId=11016&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/28/4.5/))
 
 	方法1: 用一个vector保存中序遍历的结果，找到对应值的下一个节点
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法2: 用一个stack记录中序遍历的结果。找到值时设一个flag=true，下一个遇到flag==true则输出
 	复杂度： O(n) space, O(n) time.
-	
+
 	方法3: 直接用一个flag传入函数递归来做。（假设所有值>=0）
 			如果root为null，返回-1.
 			对左节点调用函数。如果返回不为-1，证明在左子树找到，返回该值。
@@ -766,7 +766,7 @@ it = s.equal_range(val)                                     ## return iter that 
 			返回右节点的递归结果（因为sign已经是true了，会直接输出下一个访问的节点的值）
 	复杂度： O(1) space, O(n) time.
 
-	
+
 > 12.对称的二叉树([剑指offer Q58](https://www.nowcoder.com/practice/ff05d44dfdb04e1d83bdbdab320efbcb?tpId=13&tqId=11211&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 求出pRoot的镜像树pRoot_mirror,对比两个树是否完全一致
@@ -808,22 +808,22 @@ it = s.equal_range(val)                                     ## return iter that 
 > 17.递增数列构建最低二叉搜索树([CC150 Q19](https://www.nowcoder.com/practice/01a12f94988649e39b554d95c45bfa6f?tpId=8&tqId=11013&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/26/4.3/))
 
 	方法1: 每次取mid，递归构建
-	
+
 > 18.判断二叉搜索树([CC150 Q21](https://www.nowcoder.com/practice/536c0199151245f897da2c5390930657?tpId=8&tqId=11015&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 使用15中stack版的中序遍历，每次访问到一个点的时候记录下值，保证下一个访问的点比他大，不断更新该值
 	复杂度： O(n) space, O(n) time
-	
+
 > 19.二叉树的最长路径([Leetcode Q543](https://leetcode.com/problems/diameter-of-binary-tree))
 
 	方法1: 根节点最长路径=max(左节点最长路径，右节点最长路径，左深度+右深度）。深度可以传入函数递归
 	复杂度： O(1) space, O(n) time
-	
+
 > 20.维护数组的rank([CC150 Q58](https://www.nowcoder.com/practice/0ade0d95c85349beb934a90b1d9b02be?tpId=8&tqId=11052&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 暴力检查
 	复杂度： O(1) space, O(n^2) time
-	
+
 	方法2: 用二叉搜索树保存stream的结果，每次查找rank。
 	复杂度： O(n) space, O(logn) time
 
@@ -860,12 +860,12 @@ stack.empty()                                               ## return whether th
 
 	方法1: 用一个额外的栈按照压入的顺序不断推入，但当该栈顶的数等于弹出序列的头，弹出栈顶数与弹出序列的头（或移动index）
 	复杂度： O(n) space, O(n) time.
-	
+
 > 4.双栈排序 ([CC150 Q15](https://www.nowcoder.com/practice/d0d0cddc1489476da6b782a6301e7dec?tpId=8&tqId=11009&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/23/3.6/))
 
 	方法1: Insertion sort的方法，每次把栈顶插到temp栈对应的地方，temp栈顶大的数先push回原来的栈即可
 	复杂度： O(n) space, O(n^2) time.
-	
+
 > 5.合法括号 ([CC150 Q45](https://www.nowcoder.com/practice/d8acfa0619814b2d98f12c071aef20d4?tpId=8&tqId=11039&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/12/8.5/))
 
 	方法1: 使用一个stack，当栈顶为'('且A字符为')'弹出栈顶，否则一次输入A的字符。如果合法，stack应为空。
@@ -1058,7 +1058,7 @@ s.popitem()                          ## remove the last item
 
 	方法2: 因为字符个数有限，使用一个unsigned int table[256]保存每个char的出现个数。每个字符对应位置为int(str[i])。
 	复杂度： O(1) space, O(n) time.
-	
+
 > 4.变位词排序 ([CC150 Q52](https://www.nowcoder.com/practice/764edc8f2a6147429a098f422753853b?tpId=8&tqId=11046&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 所有的变位词按照字典序排序后都相同，可视为hash key。使用hash table保存看是否存在即可
@@ -1096,29 +1096,34 @@ list = [[]]					# Use Adjacency matrix
 
 	方法1: 深搜. 判断时多加了条件而已。
 	复杂度： O(n) space, O(n) time.
-	
+
 > 3.检查路径 ([CC150 Q18](https://www.nowcoder.com/practice/1b83885969f14329bf9222c1c54469a7?tpId=8&tqId=11012&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/25/4.2/))
 
 	方法1: 深搜. 退出时可不将visit改为0，因为为有向图，不能到达则无需再次访问
 	复杂度： O(n) space, O(n) time.
-	
-	方法2: 广搜. 用queue来实现 
+
+	方法2: 广搜. 用queue来实现
 	复杂度： O(n) space, O(n) time.
-	
+
 > 4.N皇后问题([CC150 Q48](https://www.nowcoder.com/practice/8b5d63163fbe48719f2dfe01fe9f7e54?tpId=8&tqId=11042&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/15/8.8/))
 
 	方法1: 回溯/dfs，用rows[i]表示每一行的assignment，每次assign一行里边所有可能性，如果valid就去assign下一行。
 			当八行都assign成功后，将传入的count++
-			
+
 > 5.迷宫([CC150 Q46](https://www.nowcoder.com/practice/365493766c514d0da0cd774d3d40fd49?tpId=8&tqId=11040&rp=3&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=3))
 
-	方法1: bfs. 将输入的map直接当作visit table。queue每次push一个pos(x*m+y)，向四个方向进行查找。map直接保存到达该格的步数 
+	方法1: bfs. 将输入的map直接当作visit table。queue每次push一个pos(x*m+y)，向四个方向进行查找。map直接保存到达该格的步数
 
 > 6.字符串变换最短路径 ([CC150 Q79](https://www.nowcoder.com/practice/4818ae796bbc4a85a8cdd8e155c06d46?tpId=8&tqId=11073&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)）
 
 	方法1: 使用bfs。相邻的定义即为两个字符串相差为1。用visit表示访问的距离。
 		   queue保存遍历的字符串，用一个map将字符串和idx对应起来。主要注意开始时的字符串没有idx。
-	
+
+> 7.岛屿个数 ([Leetcode Q200](https://leetcode.com/problems/number-of-islands)）
+
+  方法1: 使用dfs。可注意的是不需要添加visit table，而直接使用map修改其值即可
+  相关问题：最大岛屿面积 (Leetcode Q695)：每次dfs传入一个area的参数，在一个dfs中不断增加其值即可
+
 # <h2 id="11">位运算（Bit Manipulation）</h2>
 ### C++用法
 ```c++
@@ -1164,23 +1169,23 @@ from bitarray import bitarray
 			按照该位将数字分为两组。分别进行xor并输出两个结果
 	复杂度： O(1) space, O(n) time.
 	相关问题：只出现一次的三个数字（同样用某一位分组，产生一个奇数分组和一个偶数分组。奇数分组先得到，偶数再做）
-	
+
 >3.最接近的数([CC150 Q27](https://www.nowcoder.com/practice/33ad4d168a3247b9b63f41e4eaded652?tpId=8&tqId=11021&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=2))([CC150 Sol](http://hawstein.com/2013/01/04/5.3/))
 
 	方法1: 对于0001100，更大的一个数是另左边第二次出现连续的0时成为1,后面补0->0010000
 		再将后面多加不足的1->0010001. 整个过程为x + 1<<c_0 + 1<<(c_01-1) - 1,c_0=2,c_01=2
 		对于1100011，更小的一个数是另左边第二次出现连续的1时成为0，后面补1->1011111
 		再将后面多余的1变成0->1011100. 整个过程为x - (1<<c_1) - 1<<(c_10-1) + 1, c_1=2,c_10=3
-	
+
 >4.交换奇偶数位([CC150 Q29](https://www.nowcoder.com/practice/ed7d014b42e740679c4bd69b9d9c49b9?tpId=8&tqId=11023&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/04/5.6/))
-	
+
 	方法1: 用mask表示奇数与偶数(0x55555555, 0xAAAAAAAA). 输出(odd<<1 | even>>1)
-	
+
 >5.集合的子集([CC150 Q43](https://www.nowcoder.com/practice/1f2700e2b1904254b55765479e9b8766?tpId=8&tqId=11037&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/10/8.3/))
-	
+
 	方法1: 一个集合的全排列可以用n个1表示，则最大为2^n-1, 最小为1(非空子集)。按照位置加入元素即可
 	复杂度： O(1) space, O(n) time.
-	
+
 ---
 <br />
 
@@ -1232,32 +1237,32 @@ from bitarray import bitarray
 			状态转移: dp[j] = max(A[i] for 0<=i<j and A[i]<A[j]). If not exist. A[j]=0
 	复杂度： O(n) space, O(n^2) time.
 	相关问题：最长公共子序列
-				Xm=Yn -> LCS(m,n)=LCS(m-1,n-1)+1; 
+				Xm=Yn -> LCS(m,n)=LCS(m-1,n-1)+1;
 				Xm!=Yn -> LCS(m,n)=max{LCS(m-1,n)+LCS(m,n-1)}
-	
+
 > 7.硬币组合 ([CC150 Q47](hhttps://www.nowcoder.com/practice/c0503ca0a12d4256af33fce2712d7b24?tpId=8&tqId=11041&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](https://www.cnblogs.com/python27/archive/2013/09/05/3303721.html))
 
 	不能直接使用dp进行规划，因为没有分硬币种类dp的时候会重复计算组合
 	方法1: dp[m][sum]表示前m个硬币组成sum的方法数。
-			状态转移: dp[m] = dp[m-1][sum-k*coins[m]] for k=0,...,sum/coins[m]. 
+			状态转移: dp[m] = dp[m-1][sum-k*coins[m]] for k=0,...,sum/coins[m].
 			实际递归的时候可以用dp[m-1][sum]+dp[m][sum-coins[m]],但要保证sum>=coins
 	复杂度： O(kn) space, O(kn) time.
-	
+
 	方法2: 同方法1，但是可以只用一个O(n)的vec表示，每次加入新的coin只更新coins[m]~n的这部分，转移函数为
 			dp[j] = (dp[j]+dp[j-coins[i]]), for j=coins[i]~n, for i=1~4. dp[0]=0
 	复杂度： O(n) space, O(kn) time.
-	
+
 > 8.堆箱子的最大高度 ([CC150 Q48](https://www.nowcoder.com/practice/daaec37090484f4587d0e8f5b612cda1?tpId=8&tqId=11043&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 先将w, l, h都按照w的降序排列，然后求l中h最大递减子序列。同6中的方法
 	复杂度： O(n) space, O(n^2) time.
 	相关问题：最长递增子序列
-	
+
 > 9.最大子方阵 ([CC150 Q80](https://www.nowcoder.com/practice/008759ec032e44c6b615f7b6a5b752aa?tpId=8&tqId=11074&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 暴力查找以每个顶点每个长度组成的方阵是否满足要求
 	复杂度： O(1) space, O(n^3) time.
-	
+
 	方法2: 用两个dp矩阵保存到某点的左边和上面的最长相等长度。可用dp来计算。
 	      求解时逐步遍历长度找到相对应的左和上点判断其上/左长度是否满足。
 	复杂度： O(^2) space, 最差O(n^3) time，但会稍好.
@@ -1347,22 +1352,22 @@ sum(list)				 ## sum of all elements in list
 > 6.二进制float小数([CC150 Q26](https://www.nowcoder.com/practice/743853af75fc4026939a682b86535f79?tpId=8&tqId=11020&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/02/5.2/))
 
 	方法1: 整数部分通过%2再/2一步步向前，小数部分对比1/2^i一步步向后
-	
+
 > 7.无缓存交换([CC150 Q60](https://www.nowcoder.com/practice/845ec89145b04b2b855d020d9c3ea2ef?tpId=8&tqId=11054&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/02/20/19.1/))
 
 	方法1: b = a - b
 		  a = a - b = b
 		  b = a + b = a
-	
+
 	方法2: a = a^b
 		  b = a^b = a^b^b = a
 		  a = a^b = a^b^a = b
-		  
+
 > 8.得到两数较大值([CC150 Q62](https://www.nowcoder.com/practice/b0a82250677a4fabb0bc41053fa05013?tpId=8&tqId=11056&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/02/21/19.4/))
 
 	方法1: b = a - b，令b>>31为mask.如果a<b,mask=11..11; 否则mask=00..00
 		   b&(b>>31) = a-b if a<b else 0. 返回 a-b&(b>>31) 即可
-		   
+
 > 9.阶乘末尾0的个数([CC150 Q64](https://www.nowcoder.com/practice/434922f9f4724b97b83c417e884008f1?tpId=8&tqId=11058&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/02/20/19.3/))
 
 	方法1: 等同于只需要计算5的因子数。n/5返回1一个5的个数，/25返回两个5的额外个数。所以loop让n/=5不停统计即可
@@ -1691,9 +1696,9 @@ sum(list)				 ## sum of all elements in list
 > 5.虚拟内存
 
 	虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存 （一个连续完整的地址空间），
-	而实际上，它通常是被分隔成多个物理内存碎片， 还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。 
+	而实际上，它通常是被分隔成多个物理内存碎片， 还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。
 	与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易， 对真正的物理内存（例如RAM）的使用也更有效率。
-	
+
 > 6.缺页中断
 
 	一个页(Page)是一个固定容量的内存区块，是物理内存和外部存储(如硬盘等) 传输的单位。当一个程序访问一个映射到地址空间却实际并未加载到物理内存的页（page）时， 硬件向软件发出的一次中断（或异常）就是一个缺页中断或叫页错误（page fault）。
@@ -1765,18 +1770,18 @@ sum(list)				 ## sum of all elements in list
 	3.虚函数的类用于 “实作继承”，继承接口的同时也继承了父类的实现。当然大家也可以完成自己的实现。纯虚函数关注的是接口的统一性，实现由子类完成。
 	4.带纯虚函数的类叫抽象类，这种类不能直接生成对象，而只有被继承，并重写其虚函数后，才能使用。抽象类被继承后，子类可以继续是抽象类，也可以是普通类。
 	5.虚基类是虚继承中的基类，具体见下文虚继承。
-	
+
 > 4.C++中的虚函数是如何工作的？
 
 	1.虚函数依赖虚函数表进行工作。如果一个类中，有函数被关键词virtual进行修饰，那么一个虚函数表就会被构建起来保存这个类中虚函数的地址。
 	2.同时，编译器会为这个类添加一个隐藏指针指向虚函数表。如果在派生类中没有重写虚函数，那么，派生类中虚表存储的是父类虚函数的地址。
 	3.每当虚函数被调用时，虚表会决定具体去调用哪个函数。因此，C++中的动态绑定是通过虚函数表机制进行的。
-	
+
 > 5.深拷贝和浅拷贝的区别是什么？你会如何使用它们？
 
-	浅拷贝并不复制数据，只复制指向数据的指针，因此是多个指针指向同一份数据。 
+	浅拷贝并不复制数据，只复制指向数据的指针，因此是多个指针指向同一份数据。
 	深拷贝会复制原始数据，每个指针指向一份独立的数据。
-	
+
 > 6.谈谈C语言关键字”volatile”的意义(或重要性)？
 
 	volatile的意思是”易变的”，因为访问寄存器比访问内存要快得多，所以编译器一般都会做减少存取内存的优化。
