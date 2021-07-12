@@ -1465,6 +1465,7 @@ sum(list)				 ## sum of all elements in list
 > 4.快速排序(Quick Sort) <br>
 >
 > 简述：每次选取最后一个数作为pivot，小的放前面，大的放后面，再递归 <br>
+> 随机取一个实际时间容易比总是取最后一个更好.
 > 平均时间复杂度: O(nlogn) <br>
 > 最差时间复杂度: O(n^2) -- 当本来就排好序时 <br>
 > 空间复杂度: O(logn) --递归导致 <br>
@@ -1473,7 +1474,7 @@ sum(list)				 ## sum of all elements in list
 	void quickSort(vector<int>& nums){
 		quickSort(nums,0,nums.size());
 	}
-	void quickSort(vecotr<int>& nums, int low, int high){
+	void quickSort(vector<int>& nums, int low, int high){
 		if(low<high){
 			int p = partition(nums,low,high);
 			quickSort(nums,low,p-1);
