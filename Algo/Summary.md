@@ -28,7 +28,7 @@ int arr [5] = {1,2,3,4,5}             ## Init an array
 int arr [] = {1,2,3,4,5}              ## Init an array without declare the length
 arr[idx]                              ## acces the idx
 int *ptr = arr                        ## init a pointer of array
-int *ptr = new int[n]			      ## init array with size n
+int *ptr = new int[n]                 ## init array with size n
 ```
 ```c++
 array<int,3> arr {1,2,3}                                    ## Init an array
@@ -80,15 +80,16 @@ sum(list)				 	## sum of all elements
 ```
 
 ### 问题及思路
-> 1. 旋转数组的最小数字 ([剑指offer Q6](https://www.nowcoder.com/practice/9f3231a991af4f55b95579b44b7a01ba?tpId=13&tqId=11159&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 1.旋转数组的最小数字 ([剑指offer Q6](https://www.nowcoder.com/practice/9f3231a991af4f55b95579b44b7a01ba?tpId=13&tqId=11159&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 直接扫描，当后面小于前面则返回
 	复杂度： O(1) space, O(n) time.
 
 	方法2: 二分查找。每次对比mid与头尾的值。注意start一定大于等于end，否为不为旋转数组而是排序数组
+	最主要的是中间和两头判断的corner case
 	· mid == end && mid == start, 则查找[start+1, end-1] <--(注意[1,0,1,1,1]与[1,1,1,0,0]的特殊case)
-	· mid>=start, 则查找[mid, end];
-	· mid<=end,则查找[start, mid]
+	· mid>end, 则查找[mid+1, end];
+	· 其他情况,则查找[start, mid]
 	复杂度： O(1) space, O(logn) time.
 	相关问题：旋转数组的查找(CC150 053)：按照mid与target的值比较
 			A[mid]<target时，只有mid在右侧且x在左侧才向左查找，否则都向右
@@ -227,6 +228,13 @@ sum(list)				 	## sum of all elements
 	方法2: 如果想要对任意查找都快，可以将所有的pair调整顺序后保存进map
 	复杂度： O(n^2) space, O(n^2) time 预处理，O(1) time查找
 
+> 18.两个升序数组的中位数([Leetcode Q4](https://leetcode-cn.com/problems/median-of-two-sorted-arrays))
+
+    方法1:  双指针前进，找到中位的结果，记得判断条件即可
+	复杂度： O(1) space, O(m+n) time
+
+	方法2: 二分查找，写起来难度较大，判断条件比较多
+	复杂度： O(n+m) space, O(log(m+n)) time
 
 
 ---

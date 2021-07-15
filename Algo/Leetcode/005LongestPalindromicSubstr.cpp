@@ -45,7 +45,7 @@ public:
                 }
             }
         }
-        cout << max<<endl;
+
         return s.substr(left,max);
     }
 

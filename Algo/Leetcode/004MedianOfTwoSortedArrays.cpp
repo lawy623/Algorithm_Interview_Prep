@@ -90,3 +90,46 @@ private:
         else return *(A+ia-1);   //if equal, these two are the (k-1)th and kth num.
     }
 };
+
+//4. O(m+n) brute force solve
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int i = 0; int j = 0;
+        int full_size = nums1.size() + nums2.size();
+
+        int count = 0;
+        int median_index = (full_size + 1)/ 2;
+
+        bool get_two_index = full_size % 2 - 1;
+        int last_value = 0;
+
+        while(true) {
+
+            if (i==nums1.size())
+                last_value = nums2[j++];
+            else if (j==nums2.size())
+                last_value = nums1[i++];
+            else if (nums1[i] <= nums2[j])
+                last_value = nums1[i++];
+            else
+                last_value = nums2[j++];
+
+            count++;
+
+            if (count == median_index && !get_two_index)
+                return (double)last_value;
+            else if (count == median_index && get_two_index){
+                int next_value = 0;
+                if (i==nums1.size())
+                    next_value = nums2[j];
+                else if (j==nums2.size())
+                    next_value = nums1[i];
+                else
+                    next_value = min(nums1[i], nums2[j]);
+
+                return (double)(last_value + next_value) / 2.0;
+            }
+        }
+    }
+};
