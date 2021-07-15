@@ -147,6 +147,12 @@ l = []                      ## Initial a empty list
 > 局限性
 
     1. 模型太简单, 无法更有效地进行特征融合, 损失了很多有用的信息
+    
+> 数据处理与实现方式
+
+    · sparse feature通过embedding(hidden=1，相当于一个linear层)得到d1个sparse结果，然后求和
+    · dense feature通过一个linear层计算wx，相当于weighted sum of dense feature
+    · 两个结果加起来就是所有的feature的weighted sum，可以当作sigmoid之前的输出
 
 
 ## 特征组合
@@ -180,6 +186,7 @@ l = []                      ## Initial a empty list
 ---
 
 # <h3 id="3">深度学习在推荐系统中的应用</h3>
+可以参考https://github.com/shenweichen/DeepCTR-Torch，查看数据的处理以及实现
 
 > 深度学习优势
 
@@ -257,6 +264,20 @@ Wide是单层模型，具有记忆能力；Deep是多层模型，具有泛化能
     · wide的部分输入的是直接与结果强相关的特征，充分利用网络的记忆能力；deep部分则是把所有的特征都输入，充分的挖掘相关性
     · wide的输入特征使用了交叉积变化，也包含了特征组合
     · 对两个网络实际上使用了不同的优化器，期望wide网络更稀疏，容易部署
+    · deep网络可以理解为deep crossing
+    
+    
+> 数据处理与实现方式
+
+    - wide网络（相当于lr）
+    · sparse feature通过embedding(hidden=1，相当于一个linear层)得到d1个sparse结果，然后求和
+    · dense feature通过一个linear层计算wx，相当于weighted sum of dense feature
+    · 两个结果加起来就是所有的feature的weighted sum，可以当作sigmoid之前的输出
+    
+    - deep网络（相当于deep crossing）
+    · 将sparse feature映射成多维。与dense一起拼接起来，整体输入一个多层linear
+    
+    - 两个网络的logit输出相加，当作最后结果sigmoid的输入。看实现来说最后是没有加bias的
     
 ## Deep&Cross(DCN)
 
@@ -279,17 +300,19 @@ Wide是单层模型，具有记忆能力；Deep是多层模型，具有泛化能
 
 > 方法
 
-    · 用FM替换了deep & wide中的wide网络，和dcn一致。但是使用的是fm网络进行替换
+    · 用FM替换了deep & wide中的wide网络（fm中实际上有一层linear，再加上两两乘积和），和dcn一致。但是使用的是fm网络进行替换
     · 输入fm和deep网络中的embedding现在是一样的了
     
 ## NFM
 
 > 方法
 
-    · 用神经网络将FM的二阶特征交叉替换掉，争取更高阶的特征交叉形式
-    · 特征交叉池话层
+    · wide网络保持简单linear，将deep网络替换为fm网络
+    · 用神经网络将FM的二阶特征交叉替换掉，争取更高阶的特征交叉形式，是对sparse的feature进行特征的交叉
+    · 特征交叉池化层。为了求xixj的和，可以用0.5*(sqrt_of_sum - sum_of_sqrt) = 0.5[(x1+..+xn)^2 - (x1^2+...+xn^2)]的和
     
 # 注意力机制的使用
 ## AFM
 
     · 在特征层和输出层之间加上一个注意力网络，将一个权重联系到特征上去作为注意力得分。
+    · 将所有的交叉特征结果用softmax得到注意力得分，与交叉特征加权得到新特征。当attention不存在时，即为nfm网络
