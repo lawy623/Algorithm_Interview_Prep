@@ -154,7 +154,6 @@ l = []                      ## Initial a empty list
     · dense feature通过一个linear层计算wx，相当于weighted sum of dense feature
     · 两个结果加起来就是所有的feature的weighted sum，可以当作sigmoid之前的输出
 
-
 ## 特征组合
 单一的特征无法会造成信息的损失。
 
@@ -214,6 +213,7 @@ l = []                      ## Initial a empty list
     · 但是用户向量是稀疏的，影响到了模型效果
 
 # 特征交叉方法的探索
+
 ## Deep Crossing
 
 > 方法
@@ -241,7 +241,6 @@ l = []                      ## Initial a empty list
     · 更好的做了信息的交叉，更加灵活的进行了模型组合
     · 没有假如其他的context信息等，仍然是矩阵分解的套路
 
-
 ## PNN
 
 > 方法
@@ -253,6 +252,7 @@ l = []                      ## Initial a empty list
 
     · 使用了更多的特征，并且强调了主动的特征交叉，让模型更容易捕捉
     · 无差别的特征交叉可能容易损失有价值的信息
+    
     
 ## Wide&Deep
 Wide是单层模型，具有记忆能力；Deep是多层模型，具有泛化能力。记忆能力指的是看到相关的特征就输出相近似的结果，单层网络有这样的效果。
@@ -279,6 +279,7 @@ Wide是单层模型，具有记忆能力；Deep是多层模型，具有泛化能
     
     - 两个网络的logit输出相加，当作最后结果sigmoid的输入。看实现来说最后是没有加bias的
     
+    
 ## Deep&Cross(DCN)
 
 > 方法
@@ -286,8 +287,9 @@ Wide是单层模型，具有记忆能力；Deep是多层模型，具有泛化能
     · 用cross网络替代wide网络，提升特征的交互力度。多个交叉层，每个输入都会与原向量x0。
     · Deep网络更新成cross之后，抛弃了原来的多层mlp的结构，更加主动的进行了信息的融合（比如xix0的外积），使cross网络的表达能力更强
 
-
 # 将FM融入网络结构
+FM的特征交叉方式是一种高效的特征组合方式。
+
 ## FNN
 
 >  要解决的问题
@@ -296,12 +298,14 @@ Wide是单层模型，具有记忆能力；Deep是多层模型，具有泛化能
     · FNN将随即初始化的embedding用FM模型训练好的结果进行初始化。具体操作实际上是让隐权重向量v去初始化embedding层的连接权重（而不是结果）
     · 为特征预训练提供了思路
     
+    
 ## DeepFM
 
 > 方法
 
     · 用FM替换了deep & wide中的wide网络（fm中实际上有一层linear，再加上两两乘积和），和dcn一致。但是使用的是fm网络进行替换
     · 输入fm和deep网络中的embedding现在是一样的了
+    
     
 ## NFM
 
@@ -310,6 +314,13 @@ Wide是单层模型，具有记忆能力；Deep是多层模型，具有泛化能
     · wide网络保持简单linear，将deep网络替换为fm网络
     · 用神经网络将FM的二阶特征交叉替换掉，争取更高阶的特征交叉形式，是对sparse的feature进行特征的交叉
     · 特征交叉池化层。为了求xixj的和，可以用0.5*(sqrt_of_sum - sum_of_sqrt) = 0.5[(x1+..+xn)^2 - (x1^2+...+xn^2)]的和
+    
+> 与deepFM的区别是
+
+    · deepFM是吧deep网络和fm网络分开，一个学二阶，一个学更高阶，但是deep网络的输入组合不够明显；
+    而这里是把deep接在bi-interaction-pool后面（这个层近似FM层但是不求和），把交叉的特征更深入。
+    · 有点像更加强的PNN，结构比较类似
+    
     
 # 注意力机制的使用
 ## AFM
