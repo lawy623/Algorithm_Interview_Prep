@@ -2,8 +2,8 @@
 class Solution {
 public:
     int findValInVec(vector<int> vec, int start, int end, int target) {
-    if(vec.size()==0 || start>end )
-        return 0;
+      if(vec.size()==0 || start>end )
+          return 0;
         int idx = start;
         while(idx <= end){
             if(vec[idx]==target)
