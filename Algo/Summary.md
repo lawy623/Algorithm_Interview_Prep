@@ -95,7 +95,7 @@ sum(list)				 	## sum of all elements
 			A[mid]<target时，只有mid在右侧且x在左侧才向左查找，否则都向右
 			A[mid]>target时，只有mid在左侧且x在右侧才向右查找，否则都向左
 
-> 2.调整数组顺序使奇数位于偶数前面 ([剑指offer Q13](https://www.nowcoder.com/practice/beb5aa231adc45b2a5dcc5b62c93f593?tpId=13&tqId=11166&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.调整数组顺序使奇数位于偶数前面 ([剑指offer Q13](https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof))
 
 	方法1: 直接扫描，分别保存奇数与偶数数组，再合并
 	复杂度： O(n) space, O(n) time.
@@ -265,7 +265,7 @@ arr[row][col]                           ## acces the idx
 	方法1: 从右上角开始判断，小了往下， 大了往左。
 	复杂度： O(1) space, O(n) time.
 
-> 2.顺时针打印矩阵 ([剑指offer Q19](https://www.nowcoder.com/practice/9b4c81a02cd34f76be2659fa0d54342a?tpId=13&tqId=11172&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.顺时针打印矩阵 ([剑指offer Q19](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)) ([Leetcode Q54](https://leetcode-cn.com/problems/spiral-matrix))
 
 	方法1: 每次开始都是(0,0)->(1,1)->(2,2)->...->(k,k)，直到2k>=n_row或2k>=n_col
 			对每个(k,k)开始的circle，四个方向找到头尾断点打印（但要判断各方向上是否需要打印。）
@@ -381,7 +381,7 @@ s.isupper()                          ## string is all uppercases
 		   判断溢出即可以用long long表示值与MAX_INT对比，也可以再乘10前对比n与MAX_INT/10.
 	复杂度： O(1) space, O(n) time.
 
-> 5.正则表达式匹配 ([剑指offer Q52](https://www.nowcoder.com/practice/45327ae22b7b413ea21df13ee7d6429c?tpId=13&tqId=11205&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 5.正则表达式匹配 ([剑指offer Q52](https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/)) ([Leetcode Q10](https://leetcode-cn.com/problems/regular-expression-matching/))
 
 	方法1: 递归判断。注意到字符串尾时=='\0'
 			下一位不为'*'时，只有*str==*pattern或者*str!='\0'&&*pattern=='.'，将两个都向前一位递归判断match(str+1,pattern+1)
@@ -389,7 +389,7 @@ s.isupper()                          ## string is all uppercases
 				同样的条件满足时，判断match(str+1,pattern)或match(str,pattern+2) --不match或者match一至多位
 				不满足只判断match(str,pattern+2) -- 则没有match上该位
 
-> 6.表示数值的字符串 ([剑指offer Q53](https://www.nowcoder.com/practice/6f8c901d091949a5837e24bb82a731f2?tpId=13&tqId=11206&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 6.表示数值的字符串 ([剑指offer Q53](https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/))
 
 	方法1: 分为e/E前后判断。后面的只能是整数。前面的最多只能有一个dot。注意边界检查条件。
 
@@ -524,12 +524,12 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1: 双指针，让头指针先走k步，再让前后指针一起走
 	复杂度： O(1) space, O(n) time.
 
-> 3.反转链表 ([剑指offer Q15](https://www.nowcoder.com/practice/75e878df47f24fdc9dc3e400ec6058ca?tpId=13&tqId=11168&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 3.反转链表 ([剑指offer Q15](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof)) ([Leetcode Q206](https://leetcode-cn.com/problems/reverse-linked-list))
 
 	方法1: 常规操作,与1相同
 	复杂度： O(1) space, O(n) time.
 
-> 4.合并两个排序链表 ([剑指offer Q16](https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 4.合并两个排序链表 ([剑指offer Q16](https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)) ([Leetcode Q21](https://leetcode-cn.com/problems/merge-two-sorted-lists/))
 
 	方法1: 递归。若有一个指针为空，返回另一个指针，否则指向数值较小的指针，并移动该指针头，递归得到
 	复杂度： O(1) space, O(n) time.
@@ -674,16 +674,16 @@ it = s.equal_range(val)                                     ## return iter that 
 
 ### 问题及思路
 
-> 1.从前序遍历与中序遍历结果重建二叉树 ([剑指offer Q4](https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/))([Leetcode Q105](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/))
+> 1.从前序遍历与中序遍历结果重建二叉树 ([剑指offer Q4](https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/)) ([Leetcode Q105](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/))
 
 	方法1: 前序遍历数组[根结点，左子树节点，右子树节点] && 中序遍历数组[左子树节点，根结点，右子树节点]
 		于是通过前序的第一个root，将中序分隔开来，递归重建左右子树
 
-> 2.树的子结构 ([剑指offer Q17](https://www.nowcoder.com/practice/6e196c44c7004d15b1610b9afca8bd88?tpId=13&tqId=11170&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.树的子结构 ([剑指offer Q17](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof))
 
 	方法1: 递归。如果root1==root2，递归判断左右子树是否完全相等；若不是，递归判断root1的左右子树是否是包含root2子树
 
-> 3.二叉树的镜像 ([剑指offer Q18](https://www.nowcoder.com/practice/564f4c26aa584921bc75623e48ca3011?tpId=13&tqId=11171&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 3.二叉树的镜像 ([剑指offer Q18](https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/)) ([Leetcode Q226](https://leetcode-cn.com/problems/invert-binary-tree/))
 
 	方法1: 递归。互换左右子树，再递归完成子树的替换
 	复杂度： O(1) space, O(n) time.
@@ -775,7 +775,7 @@ it = s.equal_range(val)                                     ## return iter that 
 	复杂度： O(1) space, O(n) time.
 
 
-> 12.对称的二叉树([剑指offer Q58](https://www.nowcoder.com/practice/ff05d44dfdb04e1d83bdbdab320efbcb?tpId=13&tqId=11211&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 12.对称的二叉树([剑指offer Q58](https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof)) ([Leetcode Q101](https://leetcode-cn.com/problems/symmetric-tree/))
 
 	方法1: 求出pRoot的镜像树pRoot_mirror,对比两个树是否完全一致
 	复杂度： O(n) space, O(n) time, and need repeative visit.
@@ -1100,7 +1100,7 @@ list = [[]]					# Use Adjacency matrix
 	方法1: 深搜，注意visit的表需要修改。注意传入函数的方式(dfs(int *&visit...))
 	复杂度： O(n) space, O(n) time.
 
-> 2.机器人的运动范围 ([剑指offer Q66](https://www.nowcoder.com/practice/6e5207314b5241fb83f2329e89fdecc8?tpId=13&tqId=11219&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.机器人的运动范围 ([剑指offer Q66](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/))
 
 	方法1: 深搜. 判断时多加了条件而已。
 	复杂度： O(n) space, O(n) time.
@@ -1163,7 +1163,7 @@ from bitarray import bitarray
 
 ### 问题及思路
 
-> 1.二进制中的1的个数 ([剑指offer Q11](https://www.nowcoder.com/practice/8ee967e43c2c4ec193b040ea7fbb10b8?tpId=13&tqId=11164&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 1.二进制中的1的个数 ([剑指offer Q11](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/))
 
 	方法1: for loop 查看每一位的是否为1
 	复杂度： O(1) space, O(1) time.
@@ -1275,6 +1275,10 @@ from bitarray import bitarray
 	      求解时逐步遍历长度找到相对应的左和上点判断其上/左长度是否满足。
 	复杂度： O(^2) space, 最差O(n^3) time，但会稍好.
 
+> 10. 剪绳子 ([LeadToOffer](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/submissions/))
+
+    方法1： dp记录，更新为(max(dp[i], dp[i-k]*d[k]) for all valid k). 主要记得dp[3]的输出跟状态初始并不一样
+    复杂度: O(n) space, O(n^2) time.
 
 ---
 <br />
@@ -1314,7 +1318,7 @@ sum(list)				 ## sum of all elements in list
 
 ### 问题及思路
 
-> 1.数值的整数次方([剑指offer Q12](https://www.nowcoder.com/practice/1a834e5e3e1a4b7ba251417554e07c00?tpId=13&tqId=11165&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 1.数值的整数次方([剑指offer Q12](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/)) ([Leetcode Q50](https://leetcode-cn.com/problems/powx-n/submissions/))
 
 	方法1: 主要考察是否覆盖全部case(0^0, 0^neg, 0^pos, n^0, n^neg, n^pos).
 		  注意的是，对于c++，判断浮点数是否为0应留有error
