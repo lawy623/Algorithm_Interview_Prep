@@ -16,13 +16,14 @@
 	· 局部连接：只有一小部分区域进行计算，感受野逐渐增大
 	· 权值共享
 	· 保持了相同的空间结构，与生物视觉相关
+	· Im2Col: 每个k*k拆成一行，一共l*l行，与k*k的卷积相乘，在resize得到l*l的结果。多个channel就拼起来(l*l x k*k * ci) * (k*k * ci * co)
 	
 > 参数
 
     · 感受野： Rt = min(Rt-1 + (kt-1)Mul(Si), L), 与之前的都相关
     · 输出尺寸：lo = floor[(li+2p-k) / s] + 1
     · 参数量：ci * co * kw * kh
-    · 计算了：参数量乘上滑动次数(li*lo/si*so)
+    · 计算量：参数量乘上滑动次数(li*lo/si*so)
     
 ## 卷积变种
 
@@ -46,3 +47,23 @@
 
     · 加上offset将conv作用的位置改变，不再局限于规则的网格点采样
     · 不在整数位置需要双线性插值
+    
+## 网络结构发展
+
+> 网络及特点
+
+    · Alexnet：Relu, Dropout, 分组卷积
+    · VGG： 3*3卷积， 2*2 pooling，网络更深， batchnorm。小的kernel参数少计算少，垒起来感受野也大
+    · GoogleNet：同时用多个尺寸卷积（并行）提取，bottlenet（1*1卷积压缩通道在复原）
+    · Inceptionv2/3: 将k*k卷积分解为k*1&1*k降低计算量
+    · Resnet：shortcut抑制了梯度消失，层数大量增加
+    · ResNext：中间的卷积改为分组卷积，中间通道也增加了些
+    · SEnet：对channel做attention
+    · Depthwise+Pointwise：全通道的group conv，后接1*1
+    
+> 基础模块
+
+    · BN：让各层的输入稳定分布，否则影响学习效率；需要有一个beta和gamma保持分布，不然全为（0~1）了，影响非线性表达
+    · 瓶颈结构：通过1*1卷积降低了计算量，但达到更好的效果
+    · 沙漏结构：多层conv+skip connection，加大感受野，但是减少梯度消失
+    · Pooling：非线性，降维，平移不变性

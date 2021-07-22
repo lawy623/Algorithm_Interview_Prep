@@ -40,3 +40,23 @@ public:
         return verify(sequence, 0, sequence.size()-1);
     }
 };
+
+
+// more clear recursive
+class Solution {
+public:
+    bool verifyPostorder(vector<int>& postorder) {
+        return verifyPostorder(postorder, 0, postorder.size()-1);
+    }
+
+    bool verifyPostorder(vector<int>& postorder, int start, int end){
+        if(start>=end) return true;
+        int m=start;
+        while(postorder[m] < postorder[end]) m++;
+        for(int i=m; i<end; i++){
+            if(postorder[i] < postorder[end])
+                return false;
+        }
+        return verifyPostorder(postorder, start, m-1) && verifyPostorder(postorder, m, end-1);
+    }
+};

@@ -106,7 +106,7 @@ sum(list)				 	## sum of all elements
 	方法3: 双指针，从头和尾分别遍历。当前为偶数后为奇数时交换。否则向中间移动指针
 	复杂度： O(1) space, O(n) time.
 
-> 3.数组中出现次数超过一半的数字 ([剑指offer Q28](https://www.nowcoder.com/practice/e8a1b01a2df14cb2b228b30ee6a92163?tpId=13&tqId=11181&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 3.数组中出现次数超过一半的数字 ([剑指offer Q28](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof)) ([Leetcode Q169](https://leetcode-cn.com/problems/majority-element))
 
 	方法1: 排序，在找median的值。需要判断该值是否真的出现超过一半次数（出现超过一半必为排序中位数，但中位数未必超过一半）
 	复杂度： O(1) space, O(nlogn) time.
@@ -116,6 +116,8 @@ sum(list)				 	## sum of all elements
 	
 	方法3: QuickSelect通过找到第k小的数找到中位数
 	复杂度： O(1) space, O(n) time（On average）.
+	
+	方法4： 摩尔投票。通过count，超过半数的一定保留着最后的val
 
 > 4.最小的K个数 ([剑指offer Q29](https://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&tqId=11182&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -534,7 +536,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1: 递归。若有一个指针为空，返回另一个指针，否则指向数值较小的指针，并移动该指针头，递归得到
 	复杂度： O(1) space, O(n) time.
 
-> 5.复杂链表的复制 ([剑指offer Q25](https://www.nowcoder.com/practice/f836b2c43afc4b35ad6adc41ec941dba?tpId=13&tqId=11178&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 5.复杂链表的复制 ([剑指offer Q25](https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof)) ([Leetcode Q138](https://leetcode-cn.com/problems/copy-list-with-random-pointer/))
 
 	方法1: 先复制所有的next节点，并用map保存两个链表1on1的对应。然后复制random指针，通过map找到对应的值
 	复杂度： O(n) space, O(n) time.
@@ -691,24 +693,25 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法2: 使用queue，每次互换最头上的节点的左右子树，再将左右子树的节点推入队列
 	复杂度： O(n) space, O(n) time.
 
-> 4.从上往下打印二叉树（层级遍历） ([剑指offer Q22](https://www.nowcoder.com/practice/7fe2212963db4790b57431d9ed259701?tpId=13&tqId=11175&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 4.从上往下打印二叉树（层级遍历） ([剑指offer Q22](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/))
 
 	方法1: 使用queue，每次弹出队列的头，将左右子树推入队尾
 	复杂度： O(n) space, O(n) time.
 	相关问题：- 把二叉树打印成多行（每次要记录queue的大小，每次pop掉一层的节点）
 			- 将某一层输出成为链表 (CC150 Q20)
 
+> 5.二叉搜索树的后序遍历序列构造二叉树 ([剑指offer Q23](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof))
 
-> 5.二叉搜索树的后序遍历序列构造二叉树 ([剑指offer Q23](https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&tqId=11176&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-
-	方法1: 后序遍历数组[左子树节点，右子树节点，根结点]
+	方法1: 后序遍历数组[左子树节点，右子树节点，根结点]。注意这是二叉搜索树
 			每次通过根节点找到数组前面第一个比根节点大的数作为右子树开始（找不到则返回自己的位置）。
 			判断断开的右子树是否全部比根节点大
 			再递归判断左右子树是否为二叉搜索树
 
-> 6.二叉树中和为某一值的路径([剑指offer Q24](https://www.nowcoder.com/practice/b736e784e3e34731af99065031301bca?tpId=13&tqId=11177&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 6.二叉树中和为某一值的路径([剑指offer Q24](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)) ([Leetcode Q113](https://leetcode-cn.com/problems/path-sum-ii/))
 
 	方法1: 递归。每次查找左右子树值为target-root的路径，存在则将自己推入路径。只有叶节点能直接放回路径。
+	
+	方法2： dfs。用一个global保存
 
 > 7.二叉搜索树与双向链表([剑指offer Q26](https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&tqId=11179&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -859,12 +862,12 @@ stack.empty()                                               ## return whether th
 
 	方法1: 往stack1中push; pop时如果stack2为空，先将stack1从顶pop过来，然后返回stack2的top，不为空则直接返回
 
-> 2.包含min函数的栈 ([剑指offer Q20](https://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&tqId=11173&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.包含min函数的栈 ([剑指offer Q20](https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/)) ([Leetcode Q155](https://leetcode-cn.com/problems/min-stack/))
 
-	方法1: 用一个额外的栈保存至今最小的树，与value栈同步。若新加的数更小，推入新树，否则推入栈顶的树(事实上额外的栈不需要保存重复的最小值，如果新的值不小于栈顶的值则推入；如果pop的值==栈顶值一同pop掉)
+	方法1: 用一个额外的栈保存至今最小的数，与value栈同步。若新加的数更小，推入新树，否则推入栈顶的树(事实上额外的栈不需要保存重复的最小值，如果新的值不小于栈顶的值则推入；如果pop的值==栈顶值一同pop掉)
 	复杂度： O(n) space, O(1) time for min().
 
-> 3.栈的压入、弹出序列 ([剑指offer Q21](https://www.nowcoder.com/practice/d77d11405cc7470d82554cb392585106?tpId=13&tqId=11174&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 3.栈的压入、弹出序列 ([剑指offer Q21](https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/)) ([Leetcode Q946](https://leetcode-cn.com/problems/validate-stack-sequences/))
 
 	方法1: 用一个额外的栈按照压入的顺序不断推入，但当该栈顶的数等于弹出序列的头，弹出栈顶数与弹出序列的头（或移动index）
 	复杂度： O(n) space, O(n) time.
