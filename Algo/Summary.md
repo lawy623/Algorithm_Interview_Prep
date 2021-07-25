@@ -721,6 +721,9 @@ it = s.equal_range(val)                                     ## return iter that 
 	    struct TreeNode* end;
 	    TopEndNode(): top(NULL), end(NULL) {}
 	};
+	
+	方法2： dfs。要用全局变量。二叉树的dfs这里总是不太懂
+	
 
 > 8.二叉树的深度([剑指offer Q38](https://www.nowcoder.com/practice/435fb86331474282a3499955f0a41e8b?tpId=13&tqId=11191&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -1278,7 +1281,7 @@ from bitarray import bitarray
 	      求解时逐步遍历长度找到相对应的左和上点判断其上/左长度是否满足。
 	复杂度： O(^2) space, 最差O(n^3) time，但会稍好.
 
-> 10. 剪绳子 ([LeadToOffer](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/submissions/))
+> 10.剪绳子 ([LeadToOffer](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/submissions/))
 
     方法1： dp记录，更新为(max(dp[i], dp[i-k]*d[k]) for all valid k). 主要记得dp[3]的输出跟状态初始并不一样
     复杂度: O(n) space, O(n^2) time.
