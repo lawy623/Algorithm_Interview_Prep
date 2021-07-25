@@ -711,7 +711,7 @@ it = s.equal_range(val)                                     ## return iter that 
 
 	方法1: 递归。每次查找左右子树值为target-root的路径，存在则将自己推入路径。只有叶节点能直接放回路径。
 	
-	方法2： dfs。用一个global保存
+	方法2： dfs。用一个global保存。是前序便利的方法，每次走通一条子树
 
 > 7.二叉搜索树与双向链表([剑指offer Q26](https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&tqId=11179&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -722,7 +722,7 @@ it = s.equal_range(val)                                     ## return iter that 
 	    TopEndNode(): top(NULL), end(NULL) {}
 	};
 	
-	方法2： dfs。要用全局变量。二叉树的dfs这里总是不太懂
+	方法2： dfs。要用全局变量。dfs进行中序遍历，最先获取左下角最小的设为head。后面用cur和pre持续更新连接。
 	
 
 > 8.二叉树的深度([剑指offer Q38](https://www.nowcoder.com/practice/435fb86331474282a3499955f0a41e8b?tpId=13&tqId=11191&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
