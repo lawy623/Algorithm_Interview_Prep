@@ -5,7 +5,7 @@ public:
         int res = INT_MIN, f = 0;
         for(int i=0;i<nums.size();++i){
             f = max(f + nums[i],nums[i]);  //This a already the transfer function.
-                res = max(res , f);
+            res = max(res , f);
         }
         return res;
     }    

@@ -119,7 +119,7 @@ sum(list)				 	## sum of all elements
 	
 	方法4： 摩尔投票。通过count，超过半数的一定保留着最后的val
 
-> 4.最小的K个数 ([剑指offer Q29](https://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&tqId=11182&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 4.最小的K个数 ([剑指offer Q29](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/))
 
 	方法1: 使用最小堆。构建堆，再推出直到第k个数
 	复杂度： O(n) space, O(n+klogn) time. 当n>>k时效率高
@@ -354,7 +354,7 @@ s.isupper()                          ## string is all uppercases
 	方法2: python使用split(" ") 与 "%20".join()函数
 	复杂度: O(n) time.
 
-> 2.字符串的排列 ([剑指offer Q27](https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&tqId=11180&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))([CC150 Q44](https://www.nowcoder.com/practice/8380c8cf28954a188362206b1991b5d6?tpId=8&tqId=11038&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+> 2.字符串的排列 ([剑指offer Q27](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)) ([CC150 Q44](https://www.nowcoder.com/practice/8380c8cf28954a188362206b1991b5d6?tpId=8&tqId=11038&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 先递归返回str[1:]的全排列，再将该数字插入每个全排列的不同位置，推入队列/数组，并将原来的全排列弹出
 			最后需要通过hashtable去除重复的排列
@@ -362,6 +362,10 @@ s.isupper()                          ## string is all uppercases
 	方法2: 递归。每一次将i>cur移到cur的位置做一次permutation。再swap回去
 	
 	方法3: 递归。每一次取其中的一位，将剩下的字符串premute之后，将该位放在开头
+	
+	方法4：使用dfs，用交换的方式保证某一位的开始。
+	相似题型：全排列 ([Leet Q46](https://leetcode-cn.com/problems/permutations))
+	        全排列ii ([Leet Q47](https://leetcode-cn.com/problems/permutations-ii))
 
 > 3.第一个只出现一次的字符 ([剑指offer Q34](https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -797,8 +801,11 @@ it = s.equal_range(val)                                     ## return iter that 
 
 > 14.序列化二叉树([Leetcode Q297](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/))
 
-	方法1: 用queue进行层级遍历，用#表示null，用空格隔开不同节点。使用istringstream与ostringstream便于序列化。
-	复杂度： O(1) space, O(n) time
+	方法1: 用queue进行层级遍历，用#表示null，用空格隔开不同节点。
+	复杂度： O(n) space, O(n) time
+	
+	方法2：使用istringstream与ostringstream进行前序遍历。注意两个的使用
+	复杂度： O(n) space, O(n) time
 
 > 15.二叉树的中序遍历([Leetcode Q94](https://leetcode.com/problems/binary-tree-inorder-traversal/))
 
@@ -949,7 +956,7 @@ dq.clear()                                                  ## clear
 -- (operation on vector) --
 make_heap(vec.begin(), vec.end())                           ## make the heap to be the max heap. 'greater<int>()' as last argument turn it to min heap.
 vec.front()                                                 ## get the first val(max) from max heap
-vec.push_back(40); push_heap(vec.begin(), vec.end())        ## push a value
+vec.push_back(40); push_heap(vec.begin(), vec.end())        ## push a value. O(logn) time.
 pop_heap(v.begin(), v.end()); v.pop_back()                  ## remove the max
 sort_heap(v.begin(), v.end());                              ## need to sort heap after pop_back()
 ```
@@ -974,12 +981,12 @@ q.push(val)                                                 ## push value
 
 ### 问题及思路
 
-> 1.最小的K个数 ([剑指offer Q29](https://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&tqId=11182&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 1.最小的K个数 ([剑指offer Q29](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/))
 
 	方法1: 使用最小堆。构建堆，再推出直到第k个数
 	复杂度： O(n) space, O(n+klogn) time. 当n>>k时效率高
 
-> 2.数据流中的中位数 ([剑指offer Q63](https://www.nowcoder.com/practice/9be0172896bd43948f8a32fb954e1be1?tpId=13&tqId=11216&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.数据流中的中位数 ([剑指offer Q63](https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/)) ([Leetcode Q295](https://leetcode-cn.com/problems/find-median-from-data-stream/))
 
 	方法1: 内置vector，每次insert都保证sorted(插入排序)。
 	复杂度： O(n) space, O(n) time for insertion. O(1) for getMedian
@@ -989,7 +996,7 @@ q.push(val)                                                 ## push value
 			若现在count为奇数，插入是先进max heap，得到的max heap最大值释放并推入min heap。
 			奇数的median返回max heap的最大，偶数的median返回min heap和max heap顶的平均值
 	复杂度： O(n) space, O(logn) time for insertion. O(1) for getMedian
-
+	
 ---
 <br />
 
@@ -1184,18 +1191,18 @@ from bitarray import bitarray
 	复杂度： O(1) space, O(n) time.
 	相关问题：只出现一次的三个数字（同样用某一位分组，产生一个奇数分组和一个偶数分组。奇数分组先得到，偶数再做）
 
->3.最接近的数([CC150 Q27](https://www.nowcoder.com/practice/33ad4d168a3247b9b63f41e4eaded652?tpId=8&tqId=11021&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=2))([CC150 Sol](http://hawstein.com/2013/01/04/5.3/))
+> 3.最接近的数([CC150 Q27](https://www.nowcoder.com/practice/33ad4d168a3247b9b63f41e4eaded652?tpId=8&tqId=11021&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=2))([CC150 Sol](http://hawstein.com/2013/01/04/5.3/))
 
 	方法1: 对于0001100，更大的一个数是另左边第二次出现连续的0时成为1,后面补0->0010000
 		再将后面多加不足的1->0010001. 整个过程为x + 1<<c_0 + 1<<(c_01-1) - 1,c_0=2,c_01=2
 		对于1100011，更小的一个数是另左边第二次出现连续的1时成为0，后面补1->1011111
 		再将后面多余的1变成0->1011100. 整个过程为x - (1<<c_1) - 1<<(c_10-1) + 1, c_1=2,c_10=3
 
->4.交换奇偶数位([CC150 Q29](https://www.nowcoder.com/practice/ed7d014b42e740679c4bd69b9d9c49b9?tpId=8&tqId=11023&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/04/5.6/))
+> 4.交换奇偶数位([CC150 Q29](https://www.nowcoder.com/practice/ed7d014b42e740679c4bd69b9d9c49b9?tpId=8&tqId=11023&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/04/5.6/))
 
 	方法1: 用mask表示奇数与偶数(0x55555555, 0xAAAAAAAA). 输出(odd<<1 | even>>1)
 
->5.集合的子集([CC150 Q43](https://www.nowcoder.com/practice/1f2700e2b1904254b55765479e9b8766?tpId=8&tqId=11037&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/10/8.3/))
+> 5.集合的子集([CC150 Q43](https://www.nowcoder.com/practice/1f2700e2b1904254b55765479e9b8766?tpId=8&tqId=11037&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/10/8.3/))
 
 	方法1: 一个集合的全排列可以用n个1表示，则最大为2^n-1, 最小为1(非空子集)。按照位置加入元素即可
 	复杂度： O(1) space, O(n) time.
@@ -1213,18 +1220,19 @@ from bitarray import bitarray
 	复杂度： O(1) space, O(n) time.
 	相关： 青蛙跳， 矩形覆盖
 
-> 2.连续子数组的最大和 ([剑指offer Q30](https://www.nowcoder.com/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&tqId=11183&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.连续子数组的最大和 ([剑指offer Q30](https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/)) ([Leetcode 53](https://leetcode-cn.com/problems/maximum-subarray/))
 
 	方法1: 使用一个额外的sum保存到该数的最大sum。如果sum为负则定义改出的sum为自身（最大sum必然不包括前面的负数和）
 	复杂度： O(1) space, O(n) time.
 	相关问题：最大和子矩阵[CC150 Q81]: 每次将i～j行加起来，求连续字数组最大和。O(n)space，O(n^3) time.
 
-> 3.连续子数组的最大积 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.01.html))
+> 3.连续子数组的最大积 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.01.html)) ([Leetcode Q152](https://leetcode-cn.com/problems/maximum-product-subarray/))
 
 	方法1: 由于有负数的存在，同时需要保存有负数的情况。
 			状态转移: max[i] = max(max[i-1]*A[i], min[i-1]*A[i], A[i]) -> 结果在此数组中更新
 					 min[i] = min(max[i-1]*A[i], min[i-1]*A[i], A[i])
 	复杂度： O(n) space (O(1) if you use two var only), O(n) time.
+	相关问题：最大和绝对值[Leetcode Q1749]: 同样用两个值保存最大和最小和，每次找最大最小的绝对值最大值
 
 > 4.字符串的最小编辑距离 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.02.html))
 

@@ -81,3 +81,27 @@ private:
         }
     }
 };
+
+// better dfs
+class Solution {
+public:
+    vector<vector<int> > res;
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        dfs(nums, 0);
+        return res;
+    }
+
+    void dfs(vector<int>& nums, int x){
+        if (x==nums.size()-1)
+            res.push_back(nums);
+
+        set<int> st;
+        for(int i=x; i<nums.size(); i++){
+            if(st.find(nums[i]) != st.end()) continue;
+            st.insert(nums[i]);
+            swap(nums[i], nums[x]);
+            dfs(nums, x+1);
+            swap(nums[i], nums[x]);
+        }
+    }
+};

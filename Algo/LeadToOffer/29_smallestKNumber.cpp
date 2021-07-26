@@ -38,47 +38,39 @@ public:
 //3. Use partition and find the k-th smallest. Total O(n) time.
 class Solution {
 public:
-    int partition(vector<int>& nums, int left, int right) {
-        int pivot = nums[right];
-        int pos = left-1;
-        for (int i=left; i<right; i++) {
-            if (nums[i] <= pivot) {
-                swap(nums[++pos], nums[i]);
-            }
-        }
-        swap(nums[++pos], nums[right]);
-        return pos;
-    }
-
-    int findKSmallest(vector<int>& nums, int k) {
-        int left = 0;
-        int right = nums.size()-1;
-        int idx = 0;
-        while(true) {
-            idx = partition(nums, left, right);
-            if (idx==k-1)
-                return nums[idx];
-            else if (idx>k-1)
-                right = idx - 1;
-            else
-                left = idx + 1;
-        }
-    }
-
-    vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
+    vector<int> getLeastNumbers(vector<int>& arr, int k) {
+        int kth = findK(arr, k-1);
         vector<int> res;
-        if (input.size()==0 || k<=0 || k>input.size())
-            return res;
-
-        int kth = findKSmallest(input, k);
-        for(int i=0; i<input.size(); i++){
-            if (input[i]<kth)
-                res.push_back(input[i]);
+        for(auto n : arr){
+            if (n<=kth && res.size()<k)
+                res.push_back(n);
         }
-        while(res.size()<k) {
-            res.push_back(kth);
-        }
-
         return res;
+    }
+
+    int findK(vector<int>& arr, int k){
+        if (k<0 || k>arr.size()-1) return -1;
+        int start = 0; int end = arr.size()-1;
+
+        int p = partition(arr, start, end);
+        while(p!=k){
+            if(p>k) end = p-1;
+            else start = p+1;
+            p = partition(arr, start, end);
+        }
+        return arr[p];
+    }
+
+    int partition(vector<int>& arr, int start, int end){
+        if(end<=start) return start;
+        int pivot_idx = rand() % (end - start + 1) + start;
+        swap(arr[pivot_idx], arr[end]);
+        int idx = start-1;
+        for(int i=start; i<end; i++){
+            if(arr[i] <= arr[end])
+                swap(arr[++idx], arr[i]);
+        }
+        swap(arr[++idx], arr[end]);
+        return idx;
     }
 };

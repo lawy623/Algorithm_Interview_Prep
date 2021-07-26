@@ -52,3 +52,24 @@ private:
         }
     }
 };
+
+// More clear dfs
+class Solution {
+public:
+    vector<vector<int> > res;
+    vector<vector<int>> permute(vector<int>& nums) {
+        dfs(nums, 0);
+        return res;
+    }
+
+    void dfs(vector<int>& nums, int x){
+        if (x==nums.size()-1)
+            res.push_back(nums);
+
+        for(int i=x; i<nums.size(); i++){
+            swap(nums[i], nums[x]);
+            dfs(nums, x+1);
+            swap(nums[i], nums[x]);
+        }
+    }
+};
