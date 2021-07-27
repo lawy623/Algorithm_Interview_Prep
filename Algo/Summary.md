@@ -603,7 +603,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1: 使用大小两个链表进行添加。注意大链表最后next要指向null.
 	复杂度： O(1) space, O(n) time.
 
-> 11.链表相加 ([CC150 Q11](https://www.nowcoder.com/practice/ed85a09f0df047119e94fb3e5569855a?tpId=8&tqId=11005&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/16/2.4/))([LeetCode Q2](https://leetcode.com/problems/add-two-numbers/))
+> 11.链表相加 ([CC150 Q11](https://www.nowcoder.com/practice/ed85a09f0df047119e94fb3e5569855a?tpId=8&tqId=11005&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/16/2.4/)) ([LeetCode Q2](https://leetcode.com/problems/add-two-numbers/))
 
 
 	方法1: 注意对while条件的判断，只要(a || b || carry)即可继续，赋值可用a?a->val:0进行。减少过多代码
@@ -729,11 +729,11 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法2： dfs。要用全局变量。dfs进行中序遍历，最先获取左下角最小的设为head。后面用cur和pre持续更新连接。
 	
 
-> 8.二叉树的深度([剑指offer Q38](https://www.nowcoder.com/practice/435fb86331474282a3499955f0a41e8b?tpId=13&tqId=11191&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 8.二叉树的深度([剑指offer Q38](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof))
 
 	方法1: 递归。叶节点返回深度为1.根节点返回1+max(左深度，右深度）
 	
-	方法2: 将深度传入函数，避免多次重复调用
+	方法2: dfs修改depth。记录max depth
 
 > 9.平衡二叉树判断([剑指offer Q39](https://www.nowcoder.com/practice/8b3b95850edb4115918ecebdf1b4d222?tpId=13&tqId=11192&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))([CC150 Q17](https://www.nowcoder.com/practice/b6bbed48cd864cf09a34a6ca14a3976f?tpId=8&tqId=11011&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1))([CC150 Sol](http://hawstein.com/2012/12/24/4.1/))
 
@@ -848,6 +848,10 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法2: 用二叉搜索树保存stream的结果，每次查找rank。
 	复杂度： O(n) space, O(logn) time
 
+> 21. 二叉树第二小的节点([Leetcode Q671](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/))
+
+    方法1: dfs查找刚好比root大的点，要注意初始输入的res大小
+	复杂度： O(n) space, O(n) time
 
 # <h2 id="6">栈（Stack）</h2>
 ### C++用法
@@ -1332,14 +1336,14 @@ sum(list)				 ## sum of all elements in list
 
 ### 问题及思路
 
-> 1.数值的整数次方([剑指offer Q12](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/)) ([Leetcode Q50](https://leetcode-cn.com/problems/powx-n/submissions/))
+> 1.数值的整数次方([剑指offer Q12](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/)) ([Leetcode Q50](https://leetcode-cn.com/problems/powx-n))
 
 	方法1: 主要考察是否覆盖全部case(0^0, 0^neg, 0^pos, n^0, n^neg, n^pos).
 		  注意的是，对于c++，判断浮点数是否为0应留有error
 		  对于exp的计算，可以用二分法
 	复杂度： O(1) space, O(logn) time.
 
-> 2.从1到n整数中1出现的次数([剑指offer Q31](https://www.nowcoder.com/practice/bd7f978302044eee894445e244c7eee6?tpId=13&tqId=11184&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.从1到n整数中1出现的次数([剑指offer Q31](https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/)) ([Leetcode Q233](https://leetcode-cn.com/problems/number-of-digit-one))
 
 	方法1: 归纳法。对每一个数位上分别求出该数位上1出现的个数。
 	复杂度： O(1) space, O(logn) time.
@@ -1398,7 +1402,13 @@ sum(list)				 ## sum of all elements in list
 
 	方法1: 等同于只需要计算5的因子数。n/5返回1一个5的个数，/25返回两个5的额外个数。所以loop让n/=5不停统计即可
 	复杂度： O(1) space, O(logn) time.
+	
+> 10.数字序列中某一位的数 ([剑指offer Q67](https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof)) ([Leetcode Q67](https://leetcode-cn.com/problems/nth-digit/)) 
 
+    方法1：需要归纳规律。1-9有9个数9位；10-99有90个数180位；100-999有900个数2700位。10^digit-10^(digit+1)-1有9*10^digit*(digit+1)位
+          找到该n对应的digit，再找到对应的num，再找到对应的位数
+    复杂度： O(1) space, O(logn) time.
+    
 ---
 <br />
 

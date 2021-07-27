@@ -76,6 +76,21 @@
     · 沙漏结构：多层conv+skip connection，加大感受野，但是减少梯度消失
     · Pooling：非线性，降维，平移不变性
     
+> 初始化
+
+    · xavier：输入输出的方差一致
+    · he：更适合relu的输出
+    
+> normalization
+
+    · batch：在C维度上平均
+    · layer：在batch维度上平均
+    · instance：在batch、C维度上平均
+    · group：分成多个group，在C维度上统一
+    
+> KL散度
+
+    · 相对熵 = 交叉熵 - 信息熵（额外的信息需求）
     
     
 # <h2 id="2">第二章：循环神经网络</h2>
@@ -218,6 +233,11 @@
 # <h9 id="9">第九章：计算机视觉</h9>
 
 ## 目标检测
+> 指标
+
+    · mAP：当iou大于某阈值时的precision
+    · iou：相交面积占union面积的比例
+    
 > 分类
 
     · 一阶段通过输入anchor，充分预测，但是正负样例不平衡，计算效率高
@@ -225,16 +245,21 @@
     
 > RCNN系列
 
-    · RCNN: selective search用直方图挑选区域，送入cnn提特征，svm分类
-    · SPPNet：rcnn送入cnn的大小固定，需要预处理。通过多层固定池话，提取不同输入的固定大小特征。同时优化提取，先全图提取，在区域提取
+    · RCNN: selective search用直方图挑选区域，resize统一大小送入cnn提特征，svm分类
+    · SPPNet：rcnn送入cnn的大小固定，需要预处理。通过多层固定池化，提取不同输入的固定大小特征。同时优化提取，先全图提取，在区域提取
     · FastRCNN: 使用ROI pooling；同时用fc取代svm
-    · FasterRCNN：使用RPN网络提取每个区域的特征
+    · FasterRCNN：使用RPN网络提取每个区域的特征（在feature上滑动窗口，选取不同的anchor
+    · RFCN：最后加一层k^2(c+1)的输出卷积层，用于估计每个区域每个class的类别
     
 > YOLO系列
 
-    · 
+    · 每个格子当作anchor，预测offset和类别
     
 > SSD系列
+
+    · 相比yolo使用了设定好的anchor
+    · 与two stage相比不在判断anchor是否为前景后景，直接输出cls分类
+    · 多尺度，不同的feature上用不同的anchor
     
 > 小物体检测
 
