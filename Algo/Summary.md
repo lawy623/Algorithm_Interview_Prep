@@ -128,7 +128,7 @@ sum(list)				 	## sum of all elements
 			如果pivot是第k个则返回。大于k则partition前面的数组，小于k则partition后面的数组
 	复杂度： O(1) space, O(n) time（On average）.
 
-> 5.把数组排成最小的数 ([剑指offer Q32](https://www.nowcoder.com/practice/8fecd3f8ba334add803bf2a06af1b993?tpId=13&tqId=11185&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 5.把数组排成最小的数 ([剑指offer Q32](https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof)
 
 	方法1: 定义一种排序方式。当“前+后”比“后+前”小时，前<后。排序后返回即可
 			需要证明该排序定义的A1A2A3....An是最小的。可用反证法证明
@@ -262,7 +262,7 @@ arr[row][col]                           ## acces the idx
 
 ### 问题及思路
 
-> 1.递增二维数组中的查找 ([剑指offer Q1](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)([Leetcode Q240](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/))
+> 1.递增二维数组中的查找 ([剑指offer Q1](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/) ([Leetcode Q240](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/))
 
 	方法1: 从右上角开始判断，小了往下， 大了往左。
 	复杂度： O(1) space, O(n) time.
@@ -284,6 +284,14 @@ arr[row][col]                           ## acces the idx
 
 	方法1: 用两个一维数组分别表示这一行/列是否出现过0.再扫描一遍只要判断该点的行列是否出现过0即可
 	复杂度： O(n) space, O(n^2) time.
+
+> 5.礼物的最大价值 ([剑指offer Q69](https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/))
+
+    方法1: dfs。但是会超时因为有重复计算
+	复杂度： O(n) space, O(mn) time.
+	
+	方法2: dp。使用原矩阵保存价值
+	复杂度： O(1) space, O(mn) time.
 
 ---
 <br />
@@ -463,7 +471,7 @@ s.isupper()                          ## string is all uppercases
 > 14.最长无重复子串 ([Leetcode Q3](https://leetcode.com/problems/longest-substring-without-repeating-characters/))
 
 	方法1: 用一个前指针记录前一个当前最前面无重复的起始点。用一个map记录重复的情况。
-	      默认初始最前无重复的前指针位置为-1.
+	      默认初始最前无重复的前指针位置为-1. 更新的是滑动窗口的左窗，如果现在的在窗口中出现过，更新左窗位置
 	      当map发现新的字符串重复过，更新前指针到上次重复位置的后一位。
 	复杂度： O(n) space, O(n) time. O(1) space if using int[256]
 
@@ -735,7 +743,8 @@ it = s.equal_range(val)                                     ## return iter that 
 	
 	方法2: dfs修改depth。记录max depth
 
-> 9.平衡二叉树判断([剑指offer Q39](https://www.nowcoder.com/practice/8b3b95850edb4115918ecebdf1b4d222?tpId=13&tqId=11192&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))([CC150 Q17](https://www.nowcoder.com/practice/b6bbed48cd864cf09a34a6ca14a3976f?tpId=8&tqId=11011&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1))([CC150 Sol](http://hawstein.com/2012/12/24/4.1/))
+> 9.平衡二叉树判断 ([剑指offer Q39](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/)) ([CC150 Q17](https://www.nowcoder.com/practice/b6bbed48cd864cf09a34a6ca14a3976f?tpId=8&tqId=11011&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1))([CC150 Sol](http://hawstein.com/2012/12/24/4.1/))
+                 ([Leetcode Q110](https://leetcode-cn.com/problems/balanced-binary-tree/))
 
 	方法1: 递归求出左右子树的深度。如果深度相差不超过1则为平衡树。递归判断左右子树
 	
@@ -848,10 +857,15 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法2: 用二叉搜索树保存stream的结果，每次查找rank。
 	复杂度： O(n) space, O(logn) time
 
-> 21. 二叉树第二小的节点([Leetcode Q671](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/))
+> 21.二叉树第二小的节点([Leetcode Q671](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/))
 
     方法1: dfs查找刚好比root大的点，要注意初始输入的res大小
 	复杂度： O(n) space, O(n) time
+
+> 22.二叉搜索树第K大的节点([剑指offer Q70](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/))
+
+    方法1: 从右中序遍历就是排序。用一个global值记录即可即可
+	复杂度： O(1) space, O(n) time
 
 # <h2 id="6">栈（Stack）</h2>
 ### C++用法
@@ -1298,6 +1312,14 @@ from bitarray import bitarray
     方法1： dp记录，更新为(max(dp[i], dp[i-k]*d[k]) for all valid k). 主要记得dp[3]的输出跟状态初始并不一样
     复杂度: O(n) space, O(n^2) time.
 
+> 11.数字翻译成字符串 ([LeadToOffer](https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof))
+
+    方法1：f(i) = f(i-1) + f(i-2)[i-1,i goes for valid val]
+    复杂度: O(1) space, O(n) time.
+    
+    方法2：递归  translateNum(num / 10) + translateNum(num / 100) * (translateNum(num % 100) - 1);
+    复杂度: O(n) space, O(n) time.
+    
 ---
 <br />
 
@@ -1360,7 +1382,7 @@ sum(list)				 ## sum of all elements in list
 	}
 	return count;
 
-> 3.丑数([剑指offer Q33](https://www.nowcoder.com/practice/6aa9e04fc3794f68acf8778237ba065b?tpId=13&tqId=11186&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 3.丑数([剑指offer Q33](https://leetcode-cn.com/problems/chou-shu-lcof/)) ([Leetcode Q264](https://leetcode-cn.com/problems/ugly-number-ii/))
 
 	方法1: 用三个队列分别表示x2,x3,x5的结果。每次讲三个队列最小的头推出加入输出数组（重复则一起推出）。
 			将该数x2,x3,x5之后分别推入三个队列的尾部
