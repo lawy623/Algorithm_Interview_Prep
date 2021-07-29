@@ -154,7 +154,7 @@ sum(list)				 	## sum of all elements
 			如果mid>=target,返回binaryCount(前段）+binaryCount(后段）+1
 	复杂度： O(n) space, O(logn) time.
 
-> 8.和为S的两个数字 ([剑指offer Q42](https://www.nowcoder.com/practice/390da4f7a00f44bea7c2f3d19491311b?tpId=13&tqId=11195&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 8.和为S的两个数字 ([剑指offer Q42](https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof)) ([Leetcode Q1](https://leetcode-cn.com/problems/two-sum/))
 
 	方法1: 排序后使用前后两个pointer查找
 	复杂度： O(1) space, O(nlogn) time.
@@ -808,7 +808,7 @@ it = s.equal_range(val)                                     ## return iter that 
 		  每次将一个stack中的子节点向另一个方向传输。通过方向确定先传左还是先传右
 	复杂度： O(n) space, O(n) time
 
-> 14.序列化二叉树([Leetcode Q297](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/))
+> 14.序列化二叉树([剑指offer Q61](https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/)) ([Leetcode Q297](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/))
 
 	方法1: 用queue进行层级遍历，用#表示null，用空格隔开不同节点。
 	复杂度： O(n) space, O(n) time
