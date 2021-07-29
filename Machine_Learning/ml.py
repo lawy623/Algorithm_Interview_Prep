@@ -44,3 +44,14 @@ def comp_iou(r1, r2):
         intercept = (right-left)*(bottom-top)
         return intercept / (s_sum-intercept)
     
+def auc(label, pred):
+    pos = [i for i in range(len(label)) if label[i]==1]
+    neg = [i for i in range(len(label)) if label[i]==0]
+    auc = 0
+    for i in pos:
+        for j in neg:
+            if pred[i] > pred[j]:
+                auc += 1
+            elif pred[i] == pred[j]:
+                auc += 0.5
+    return auc / len(pos)*len(neg)

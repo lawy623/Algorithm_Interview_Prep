@@ -270,6 +270,25 @@
     · 提高小样本的比例，数据增强
     · 更大的输入比例
     
+> IOU计算
+
+    · 两个矩阵有overlap的前提是 max(x1_min, x2_min) > min(x1_max, x2_max) && max(y1_min, y2_min) > min(y1_max, y2_max)
+    · 因此overlap部分的面积则为 max(0, max(x1_min, x2_min)-min(x1_max, x2_max)) * max(0, max(y1_min, y2_min)-min(y1_max, y2_max))
+    · iou则为 overlap / (s1+s2-overlap)
+
+> nms
+
+    · 按照score排序，每次拿第一个最高分的与其他做iou，筛去iou较小的并重复
+    
+    ```
+    orders = scores.argsort()[::-1]
+    keep = []
+    while(order.size()>0):
+        keep.append(order[0])
+        iou = iou with 0 and all others
+        orders = order[np.where(iou <= thres)]
+    ``` 
+    
 ## 图像分割
 > 常见设计
 
@@ -328,8 +347,9 @@
     · 多头：转到不同的空间捕捉语义信息，类似于多个卷积核
     · 位置编码：捕捉位置的影响（正余弦函数，避免值过大的影响）
     · 可并行化处理（与rnn相比）
-    · 缩放因子dk避免梯度消失
+    · 缩放因子dk避免梯度消失（避免softmax之后0/1差距过大），dk为qk的方差
     · layer norm和fc层
+    · Q:当前询问的值，K：序列所有值的key，V当前的价值表示。从询问值查找与其他所有值的相似度（关系），softmax求加权，应用到V的表示上
         
 # <h11 id="11">第十一章：推荐系统</h11>
 参考Rec_Sys里面的内容
