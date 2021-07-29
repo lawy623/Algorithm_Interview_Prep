@@ -664,7 +664,7 @@ DIN的升级版，背景完全一致。模拟了用户兴趣的‘进化’过�
             for j in neg:
                 if pred[i] > pred[j]:
                     auc += 1
-                elif pred[i] == pred[j]
+                elif pred[i] == pred[j]:
                     auc += 0.5
         return auc / len(pos)*len(neg)
     ```
