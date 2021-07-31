@@ -134,7 +134,7 @@ sum(list)				 	## sum of all elements
 			需要证明该排序定义的A1A2A3....An是最小的。可用反证法证明
 	复杂度： O(1) space, O(nlogn) time.
 
-> 6.数组中的逆序对 ([剑指offer Q35](https://www.nowcoder.com/practice/96bd6684e04a44eb80e6a68efc0ec6c5?tpId=13&tqId=11188&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 6.数组中的逆序对 ([剑指offer Q35](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/))
 
 	方法1: 暴力搜索
 	复杂度： O(1) space, O(n^2) time.
@@ -167,7 +167,7 @@ sum(list)				 	## sum of all elements
 	方法1: 前后双指针。根据和的情况分别移动两个指针。
 	复杂度： O(1) space, O(n) time.
 
-> 10.扑克牌顺子 ([剑指offer Q45](https://www.nowcoder.com/practice/762836f4d43d43ca9deb273b3de8e1f4?tpId=13&tqId=11198&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 10.扑克牌顺子 ([剑指offer Q45](https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/))
 
 	方法1: 先排序，计算大小王（0）的个数，当n_0<4时，剩余的最大值-最小值<=4.（注意判断数值是否在[0,13]）
 	复杂度： O(1) space, O(1) time.
@@ -181,7 +181,7 @@ sum(list)				 	## sum of all elements
 	复杂度： O(1) space, O(n) time.
 	相似问题: 魔术引索([CC150 Q42]-当A[i]>i时，i直接跳到A[i]，避免无用搜索
 
-> 12.不用除法构建乘积数组 ([剑指offer Q51](https://www.nowcoder.com/practice/94a4d381a68b47b7a8bed86f2975db46?tpId=13&tqId=11204&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 12.不用除法构建乘积数组 ([剑指offer Q51](https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/))
 
 	方法1: 暴力构建，两个for loop
 	复杂度： O(n^2) space, O(1) time.
@@ -375,7 +375,7 @@ s.isupper()                          ## string is all uppercases
 	相似题型：全排列 ([Leet Q46](https://leetcode-cn.com/problems/permutations))
 	        全排列ii ([Leet Q47](https://leetcode-cn.com/problems/permutations-ii))
 
-> 3.第一个只出现一次的字符 ([剑指offer Q34](https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 3.第一个只出现一次的字符 ([剑指offer Q34](https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/))
 
 	方法1: 使用hash table保存遍历结果，value为出现次数。再扫描一次字符串输出第一个value=1的字符
 	复杂度： O(n) space, O(n) time.
@@ -475,8 +475,11 @@ s.isupper()                          ## string is all uppercases
 	      当map发现新的字符串重复过，更新前指针到上次重复位置的后一位。
 	复杂度： O(n) space, O(n) time. O(1) space if using int[256]
 
+> 15.反转单词顺序 ([剑指offer Q71](https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/)) ([Leetcode Q151](https://leetcode-cn.com/problems/reverse-words-in-a-string))
 
-
+    方法1：先反转整个string，再反转每一个单词。先用双指针记录左右最早不为空的位置。然后用stack记录并更新每一个单词并反转。注意最后一个位置
+    复杂度： O(n) space, O(n) time
+    
 ---
 <br />
 
@@ -625,6 +628,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	
 	方法2: 使用一个stack和快慢指针，将慢指针经历的推入堆中，在慢指针一次遍历比较stack顶。注意长度为奇偶时的区别
 	复杂度： O(n) space, O(n) time.
+	
 ---
 <br />
 
@@ -752,13 +756,19 @@ it = s.equal_range(val)                                     ## return iter that 
 	       int depth = 0;
 	       return IsBalanced(pRoot, &depth);
 
-> 10.树中两个节点的最低公共祖先(剑指offer书中)
+> 10.二叉搜索树中两个节点的最低公共祖先 ([剑指offer Q72](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/))  ([Leetcode Q235](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/))
 
 	- 若为二叉搜索树，假设两个节点的值分别为min_v, max_v, 则可以从root找到第一个min_v < node < max_v的节点。若node等于其中某个值，则其中一个节点为另一节点的子孙
-	- 若节点包含指向父节点的指针，则可将问题转化为找两个链表的第一个公共节点
-	- 若都不满足（不一定为二叉树，不是搜索树，没有指向父节点的指针），则先从root找到到达两个节点的path（递归+深搜），然后比较两个path，求出两条路径的最后公共节点
+	- 否则一左一右时即为该节点
 
-> 10_1.满二叉树的最低公共祖先([CC150 Q23](https://www.nowcoder.com/practice/70e00e490b454006976c1fdf47f155d9?tpId=8&tqId=11017&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+> 10_1.二叉树中两个节点的最低公共祖先 ([剑指offer Q73](https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/))  ([Leetcode Q236](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/))
+
+	方法1：若都不满足（不一定为二叉树，不是搜索树，没有指向父节点的指针），则先从root找到到达两个节点的path（递归+深搜），然后比较两个path，求出两条路径的最后公共节点
+
+    方法2：递归。左右分别调用。如果左右结果都为空，证明当前节点就是祖先。否则就为左右不为空的调用。
+          结束方式就是如果root为空或者root为左或右的某个。
+    
+> 10_2.满二叉树的最低公共祖先([CC150 Q23](https://www.nowcoder.com/practice/70e00e490b454006976c1fdf47f155d9?tpId=8&tqId=11017&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 注意到每个节点的父亲编号都是自己的一半。用两个stack保存路径，查看最后相同的堆顶值
 	复杂度： O(n) space, O(n) time.
@@ -1199,7 +1209,7 @@ from bitarray import bitarray
 	方法1: for loop 查看每一位的是否为1
 	复杂度： O(1) space, O(1) time.
 
-> 2.数组中只出现一次的两个数字 ([剑指offer Q40](https://www.nowcoder.com/practice/e02fdb54d7524710a7d664d082bb7811?tpId=13&tqId=11193&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.数组中只出现一次的两个数字 ([剑指offer Q40](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/))
 
 	方法1: 使用map记录每个数字出现的个数
 	复杂度： O(n) space, O(n) time.
@@ -1207,7 +1217,7 @@ from bitarray import bitarray
 	方法1: 使用xor（a xor a = 0）. 将所有数字xor一遍。找到结果中不为0的一位，则两个数字在这一位必不同
 			按照该位将数字分为两组。分别进行xor并输出两个结果
 	复杂度： O(1) space, O(n) time.
-	相关问题：只出现一次的三个数字（同样用某一位分组，产生一个奇数分组和一个偶数分组。奇数分组先得到，偶数再做）
+	相关问题：只出现一次的三个数字(每一位求1的个数和，如果余3为1证明唯一的数这里是1。可拓展到其他情况)
 
 > 3.最接近的数([CC150 Q27](https://www.nowcoder.com/practice/33ad4d168a3247b9b63f41e4eaded652?tpId=8&tqId=11021&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=2))([CC150 Sol](http://hawstein.com/2013/01/04/5.3/))
 
@@ -1389,9 +1399,9 @@ sum(list)				 ## sum of all elements in list
 			实现的时候可以只采用一个输出数组，并用3个指针指向该输出数组的位置，减少extra space。
 	复杂度： O(1) space, O(n) time.
 
-> 4.不使用加减乘除和判断语句求1～n的和([剑指offer Q47](https://www.nowcoder.com/practice/7a0da8fc483247ff8800059e12d7caf1?tpId=13&tqId=11200&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 4.不使用加减乘除和判断语句求1～n的和([剑指offer Q47](https://leetcode-cn.com/problems/qiu-12n-lcof/))
 
-	方法1: 采用递归. n==0时 n && 不再计算直接返回
+	方法1: 采用递归. n==0时 n && 不再计算直接返回。主要就是怎么样停止循环
 	复杂度： O(1) space, O(logn) time.
 	 int res = n;
 	 n && (res += Sum_Solution(n-1));
