@@ -567,12 +567,12 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法2: 计算两个链表的长度，找到长度差d。长链表先走d步，两个再一起走知道相等
 	复杂度： O(1) space, O(n) time.
 
-> 7.圆圈中最后剩下的数(约瑟夫环问题) ([剑指offer Q46](https://www.nowcoder.com/practice/f78a359491e64a50bce2d89cff857eb6?tpId=13&tqId=11199&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 7.圆圈中最后剩下的数(约瑟夫环问题) ([剑指offer Q46](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/))
 
 	方法1: 从数组构建链表，然后loop返回
 	复杂度： O(n) space, O(mn) time.
 	
-	方法2: 归纳法。推出f(n,m) = (f(n-1,m)+m)%n。f(1,m)=0. 再dp求得。如果起点为1则+1
+	方法2: 归纳法。推出f(n,m) = (f(n-1,m)+m)%n。f(1,m)=0. 再dp求得。如果起点为1则+1。动态归纳问题
 	复杂度： O(1) space, O(n) time.
 
 > 8.链表中环的入口结点 ([剑指offer Q55](https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)) ([Leetcode Q142](https://leetcode.com/problems/linked-list-cycle-ii/)) ([CC150 Sol](http://hawstein.com/2012/12/17/2.5/))
@@ -1317,18 +1317,24 @@ from bitarray import bitarray
 	      求解时逐步遍历长度找到相对应的左和上点判断其上/左长度是否满足。
 	复杂度： O(^2) space, 最差O(n^3) time，但会稍好.
 
-> 10.剪绳子 ([LeadToOffer](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/submissions/))
+> 10.剪绳子 ([剑指offer Q75](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/))
 
     方法1： dp记录，更新为(max(dp[i], dp[i-k]*d[k]) for all valid k). 主要记得dp[3]的输出跟状态初始并不一样
     复杂度: O(n) space, O(n^2) time.
 
-> 11.数字翻译成字符串 ([LeadToOffer](https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof))
+> 11.数字翻译成字符串 ([剑指offer Q68](https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof))
 
     方法1：f(i) = f(i-1) + f(i-2)[i-1,i goes for valid val]
     复杂度: O(1) space, O(n) time.
     
     方法2：递归  translateNum(num / 10) + translateNum(num / 100) * (translateNum(num % 100) - 1);
     复杂度: O(n) space, O(n) time.
+    
+> 11.n个骰子的点数-概率 ([剑指offer Q74](https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/))
+
+    方法1：每多一个骰子，概率都为前面n-1个组成的概率 + 现在这个的概率。这里要注意写法, 前n-1个骰子和为k时，n个骰子时k+1~k+6概率分布贡献1/6
+          写的时候，每一个dp数组都是从最小的和开始
+    复杂度： O(n) space, O(n^2) time.
     
 ---
 <br />
@@ -1440,6 +1446,8 @@ sum(list)				 ## sum of all elements in list
     方法1：需要归纳规律。1-9有9个数9位；10-99有90个数180位；100-999有900个数2700位。10^digit-10^(digit+1)-1有9*10^digit*(digit+1)位
           找到该n对应的digit，再找到对应的num，再找到对应的位数
     复杂度： O(1) space, O(logn) time.
+    
+
     
 ---
 <br />
