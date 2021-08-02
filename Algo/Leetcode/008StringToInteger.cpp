@@ -52,3 +52,37 @@ public:
         return res;
     }
 };
+
+// more clear exit mode
+class Solution {
+public:
+    int myAtoi(string str) {
+        int n = str.length();
+        if(n==0) return 0;
+        int move = 0;
+        while(move<n && str[move]==' ') move++;
+        if(move==n) return 0;
+        int sign = 1;
+        if(str[move] == '-'){
+            sign = -1;
+            move++;
+        } else if(str[move] == '+'){
+            move++;
+        }
+        if(move==n) return 0;
+
+        int res = 0;
+        while(move<n && isNum(str[move])){
+            if(res>INT_MAX/10 || ((res==INT_MAX/10) && str[move] > '7'))
+                return sign>0?INT_MAX:INT_MIN;
+            res = 10*res + (str[move++]-'0');
+        }
+        return sign*res;
+    }
+
+    int isNum(char c){
+        if(c-'0' >=0 && c-'0'<=9) return true;
+        else return false;
+    }
+
+};

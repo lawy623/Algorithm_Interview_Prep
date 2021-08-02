@@ -16,3 +16,21 @@ public:
         return pFirst;
     }
 };
+
+
+// pre cur two pointer. easy to understand
+class Solution {
+public:
+    ListNode* reverseList(ListNode* cur) {
+        ListNode* pre = NULL;
+        ListNode* tmp;
+
+        while(cur){
+            tmp = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = tmp;
+        }
+        return pre;
+    }
+};

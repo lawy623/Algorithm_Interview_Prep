@@ -389,10 +389,11 @@ s.isupper()                          ## string is all uppercases
 	复杂度： O(1) space, O(n) time.
 	相关问题：翻转单词顺序列。旋转链表（同样分别旋转两部分最后一起翻转）
 
-> 4.把字符串转换成整数 ([剑指offer Q49](https://www.nowcoder.com/practice/1277c681251b4372bdef344468e4f26e?tpId=13&tqId=11202&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 4.把字符串转换成整数 ([剑指offer Q49](https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof)) ([Leetcode Q8](https://leetcode-cn.com/problems/string-to-integer-atoi)))
 
 	方法1: 注意第一位为+/-，溢出，invalid char，“”的情况。
 		   判断溢出即可以用long long表示值与MAX_INT对比，也可以再乘10前对比n与MAX_INT/10.
+		   更好记住的退出条件是 if(res>INT_MAX/10 || ((res==INT_MAX/10) && str[move] > '7')) 则返回最大或最小
 	复杂度： O(1) space, O(n) time.
 
 > 5.正则表达式匹配 ([剑指offer Q52](https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/)) ([Leetcode Q10](https://leetcode-cn.com/problems/regular-expression-matching/))
@@ -963,7 +964,7 @@ dq.clear()                                                  ## clear
 ```
 ### 问题及思路
 
-> 1.滑动窗口的最大值([剑指offer Q64](https://www.nowcoder.com/practice/1624bc35a45c42c0bc17d17fa0cba788?tpId=13&tqId=11217&rp=2&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tPage=4))
+> 1.滑动窗口的最大值 ([剑指offer Q64](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/))
 
 	方法1: 暴力搜索每个slidingwindow。可以用dp思想稍微减少一点对比
 	复杂度： O(1) space, O(nk) time.
@@ -971,9 +972,13 @@ dq.clear()                                                  ## clear
 	方法2: 使用一个动态维护的deque来构建每个窗口的slidingwindow。保证deque的头部永远是该windows内的最大值
 		  每次加入的新的数之前，需要从尾部删除比新加的小的数。
 		  然后从头删除已经不在slidingwindow内的数（所以deque存index而不存数字）
-		  最后输出头部的数当作该窗口结果
+		  最后输出头部的数当作该窗口结果. 注意要当i>=k-1时才开始输出
 	复杂度： O(k) space, O(n) time.
+	
+> 2.队列的最大值 ([剑指offer Q76](https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/))
 
+    方法1: 要记录每个状态下的最大值，通过一个双边队列进行
+	复杂度： O(1) space, O(n) time.
 ---
 <br />
 
