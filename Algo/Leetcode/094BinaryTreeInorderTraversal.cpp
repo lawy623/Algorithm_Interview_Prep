@@ -40,3 +40,22 @@ public:
         return res;
     }
 };
+
+//dfs
+class Solution {
+public:
+    vector<int> res;
+    vector<int> inorderTraversal(TreeNode* root) {
+        if(!root) return res;
+        dfs(root);
+        return res;
+    }
+
+    void dfs(TreeNode* root){
+        if(!root) return;
+
+        dfs(root->left);
+        res.push_back(root->val);
+        dfs(root->right);
+    }
+};

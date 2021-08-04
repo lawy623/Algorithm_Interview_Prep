@@ -22,40 +22,42 @@ public:
 class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
-        int res = 0;
-        int len = heights.size();
-        if(len==0) return 0;
-        
-        int maxH = heights[0];
-        int mid = 0;
-        for(int i=1;i<len;i++){
-            if(heights[i]>maxH){
-                maxH = heights[i];
-                mid = i;
+        if(heights.size()==0) return 0;
+        int n = heights.size();
+
+        int max_a = 0;
+        for(int i=0; i<n; i++){
+            int l = i;
+            int r = i;
+            int h = heights[i];
+            while(l>=0 && heights[l]>=heights[i]) l--;
+            while(r<n && heights[r]>=heights[i]) r++;
+            max_a = max(max_a, (r-l-1)*h);
+        }
+        return max_a;
+    }
+};
+
+// 单调栈。保存左右边界
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int n = heights.size();
+        vector<int> l(n), r(n, n);
+
+        stack<int> s;
+        for(int i=0; i<n; i++){
+            while(!s.empty() && heights[s.top()] > heights[i]){
+                r[s.top()] = i;
+                s.pop();
             }
+            l[i] = s.empty()?-1:s.top();
+            s.push(i);
         }
-        
-        int l = mid, r = mid;
-        res = heights[mid];
-        int minH = heights[mid];
-        while(l>0 || r<len-1){
-            if(l==0){r++; minH = min(minH,heights[r]);}
-            else if(r==len-1){l--; minH = min(minH,heights[l]);}
-            else if(heights[r+1]>=heights[l-1]){r++; minH = min(minH,heights[r]);}
-            else{l--; minH = min(minH,heights[l]);}
-            
-            res = max(res,(r-l+1)*minH);
-        }
-        
-        if(mid!=len){
-            vector<int> right(heights.begin()+mid+1,heights.end());
-            res = max(res,largestRectangleArea(right));
-        }
-        if(mid!=0){
-            vector<int> left(heights.begin(),heights.begin()+mid-1);
-            res = max(res,largestRectangleArea(left));
-        }
-        
+
+        int res = 0;
+        for(int i=0; i<n; i++)
+            res = max(res, (r[i]-l[i]-1)*heights[i]);
         return res;
     }
 };

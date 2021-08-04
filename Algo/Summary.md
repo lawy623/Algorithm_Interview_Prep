@@ -238,6 +238,14 @@ sum(list)				 	## sum of all elements
     方法2: 二分查找，写起来难度较大，判断条件比较多
     复杂度： O(n+m) space, O(log(m+n)) time
 
+> 19.有效三角形的个数([Leetcode Q611](https://leetcode-cn.com/problems/valid-triangle-number/))
+
+    方法1:  排序+二分查找
+    复杂度： O(logn) space, O(n^2logn) time
+    
+    方法2: 先排序，固定ij两个左指针时移动右指针k。找到最大满足三角形的k。移动j向右，此时k不需要重置，继续向右找，只需要两次遍历
+    复杂度： O(logn) space, O(n^2) time
+    
 
 ---
 <br />
@@ -560,13 +568,16 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法2: 现在同一个链表中每个节点后面添加一个复制节点。在扫描一次将后面的复印节点random指针指向对应的复制节点
 	复杂度： O(1) space, O(n) time.
 
-> 6.两个链表的第一个公共结点 ([剑指offer Q36](https://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=13&tqId=11189&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 6.两个链表的第一个公共结点 ([剑指offer Q36](https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/)) ([Leetcode Q160](https://leetcode-cn.com/problems/intersection-of-two-linked-lists))
 
 	方法1: 使用一个map保存链表1的结果。链表2扫描找到第一个在map中的数
-	复杂度： O(n) space, O(n) time.
+	复杂度： O(n) space, O(n+m) time.
 	
 	方法2: 计算两个链表的长度，找到长度差d。长链表先走d步，两个再一起走知道相等
-	复杂度： O(1) space, O(n) time.
+	复杂度： O(1) space, O(n+m) time.
+	
+	方法3： 交叉遍历. 一个到底了去遍历另一个。如果不相交，总有一个为null
+	复杂度： O(1) space, O(n+m) time.
 
 > 7.圆圈中最后剩下的数(约瑟夫环问题) ([剑指offer Q46](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/))
 
@@ -920,6 +931,24 @@ stack.empty()                                               ## return whether th
 
 	方法1: 使用一个stack，当栈顶为'('且A字符为')'弹出栈顶，否则一次输入A的字符。如果合法，stack应为空。
 	复杂度： O(n) space, O(n) time.
+	
+> 6.最大矩形 ([Leetcode Q84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram))
+	
+    方法1: 固定每个i位置的高度h，双指针向左右延申知道无法增高。
+	复杂度： O(1) space, O(n^2) time.
+	
+	方法2: 单调递增栈。单调递增栈可以找到一直向左、右最后一个比自己大的数（也就是矩形的允许最大的左边界、右边界）
+	             只用一次的话，入栈操作标志了左边界，出栈的时候则标志了右边界。
+	复杂度： O(1) space, O(n) time.
+    
+> 7.接雨水 ([Leetcode Q41](https://leetcode-cn.com/problems/trapping-rain-water))
+
+    方法1: 某个点的雨水量为左右两边（包含自己）高度的最大值中的最小值 - 自身高度。用两个vector分别记录两边的最大值即可
+    复杂度： O(n) space, O(n) time
+    
+    方法2: 单调递减栈
+    复杂度： O(n) space, O(n) time
+    
 
 ---
 <br />
@@ -1341,6 +1370,11 @@ from bitarray import bitarray
           写的时候，每一个dp数组都是从最小的和开始
     复杂度： O(n) space, O(n^2) time.
     
+> 12.接雨水 ([Leetcode Q41](https://leetcode-cn.com/problems/trapping-rain-water))
+
+    方法1: 某个点的雨水量为左右两边（包含自己）高度的最大值中的最小值 - 自身高度。用两个vector分别记录两边的最大值即可
+    复杂度： O(n) space, O(n) time
+    
 ---
 <br />
 
@@ -1458,20 +1492,14 @@ sum(list)				 ## sum of all elements in list
 <br />
 
 # <h2 id="14">贪心算法（Greedy Algorithm）</h2>
-### C++用法
-```c++
-
-```
-### Python用法
-```python
-
-```
 
 ### 问题及思路
 
-> 1.
+> 1.最大的盛水容器 ([Leetcode Q11](https://leetcode-cn.com/problems/container-with-most-water/))
 
-	方法1:
+    方法1: 双指针。每次移动较小值的指针。如果移动较大值的指针，最小高度不变，容积一定减小
+    复杂度： O(1) space, O(n) time
+    
 ---
 <br />
 

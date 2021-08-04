@@ -19,3 +19,26 @@ public:
         root ->left = nullptr;
     }
 };
+
+// same dfs
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if(!root) return;
+        dfs(root);
+    }
+
+    void dfs(TreeNode* root){
+        if(!root) return;
+        dfs(root->left);
+        dfs(root->right);
+        if(root->left){
+            TreeNode* tmp = root->left;
+            while(tmp->right)
+                tmp = tmp->right;
+            tmp->right = root->right;
+            root->right = root->left;
+            root->left = NULL;
+        }
+    }
+};

@@ -35,3 +35,20 @@ public:
         return NULL;
     }
 };
+
+// 交叉遍历
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(!headA || !headB) return NULL;
+
+        ListNode* A = headA;
+        ListNode* B = headB;
+        while(A || B){
+            if(A == B) break;
+            A = A?A->next:headB;
+            B = B?B->next:headA;
+        }
+        return A;
+    }
+};
