@@ -54,3 +54,30 @@ private:
         return;
     }
 };
+
+// dfs with backtrace
+class Solution {
+public:
+    vector<string> res;
+    vector<string> code = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    string s;
+    vector<string> letterCombinations(string digits) {
+        int n = digits.length();
+        if(n==0) return res;
+        dfs(digits, 0);
+        return res;
+    }
+
+    void dfs(string digits, int x){
+        if(x==digits.length()){
+            res.push_back(s);
+            return;
+        }
+
+        for(int i=0; i < code[digits[x] - '0'].length(); i++){
+            s += code[digits[x] - '0'][i];
+            dfs(digits, x+1);
+            s = s.substr(0, s.length()-1);
+        }
+    }
+};

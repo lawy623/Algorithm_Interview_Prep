@@ -37,3 +37,31 @@ class Solution {
             return ans;
         }     
 };
+
+// dfs
+class Solution {
+public:
+
+    vector<string> res;
+    vector<string> generateParenthesis(int n) {
+        if(n==0) return res;
+        dfs("", n, n);
+        return res;
+    }
+
+    void dfs(string s, int l, int r){
+        if(r==0){
+            res.push_back(s);
+            return;
+        }
+        else if(l==0)
+            dfs(s+')', 0, r-1);
+        else if(l==r)
+            dfs(s+'(', l-1, r);
+        else{
+            dfs(s+'(', l-1, r);
+            dfs(s+')', l, r-1);
+        }
+
+    }
+};

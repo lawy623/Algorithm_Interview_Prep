@@ -188,6 +188,10 @@ sum(list)				 	## sum of all elements
 	
 	方法2: 用两个数组分别表示从左/右开始到某位置i的累积乘积，dp方式求解
 	复杂度： O(n) space, O(n) time.
+	
+	方法3: 只用一个输出vector记录，左右对该结果vec进行更新
+	复杂度： O(1) space, O(n) time.
+	
 
 > 13.荷兰旗问题（三色分离） ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/02.07.html))
 
@@ -246,6 +250,13 @@ sum(list)				 	## sum of all elements
     方法2: 先排序，固定ij两个左指针时移动右指针k。找到最大满足三角形的k。移动j向右，此时k不需要重置，继续向右找，只需要两次遍历
     复杂度： O(logn) space, O(n^2) time
     
+> 20.下一个排列([Leetcode Q31](https://leetcode-cn.com/problems/next-permutation/))
+
+    方法1: 从右找到第一个nums[l]<nums[l+1]的位置，否则调换也是增大整个值大小
+          然后再从右边找到第一个nums[k]>nums[l]的位置（最多到l+1），这样整体的提升就时最小的。
+          swap l、r位置，此时l后面必然为降序数组。然后将l+1到最后的整体reverse
+    复杂度： O(1) space, O(n) time
+ 
 
 ---
 <br />
@@ -489,6 +500,11 @@ s.isupper()                          ## string is all uppercases
     方法1：先反转整个string，再反转每一个单词。先用双指针记录左右最早不为空的位置。然后用stack记录并更新每一个单词并反转。注意最后一个位置
     复杂度： O(n) space, O(n) time
     
+> 16.括号生成 ([剑指offer Q71](https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/)) ([Leetcode Q151](https://leetcode-cn.com/problems/reverse-words-in-a-string))
+
+    方法1：先反转整个string，再反转每一个单词。先用双指针记录左右最早不为空的位置。然后用stack记录并更新每一个单词并反转。注意最后一个位置
+    复杂度： O(n) space, O(n) time
+    
 ---
 <br />
 
@@ -555,10 +571,21 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1: 常规操作,与1相同
 	复杂度： O(1) space, O(n) time.
 
-> 4.合并两个排序链表 ([剑指offer Q16](https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)) ([Leetcode Q21](https://leetcode-cn.com/problems/merge-two-sorted-lists/))
+> 4_1.合并两个排序链表 ([剑指offer Q16](https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)) ([Leetcode Q21](https://leetcode-cn.com/problems/merge-two-sorted-lists/))
 
 	方法1: 递归。若有一个指针为空，返回另一个指针，否则指向数值较小的指针，并移动该指针头，递归得到
 	复杂度： O(1) space, O(n) time.
+	
+> 4_2.合并K个排序链表 ([Leetcode Q23](https://leetcode-cn.com/problems/merge-k-sorted-lists))
+
+    方法1: 每次找到最小的那个，把head向后移动，然后递归
+	复杂度： O(1) space, O(nk) time.
+	
+	方法2: 两个两个合并，类似二分
+	复杂度： O(1) space, O(nlogk) time.
+	
+	方法3: 用一个priority queue保存队列头。每次推出最小的那个，并把他的next推进去
+	复杂度： O(k) space, O(nlogk) time.
 
 > 5.复杂链表的复制 ([剑指offer Q25](https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof)) ([Leetcode Q138](https://leetcode-cn.com/problems/copy-list-with-random-pointer/))
 
@@ -622,7 +649,6 @@ l.merge(l2)                                                 ## merge two sorted 
 
 > 10.分割链表 ([CC150 Q10](https://www.nowcoder.com/practice/0e27e0b064de4eacac178676ef9c9d70?tpId=8&tqId=11004&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
-
 	方法1: 使用大小两个链表进行添加。注意大链表最后next要指向null.
 	复杂度： O(1) space, O(n) time.
 
@@ -632,14 +658,16 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1: 注意对while条件的判断，只要(a || b || carry)即可继续，赋值可用a?a->val:0进行。减少过多代码
 	复杂度： O(1) space, O(n) time.
 
-> 12.回文链表 ([CC150 Q12](https://www.nowcoder.com/practice/baefd05def524a92bcfa6e1f113ed4f0?tpId=8&tqId=11006&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
-
+> 12.回文链表 ([Leetcode Q243](https://leetcode-cn.com/problems/palindrome-linked-list/)) ([CC150 Q12](https://www.nowcoder.com/practice/baefd05def524a92bcfa6e1f113ed4f0?tpId=8&tqId=11006&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 使用一个stack，全部推入判断堆顶是否一次相等
 	复杂度： O(n) space, O(n) time.
 	
 	方法2: 使用一个stack和快慢指针，将慢指针经历的推入堆中，在慢指针一次遍历比较stack顶。注意长度为奇偶时的区别
 	复杂度： O(n) space, O(n) time.
+	
+	方法3： 用快慢指针，并将后续的反转。依次判断。注意奇偶情况
+	复杂度： O(1) space, O(n) time.
 	
 ---
 <br />
@@ -927,10 +955,15 @@ stack.empty()                                               ## return whether th
 	方法1: Insertion sort的方法，每次把栈顶插到temp栈对应的地方，temp栈顶大的数先push回原来的栈即可
 	复杂度： O(n) space, O(n^2) time.
 
-> 5.合法括号 ([CC150 Q45](https://www.nowcoder.com/practice/d8acfa0619814b2d98f12c071aef20d4?tpId=8&tqId=11039&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/12/8.5/))
+> 5_1.合法括号 ([CC150 Q45](https://www.nowcoder.com/practice/d8acfa0619814b2d98f12c071aef20d4?tpId=8&tqId=11039&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2013/01/12/8.5/))
 
 	方法1: 使用一个stack，当栈顶为'('且A字符为')'弹出栈顶，否则一次输入A的字符。如果合法，stack应为空。
 	复杂度： O(n) space, O(n) time.
+
+> 5_2.最长有效括号 ([Leetcode Q32](https://leetcode-cn.com/problems/longest-valid-parentheses))
+
+    方法1: 用stack。如果遇'('就把i推入，如果遇到')'就推出顶端，如果空了就把i推入；不空的话就计算现在到顶端的长度。一开始要推入-1
+    复杂度： O(n) space, O(n) time
 	
 > 6.最大矩形 ([Leetcode Q84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram))
 	
@@ -1374,6 +1407,18 @@ from bitarray import bitarray
 
     方法1: 某个点的雨水量为左右两边（包含自己）高度的最大值中的最小值 - 自身高度。用两个vector分别记录两边的最大值即可
     复杂度： O(n) space, O(n) time
+    
+> 13_1.最大正方形面积 ([Leetcode Q221](https://leetcode-cn.com/problems/maximal-square))
+
+    方法1: dp[i][j]为右下角每个点为正方形的最大面积。可以证明dp[i][j] = min(dp[i-1][j], dp[i-1][j-1], dp[i][j-1])+1，当nums[i][j]==1成立
+    复杂度： O(mn) space, O(mn) time
+    
+> 13_2.全为1的正方形 ([Leetcode Q1277](https://leetcode-cn.com/problems/count-square-submatrices-with-all-ones/))
+
+    方法1: 同13_1的递归。同时可以发现dp[i][j]正是以该顶点为右下角的正方形个数
+    复杂度： O(mn) space, O(mn) time
+    
+
     
 ---
 <br />

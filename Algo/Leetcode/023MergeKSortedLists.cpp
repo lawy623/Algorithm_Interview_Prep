@@ -26,3 +26,40 @@ public:
         return res;
     }
 };
+
+// 2. 两两merge。  O(nlogk).
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.size()==0) return NULL;
+        ListNode* res = NULL;
+        int k = lists.size();
+        int idx;
+        while(k>1){
+            idx = 0;
+            for(int i=0; i<k; i+=2){
+                if(i==k-1) lists[idx++] = lists[i];
+                else lists[idx++] = merge2Lists(lists[i], lists[i+1]);
+            }
+            k = idx;
+        }
+        return lists[0];
+    }
+
+    ListNode* merge2Lists(ListNode* a, ListNode* b){
+        if(!a && !b) return NULL;
+        if(!a) return b;
+        if(!b) return a;
+
+        ListNode* res;
+        if(a->val < b->val){
+            res = a;
+            a = a->next;
+        } else{
+            res = b;
+            b = b->next;
+        }
+        res -> next = merge2Lists(a, b);
+        return res;
+    }
+};
