@@ -80,7 +80,7 @@ sum(list)				 	## sum of all elements
 ```
 
 ### 问题及思路
-> 1.旋转数组的最小数字 ([剑指offer Q6](https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/)) ([Leetcode Q154](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/))
+> 1_1.旋转数组的最小数字 ([剑指offer Q6](https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/)) ([Leetcode Q154](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/))
 
 	方法1: 直接扫描，当后面小于前面则返回
 	复杂度： O(1) space, O(n) time.
@@ -91,9 +91,14 @@ sum(list)				 	## sum of all elements
 	· mid>end, 则查找[mid+1, end];
 	· 其他情况,则查找[start, mid]
 	复杂度： O(1) space, O(logn) time.
-	相关问题：旋转数组的查找(CC150 053)：按照mid与target的值比较
-			A[mid]<target时，只有mid在右侧且x在左侧才向左查找，否则都向右
-			A[mid]>target时，只有mid在左侧且x在右侧才向右查找，否则都向左
+
+> 1_2.搜索排序旋转数组 ([Leetcode Q33](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/))
+
+    方法1: 按照mid与l的值比较
+            如果mid>=l, 证明在左侧上升序列。只有当target的值在l和mid中间才往(l,mid-1)搜，否则往(mid+1,r)搜
+            否则在右侧上升序列。只有当target的值在r和mid中间才往(mid+1，r)搜，否则往(l,mid-1)搜
+            与边界值的判断都要带等号
+	复杂度： O(1) space, O(logn) time.
 
 > 2.调整数组顺序使奇数位于偶数前面 ([剑指offer Q13](https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof))
 
@@ -299,11 +304,12 @@ arr[row][col]                           ## acces the idx
 			对每个(k,k)开始的circle，四个方向找到头尾断点打印（但要判断各方向上是否需要打印。）
 
 > 3.旋转矩阵 ([CC150 Q6](https://www.nowcoder.com/practice/17ab1e527c504df09a600e1af09d9a60?tpId=8&tqId=10999&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/08/1.6/))
+            ([Leetcode Q48](https://leetcode-cn.com/problems/rotate-image))
 
 	方法1: 两个for loop直接copy
 	复杂度： O(n^2) space, O(n^2) time.
 	
-	方法2: inplace交换，两次翻转。先对角线交换，再垂直方向交换
+	方法2: inplace交换，两次翻转。先对角线交换，再垂直方向交换。注意左右/上下/主对角线/副对角线反转方法
 	复杂度： O(1) space, O(n^2) time.
 
 > 4.清除行列 ([CC150 Q7](https://www.nowcoder.com/practice/c95aac1506574dfc8ad44c3939c6739d?tpId=8&tqId=11000&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/09/1.7/))
@@ -1307,10 +1313,35 @@ from bitarray import bitarray
 
 	方法1: 用mask表示奇数与偶数(0x55555555, 0xAAAAAAAA). 输出(odd<<1 | even>>1)
 
-> 5.集合的子集 ([CC150 Q43](https://www.nowcoder.com/practice/1f2700e2b1904254b55765479e9b8766?tpId=8&tqId=11037&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2013/01/10/8.3/))
+> 5_1.集合的子集 ([CC150 Q43](https://www.nowcoder.com/practice/1f2700e2b1904254b55765479e9b8766?tpId=8&tqId=11037&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2013/01/10/8.3/))
+               ([Leetcode Q78](https://leetcode-cn.com/problems/subsets))
 
-	方法1: 一个集合的全排列可以用n个1表示，则最大为2^n-1, 最小为1(非空子集)。按照位置加入元素即可
-	复杂度： O(1) space, O(n) time.
+	方法1: 一个集合的全排列可以用n个1表示，则最大为2^n-1, 最小为1(非空子集)。按照位置加入元素即可。但是这个必须要数组小于32才可以用
+	复杂度： O(1) space, O(2^n) time.
+	
+	方法2: dfs。添不添加自己都做一次dfs。
+	复杂度： O(2^n) space, O(2^n) time.
+	
+> 5_2.集合数量为k的子集 ([Leetcode Q77](https://leetcode-cn.com/problems/combinations))
+    
+    方法1: 一个集合的全排列可以用n个1表示，则最大为2^n-1, 最小为1(非空子集)。当1的个数为k时加入
+	复杂度： O(1) space, O(2^n) time.
+	
+	方法2: dfs。需要用两个start+cur保存现在的位置和当前的个数
+	复杂度： O(2^n) space, O(2^n) time.
+
+> 6_1.组合总数(有重复元素，但是不可重复挑选) ([Leetcode Q40](https://leetcode-cn.com/problems/combination-sum-ii/))
+
+    方法1: 用(0,2^n-1)中每一个位置为1表示是否取元素组中的数，判断当前和是否为target。但是这个必须要数组小于32才可以用
+	复杂度： O(1) space, O(2^n) time.
+	
+	方法2: dfs+剪枝。dfs从下一轮开始，但是注意因为有重复元素，需要现将数组排序，当当前item不等于上一个item时才挑选，不然有重复
+	复杂度： O(n_target) space, O(n*2^n) time. 事实上比较难有确定界限
+	
+> 6_2.组合总数(无重复元素，但是可重复挑选) ([Leetcode Q39](https://leetcode-cn.com/problems/combination-sum/))
+
+    方法1: dfs+剪枝。注意退出的时候要判断sum和target大小，dfs下一轮也可以从自身开始
+	复杂度： O(n_target) space, O(n*2^n) time. 事实上比较难有确定界限
 
 ---
 <br />
