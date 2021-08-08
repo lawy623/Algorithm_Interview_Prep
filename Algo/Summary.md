@@ -953,8 +953,9 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法1: 每次取mid，递归构建
 
 > 18.判断二叉搜索树 ([CC150 Q21](https://www.nowcoder.com/practice/536c0199151245f897da2c5390930657?tpId=8&tqId=11015&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+                  ([Leetcode Q98](https://leetcode-cn.com/problems/validate-binary-search-tree))
 
-	方法1: 使用15中stack版的中序遍历，每次访问到一个点的时候记录下值，保证下一个访问的点比他大，不断更新该值
+	方法1: dfs. 判断pre的结果是不是比cur小或等。最开始的时候pre为NULL
 	复杂度： O(n) space, O(n) time
 
 > 19.维护数组的rank ([CC150 Q58](https://www.nowcoder.com/practice/0ade0d95c85349beb934a90b1d9b02be?tpId=8&tqId=11052&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
@@ -968,6 +969,12 @@ it = s.equal_range(val)                                     ## return iter that 
 > 20.二叉树第二小的节点 ([Leetcode Q671](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/))
 
     方法1: dfs查找刚好比root大的点，要注意初始输入的res大小
+	复杂度： O(n) space, O(n) time
+	
+> 21.二叉搜索树的众数 ([Leetcode Q501](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree))
+
+	方法1: dfs. 用last val记录上一个遍历的数，用pre初始化。每次判断和上一个数是不是一样的，更新count和max count。
+	      当count == maxcount时，一定是新的众数来了，推入res。如果大于，证明唯一的新的众数来了，清空res并且推入新的众数
 	复杂度： O(n) space, O(n) time
 
 
@@ -1499,7 +1506,7 @@ from bitarray import bitarray
     方法1: 同13_1的递归。同时可以发现dp[i][j]正是以该顶点为右下角的正方形个数
     复杂度： O(mn) space, O(mn) time
    
-> 14_1. 不同路径 ([Leetcode Q62](https://leetcode-cn.com/problems/unique-paths))
+> 14_1.不同路径 ([Leetcode Q62](https://leetcode-cn.com/problems/unique-paths))
 
     方法1: dp[i][j] = dp[i-1][j](i!=0) + dp[i][j-1](j!=0)
     复杂度： O(mn) space, O(mn) time
@@ -1507,15 +1514,24 @@ from bitarray import bitarray
     方法2: 一共要走 (m-1)*(n-1)步，其中(m-1)步向下，计算组合数量即可
     复杂度： O(1) space, O(min(m,n)) time
     
-> 14_2. 不同路径II ([Leetcode Q63](https://leetcode-cn.com/problems/unique-paths-ii))
+> 14_2.不同路径II ([Leetcode Q63](https://leetcode-cn.com/problems/unique-paths-ii))
 
     方法1: dp[i][j] = dp[i-1][j](i!=0) + dp[i][j-1](j!=0), 但是当nums[i][j] == 1时为0.
     复杂度： O(mn) space(O(1) if use original matrix), O(mn) time
     
-> 14_3. 最小路径和 ([Leetcode Q64](https://leetcode-cn.com/problems/minimum-path-sum))
+> 14_3.最小路径和 ([Leetcode Q64](https://leetcode-cn.com/problems/minimum-path-sum))
 
     方法1: dp[i][j] = min(dp[i-1][j](i!=0), dp[i][j-1](j!=0))
     复杂度： O(mn) space(O(1) if use original matrix), O(mn) time
+    
+> 15.不同的二叉搜索树 ([Leetcode Q96](https://leetcode-cn.com/problems/unique-binary-search-trees))
+
+    方法1: dp[i] = sum(dp[j-1]*dp[i-j])
+    复杂度： O(n) space, O(n^2) time
+    
+    方法2: 数学归纳法。dp[i+1] = 2(2n+1)/(n+2) dp[i]
+    复杂度： O(1) space, O(n) time
+    相似题目：不同的二叉搜索树II([Leetcode Q95]): 递归的把左右子树都求出来，拼接在当前node上
     
 ---
 <br />
