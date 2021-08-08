@@ -269,6 +269,19 @@ sum(list)				 	## sum of all elements
           然后再从右边找到第一个nums[k]>nums[l]的位置（最多到l+1），这样整体的提升就时最小的。
           swap l、r位置，此时l后面必然为降序数组。然后将l+1到最后的整体reverse
     复杂度： O(1) space, O(n) time
+    
+> 21_1.合并区间 ([Leetcode Q56](https://leetcode-cn.com/problems/merge-intervals/))
+
+    方法1: 先将数组排序, 然后通过双指针找到最大能merge的段落（最右的start<last_end)
+    复杂度： O(logn) space, O(nlogn) time
+    
+> 21_2.插入区间 ([Leetcode Q57](https://leetcode-cn.com/problems/insert-interval))
+
+    方法1: 分三个阶段。
+           一阶段所有的end都小于插入的start，直接往res里面push
+           二阶段，直到start<=插入的end，都可以合并。注意这里相等时也可以最后合并
+           三阶段，全部都push
+    复杂度： O(1) space, O(n) time
  
 ---
 <br />
@@ -519,6 +532,13 @@ s.isupper()                          ## string is all uppercases
 
     方法1：dfs，用l/r记录当前剩余左右括号数。r==0输出，l==0补右括号，l==r补左括号，其余先补做再补右
     复杂度： O(n) space, O(n) time
+    
+     
+> 17.字母异位词分组 ([Leetcode Q49](https://leetcode-cn.com/problems/group-anagrams/))
+
+    方法1：异位词通过sort可以变成等价(O(nlogn)time, 通过dict判断次数可以到O(n)). 通过一个dict，用sort string当作k，value是对应的数组
+    复杂度： O(nk) space, O(nklogk) time
+    
     
 ---
 <br />
@@ -777,11 +797,31 @@ it = s.equal_range(val)                                     ## return iter that 
           判断断开的右子树是否全部比根节点大
           再递归判断左右子树是否为二叉搜索树
 
-> 6.二叉树中和为某一值的路径 ([剑指offer Q24](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)) ([Leetcode Q113](https://leetcode-cn.com/problems/path-sum-ii/))
+> 6_1.二叉树中和为某一值的路径 ([剑指offer Q24](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)) ([Leetcode Q113](https://leetcode-cn.com/problems/path-sum-ii/))
 
 	方法1: 递归。每次查找左右子树值为target-root的路径，存在则将自己推入路径。只有叶节点能直接放回路径。
 	
 	方法2： dfs。用一个global保存。是前序便利的方法，每次走通一条子树
+	
+> 6_2.路径总和 （[Leetcode Q112](https://leetcode-cn.com/problems/path-sum/))
+
+	方法1: 递归. 为叶子节点就判断是否值为target。否则递归左右子树是否含有路径
+	复杂度：O(n) space, O(n) time
+	
+> 6_3.root到叶子节点之和 ([Leetcode Q129](https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/))
+
+	方法1: 递归. 要加入prevsum，为叶子节点输出prevsum*10 + root->val, 否则左右子树相加
+	复杂度：O(n) space, O(n) time
+	
+> 6_4.最大路径和[Leetcode Q124](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/))
+
+	方法1: 递归. 由于路径不一定要到叶子节点，可以左右子树相连。最大和递归计算时可以把左右都加进来，但是输出给上一层时只能取左右最大的一支
+	复杂度：O(n) space, O(n) time
+	
+> 6_5.二叉树的最长路径 ([Leetcode Q543](https://leetcode.com/problems/diameter-of-binary-tree))
+
+	方法1: 根节点最长路径=max(左节点最长路径，右节点最长路径，左深度+右深度）。深度可以传入函数递归
+	复杂度： O(1) space, O(n) time
 
 > 7.二叉搜索树与双向链表 ([剑指offer Q26](https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&tqId=11179&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
@@ -794,7 +834,6 @@ it = s.equal_range(val)                                     ## return iter that 
 	
 	方法2： dfs。要用全局变量。dfs进行中序遍历，最先获取左下角最小的设为head。后面用cur和pre持续更新连接。
 	
-
 > 8.二叉树的深度 ([剑指offer Q38](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof))
 
 	方法1: 递归。叶节点返回深度为1.根节点返回1+max(左深度，右深度）
@@ -857,7 +896,6 @@ it = s.equal_range(val)                                     ## return iter that 
 			返回右节点的递归结果（因为sign已经是true了，会直接输出下一个访问的节点的值）
 	复杂度： O(1) space, O(n) time.
 
-
 > 12.对称的二叉树 ([剑指offer Q58](https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof)) ([Leetcode Q101](https://leetcode-cn.com/problems/symmetric-tree/))
 
 	方法1: 求出pRoot的镜像树pRoot_mirror,对比两个树是否完全一致
@@ -887,8 +925,11 @@ it = s.equal_range(val)                                     ## return iter that 
 	
 	方法2: 使用stack。p不为空时，推入自己，p指向p->left。p为空时，p=stack.top()，将p的值推入结果vector，stack pop()，再让p指向p->right
 	复杂度： O(n) space, O(n) time
+	
+	方法3: dfs
+	复杂度： O(1) space, O(n) time
 
-> 16.二叉树搜索树的第k个节点 ([Leetcode Q230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/))
+> 16_1.二叉树搜索树的第k个节点 ([Leetcode Q230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/))
 
 	方法1: 递归。先用一个函数递归求树的节点数目。如果左节点数目等于k-1，返回root；大于k-1则返回左子树的第k个；否则返回右子树的k-leftcount-1个节点
 	复杂度： O(1) space, O(n) time，但是多次递归开销很大
@@ -898,8 +939,16 @@ it = s.equal_range(val)                                     ## return iter that 
 	
 	方法3: 使用15的方法2的stack，在推入的时候改为记录count，返回第k个count的时候的值
 	复杂度： O(n) space, O(n) time
+	
+	方法4: dfs从左节点->根节点->右节点遍历，记录下第k个值
+	复杂度： O(n) space, O(n) time
 
-> 17.递增数列构建最低二叉搜索树 ([CC150 Q19](https://www.nowcoder.com/practice/01a12f94988649e39b554d95c45bfa6f?tpId=8&tqId=11013&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))([CC150 Sol](http://hawstein.com/2012/12/26/4.3/))
+> 16_2.二叉搜索树第K大的节点 ([剑指offer Q70](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/))
+
+    方法1: 从右中序遍历就是排序。用一个global值记录即可即可
+	复杂度： O(1) space, O(n) time
+
+> 17.递增数列构建最低二叉搜索树 ([CC150 Q19](https://www.nowcoder.com/practice/01a12f94988649e39b554d95c45bfa6f?tpId=8&tqId=11013&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/26/4.3/))
 
 	方法1: 每次取mid，递归构建
 
@@ -908,12 +957,7 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法1: 使用15中stack版的中序遍历，每次访问到一个点的时候记录下值，保证下一个访问的点比他大，不断更新该值
 	复杂度： O(n) space, O(n) time
 
-> 19.二叉树的最长路径 ([Leetcode Q543](https://leetcode.com/problems/diameter-of-binary-tree))
-
-	方法1: 根节点最长路径=max(左节点最长路径，右节点最长路径，左深度+右深度）。深度可以传入函数递归
-	复杂度： O(1) space, O(n) time
-
-> 20.维护数组的rank ([CC150 Q58](https://www.nowcoder.com/practice/0ade0d95c85349beb934a90b1d9b02be?tpId=8&tqId=11052&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+> 19.维护数组的rank ([CC150 Q58](https://www.nowcoder.com/practice/0ade0d95c85349beb934a90b1d9b02be?tpId=8&tqId=11052&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 暴力检查
 	复杂度： O(1) space, O(n^2) time
@@ -921,15 +965,12 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法2: 用二叉搜索树保存stream的结果，每次查找rank。
 	复杂度： O(n) space, O(logn) time
 
-> 21.二叉树第二小的节点 ([Leetcode Q671](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/))
+> 20.二叉树第二小的节点 ([Leetcode Q671](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/))
 
     方法1: dfs查找刚好比root大的点，要注意初始输入的res大小
 	复杂度： O(n) space, O(n) time
 
-> 22.二叉搜索树第K大的节点 ([剑指offer Q70](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/))
 
-    方法1: 从右中序遍历就是排序。用一个global值记录即可即可
-	复杂度： O(1) space, O(n) time
 
 # <h2 id="6">栈（Stack）</h2>
 ### C++用法
@@ -1457,6 +1498,24 @@ from bitarray import bitarray
 
     方法1: 同13_1的递归。同时可以发现dp[i][j]正是以该顶点为右下角的正方形个数
     复杂度： O(mn) space, O(mn) time
+   
+> 14_1. 不同路径 ([Leetcode Q62](https://leetcode-cn.com/problems/unique-paths))
+
+    方法1: dp[i][j] = dp[i-1][j](i!=0) + dp[i][j-1](j!=0)
+    复杂度： O(mn) space, O(mn) time
+    
+    方法2: 一共要走 (m-1)*(n-1)步，其中(m-1)步向下，计算组合数量即可
+    复杂度： O(1) space, O(min(m,n)) time
+    
+> 14_2. 不同路径II ([Leetcode Q63](https://leetcode-cn.com/problems/unique-paths-ii))
+
+    方法1: dp[i][j] = dp[i-1][j](i!=0) + dp[i][j-1](j!=0), 但是当nums[i][j] == 1时为0.
+    复杂度： O(mn) space(O(1) if use original matrix), O(mn) time
+    
+> 14_3. 最小路径和 ([Leetcode Q64](https://leetcode-cn.com/problems/minimum-path-sum))
+
+    方法1: dp[i][j] = min(dp[i-1][j](i!=0), dp[i][j-1](j!=0))
+    复杂度： O(mn) space(O(1) if use original matrix), O(mn) time
     
 ---
 <br />
@@ -1579,6 +1638,19 @@ sum(list)				 ## sum of all elements in list
 > 1.最大的盛水容器 ([Leetcode Q11](https://leetcode-cn.com/problems/container-with-most-water/))
 
     方法1: 双指针。每次移动较小值的指针。如果移动较大值的指针，最小高度不变，容积一定减小
+    复杂度： O(1) space, O(n) time
+    
+> 2_1.跳跃游戏([Leetcode Q55](https://leetcode-cn.com/problems/jump-game))
+
+    方法1: 从后往前看，dp为从每个点开始是否能跳到最后的结果，但是每个都要计算k此
+    复杂度： O(n) space, O(nk) time
+    
+    方法2: 贪心的看，每次到i只要记录能到达的最右边，遍历i的位置即可
+    复杂度： O(1) space, O(n) time
+    
+> 2_2.跳跃游戏II ([Leetcode Q45](https://leetcode-cn.com/problems/jump-game-ii))
+
+    方法1: 贪心算法，每次都向前到最右边能到的边界。等真的到了这个地方，把count++
     复杂度： O(1) space, O(n) time
     
 ---
