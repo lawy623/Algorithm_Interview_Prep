@@ -19,7 +19,7 @@ public:
                     dp[i] = dp[i]>dp[j]+1? dp[i]:dp[j]+1;
                 }
             }
-            max_len = max_len>dp[i]?max_len:dp[i];
+            max_len = max(max_len, dp[i]);
         }
         return max_len;
     }

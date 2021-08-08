@@ -1436,10 +1436,10 @@ from bitarray import bitarray
 					dp[i][j] = 0 otherwise
 	复杂度： O(nm) space, O(nm) time.
 
-> 6.最长递增子序列 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.06.html))
+> 6.最长递增子序列 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.06.html)) ([Leetcode Q300](https://leetcode-cn.com/problems/longest-increasing-subsequence))
 
 	方法1: dp[i]表示以A[i]结尾的序列的最长递增子序列. dp[0]=1
-			状态转移: dp[j] = max(A[i] for 0<=i<j and A[i]<A[j]). If not exist. A[j]=0
+			状态转移: dp[j] = max(A[i]+1 for 0<=i<j and A[i]<A[j]). If not exist. A[j]=1
 	复杂度： O(n) space, O(n^2) time.
 	相关问题：最长公共子序列
 				Xm=Yn -> LCS(m,n)=LCS(m-1,n-1)+1;
