@@ -206,7 +206,7 @@ sum(list)				 	## sum of all elements
 	方法3: 只用一个输出vector记录，左右对该结果vec进行更新
 	复杂度： O(1) space, O(n) time.
 	
-> 13.荷兰旗问题（三色分离）([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/02.07.html))
+> 13.荷兰旗问题（三色分离）([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/02.07.html)) ([Leetcode Q75](https://leetcode-cn.com/problems/sort-colors/))
 
 	方法1: Sorting counting
 	复杂度： O(1) space, O(n) time.
@@ -282,6 +282,11 @@ sum(list)				 	## sum of all elements
            二阶段，直到start<=插入的end，都可以合并。注意这里相等时也可以最后合并
            三阶段，全部都push
     复杂度： O(1) space, O(n) time
+    
+> 22.最长连续序列 ([Leetcode Q128](https://leetcode-cn.com/problems/longest-consecutive-sequence))
+
+    方法1: 用一个map/set保存所有的数。重新遍历时，如果a+1不在数组内，向下遍历a,a-1,...直到数组找不到。如果不加前面的条件，时间最差O(n^2)
+    复杂度： O(n) space, O(n) time
  
 ---
 <br />
@@ -533,7 +538,6 @@ s.isupper()                          ## string is all uppercases
     方法1：dfs，用l/r记录当前剩余左右括号数。r==0输出，l==0补右括号，l==r补左括号，其余先补做再补右
     复杂度： O(n) space, O(n) time
     
-     
 > 17.字母异位词分组 ([Leetcode Q49](https://leetcode-cn.com/problems/group-anagrams/))
 
     方法1：异位词通过sort可以变成等价(O(nlogn)time, 通过dict判断次数可以到O(n)). 通过一个dict，用sort string当作k，value是对应的数组
@@ -676,23 +680,28 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法2: 用一个hash判断该节点是否曾经出现过
 	复杂度： O(n) space, O(n) time.
 
-> 10.删除链表节点 ([CC150 Q9](https://www.nowcoder.com/practice/6a668a3960e24d3ea04bba89109c6451?tpId=8&tqId=11003&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/15/2.3/))
-
+> 10_1.删除链表节点 ([CC150 Q9](https://www.nowcoder.com/practice/6a668a3960e24d3ea04bba89109c6451?tpId=8&tqId=11003&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/15/2.3/))
+                
 	方法1: 将指向节点的下一个节点的值copy至指向节点。再删除下一个节点
 			如果该节点是尾节点，则必须要遍历
 	复杂度： O(1) space, O(1) time. O(n) for ending node
 
-> 10.分割链表 ([CC150 Q10](https://www.nowcoder.com/practice/0e27e0b064de4eacac178676ef9c9d70?tpId=8&tqId=11004&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+> 10_2.删除链表值为val的节点 ([Leetcode Q203](https://leetcode-cn.com/problems/remove-linked-list-elements))
+                
+	方法1: 递归，head->next = removeVal(head->next)，如果自身等于val直接返回head->next
+	复杂度： O(n) space, O(n) time
+
+> 11.分割链表 ([CC150 Q10](https://www.nowcoder.com/practice/0e27e0b064de4eacac178676ef9c9d70?tpId=8&tqId=11004&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 使用大小两个链表进行添加。注意大链表最后next要指向null.
 	复杂度： O(1) space, O(n) time.
 
-> 11.链表相加 ([CC150 Q11](https://www.nowcoder.com/practice/ed85a09f0df047119e94fb3e5569855a?tpId=8&tqId=11005&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/16/2.4/)) ([LeetCode Q2](https://leetcode.com/problems/add-two-numbers/))
+> 12.链表相加 ([CC150 Q11](https://www.nowcoder.com/practice/ed85a09f0df047119e94fb3e5569855a?tpId=8&tqId=11005&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/16/2.4/)) ([LeetCode Q2](https://leetcode.com/problems/add-two-numbers/))
 
 	方法1: 注意对while条件的判断，只要(a || b || carry)即可继续，赋值可用a?a->val:0进行。减少过多代码
 	复杂度： O(1) space, O(n) time.
 
-> 12.回文链表 ([Leetcode Q243](https://leetcode-cn.com/problems/palindrome-linked-list/)) ([CC150 Q12](https://www.nowcoder.com/practice/baefd05def524a92bcfa6e1f113ed4f0?tpId=8&tqId=11006&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+> 13.回文链表 ([Leetcode Q243](https://leetcode-cn.com/problems/palindrome-linked-list/)) ([CC150 Q12](https://www.nowcoder.com/practice/baefd05def524a92bcfa6e1f113ed4f0?tpId=8&tqId=11006&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 使用一个stack，全部推入判断堆顶是否一次相等
 	复杂度： O(n) space, O(n) time.
@@ -702,6 +711,11 @@ l.merge(l2)                                                 ## merge two sorted 
 	
 	方法3： 用快慢指针，并将后续的反转。依次判断。注意奇偶情况。按照长度，要在头上加一个dummy node
 	复杂度： O(1) space, O(n) time.
+	
+> 14.排序链表 ([Leetcode Q148](https://leetcode-cn.com/problems/sort-list/))
+	
+	方法1： 用快慢指针，并用prev记录慢指针上一个位置。fast到底时断开prev和后面的，sort(head, slow）两部分，然后mergeSortedList
+	复杂度： O(logn) space, O(nlogn) time.
 	
 ---
 <br />
@@ -1417,14 +1431,14 @@ from bitarray import bitarray
 	复杂度： O(n) space (O(1) if you use two var only), O(n) time.
 	相关问题：最大和绝对值[Leetcode Q1749]: 同样用两个值保存最大和最小和，每次找最大最小的绝对值最大值
 
-> 4.字符串的最小编辑距离 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.02.html))
+> 4.字符串的最小编辑距离 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.02.html))  ([Leetcode Q72](https://leetcode-cn.com/problems/edit-distance/))
 
 	方法1: dp[i][j]表示从S[:i]到T[:j]的转换. dp[i][0]=i; dp[0][j]=j.
 			状态转移: dp[i][j] =min{
 					dp[i-1][j] + 1, S[i]不在T[0…j]中，删除操作
 					dp[i-1][j-1] + 1/0, S[i]是否等于0T[j]，替换操作
 					dp[i][j-1] + 1 , S[i]在T[0…j-1]中增加操作
-			即 dp[i][j] = min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + (S[i]==T[j]))
+			即 dp[i][j] = min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + (S[i]!=T[j]))
 	复杂度： O(nm) space, O(mn) time.
 
 > 5.交替字符串 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.04.html))
@@ -1441,9 +1455,10 @@ from bitarray import bitarray
 	方法1: dp[i]表示以A[i]结尾的序列的最长递增子序列. dp[0]=1
 			状态转移: dp[j] = max(A[i]+1 for 0<=i<j and A[i]<A[j]). If not exist. A[j]=1
 	复杂度： O(n) space, O(n^2) time.
-	相关问题：最长公共子序列
+	相关问题：最长公共子序列([Leetcode Q1143])
 				Xm=Yn -> LCS(m,n)=LCS(m-1,n-1)+1;
 				Xm!=Yn -> LCS(m,n)=max{LCS(m-1,n)+LCS(m,n-1)}
+		    最短删除距离([Leetcode Q583]) 等价于求出LCS之后，m+n-2*LCS(m,n)
 
 > 7.硬币组合 ([CC150 Q47](hhttps://www.nowcoder.com/practice/c0503ca0a12d4256af33fce2712d7b24?tpId=8&tqId=11041&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](https://www.cnblogs.com/python27/archive/2013/09/05/3303721.html))
 
@@ -1533,6 +1548,11 @@ from bitarray import bitarray
     复杂度： O(1) space, O(n) time
     相似题目：不同的二叉搜索树II([Leetcode Q95]): 递归的把左右子树都求出来，拼接在当前node上
     
+> 15_1.单词拆分 ([Leetcode Q64](https://leetcode-cn.com/problems/word-break))
+
+    方法1: 用一个set保存可行的单词选择。dp[i] = dp[j] && set.contains(s.substr(j, i-j)) for all j. 某个点为true就可设置为true
+    复杂度： O(n) space, O(n^2) time
+    
 ---
 <br />
 
@@ -1601,6 +1621,7 @@ sum(list)				 ## sum of all elements in list
 			将该数x2,x3,x5之后分别推入三个队列的尾部
 			实现的时候可以只采用一个输出数组，并用3个指针指向该输出数组的位置，减少extra space。
 	复杂度： O(1) space, O(n) time.
+	相似题目：超级丑数 ([剑指offer Q311]）：增加了prime的数量。用同样的方法for loop即可
 
 > 4.不使用加减乘除和判断语句求1～n的和 ([剑指offer Q47](https://leetcode-cn.com/problems/qiu-12n-lcof/))
 
