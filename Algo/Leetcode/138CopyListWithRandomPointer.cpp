@@ -1,3 +1,30 @@
+// Use a hash table
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        if(!head) return head;
+        map<Node*, Node*> m;
+        Node* move = head;
+        Node* new_head = new Node(0);
+        Node* tmp = new_head;
+        while(move){
+            tmp->next = new Node(move->val);
+            tmp = tmp->next;
+            m[move] = tmp;
+            move = move->next;
+        }
+        move = head;
+        tmp = new_head->next;
+        while(move){
+            tmp->random = m[move->random];
+            move = move->next;
+            tmp = tmp->next;
+        }
+        return new_head->next;
+    }
+};
+
+// In place copy and split
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
