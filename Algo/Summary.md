@@ -1012,9 +1012,18 @@ stack.empty()                                               ## return whether th
 
 ### 问题及思路
 
-> 1.两个栈实现队列 ([剑指offer Q5](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/))
+> 1_1.两个栈实现队列 ([剑指offer Q5](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)) ([Leetcode Q232](https://leetcode-cn.com/problems/implement-queue-using-stacks/))
 
 	方法1: 往stack1中push; pop时如果stack2为空，先将stack1从顶pop过来，然后返回stack2的top，不为空则直接返回
+	复杂度： O(n) space, O(1) time.
+
+> 1_2.队列实现栈 ([Leetcode Q225](https://leetcode-cn.com/problems/implement-stack-using-queues/))
+
+	方法1: 两个队列，每次push的时候先把q1的推到q2，然后推入q1。最后q2推回来
+	复杂度： O(n) space, O(n) time for push/O(1) time for pop.
+	
+	方法2: 一个队列，可以把先推进来的推到后面去
+	复杂度： O(n) space, O(n) time for push/O(1) time for pop.
 
 > 2.包含min函数的栈 ([剑指offer Q20](https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/)) ([Leetcode Q155](https://leetcode-cn.com/problems/min-stack/))
 
