@@ -186,14 +186,31 @@ sum(list)				 	## sum of all elements
 	方法1: 先排序，计算大小王（0）的个数，当n_0<4时，剩余的最大值-最小值<=4.（注意判断数值是否在[0,13]）
 	复杂度： O(1) space, O(1) time.
 
-> 11.数组中重复的数字 ([剑指offer Q50](https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/))
+> 11_1.数组中重复的数字 ([剑指offer Q50](https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/)) ([Leetcode Q287](https://leetcode-cn.com/problems/find-the-duplicate-number/))
 
 	方法1: 使用hash table储存，直到遇到第一个重复的数字
 	复杂度： O(n) space, O(n) time.
 	
-	方法2: 将每个数字i移动到第i个位置。
+	方法2: 将每个数字i移动到第i个位置, 如果num[i]和nums[nums[i]]重复了话则输出该值。（如果是1-n的数，要用nums[nums[i]-1]）
 	复杂度： O(1) space, O(n) time.
 	相似问题: 魔术引索([CC150 Q42]-当A[i]>i时，i直接跳到A[i]，避免无用搜索
+	
+> 11_2.数组中缺失的数字 ([Leetcode Q448](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array))
+
+	方法1: 使用hash table储存，遍历之后看看dict是否已经记录了
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 遍历每个值，将该值对应的nums位置设置成负数。重新遍历，为正的位置预示着这个数字没出现过
+	复杂度： O(1) space, O(n) time.
+	
+> 11_3.第一个缺失的正数 ([Leetcode Q41](https://leetcode-cn.com/problems/first-missing-positive/))
+
+	方法1: 使用hash table储存，遍历之后看看dict是否已经记录了
+	复杂度： O(n) space, O(n) time.
+	
+	方法2: 将数组本身当作一个hash table。第一个缺失的正数一定在[1,n+1]内。先把负数改成n+1, 遍历数组。
+	      当数的绝对值<n+1时，将对应的hash table设置为负数。再遍历一次就知道谁不在里面了
+	复杂度： O(1) space, O(n) time.
 
 > 12.不用除法构建乘积数组 ([剑指offer Q51](https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/))
 
@@ -543,6 +560,12 @@ s.isupper()                          ## string is all uppercases
     方法1：异位词通过sort可以变成等价(O(nlogn)time, 通过dict判断次数可以到O(n)). 通过一个dict，用sort string当作k，value是对应的数组
     复杂度： O(nk) space, O(nklogk) time
     
+> 18.最小覆盖子串 ([Leetcode Q76](https://leetcode-cn.com/problems/minimum-window-substring))
+
+    方法1：用一个hash table c2保存目标子串的各位count。双指针滑动窗口遍历。另一个table c1记录实际遇到的情况
+          当end指针遇到目标字串(c2[end]>0)时，在c1[end]记录下来。如果此时c1[end]<=c2[end], count++，此时窗口中成功数量+1.
+          更新最小窗口的左界时，要不就是当前位置不在c2中，要不就是c1[start]>c2[start]，直到两个条件都不符合，得到最小窗口
+    复杂度： O(n) space, O(n) time
     
 ---
 <br />
@@ -737,7 +760,7 @@ l.merge(l2)                                                 ## merge two sorted 
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode(int x): val(x), left(NULL), right(NULL) {}
  * };
  */
 ```
@@ -852,7 +875,7 @@ it = s.equal_range(val)                                     ## return iter that 
 
 	方法1: 递归。叶节点返回深度为1.根节点返回1+max(左深度，右深度）
 	
-	方法2: dfs修改depth。记录max depth
+	方法2: dfs修改depth并回溯。记录max depth
 
 > 9.平衡二叉树判断 ([剑指offer Q39](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/)) ([CC150 Q17](https://www.nowcoder.com/practice/b6bbed48cd864cf09a34a6ca14a3976f?tpId=8&tqId=11011&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1)) ([CC150 Sol](http://hawstein.com/2012/12/24/4.1/))
                  ([Leetcode Q110](https://leetcode-cn.com/problems/balanced-binary-tree/))
@@ -990,8 +1013,9 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法1: dfs. 用last val记录上一个遍历的数，用pre初始化。每次判断和上一个数是不是一样的，更新count和max count。
 	      当count == maxcount时，一定是新的众数来了，推入res。如果大于，证明唯一的新的众数来了，清空res并且推入新的众数
 	复杂度： O(n) space, O(n) time
-
-
+	
+---
+<br />
 
 # <h2 id="6">栈（Stack）</h2>
 ### C++用法
@@ -1041,7 +1065,8 @@ stack.empty()                                               ## return whether th
 	复杂度： O(n) space, O(n^2) time.
 
 > 5_1.合法括号 ([CC150 Q45](https://www.nowcoder.com/practice/d8acfa0619814b2d98f12c071aef20d4?tpId=8&tqId=11039&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2013/01/12/8.5/))
-
+              ([Leetcode Q20](https://leetcode-cn.com/problems/valid-parentheses))
+>
 	方法1: 使用一个stack，当栈顶为'('且A字符为')'弹出栈顶，否则一次输入A的字符。如果合法，stack应为空。
 	复杂度： O(n) space, O(n) time.
 
@@ -1050,7 +1075,7 @@ stack.empty()                                               ## return whether th
     方法1: 用stack。如果遇'('就把i推入，如果遇到')'就推出顶端，如果空了就把i推入；不空的话就计算现在到顶端的长度。一开始要推入-1
     复杂度： O(n) space, O(n) time
 	
-> 6.最大矩形 ([Leetcode Q84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram))
+> 6_1.最大矩形 ([Leetcode Q84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram))
 	
     方法1: 固定每个i位置的高度h，双指针向左右延申知道无法增高。
 	复杂度： O(1) space, O(n^2) time.
@@ -1058,6 +1083,12 @@ stack.empty()                                               ## return whether th
 	方法2: 单调递增栈。单调递增栈可以找到一直向左、右最后一个比自己大的数（也就是矩形的允许最大的左边界、右边界）
 	             只用一次的话，入栈操作标志了左边界，出栈的时候则标志了右边界。
 	复杂度： O(1) space, O(n) time.
+	
+> 6_2.矩阵中的最大矩形 ([Leetcode Q85](https://leetcode-cn.com/problems/maximal-rectangle))
+		
+	方法1: 对每一行，可以看作上面的矩阵就是6_1中的矩阵。对每一行调用一次单调栈算法即可。
+		   注意对输入height的更新，当matrix[i][j]！=1时，height被设置为0，否则为height上一轮的结果+1.
+	复杂度： O(m) space, O(mn) time.
     
 > 7.接雨水 ([Leetcode Q41](https://leetcode-cn.com/problems/trapping-rain-water))
 
@@ -1323,7 +1354,13 @@ list = [[]]					# Use Adjacency matrix
 
     方法1: 使用dfs。可注意的是不需要添加visit table，而直接使用map修改其值即可
     相关问题：最大岛屿面积 (Leetcode Q695)：每次dfs传入一个area的参数，在一个dfs中不断增加其值即可
+    复杂度: O(1) space, O(mn) time.
 
+> 8.课程表II ([Leetcode Q210](https://leetcode-cn.com/problems/course-schedule-ii/))
+
+    方法1: 通过关系构建出邻接链表。通过dfs进行邻接链表和visit遍历，当无环时，可以成功拓扑排序
+    复杂度: O(m+n) space and time.
+    
 ---
 <br />
 
@@ -1358,10 +1395,18 @@ from bitarray import bitarray
 
 ### 问题及思路
 
-> 1.二进制中的1的个数 ([剑指offer Q11](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/))
+> 1_1.二进制中的1的个数 ([剑指offer Q11](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/))
 
 	方法1: for loop 查看每一位的是否为1
 	复杂度： O(1) space, O(1) time.
+	
+> 1_2.0到n中每个数1的个数 ([Leetcode Q338](https://leetcode-cn.com/problems/counting-bits))
+
+	方法1: for loop 查看每一位的是否为1
+	复杂度： O(1) space, O(n*32) time.
+	
+	方法2: 对于每个i来说，如果i为奇数，则i中1的个数比i-1中多一个；如果i为偶数，则与i/2中个数一样。dp即可
+	复杂度： O(1) space, O(n) time.
 
 > 2.数组中只出现一次的两个数字 ([剑指offer Q40](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/))
 
@@ -1406,7 +1451,7 @@ from bitarray import bitarray
     方法1: 用(0,2^n-1)中每一个位置为1表示是否取元素组中的数，判断当前和是否为target。但是这个必须要数组小于32才可以用
 	复杂度： O(1) space, O(2^n) time.
 	
-	方法2: dfs+剪枝。dfs从下一轮开始，但是注意因为有重复元素，需要现将数组排序，当当前item不等于上一个item时才挑选，不然有重复
+	方法2: dfs+剪枝。dfs从下一轮开始，但是注意因为有重复元素，需要先将数组排序，当当前item不等于上一个item时才挑选，不然有重复
 	复杂度： O(n_target) space, O(n*2^n) time. 事实上比较难有确定界限
 	
 > 6_2.组合总数(无重复元素，但是可重复挑选) ([Leetcode Q39](https://leetcode-cn.com/problems/combination-sum/))
@@ -1509,28 +1554,28 @@ from bitarray import bitarray
     方法2：递归  translateNum(num / 10) + translateNum(num / 100) * (translateNum(num % 100) - 1);
     复杂度: O(n) space, O(n) time.
     
-> 11.n个骰子的点数-概率 ([剑指offer Q74](https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/))
+> 12.n个骰子的点数-概率 ([剑指offer Q74](https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/))
 
     方法1：每多一个骰子，概率都为前面n-1个组成的概率 + 现在这个的概率。这里要注意写法, 前n-1个骰子和为k时，n个骰子时k+1~k+6概率分布贡献1/6
           写的时候，每一个dp数组都是从最小的和开始
     复杂度： O(n) space, O(n^2) time.
     
-> 12.接雨水 ([Leetcode Q41](https://leetcode-cn.com/problems/trapping-rain-water))
+> 13.接雨水 ([Leetcode Q41](https://leetcode-cn.com/problems/trapping-rain-water))
 
     方法1: 某个点的雨水量为左右两边（包含自己）高度的最大值中的最小值 - 自身高度。用两个vector分别记录两边的最大值即可
     复杂度： O(n) space, O(n) time
     
-> 13_1.最大正方形面积 ([Leetcode Q221](https://leetcode-cn.com/problems/maximal-square))
+> 14_1.最大正方形面积 ([Leetcode Q221](https://leetcode-cn.com/problems/maximal-square))
 
     方法1: dp[i][j]为右下角每个点为正方形的最大面积。可以证明dp[i][j] = min(dp[i-1][j], dp[i-1][j-1], dp[i][j-1])+1，当nums[i][j]==1成立
     复杂度： O(mn) space, O(mn) time
     
-> 13_2.全为1的正方形 ([Leetcode Q1277](https://leetcode-cn.com/problems/count-square-submatrices-with-all-ones/))
+> 14_2.全为1的正方形 ([Leetcode Q1277](https://leetcode-cn.com/problems/count-square-submatrices-with-all-ones/))
 
     方法1: 同13_1的递归。同时可以发现dp[i][j]正是以该顶点为右下角的正方形个数
     复杂度： O(mn) space, O(mn) time
    
-> 14_1.不同路径 ([Leetcode Q62](https://leetcode-cn.com/problems/unique-paths))
+> 15_1.不同路径 ([Leetcode Q62](https://leetcode-cn.com/problems/unique-paths))
 
     方法1: dp[i][j] = dp[i-1][j](i!=0) + dp[i][j-1](j!=0)
     复杂度： O(mn) space, O(mn) time
@@ -1538,17 +1583,17 @@ from bitarray import bitarray
     方法2: 一共要走 (m-1)*(n-1)步，其中(m-1)步向下，计算组合数量即可
     复杂度： O(1) space, O(min(m,n)) time
     
-> 14_2.不同路径II ([Leetcode Q63](https://leetcode-cn.com/problems/unique-paths-ii))
+> 15_2.不同路径II ([Leetcode Q63](https://leetcode-cn.com/problems/unique-paths-ii))
 
     方法1: dp[i][j] = dp[i-1][j](i!=0) + dp[i][j-1](j!=0), 但是当nums[i][j] == 1时为0.
     复杂度： O(mn) space(O(1) if use original matrix), O(mn) time
     
-> 14_3.最小路径和 ([Leetcode Q64](https://leetcode-cn.com/problems/minimum-path-sum))
+> 15_3.最小路径和 ([Leetcode Q64](https://leetcode-cn.com/problems/minimum-path-sum))
 
     方法1: dp[i][j] = min(dp[i-1][j](i!=0), dp[i][j-1](j!=0))
     复杂度： O(mn) space(O(1) if use original matrix), O(mn) time
     
-> 15.不同的二叉搜索树 ([Leetcode Q96](https://leetcode-cn.com/problems/unique-binary-search-trees))
+> 16.不同的二叉搜索树 ([Leetcode Q96](https://leetcode-cn.com/problems/unique-binary-search-trees))
 
     方法1: dp[i] = sum(dp[j-1]*dp[i-j])
     复杂度： O(n) space, O(n^2) time
@@ -1557,10 +1602,16 @@ from bitarray import bitarray
     复杂度： O(1) space, O(n) time
     相似题目：不同的二叉搜索树II([Leetcode Q95]): 递归的把左右子树都求出来，拼接在当前node上
     
-> 15_1.单词拆分 ([Leetcode Q64](https://leetcode-cn.com/problems/word-break))
+> 17_1.单词拆分 ([Leetcode Q64](https://leetcode-cn.com/problems/word-break))
 
     方法1: 用一个set保存可行的单词选择。dp[i] = dp[j] && set.contains(s.substr(j, i-j)) for all j. 某个点为true就可设置为true
     复杂度： O(n) space, O(n^2) time
+    
+> 18.打家劫舍III ([Leetcode Q337](https://leetcode-cn.com/problems/house-robber-iii))
+
+    方法1: 用一个vector<int> res(2)表示取和不取当前node的最大结果。
+          res[0] = max(l[0], l[1]) + max(r[0], r[1]) 不取当前node，保证下面都是最大的
+          res[1] = root->val + l[0] + r[0] 取当前node，保证下面都是没取左右孩子的
     
 ---
 <br />
@@ -1674,6 +1725,20 @@ sum(list)				 ## sum of all elements in list
           找到该n对应的digit，再找到对应的num，再找到对应的位数
     复杂度： O(1) space, O(logn) time.
     
+> 11.质数统计 ([Leetcode Q204](https://leetcode-cn.com/problems/count-primes)) 
+
+    方法1：每个数检查一下是否为质数。质数需要从2~sqrt(x)的因子都去做余数，如果余数==0，不为质数
+    复杂度： O(1) space, O(n*sqrt(n)) time.
+    
+    方法2：埃式筛查法。用一个长度为n的数组记录每个值是否为质数，一开始都为true。如果i为质数，则把对应的i的倍数全部更新为非质数
+          更新的时候，j从i*i开始，每次+=i，更小的非质数已经被更新过。i只需要遍历2~sqrt(n)
+    复杂度： O(n) space, O(nloglog(n)) time.
+    
+> 12.完全平方数 ([Leetcode Q274](https://leetcode-cn.com/problems/perfect-squares)) 
+
+    方法1：dp[i]保存到每个i位置时最少的组合个数。dp[i] = min(dp[i], dp[i-j*j]) for all j*j<=i. dp[i]初始为i
+    复杂度： O(1) space, O(n*sqrt(n)) time.
+    
 ---
 <br />
 
@@ -1721,9 +1786,7 @@ sum(list)				 ## sum of all elements in list
 	for (int i = 0; i < len - 1; i++) {
 	    for (int j = 0; j < len - 1 - i; j++) {
 	        if (nums[j] > nums[j+1]) {
-	            temp = nums[j+1];
-	            nums[j+1] = nums[j];
-	            nums[j] = temp;
+	            swap(nums[j], nums[j+1]);
 	        }
 	    }
 	}
@@ -1745,9 +1808,7 @@ sum(list)				 ## sum of all elements in list
 	            minIndex = j;
 	        }
 	    }
-	    temp = nums[i];
-	    nums[i] = nums[minIndex];
-	    nums[minIndex] = temp;
+	    swap(nums[i], nums[minIndex]);
 	}
 
 > 3.插入排序(Insertion Sort) <br>

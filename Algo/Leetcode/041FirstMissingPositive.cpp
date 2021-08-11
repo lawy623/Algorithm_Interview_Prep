@@ -1,20 +1,35 @@
-//1. Use hashtable. O(N)
+//1 brute force
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
-        if(nums.size()==0) return 1;
-        
-        unordered_set<int> s;
-        for(int i=0;i<nums.size();i++){
-            if(nums[i]>=0) s.insert(nums[i]);
+        set<int> s;
+        for(auto n:nums){
+            if(n>0) s.insert(n);
         }
-        
-        int minV = INT_MAX;
-        int lower = INT_MAX;
-        for(int k : s){
-            if(s.count(k+1)==0) minV = k+1<minV? k+1:minV;
-            lower = k<lower? k:lower;
+
+        int i = 1;
+        while(true){
+            if(s.find(i)==s.end()) return i;
+            i++;
         }
-        return lower>1? 1:minV;
+        return -1;
+    }
+};
+
+//2. Use nums as a hash table. Consider those negative value.
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n = nums.size();
+        for(int i=0; i<n; i++)
+            if(nums[i] <= 0) nums[i] = n+1;
+
+        for(int i=0; i<n; i++)
+            if(abs(nums[i]) < n+1) nums[abs(nums[i])-1] = -abs(nums[abs(nums[i])-1]);
+
+        for(int i=0; i<n; i++)
+            if(nums[i] > 0) return i+1;
+
+        return n+1;
     }
 };

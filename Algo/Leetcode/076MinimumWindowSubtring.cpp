@@ -1,38 +1,30 @@
-//1. Two Pointer sliding window. O(N)
 class Solution {
 public:
     string minWindow(string s, string t) {
-        if(s.empty()) return "";
-        if(s.size()<t.size()) return "";
-        
-        int c1[256]={0};
-        int c2[256]={0};
-        
-        for(int i=0;i<t.length();i++) c2[t[i]]++;
-        
-        int minW = INT_MAX, minId = 0;
-        
-        int pStart = 0;
-        int appear = 0;
-        
-        for(int pEnd=0;pEnd<s.length();pEnd++){
-            if(c2[s[pEnd]]>0){
-                c1[s[pEnd]]++;
-                if(c1[s[pEnd]]<=c2[s[pEnd]]) appear++;   //The second time when pEnd move, appear will not move.
+        int min_len = INT_MAX; int min_start = 0;
+        vector<int> c1(256, 0);
+        vector<int> c2(256, 0);
+        for(auto c:t) c2[c] += 1;
+
+        int count = 0; int start = 0;
+        for(int end=0; end<s.length(); end++){
+            if(c2[s[end]] > 0){
+                c1[s[end]]++;
+                if(c1[s[end]] <= c2[s[end]]) count++;
             }
-            if(appear==t.size()){
-                while(c1[s[pStart]]>c2[s[pStart]] || c2[s[pStart]]==0){
-                    c1[s[pStart]]--;
-                    pStart++;
+
+            if(count==t.length()  && c2[s[end]]>0){ // will only successful if get the count
+                while(c2[s[start]]==0 || c1[s[start]] > c2[s[start]]){
+                    c1[s[start]]--;
+                    start++;
                 }
-                if(minW > pEnd - pStart +1){
-                    minW = pEnd - pStart +1;
-                    minId = pStart;
+                if(end-start+1 < min_len){
+                    min_len = end - start + 1;
+                    min_start = start;
                 }
             }
         }
-        
-        if(minW == INT_MAX) return "";
-        else return s.substr(minId,minW);
+        if(min_len == INT_MAX) return "";
+        return s.substr(min_start, min_len);
     }
 };

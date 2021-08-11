@@ -47,7 +47,7 @@ public:
 
         stack<int> s;
         for(int i=0; i<n; i++){
-            while(!s.empty() && heights[s.top()] > heights[i]){
+            while(!s.empty() && heights[s.top()] > heights[i]){ //每次都推入更大的数值，单调递增栈。特点是会返回两边比当前小的第一个数
                 r[s.top()] = i;
                 s.pop();
             }
