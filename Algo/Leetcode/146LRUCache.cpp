@@ -1,39 +1,35 @@
 class LRUCache {
 public:
     LRUCache(int capacity) {
-        this -> capacity = capacity;
+        this->capacity=capacity;
     }
-    
+
     int get(int key) {
         if(cacheMap.find(key) == cacheMap.end()) return -1;
-        
-        cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]); //Find the key. Move actual node to front.
-        cacheMap[key] = cacheList.begin();   //update itera postion.
-        return cacheMap[key] ->value;        //Actaul is map->list->value
+
+        cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]); // move to head. Dict no need to touch since it will change
+        return cacheMap[key]->value;
     }
-    
+
     void put(int key, int value) {
-        if(cacheMap.find(key) == cacheMap.end()){
-            if(cacheList.size()==capacity){
-                cacheMap.erase(cacheList.back().key); //erase last in the node from both list and map.
+        if(cacheMap.find(key) == cacheMap.end()){ // not in the list
+            if(cacheList.size()==capacity){       // remove least recently access one
+                cacheMap.erase(cacheList.back().key);
                 cacheList.pop_back();
             }
-            cacheList.push_front(CacheNode(key,value));   //list and node make the new one.
-            cacheMap.insert(make_pair(key,cacheList.begin()));
-        }
-        else{
-            cacheMap[key]->value = value;  //just update value and iter.
-            cacheList.splice(cacheList.begin(),cacheList,cacheMap[key]);
-            cacheMap[key] = cacheList.begin();
+            cacheList.push_front(CacheNode(key, value)); // add new one to the front
+            cacheMap[key] = cacheList.begin();           // update the pos in dict
+        } else {
+            cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]); // if exist, update to front and update value
+            cacheList.front().value = value;
         }
     }
-private:
+    int capacity;
     struct CacheNode{
         int key;
         int value;
-        CacheNode(int k,int v) : key(k), value(v){};
+        CacheNode(int k, int v): key(k), value(v) {};
     };
-    list<CacheNode> cacheList;    //This list is the actual storage.
-    int capacity;
-    unordered_map<int,list<CacheNode>::iterator> cacheMap;  //This map is for search. Contain iter is easy to search in list. And we don't need to maintain its position.
+    list<CacheNode> cacheList;
+    map<int, list<CacheNode>::iterator> cacheMap;
 };

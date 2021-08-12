@@ -18,3 +18,23 @@ public:
         return diameter(root, depth);
     }
 };
+
+
+//
+class Solution {
+public:
+    int max_d = INT_MIN;
+    int diameterOfBinaryTree(TreeNode* root) {
+        if(!root) return 0;
+        dfs(root);
+        return max_d-1;
+    }
+
+    int dfs(TreeNode* root){ // max sum of depth pass root
+        if(!root) return 0;
+        int L = dfs(root->left);
+        int R = dfs(root->right);
+        max_d = max(max_d, L+R+1); // key record of every max path
+        return max(L, R) + 1;
+    }
+};

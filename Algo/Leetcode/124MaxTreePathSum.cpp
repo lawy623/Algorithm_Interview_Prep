@@ -14,8 +14,7 @@ public:
         int l = max(maxSum(root->left), 0);  // only significant node is fine.
         int r = max(maxSum(root->right), 0);
 
-        int max_sum = l + r + root->val;
-        res = max(max_sum, res);
+        res = max( l + r + root->val, res);
 
         return root->val + max(l, r);  // You can not select both l and r for this node
     }

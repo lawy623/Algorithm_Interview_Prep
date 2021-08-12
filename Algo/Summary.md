@@ -176,10 +176,24 @@ sum(list)				 	## sum of all elements
 	方法1: 排序后, 固定第一个位置，后面用双指针使用前后两个pointer查找。需要注意重复的情况
 	复杂度： O(1) space, O(n^2+nlogn) time.
 
-> 9.和为S的连续正数序列 ([剑指offer Q41](https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/))
+> 9_1.和为S的连续正数序列 ([剑指offer Q41](https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/))
 
 	方法1: 前后双指针。根据和的情况分别移动两个指针。
 	复杂度： O(1) space, O(n) time.
+	
+> 9_2.和为K的连续子数组 ([Leetcode Q560](https://leetcode-cn.com/problems/subarray-sum-equals-k/))
+
+	方法1: 每个ij区间求和判断，可优化至O(n^2)
+	复杂度： O(1) space, O(n^2) time.
+	
+	方法2: 注意连续数组和(i,j)=sum(0,j)-sum(0,i)。可以用一个dict保存sum(i)的个数。每次更新dict。
+	      对于j位置来说，count新增 dict[sum(j)-k]次
+	复杂度： O(n) space, O(n) time.
+	
+> 9_3.和为K倍数的连续子数组 ([Leetcode Q523](https://leetcode-cn.com/problems/continuous-subarray-sum/))
+	
+	方法1: dict保存对k的余数，当余数相同时，子数组和为k的倍数。为了保证数组长度至少为2，dict[sum%k]>((sum%k)==(prev_sum%k))
+	复杂度： O(n) space, O(n) time.
 
 > 10.扑克牌顺子 ([剑指offer Q45](https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/))
 
@@ -588,6 +602,10 @@ list<int> l                                                 ## init list
 list<int>::iterator it                                      ## list iterator
 l.back()                                                    ## last element
 l.front()                                                   ## first element
+l.splice()
+    l.splice(it, l2)                                        ## transfer whole l2 list to l's it pos
+    l.splice(it, l2, it2)                                   ## transfer l2's it2 item to l's it pos
+    l.splice(it, l2, it_start, it_end)                      ## transfer l2's it_start-it_end items to l's it pos
 l.erase(iter)                                               ## erase a node by iter
 l.pop_back()                                                ## pop the last node out
 l.pop_front()                                               ## pop the first out
@@ -740,6 +758,16 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法1： 用快慢指针，并用prev记录慢指针上一个位置。fast到底时断开prev和后面的，sort(head, slow）两部分，然后mergeSortedList
 	复杂度： O(logn) space, O(nlogn) time.
 	
+> 15.LRU机制 ([Leetcode Q146](https://leetcode-cn.com/problems/lru-cache/submissions/))
+	
+	方法1： 用一个list（双向链表）保存最近access列表，用一个map<int, list<CacheNode>::iterator>保存 key到链表位置的dict
+	       get：map中查找的到，将map对应到的it用splice更新到list头，输出他的值；找不到输出-1
+	       put：map中查找的到：
+	                将map对应的it用splice更新到list头，更新其value
+	            map中查找不到：
+	                如果list到达capicity长度，pop掉最后一个，将对应的key从dict中删。然后在list头上加上node，并且用dict记录
+	复杂度： O(n) space, O(1) time（用双向链表list，要自己实现就算了）.
+	
 ---
 <br />
 
@@ -857,7 +885,7 @@ it = s.equal_range(val)                                     ## return iter that 
 	
 > 6_5.二叉树的最长路径 ([Leetcode Q543](https://leetcode.com/problems/diameter-of-binary-tree))
 
-	方法1: 根节点最长路径=max(左节点最长路径，右节点最长路径，左深度+右深度）。深度可以传入函数递归
+	方法1: dfs函数记录从root开始的最大深度。用一个global记录max(l+r+1)为最大路径（左+右最大深度+1）。和6_4十分接近
 	复杂度： O(1) space, O(n) time
 
 > 7.二叉搜索树与双向链表 ([剑指offer Q26](https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&tqId=11179&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
@@ -1012,6 +1040,18 @@ it = s.equal_range(val)                                     ## return iter that 
 
 	方法1: dfs. 用last val记录上一个遍历的数，用pre初始化。每次判断和上一个数是不是一样的，更新count和max count。
 	      当count == maxcount时，一定是新的众数来了，推入res。如果大于，证明唯一的新的众数来了，清空res并且推入新的众数
+	复杂度： O(n) space, O(n) time
+	
+> 22.Trie树 ([Leetcode Q208](https://leetcode-cn.com/problems/implement-trie-prefix-tree/))
+
+	方法1: struct TrieNode{
+                bool isEnd;
+                struct TrieNode* ptr[26];
+                TrieNode(bool e): isEnd(e) {
+                    memset(ptr, 0, sizeof(ptr));
+                }
+            };
+            用此结构记录每一个节点，isEnd用于记录此节点是否为终点。Root为一个isEnd为true的节点
 	复杂度： O(n) space, O(n) time
 	
 ---
@@ -1612,6 +1652,28 @@ from bitarray import bitarray
     方法1: 用一个vector<int> res(2)表示取和不取当前node的最大结果。
           res[0] = max(l[0], l[1]) + max(r[0], r[1]) 不取当前node，保证下面都是最大的
           res[1] = root->val + l[0] + r[0] 取当前node，保证下面都是没取左右孩子的
+    
+> 19.零钱组合 ([Leetcode Q322](https://leetcode-cn.com/problems/coin-change))
+
+    方法1: dp[i] = min(dp[i], dp[i-c]+1) for all c in coins. 初始为amount+1(不可能达到），dp[0] = 0
+    复杂度： O(n) space, O(nk) time
+    
+> 20_1.分割等和子集 ([Leetcode Q416](https://leetcode-cn.com/problems/partition-equal-subset-sum/))
+
+    方法1: 等价于取出子集中n个元素，和为整个和的一般（01背包问题）
+    复杂度： O(sum) space, O(n*target) time
+    
+> 20_2.目标和 ([Leetcode Q494](https://leetcode-cn.com/problems/target-sum/))
+
+    方法1: S=A+B, 现在另B=-B。A-B=target->A=（S+target）/2. 等价于取出子集中n个元素，使和为A。dp求解有多少种方式模板为
+                vector<int> dp(sum+1);
+                dp[0] = 1;
+                for(auto i:nums){
+                    for(int j=sum; j>=i; j--)
+                        dp[j] += dp[j-i];
+                }
+                return dp[sum];
+    复杂度： O(sum) space, O(n*target) time
     
 ---
 <br />
