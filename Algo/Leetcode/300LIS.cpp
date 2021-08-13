@@ -48,3 +48,19 @@ public:
         return dp.size();
     }   
 };
+
+// binary search on increasing array. Find the larger or equal num
+while(l<r){
+    m = (l+r)/2;            // right part all >= k, you only need to go to m as most from right
+    if(nums[m] >= k) r=m;  // if find strictly larger than, make it >k
+    else l=m+1;
+}
+return l;
+
+// binary search on increasing array. Find the smaller or equal num
+while(l<r){
+    m = (l+r)/2;           // left part all <=k, you only need to go to m as most from left
+    if(nums[m] <= k) l=m;  // if find strictly smaller than, make it >k
+    else r=m-1;
+}
+return r;
