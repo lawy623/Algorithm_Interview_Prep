@@ -1142,7 +1142,7 @@ stack.empty()                                               ## return whether th
 		   注意对输入height的更新，当matrix[i][j]！=1时，height被设置为0，否则为height上一轮的结果+1.
 	复杂度： O(m) space, O(mn) time.
     
-> 7.接雨水 ([Leetcode Q41](https://leetcode-cn.com/problems/trapping-rain-water))
+> 7.接雨水 ([Leetcode Q42](https://leetcode-cn.com/problems/trapping-rain-water))
 
     方法1: 某个点的雨水量为左右两边（包含自己）高度的最大值中的最小值 - 自身高度。用两个vector分别记录两边的最大值即可
     复杂度： O(n) space, O(n) time
@@ -1624,7 +1624,7 @@ from bitarray import bitarray
           写的时候，每一个dp数组都是从最小的和开始
     复杂度： O(n) space, O(n^2) time.
     
-> 13.接雨水 ([Leetcode Q41](https://leetcode-cn.com/problems/trapping-rain-water))
+> 13.接雨水 ([Leetcode Q42](https://leetcode-cn.com/problems/trapping-rain-water))
 
     方法1: 某个点的雨水量为左右两边（包含自己）高度的最大值中的最小值 - 自身高度。用两个vector分别记录两边的最大值即可
     复杂度： O(n) space, O(n) time
