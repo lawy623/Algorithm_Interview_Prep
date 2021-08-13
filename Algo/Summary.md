@@ -51,7 +51,8 @@ vec.front()                                                 ## return the first 
 vec.back()                                                  ## return the last val
 vec.pop_back()                                              ## remove the last val
 vec.at(idx)                                                 ## access by index. same as vec[idx]
-sort(vec.begin(), vec.end());                               ## sort the vector
+sort(vec.begin(), vec.end());                               ## sort the vector - increasing
+sort(vec.begin(), vec.end(), greater<int>);                 ## sort the vector - decreasing
     static bool comp(int a, int b)                          ## sort by self defined static cmp func
     sort(v.begin(), v.end(), comp)
 for (auto x : vec) {}                                       ## access by auto var though the vector
@@ -175,6 +176,7 @@ sum(list)				 	## sum of all elements
 
 	方法1: 排序后, 固定第一个位置，后面用双指针使用前后两个pointer查找。需要注意重复的情况
 	复杂度： O(1) space, O(n^2+nlogn) time.
+	相似题目：最接近target的三数之和([Leetcode Q16])：注意更新jk的时候按照sum和target的大小更新
 
 > 9_1.和为S的连续正数序列 ([剑指offer Q41](https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/))
 
@@ -593,6 +595,31 @@ s.isupper()                          ## string is all uppercases
           更新最小窗口的左界时，要不就是当前位置不在c2中，要不就是c1[start]>c2[start]，直到两个条件都不符合，得到最小窗口
     复杂度： O(n) space, O(n) time
     
+> 19.字符串按频率排序 ([Leetcode Q451](https://leetcode-cn.com/problems/sort-characters-by-frequency))
+
+    方法1：用map遍历记录每个char出现的次数，将<n, char> pair放到vector排序，按照大到小的顺序输出
+    复杂度： O(n+k) space, O(n+klogk) time, k is different number of char
+    
+    方法2：用map遍历记录每个char出现的次数, 记录出现的最大频率，建立max_count+1大小的数组，把不同的char放进去桶排序
+    复杂度： O(n+k) space, O(n+k) time
+    相似题目：前K个高频数([Leetcode Q451])
+    
+> 20.字符串的排列 ([Leetcode Q567](https://leetcode-cn.com/problems/permutation-in-string/))
+
+    方法1：滑动窗口。用map从s1统计出现的个数，滑动窗口目的是让m的所有值为零。
+          每次右窗口移动，添加c，更新map的值(map[c]--)。如果map[c]<0, 说明这个c加多了，不断移动左窗口
+          每一回合都能保证加入的数值c不会过多。如果窗口大小刚好等于s1大小，说明不多不少全占有了
+    复杂度： O(k) space, O(n)
+    相似题目：字符串中的所有异位词([Leetcode Q483])：只要把每次的l推入数组输出即可
+    
+> 21.最长公共前缀 ([Leetcode Q14](https://leetcode-cn.com/problems/longest-common-prefix/))
+
+    方法1：n个数每次对比第i位
+    复杂度： O(1) space, O(mn) time
+    
+    方法2：先将string排序，对比最前和最后的前缀即可
+    复杂度： O(1) space, O(mnlogn) time
+    
 ---
 <br />
 
@@ -874,16 +901,16 @@ it = s.equal_range(val)                                     ## return iter that 
           判断断开的右子树是否全部比根节点大
           再递归判断左右子树是否为二叉搜索树
 
-> 6_1.二叉树中和为某一值的路径 ([剑指offer Q24](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)) ([Leetcode Q113](https://leetcode-cn.com/problems/path-sum-ii/))
+> 6_1.路径总和 （[Leetcode Q112](https://leetcode-cn.com/problems/path-sum/))
+
+	方法1: 递归. 为叶子节点就判断是否值为target。否则递归左右子树是否含有路径
+	复杂度：O(n) space, O(n) time
+	
+> 6_2.二叉树中和为某一值的路径 ([剑指offer Q24](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)) ([Leetcode Q113](https://leetcode-cn.com/problems/path-sum-ii/))
 
 	方法1: 递归。每次查找左右子树值为target-root的路径，存在则将自己推入路径。只有叶节点能直接放回路径。
 	
 	方法2： dfs。用一个global保存。是前序便利的方法，每次走通一条子树
-	
-> 6_2.路径总和 （[Leetcode Q112](https://leetcode-cn.com/problems/path-sum/))
-
-	方法1: 递归. 为叶子节点就判断是否值为target。否则递归左右子树是否含有路径
-	复杂度：O(n) space, O(n) time
 	
 > 6_3.root到叶子节点之和 ([Leetcode Q129](https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/))
 
@@ -895,7 +922,12 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法1: 递归. 由于路径不一定要到叶子节点，可以左右子树相连。最大和递归计算时可以把左右都加进来，但是输出给上一层时只能取左右最大的一支
 	复杂度：O(n) space, O(n) time
 	
-> 6_5.二叉树的最长路径 ([Leetcode Q543](https://leetcode.com/problems/diameter-of-binary-tree))
+> 6_5.不一定从根节点开始的路径总数[Leetcode Q437](https://leetcode-cn.com/problems/path-sum-iii/))
+
+	方法1: 前缀和记录到节点某个父节点的和，到本节点时，查找new_sum - target是否在dict中。注意sum和dict在dfs之后都要回溯
+	复杂度：O(n) space, O(n) time
+	
+> 6_6.二叉树的最长路径 ([Leetcode Q543](https://leetcode.com/problems/diameter-of-binary-tree))
 
 	方法1: dfs函数记录从root开始的最大深度。用一个global记录max(l+r+1)为最大路径（左+右最大深度+1）。和6_4十分接近
 	复杂度： O(1) space, O(n) time
@@ -1065,7 +1097,7 @@ it = s.equal_range(val)                                     ## return iter that 
             };
             用此结构记录每一个节点，isEnd用于记录此节点是否为终点。Root为一个isEnd为true的节点
 	复杂度： O(n) space, O(n) time
-	
+		
 ---
 <br />
 
@@ -1577,6 +1609,11 @@ from bitarray import bitarray
 				Xm=Yn -> LCS(m,n)=LCS(m-1,n-1)+1;
 				Xm!=Yn -> LCS(m,n)=max{LCS(m-1,n)+LCS(m,n-1)}
 		    最短删除距离([Leetcode Q583]) 等价于求出LCS之后，m+n-2*LCS(m,n)
+		    
+    方法2：dp+二分查找。维护一个动态的vector，先放入nums。每次遍历nums中的其他值。
+          如果n<dp[0],替换dp[0];如果n>dp[-1]，插入最后。否则在dp中找到第一个比dp大的数，替换为n。dp数组一定是单调增加的，其大小为长的序列大小
+          但是这个证明比较难理解
+    复杂度： O(n) space, O(nlogn) time.      
 
 > 7.硬币组合 ([CC150 Q47](hhttps://www.nowcoder.com/practice/c0503ca0a12d4256af33fce2712d7b24?tpId=8&tqId=11041&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](https://www.cnblogs.com/python27/archive/2013/09/05/3303721.html))
 
@@ -1857,6 +1894,12 @@ sum(list)				 ## sum of all elements in list
           次数为 max(nums.size(), (t-1)*(n+1)+count)
     复杂度： O(n) space, O(n) time
     
+> 4.根据身高重建队列 ([Leetcode Q406](https://leetcode-cn.com/problems/queue-reconstruction-by-height))
+
+    方法1: 将身高按照高到低排序，相同身高按照前面人的个数升序。每次按照排序插入，插入的位置就是前面人的个数
+          用list实现会比vector在插入时快得多（但是list需要找到对应的iterator，不能使用begin()+k)
+    复杂度： O(n) space, O(n) time
+    
 ---
 <br />
 
@@ -2081,7 +2124,7 @@ sum(list)				 ## sum of all elements in list
 
 > 5.5亿个int找它们的中位数([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.06.html))
 
-	将数据从大到小分到不同的机器中。从小机器开始统计个数，不断累加，知道到达中位数
+	将数据从大到小分到不同的机器中。从小机器开始统计个数，不断累加，直到到达中位数
 
 > 6.10万个长度不超过10的单词判断前面是否出现过([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.09.html))
 

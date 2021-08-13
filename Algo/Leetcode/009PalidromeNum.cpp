@@ -2,18 +2,16 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-        if(x<0 || (x%10==0 && x!=0) ) return false;  //Can not have last digit as 0;
         if(x==0) return true;
-        
-        int rev = 0;
+        if(x<0 || x%10 ==0) return false;
+        int res = 0;
         int y = x;
         while(y){
-            rev = rev * 10 + y % 10;
-            y = y/10;
+            if(res>INT_MAX/10 || res==INT_MAX/10 && y%10>7) return false;
+            res = res*10 + y%10;
+            y /= 10;
         }
-        
-        cout << rev;
-        return rev == x;
+        return res == x;
     }
 };
 
@@ -21,16 +19,14 @@ public:
 class Solution {
 public:
     bool isPalindrome(int x) {
-        if(x<0 || (x%10==0 && x!=0) )  return false;
         if(x==0) return true;
-        
-        int rev = 0;
-        
-        while(x>rev){
-            rev = rev * 10 + x % 10;
-            x = x/10;
+        if(x<0 || x%10 ==0) return false;
+        int res = 0;
+
+        while(x > res){
+            if(res>INT_MAX/10 || res==INT_MAX/10 && x%10>7) return false;
+            res = res*10 + x%10;
+            x /= 10;
         }
-        
-        return (x==rev || x==rev/10);
+        return res == x || x==res/10;
     }
-};
