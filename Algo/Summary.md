@@ -264,6 +264,8 @@ sum(list)				 	## sum of all elements
 	方法1: 用一个stack保存从后往前的值，当检查A[i]后的第一个最大，将stack pop至找到top>A[i]，再将A[i]推进去。
 		原理在于，后面比A[i]小的数都不用继续保存了，因为A[i]相对于他们总是下一个最大的数
 	复杂度： O(n) space, O(n) time.
+	
+	方法2： 单调栈，参考栈的部分
 
 > 16.下一个最大数II ([CC150 Q74](https://www.nowcoder.com/practice/a0c19f3489774fe693d71490ce83b648?tpId=8&tqId=11068&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
@@ -318,6 +320,15 @@ sum(list)				 	## sum of all elements
 
     方法1: 用一个map/set保存所有的数。重新遍历时，如果a+1不在数组内，向下遍历a,a-1,...直到数组找不到。如果不加前面的条件，时间最差O(n^2)
     复杂度： O(n) space, O(n) time
+    
+> 23.最短无序连续子数组 ([Leetcode Q581](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/))
+
+    方法1: 单调栈。找到最左侧nums[i] > nums[i+k]的l，找到最右侧nums[i] < nums[i-k]的r。至少需要调换lr才能满足
+    复杂度： O(n) space, O(n) time
+    
+    方法2： 双指针。从左往右，找到最右边需要调整的边界（小于左边的最大值）
+                 从右往左，找到最左边需要调整的边界（大于右边的最小值）
+    复杂度： O(1) space, O(n) time
  
 ---
 <br />
@@ -515,6 +526,7 @@ s.isupper()                          ## string is all uppercases
 
 	方法1: 从每个位置开始，向两侧进行扩展并判断。需要饱含奇偶两种长度情况
 	复杂度： O(1) space, O(n^2) time.
+	相似题目：回文子串([Leetcode Q647])
 	
 	方法2: Manacher算法 （to be understand, not implement yet）
 	复杂度： O(1) space, O(n) time.
@@ -1137,6 +1149,18 @@ stack.empty()                                               ## return whether th
     
     方法2: 单调递减栈
     复杂度： O(n) space, O(n) time
+    
+> 8_1.下一个最大数 ([Leetcode Q496](https://leetcode-cn.com/problems/next-greater-element-i/))
+
+    方法1: 用一个单调栈持续记录右边的第一个更大的值，用dict保存
+    复杂度： O(n) space, O(n) time
+    相似题目：每日温度([Leetcode Q739]）
+    
+> 8_2.下一个最大数II ([Leetcode Q503](https://leetcode-cn.com/problems/next-greater-element-ii/))
+
+    方法1: 同样使用单调栈。但是因为可以回到头上，需要重复遍历数组一次(i<2n-1)，对比保存的时候index都要 %
+    复杂度： O(n) space, O(n) time
+
     
 ---
 <br />
@@ -1825,6 +1849,13 @@ sum(list)				 ## sum of all elements in list
 
     方法1: 贪心算法，每次都向前到最右边能到的边界。等真的到了这个地方，把count++
     复杂度： O(1) space, O(n) time
+    
+> 3.任务管理器 ([Leetcode Q621](https://leetcode-cn.com/problems/task-scheduler/))
+
+    方法1: 计算出不同任务出现的最大次数t, 并且记录出现了t次的count（用一个dict）
+          设想每一排长度为n+1，将出现次数最大的排在每行的头上，其他的插入即可，最后一行不需要排满.至少需要nums.size()次
+          次数为 max(nums.size(), (t-1)*(n+1)+count)
+    复杂度： O(n) space, O(n) time
     
 ---
 <br />
