@@ -32,3 +32,34 @@ public:
         return res;
     }     
 };
+
+// 2. directly reverse k nodes and recursive
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if(!head || !head->next) return head;
+        if(k<=1) return head;
+        int k1 = k-1;
+        ListNode* move = head;
+        while(k1>0 && move){
+            move = move->next;
+            k1--;
+        }
+        if(!move) return head;
+        ListNode* new_head = new ListNode(0);
+        new_head->next = head;
+        ListNode* succ = move->next;
+        ListNode* tmp = NULL;
+        while(head->next != move){          // reverse from head to move's pre
+            tmp = head->next;
+            head->next = head->next->next;
+            tmp->next = new_head->next;
+            new_head->next = tmp;
+        }
+
+        move->next = new_head->next;     // move moveNode to begin, recursively remove later
+        new_head->next = move;
+        head->next = reverseKGroup(succ, k);
+        return new_head->next;
+    }
+};

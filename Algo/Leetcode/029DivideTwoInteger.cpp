@@ -15,6 +15,29 @@ class Solution {
                 }
             }
 
-            return ((dividend^divisor) >> 31) ? (-result) : (result);  //This technique is good to dicide the sign.
+            return ((dividend^divisor) >> 31) ? (-result) : (result);  //This technique is good to decide the sign.
         }
+};
+
+// rewrite
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        bool sign = !(dividend > 0 ^ divisor > 0);
+        long a = (long) abs(dividend);
+        long b = (long) abs(divisor);
+
+        long res = 0;
+        while(a>=b){
+            for(int i=0; a>= b<<i ; i++){ // 改成long之后， b<<i不会丢失信息
+                a -= b<<i;
+                res += 1<<i;
+            }
+        }
+
+        res = sign? res:-res;
+        if (res < INT_MIN) return INT_MIN;
+        if (res > INT_MAX) return INT_MAX;
+        return (int) res;
+    }
 };

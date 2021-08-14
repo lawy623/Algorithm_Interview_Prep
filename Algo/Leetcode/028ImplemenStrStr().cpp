@@ -2,30 +2,20 @@
 class Solution {
 public:
     int strStr(string haystack, string needle) {
-        int n1 = haystack.length();
-        int n2 = needle.length();
-        if(n2==0) return false;
-        
-        int i=0;
-        while(i+n2<=n1){
-            if(haystack[i]!=needle[0]){
-                i++;
-                continue;
+        int n = haystack.size();
+        int m = needle.size();
+        if(m==0) return 0;
+        if(n==0 || n<m) return -1;
+        for(int i=0; i<n-m+1; i++){
+            if(haystack[i]==needle[0]){
+                int j = 1;
+                while(j<m && needle[j]==haystack[i+j]) j++;
+                if(j==m) return i;
             }
-            int j=1;
-            bool find = true;
-            while(j<n2){
-                if(haystack[i+j]!=needle[j]){
-                    find = false;
-                    break;
-                }
-                j++;
-            }
-            if(find) return i;
-            else{i+=1;}
         }
         return -1;
     }
 };
 
 //2. Use kmp.
+// Not Now, learn it when free.
