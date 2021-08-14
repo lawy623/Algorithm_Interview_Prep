@@ -2,21 +2,21 @@
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        int len = 0;
-        if(!head) return head;
-        ListNode* top = head;
-        while(head->next){
-            head = head -> next;
-            len ++;
+        if(k==0 || !head) return head;
+        ListNode* fast = head;
+        int count = 1;
+        while(fast->next){
+            fast = fast->next;
+            count++;
         }
-        len ++;
-        k = k % len;
-        head -> next = top;
-        for(int i=0;i<len-k;i++){
-            head = head ->next;
-        }
-        ListNode* res = head -> next;
-        head -> next = NULL;
-        return res;
+        fast->next = head; // make it circle
+
+        k = k % count;
+        fast = head;
+        for(int i=0; i<count-k-1; i++) fast = fast->next;
+
+        ListNode* new_head = fast->next;
+        fast->next = NULL;
+        return new_head;
     }
 };

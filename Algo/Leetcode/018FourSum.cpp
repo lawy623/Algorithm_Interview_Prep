@@ -2,27 +2,24 @@
 class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
-        sort(nums.begin(),nums.end());
-        int fullLen = nums.size();
-        
+        int n = nums.size();
         vector<vector<int>> res;
-        if(fullLen<4) return res;
-        
-        for(int i=0;i<fullLen-3;i++){
-            if(i==0 || nums[i]!=nums[i-1]){
-                for(int j=i+1;j<fullLen-2;j++){
-                    if(j==i+1 || nums[j]!=nums[j-1]){
-                        for(int k=j+1,l=fullLen-1;k<l;){
-                            if(k>j+1 && nums[k]==nums[k-1]) k++;
-                            else if(l<fullLen-1 && nums[l]==nums[l+1]) l--;
-                            else{
-                                int sum = nums[i]+nums[j]+nums[k]+nums[l];
-                                if(sum < target) k++;
-                                else if(sum > target) l--;
-                                else {res.push_back({nums[i],nums[j],nums[k],nums[l]});k++;l--;}
-                            }
+        if(n<=3) return res;
+        sort(nums.begin(), nums.end());
+        for(int i=0; i<n-3; i++){
+            if(i>0 && nums[i] == nums[i-1]) continue;
+            for(int j=i+1; j<n-2; j++) {
+                if(j>i+1 && nums[j] == nums[j-1]) continue;{
+                    for(int k=j+1, p=n-1; k<p;) {
+                        if(k>j+1 && nums[k]==nums[k-1]) k++;
+                        else if(p<n-1 && nums[p]==nums[p+1]) p--;
+                        else{
+                            long long sum = (long long)nums[i] + nums[j] + nums[k] + nums[p];  // leetcode is crazy
+                            if(sum==target) res.push_back({nums[i],nums[j],nums[k++],nums[p--]});
+                            else if(sum>target) p--;
+                            else k++;
                         }
-                    }    
+                    }
                 }
             }
         }

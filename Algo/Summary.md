@@ -218,6 +218,7 @@ sum(list)				 	## sum of all elements
 	
 	方法2: 遍历每个值，将该值对应的nums位置设置成负数。重新遍历，为正的位置预示着这个数字没出现过
 	复杂度： O(1) space, O(n) time.
+	相似题目：丢失的数字 ([Leetcode 268])因为刚好有一个数字恰好缺失一次，直接计算n*n+1 / 2 - sum即可
 	
 > 11_3.第一个缺失的正数 ([Leetcode Q41](https://leetcode-cn.com/problems/first-missing-positive/))
 
@@ -620,6 +621,16 @@ s.isupper()                          ## string is all uppercases
     方法2：先将string排序，对比最前和最后的前缀即可
     复杂度： O(1) space, O(mnlogn) time
     
+> 22.字符串相乘 ([Leetcode Q43](https://leetcode-cn.com/problems/multiply-strings/))
+
+    方法1：num1每次乘num2从后开始的某一位，补上0，然后做字符串相加
+    复杂度： O(1) space, O(mn) time
+    
+> 23.罗马数字和整数 ([Leetcode Q12](https://leetcode-cn.com/problems/integer-to-roman/)) ([Leetcode Q13](https://leetcode-cn.com/problems/roman-to-integer/))
+
+    方法1：罗马数字转整数-用map记录下罗马数字到数字的转换。遍历罗马数字，当前面的罗马数字小于后面时，减掉此值。否则为加
+          整数转罗马数字-直接记录下所有可行的罗马数字组合，从大到小排列，num-nums[i]，直到num==0
+    
 ---
 <br />
 
@@ -686,9 +697,29 @@ l.merge(l2)                                                 ## merge two sorted 
 	复杂度： O(1) space, O(n) time.
 	相似题目：移除倒数第k个节点
 
-> 3.反转链表 ([剑指offer Q15](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof)) ([Leetcode Q206](https://leetcode-cn.com/problems/reverse-linked-list))
+> 3_1.反转链表 ([剑指offer Q15](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof)) ([Leetcode Q206](https://leetcode-cn.com/problems/reverse-linked-list))
 
 	方法1: 常规操作,与1相同
+	复杂度： O(1) space, O(n) time.
+	
+> 3_2.两两一组反转链表 ([Leetcode Q24](https://leetcode-cn.com/problems/swap-nodes-in-pairs/))
+
+	方法1: 构造一个dummy head，在线交换链表节点
+	复杂度： O(1) space, O(n) time.
+	
+> 3_3.反转链表II ([Leetcode Q92](https://leetcode-cn.com/problems/reverse-linked-list-ii/))
+
+	方法1: 构造一个dummy head，先走left步，在线调换剩下right-left步的链表
+	复杂度： O(1) space, O(n) time.
+	
+> 3_4.K个一组反转链表 ([Leetcode Q25](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/))
+
+	方法1: 3_3的加强版，需要考虑边界情况
+	复杂度： O(1) space, O(n) time.
+	
+> 3_5.旋转链表 ([Leetcode Q61](https://leetcode-cn.com/problems/rotate-list/))
+
+	方法1: 先走完链表，记录数量，同时把尾节点连到head。再走count - k%count-1步，断开即可
 	复杂度： O(1) space, O(n) time.
 
 > 4_1.合并两个排序链表 ([剑指offer Q16](https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/)) ([Leetcode Q21](https://leetcode-cn.com/problems/merge-two-sorted-lists/))
@@ -1503,6 +1534,14 @@ from bitarray import bitarray
 	
 	方法2: 对于每个i来说，如果i为奇数，则i中1的个数比i-1中多一个；如果i为偶数，则与i/2中个数一样。dp即可
 	复杂度： O(1) space, O(n) time.
+	
+> 2_1.2的幂 ([Leetcode Q231](https://leetcode-cn.com/problems/power-of-two/))
+
+	方法1: for loop 查看每一位，记下count数量
+	复杂度： O(1) space, O(1) time.
+	
+	方法2: n&(n-1) == 0. 任何一个1000 - 1都是0111的形式，&一定为0
+	复杂度： O(1) space, O(1) time.
 
 > 2.数组中只出现一次的两个数字 ([剑指offer Q40](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/))
 
@@ -1554,6 +1593,11 @@ from bitarray import bitarray
 
     方法1: dfs+剪枝。注意退出的时候要判断sum和target大小，dfs下一轮也可以从自身开始
 	复杂度： O(n_target) space, O(n*2^n) time. 事实上比较难有确定界限
+	
+> 7.格雷编码 ([Leetcode Q89](https://leetcode-cn.com/problems/gray-code/))
+
+    方法1: 对每个i，编码为i^i/2, 一共i<<N个数
+	复杂度： O(1) space, O(2^n) time.
 
 ---
 <br />

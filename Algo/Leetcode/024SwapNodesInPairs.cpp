@@ -2,20 +2,17 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        ListNode top(-1);
-        ListNode* prev = &top;
-        ListNode* cur = head;
-        top.next = head;
-        
-        while(cur && cur -> next){
-            ListNode* tmp = cur->next;
-            prev -> next = cur -> next;
-            cur -> next = cur -> next -> next;
-            tmp -> next = cur;
-            
-            cur = cur -> next;
-            prev = prev -> next -> next;
+        if(!head || !head->next) return head;
+        ListNode* new_head = new ListNode(-1);
+        new_head -> next = head;
+        ListNode* move = new_head;
+        while(head && head->next){
+            move->next = head->next;
+            head->next = move->next->next;
+            move->next->next = head;
+            move = move->next->next;
+            head = head->next;
         }
-        return top.next;
+        return new_head->next;
     }
 };
