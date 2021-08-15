@@ -100,6 +100,12 @@ sum(list)				 	## sum of all elements
             否则在右侧上升序列。只有当target的值在r和mid中间才往(mid+1，r)搜，否则往(l,mid-1)搜
             与边界值的判断都要带等号
 	复杂度： O(1) space, O(logn) time.
+	
+> 1_3.查找峰值 ([Leetcode Q162](https://leetcode-cn.com/problems/find-peak-element/))
+
+    方法1: 二分查找。当nums[m] > nums[m+1]时，峰值一定在l~m, 否则单调递减l就是峰值
+                  否则m一定在m+1~r, 否则单调递增r就是峰值
+	复杂度： O(1) space, O(logn) time.
 
 > 2.调整数组顺序使奇数位于偶数前面 ([剑指offer Q13](https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof))
 
@@ -714,7 +720,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	
 > 3_4.K个一组反转链表 ([Leetcode Q25](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/))
 
-	方法1: 3_3的加强版，需要考虑边界情况
+	方法1: 3_3的加强版。先移动k-1次找到断点（如果期间已经到底了，直接返回），将head到断点反转（需要dummy）。然后将后续的递归调用。
 	复杂度： O(1) space, O(n) time.
 	
 > 3_5.旋转链表 ([Leetcode Q61](https://leetcode-cn.com/problems/rotate-list/))
@@ -1464,9 +1470,10 @@ list = [[]]					# Use Adjacency matrix
 	复杂度： O(n) space, O(n) time.
 
 > 4.N皇后问题 ([CC150 Q48](https://www.nowcoder.com/practice/8b5d63163fbe48719f2dfe01fe9f7e54?tpId=8&tqId=11042&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2013/01/15/8.8/))
+             ([Leetcode Q51](https://leetcode-cn.com/problems/n-queens/))
 
-	方法1: 回溯/dfs，用rows[i]表示每一行的assignment，每次assign一行里边所有可能性，如果valid就去assign下一行。
-			当八行都assign成功后，将传入的count++
+	方法1: 简单dfs+回溯。每次添加一行，判断此时在每一列添加Q的时候，是否满足条件（之前的每一列都没有Q，右上、左上斜线都没有Q）
+	      主要难在注意每一行推入的string为....Q...形式；以及左上右上遍历时的ij for loop
 
 > 5.迷宫 ([CC150 Q46](https://www.nowcoder.com/practice/365493766c514d0da0cd774d3d40fd49?tpId=8&tqId=11040&rp=3&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=3))
 
@@ -1487,6 +1494,11 @@ list = [[]]					# Use Adjacency matrix
 
     方法1: 通过关系构建出邻接链表。通过dfs进行邻接链表和visit遍历，当无环时，可以成功拓扑排序
     复杂度: O(m+n) space and time.
+
+> 9.解数独 ([Leetcode Q37](https://leetcode-cn.com/problems/sudoku-solver))
+
+    方法1: dfs二维数组，当每一个空的位置，尝试往里加1-9的数组，dfs判断剩余的数组是否满足条件。
+          注意判断新加的时候，可以判断已存在的数是否与当前冲突。如果冲突就不需要加进去了
     
 ---
 <br />
@@ -1858,10 +1870,14 @@ sum(list)				 ## sum of all elements in list
 	 n && (res += Sum_Solution(n-1));
 	 return res;
 
-> 5.不用加减乘除做加法 ([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 5_1.不用加减乘除做加法 ([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 位运算。a=a^b， b=a&b<<1。直到b不为0
 
+> 5_2.整数除法 ([Leetcode Q29](https://leetcode-cn.com/problems/divide-two-integers/))
+
+	方法1: 将a不停的减去b,b<<1,b<<2，res+=1<<i个数。要用long来保存a和b，这样b<<i就不会溢出丢失信息。注意符号判断和越界
+	
 > 6.二进制float小数 ([CC150 Q26](https://www.nowcoder.com/practice/743853af75fc4026939a682b86535f79?tpId=8&tqId=11020&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2013/01/02/5.2/))
 
 	方法1: 整数部分通过%2再/2一步步向前，小数部分对比1/2^i一步步向后
@@ -1882,8 +1898,9 @@ sum(list)				 ## sum of all elements in list
 		   b&(b>>31) = a-b if a<b else 0. 返回 a-b&(b>>31) 即可
 
 > 9.阶乘末尾0的个数 ([CC150 Q64](https://www.nowcoder.com/practice/434922f9f4724b97b83c417e884008f1?tpId=8&tqId=11058&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2013/02/20/19.3/))
+                  ([Leetcode Q172](https://leetcode-cn.com/problems/factorial-trailing-zeroes/)) 
 
-	方法1: 等同于只需要计算5的因子数。n/5返回1一个5的个数，/25返回两个5的额外个数。所以loop让n/=5不停统计即可
+	方法1: 等同于只需要计算5的因子数。每次先加上 n/5个，然后让n=n/5,计算更深层的5的个数，直到n为0
 	复杂度： O(1) space, O(logn) time.
 	
 > 10.数字序列中某一位的数 ([剑指offer Q67](https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof)) ([Leetcode Q67](https://leetcode-cn.com/problems/nth-digit/)) 
@@ -1905,6 +1922,15 @@ sum(list)				 ## sum of all elements in list
 
     方法1：dp[i]保存到每个i位置时最少的组合个数。dp[i] = min(dp[i], dp[i-j*j]) for all j*j<=i. dp[i]初始为i
     复杂度： O(1) space, O(n*sqrt(n)) time.
+    
+> 13.根号x ([Leetcode Q69](https://leetcode-cn.com/problems/sqrtx)) 
+
+    方法1：二分法查找中点，注意用long以及边界的处理情况
+    复杂度： O(1) space, O(logn) time.
+    
+    方法2：牛顿法。迭代函数为 0.5(xi + x/xi)直到xi和xi+1差距小于阈值
+          牛顿法的通俗公式为 xi+1 = xi - f(xi)/f`(xi) ，带入函数x^2-C ->  xi - (xi^2-C)/2xi -> 0.5(xi + x/xi)
+    复杂度： O(1) space, O(logn) time.
     
 ---
 <br />
@@ -1943,6 +1969,12 @@ sum(list)				 ## sum of all elements in list
     方法1: 将身高按照高到低排序，相同身高按照前面人的个数升序。每次按照排序插入，插入的位置就是前面人的个数
           用list实现会比vector在插入时快得多（但是list需要找到对应的iterator，不能使用begin()+k)
     复杂度： O(n) space, O(n) time
+    
+> 5.加油站 ([Leetcode Q134](https://leetcode-cn.com/problems/gas-station/submissions/))
+
+    方法1: 从每一个i开始，往后走，记录sumGas和sumCost。任何时刻如果cost>gas说明走不下去。下一次开始必须从走不下去的新节点开始
+          由于是环状，要用余数。如果走过n个节点，那么成功
+    复杂度： O(1) space, O(n) time
     
 ---
 <br />

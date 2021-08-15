@@ -27,40 +27,48 @@ public:
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
-        int m = matrix.size();
-        if(m == 0) return;
-        int n = matrix[0].size();
-        
-        
-        bool rowZero=true, colZero=true;
-        for(int i=0;i<n;i++){
-            if(matrix[0][i]==0) rowZero=false;
+        int row = matrix.size();
+        int col = matrix[0].size();
+
+        // consider first row and col
+        bool row0 = false;
+        bool col0 = false;
+        for(int i=0; i<row; i++){
+            if(matrix[i][0] == 0) col0 = true;
         }
-        for(int i=0;i<m;i++){
-            if(matrix[i][0]==0) colZero=false;
+        for(int j=0; j<col; j++){
+            if(matrix[0][j] == 0) row0 = true;
         }
-        
-        for(int i=0;i<(m-1)*(n-1);i++){
-            int r = i/(n-1);
-            int c = i%(n-1);
-            if(matrix[r+1][c+1]==0) {matrix[r+1][0]=0;matrix[0][c+1]=0;}
-        }
-        
-        for(int i=0;i<(m-1)*(n-1);i++){
-            int r = i/(n-1);
-            int c = i%(n-1);
-            if(matrix[r+1][0]==0 || matrix[0][c+1]==0) matrix[r+1][c+1]=0;
-        }
-        
-        if(rowZero==false){
-            for(int i=0;i<n;i++){
-                matrix[0][i]=0;
+        // consider all other rows and col
+        for(int i=1; i<row; i++){
+            for(int j=1; j<col; j++){
+                if(matrix[i][j] == 0){
+                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;
+                }
             }
         }
-        if(colZero==false){
-            for(int i=0;i<m;i++){
-                matrix[i][0]=0;
+        // reset all other rows and cols
+        for(int i=1; i<row; i++){
+            if(matrix[i][0]==0){
+                for(int j=1; j<col; j++) matrix[i][j] = 0;
             }
         }
+
+        for(int j=1; j<col; j++){
+            if(matrix[0][j] == 0){
+                for(int i=1; i<row; i++) matrix[i][j] = 0;
+            }
+        }
+        // reset first row and col
+        if(row0){
+            for(int j=0; j<col; j++) matrix[0][j] = 0;
+        }
+
+        if(col0){
+            for(int i=0; i<row; i++) matrix[i][0] = 0;
+        }
+
+        return;
     }
 };

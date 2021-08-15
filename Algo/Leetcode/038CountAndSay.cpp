@@ -1,28 +1,22 @@
-//1. Use recurrsion. Go through the n-1 string. O(N^2)
+//1. Use recursion. Go through the n-1 string. O(N^2)
 class Solution {
 public:
     string countAndSay(int n) {
         if(n==1) return "1";
-        if(n==2) return "11";
-        
-        string preS = countAndSay(n-1);
-        string newS = "";
-        int cur = 1;
-        int count = 1;
-        while(cur<preS.length()){
-            if(preS[cur]==preS[cur-1]){
-                count++;
-                cur++;
-            }
-            else{
-                newS += char(count + '0');
-                newS += preS[cur-1];
-                count = 1;
-                cur++;
-            }
+        string lastStr = countAndSay(n-1);
+
+        string res = "";
+        int i = 0;
+        int len = lastStr.length();
+        while(i<len){
+            int j = i+1;
+            while(j<len && lastStr[j]==lastStr[j-1]) j++;
+            int new_len = j-i;
+            char new_c = lastStr[i];
+            res += to_string(new_len);
+            res += new_c;
+            i = j;
         }
-        newS += char(count + '0');
-        newS += preS[cur-1];
-        return newS;
+        return res;
     }
 };

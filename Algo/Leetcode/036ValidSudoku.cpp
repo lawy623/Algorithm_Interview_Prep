@@ -48,16 +48,24 @@ public:
 class Solution {
 public:
     bool isValidSudoku(vector<vector<char>>& board) {
-        bool row[9][9] = {}, col[9][9] = {}, box[9][9] = {}; //First 9 is the num of row/col/box. Second 9 is num 1-9.
-        for (int i = 0; i < 81; ++i) {
-            int r = i / 9;
-            int c = i % 9;
-            int b = (r / 3) * 3 + (c / 3);
-            if (board[r][c] == '.') continue;
-            int n = board[r][c] - '1';
-            if (row[r][n]++) return false; //Meaning that this number n appear once in row r.
-            if (col[c][n]++) return false;
-            if (box[b][n]++) return false;
+        int n = board.size();
+        vector<vector<int>> row(n, vector<int>(9, 0));
+        vector<vector<int>> col(n, vector<int>(9, 0));
+        vector<vector<int>> box(n, vector<int>(9, 0));
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                if(board[i][j] != '.'){
+                    int k = board[i][j] -'1';
+                    if(row[i][k]>0) return false;
+                    else row[i][k]++;
+
+                    if(col[j][k]>0) return false;
+                    else col[j][k]++;
+
+                    if(box[i/3*3+j/3][k]>0) return false;  // take care of the index here for each 9*9 box
+                    else box[i/3*3+j/3][k]++;
+                }
+            }
         }
         return true;
     }
