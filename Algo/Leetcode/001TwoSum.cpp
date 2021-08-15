@@ -47,23 +47,20 @@ public:
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int len = nums.size();
-        vector<int> result;
-        if(nums.size()<=1){
-            return result;
-        }
-        map<int,int> res;
-        for(int i=0;i<len;i++){ 
-            map<int,int>::iterator pos = res.find(target-nums[i]);
-            if(pos!=res.end()){
-                result.push_back(pos->second);
-                result.push_back(i);
-                return result;
+        map<int, int> m;
+        int n = nums.size();
+        if(n<=1) return {};
+        m[nums[0]] = 0;
+        for(int i=1; i<n; i++){
+            if(m.find(target-nums[i])!=m.end()){
+                return {m[target-nums[i]], i};
             }
-            res.insert(pair<int,int>(nums[i],i));
+            m[nums[i]] = i;
         }
+        return {};
     }
 };
+
 //用unordered_map花费8ms。查找更慢
 class Solution {
 public:

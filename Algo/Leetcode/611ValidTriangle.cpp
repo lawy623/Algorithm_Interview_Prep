@@ -6,12 +6,12 @@ public:
         int n = nums.size();
         int count = 0;
         for(int i=0; i<n; i++){
-            int k = i;
-            for(int j=i+1; j<n; j++){ // incase the j is already too large. k starts from i, we don't count k.
-                while(k < n-1 && nums[k+1] < nums[i]+nums[j]){
+            int k = i+2;
+            for(int j=i+1; j<n; j++){
+                while(k < n && nums[k] < nums[i]+nums[j]){
                     k++;
                 }
-                count += max(k-j, 0);
+                count += max(k-j+1, 0);
             }
         }
         return count;

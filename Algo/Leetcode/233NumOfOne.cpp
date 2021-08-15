@@ -27,3 +27,21 @@ public:
         return count;
     }
 };
+
+//
+class Solution {
+public:
+    int countDigitOne(int n) {
+        int count = 0;
+        int a, b = 0;
+        for(long m=1; m<=n; m*=10){
+            a = n/m;
+            b = n%m;
+            count += (a+8)/10*m + (a%10==1)*(b+1);
+            // count is for the 1 at each position.
+            // (a+8)/10*m is by counting the before number from 0.
+            // (a%10==1)*(b+1) is for counting the smaller fraction
+        }
+        return count;
+    }
+};
