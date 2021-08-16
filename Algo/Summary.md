@@ -121,7 +121,7 @@ sum(list)				 	## sum of all elements
 	方法4: 快排方式。遇到奇数则交换
 	复杂度： O(1) space, O(n) time.
 
-> 3.数组中出现次数超过一半的数字 ([剑指offer Q28](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof)) ([Leetcode Q169](https://leetcode-cn.com/problems/majority-element))
+> 3_1.数组中出现次数超过一半的数字 ([剑指offer Q28](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof)) ([Leetcode Q169](https://leetcode-cn.com/problems/majority-element))
 
 	方法1: 排序，在找median的值。需要判断该值是否真的出现超过一半次数（出现超过一半必为排序中位数，但中位数未必超过一半）
 	复杂度： O(1) space, O(nlogn) time.
@@ -133,6 +133,12 @@ sum(list)				 	## sum of all elements
 	复杂度： O(1) space, O(n) time（On average）.
 	
 	方法4： 摩尔投票。通过count，超过半数的一定保留着最后的val
+	复杂度： O(1) space, O(n) time
+	
+> 3_2.数组中出现次数超过1/3的数字 ([Leetcode Q229](https://leetcode-cn.com/problems/majority-element-ii))
+
+    方法1： 摩尔投票。最多只会有两个数超过1/3，用两个count和val记录遇到的数字。如果都不对上，count都要减1
+           最后需要判断两个值是否都超过1/3. 由于初始值的关系，全0会导致两个值都为0，需要排除
 	复杂度： O(1) space, O(n) time
 
 > 4.最小的K个数 ([剑指offer Q29](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/))
@@ -491,7 +497,7 @@ s.isupper()                          ## string is all uppercases
 	复杂度： O(1) space, O(n) time.
 	相关问题：翻转单词顺序列。旋转链表（同样分别旋转两部分最后一起翻转）
 
-> 4.把字符串转换成整数 ([剑指offer Q49](https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof)) ([Leetcode Q8](https://leetcode-cn.com/problems/string-to-integer-atoi)))
+> 4_1.把字符串转换成整数 ([剑指offer Q49](https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof)) ([Leetcode Q8](https://leetcode-cn.com/problems/string-to-integer-atoi)))
 
 	方法1: 注意第一位为+/-，溢出，invalid char，“”的情况。
 		   判断溢出即可以用long long表示值与MAX_INT对比，也可以再乘10前对比n与MAX_INT/10.
@@ -507,9 +513,16 @@ s.isupper()                          ## string is all uppercases
 				不满足只判断match(str,pattern+2) -- 则没有match上该位
     复杂度： O(n) space, O(n) time.
 
-> 6.表示数值的字符串 ([剑指offer Q53](https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/))
+> 6.表示数值的字符串 ([剑指offer Q53](https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/)) ([Leetcode Q65](https://leetcode-cn.com/problems/valid-number/))
 
 	方法1: 分为e/E前后判断。后面的只能是整数。前面的最多只能有一个dot。注意边界检查条件。
+	
+	方法2：先去除两边的空号，然后遍历l到r，根据每个遇到的值判断
+	      - 遇到数字，将showNum设置为真
+	      - 遇到+-号，确保+-号在i的位置，或者s[k-1]=='e'或'E'
+	      - 遇到'e'或'E'：确保只出现过一次（showE）而且数字曾经出现过，并且将showNum设置为false（为了后面必须仍然遍历），showE设置为true
+	      - 遇到'.'：确保只出现过一次，而且e不曾出现过
+	      最后返回showNum的值
 
 > 7.字符串包含 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/01.02.html))
 
@@ -541,6 +554,7 @@ s.isupper()                          ## string is all uppercases
 	复杂度： O(1) space, O(n) time.
 
 > 10.两个字符串是否同构 ([CC150 Q3](https://www.nowcoder.com/practice/164929d4acd04de5b0ee2d93047b3b20?tpId=8&tqId=10996&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/06/1.4/))
+                     ([Leetcode Q242](https://leetcode-cn.com/problems/valid-anagram/))
 
 	方法1: 对两个字符串先排序，在比较是否完全一样
 	复杂度： O(1) space, O(nlogn) time.
@@ -809,6 +823,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	复杂度： O(n) space, O(n) time
 
 > 11.分割链表 ([CC150 Q10](https://www.nowcoder.com/practice/0e27e0b064de4eacac178676ef9c9d70?tpId=8&tqId=11004&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+             ([Leetcode Q86](https://leetcode-cn.com/problems/partition-list/))
 
 	方法1: 使用大小两个链表进行添加。注意大链表最后next要指向null.
 	复杂度： O(1) space, O(n) time.

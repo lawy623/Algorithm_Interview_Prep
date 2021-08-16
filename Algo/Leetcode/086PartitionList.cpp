@@ -2,25 +2,23 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        ListNode l(-1);
-        ListNode* l_p = &l;
-        ListNode r(-1);
-        ListNode* r_p = &r;
-        
+        if(!head) return NULL;
+        ListNode* l = new ListNode(0);
+        ListNode* r = new ListNode(0);
+        ListNode* l_move = l;
+        ListNode* r_move = r;
         while(head){
-            if(head -> val < x){
-                l_p -> next = head;
-                l_p = l_p -> next;
+            if(head->val < x){
+                l_move -> next = head;
+                l_move = l_move -> next;
+            } else{
+                r_move->next = head;
+                r_move = r_move -> next;
             }
-            else{
-                r_p -> next = head;
-                r_p = r_p -> next;
-            }
-            head = head -> next;
+            head = head->next;
         }
-        
-        l_p -> next = r.next;
-        r_p -> next = NULL;
-        return l.next;
+        l_move -> next = r->next;
+        r_move -> next = NULL;
+        return l -> next;
     }
 };

@@ -67,21 +67,22 @@ public:
 class Solution {
 public:
     vector<vector<int>> res;
-    vector<int> r;
+    vector<int> p;
     vector<vector<int>> subsets(vector<int>& nums) {
         dfs(nums, 0);
         return res;
     }
 
-    void dfs(vector<int>& nums, int cur){
-        if(cur == nums.size()){
-            res.push_back(r);
+    void dfs(vector<int>& nums, int x){
+        res.push_back(p);
+        if(x==nums.size()){
             return;
         }
 
-        r.push_back(nums[cur]);
-        dfs(nums, cur+1);
-        r.pop_back();
-        dfs(nums, cur+1);
+        for(int i=x; i<nums.size(); i++){
+            p.push_back(nums[i]);
+            dfs(nums, i+1);
+            p.pop_back();
+        }
     }
 };

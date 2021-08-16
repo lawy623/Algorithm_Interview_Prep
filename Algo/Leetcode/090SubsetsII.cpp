@@ -56,24 +56,27 @@ class Solution {
 
 //2. Use bit map. And a set to remove duplicates.v Actually it take O(n) space.
 class Solution {
-    public:
-        vector<vector<int>> subsetsWithDup(vector<int> &S) {
-            sort(S.begin(),S.end());
-            set<vector<int>> result;
-            int n = S.size();
-            vector<int> v;
-            
-            for(int i=0;i< 1<<n;i++){
-                for(int j=0;j<n;j++){
-                    if( i>>j & 1) v.push_back(S[j]);
-                }
-                result.insert(v);
-                v.clear();
-            }
-            
-            vector<vector<int>> res;
-            //for(auto i=result.begin();i!=result.end();i++) res.push_back(*i);
-            copy(result.begin(), result.end(), back_inserter(real_result));
-            return res;
+public:
+    vector<vector<int>> res;
+    vector<int> p;
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        dfs(nums, 0);
+        return res;
+    }
+
+    void dfs(vector<int>& nums, int x){
+        res.push_back(p);
+        if(x==nums.size()){
+            return;
         }
+
+        for(int i=x; i<nums.size(); i++){
+            if(i>x && nums[i]==nums[i-1])  // in case repetitive selection
+                continue;
+            p.push_back(nums[i]);
+            dfs(nums, i+1);
+            p.pop_back();
+        }
+    }
 };
