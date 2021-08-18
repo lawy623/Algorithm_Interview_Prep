@@ -344,6 +344,16 @@ sum(list)				 	## sum of all elements
     方法2： 双指针。从左往右，找到最右边需要调整的边界（小于左边的最大值）
                  从右往左，找到最左边需要调整的边界（大于右边的最小值）
     复杂度： O(1) space, O(n) time
+
+> 24.长度最小的子数组 ([Leetcode Q209](https://leetcode-cn.com/problems/minimum-size-subarray-sum/))
+
+    方法1: 前后双指针，记录当下的sum最短的长度。注意sum一直比target小的情况
+    复杂度： O(1) space, O(n) time
+    
+> 25.排列序列 ([Leetcode Q60](https://leetcode-cn.com/problems/permutation-sequence/))
+
+    方法1: 每个数后面有 (n-i)！个排列。根据k/(n-i)!+1数出当前i位置最小的第？个排列。k = k % (n-i)!
+    复杂度： O(n) space, O(n^2) time
  
 ---
 <br />

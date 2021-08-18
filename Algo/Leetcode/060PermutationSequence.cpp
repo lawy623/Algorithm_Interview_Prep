@@ -42,3 +42,33 @@ public:
         return n*calPer(n-1);
     }
 };
+
+// based on factorization result
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        vector<int> fac(n+1, 1);
+        for(int i=1; i<=n; i++){
+            fac[i] = fac[i-1] * i;
+        }
+
+        k--;
+
+        string res = "";
+        vector<int> valid(n+1, 1);
+        for(int i=n; i>=1; i--){
+            int order = k / fac[i-1] + 1;   // first element in this pos
+            for(int j=1; j<=n; j++){
+                order -= valid[j];
+                if(order==0){               // adding the order-th biggest num in remaining
+                    res += (j + '0');
+                    valid[j] = 0;
+                    break;
+                }
+            }
+            k = k % fac[i-1];              // remaining k for the res of nums
+        }
+
+        return res;
+    }
+};
