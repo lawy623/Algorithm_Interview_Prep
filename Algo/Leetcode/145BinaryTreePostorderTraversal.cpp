@@ -1,19 +1,17 @@
 //1. Recursion. O(n).
 class Solution {
 public:
+    vector<int> res;
     vector<int> postorderTraversal(TreeNode* root) {
-        vector<int> res;
-        if(!root) return res;
-        
-        postorderTraversal(root,res);
+        dfs(root);
         return res;
     }
-    
-    void postorderTraversal(TreeNode* root, vector<int>& res){
+
+    void dfs(TreeNode* root){
         if(!root) return;
-        
-        postorderTraversal(root->left,res);
-        postorderTraversal(root->right,res);
+
+        dfs(root->left);
+        dfs(root->right);
         res.push_back(root->val);
     }
 };

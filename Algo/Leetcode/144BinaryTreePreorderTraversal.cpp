@@ -1,20 +1,18 @@
 //1. Recusion. O(N)
 class Solution {
 public:
+    vector<int> res;
     vector<int> preorderTraversal(TreeNode* root) {
-        vector<int> res;
-        if(!root) return res;
-        
-        preorderTraversal(root,res);
+        dfs(root);
         return res;
     }
-    
-    void preorderTraversal(TreeNode* root, vector<int>& res){
+
+    void dfs(TreeNode* root){
         if(!root) return;
-        
+
         res.push_back(root->val);
-        preorderTraversal(root->left,res);
-        preorderTraversal(root->right,res);
+        dfs(root->left);
+        dfs(root->right);
     }
 };
 

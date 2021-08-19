@@ -355,6 +355,18 @@ sum(list)				 	## sum of all elements
     方法1: 每个数后面有 (n-i)！个排列。根据k/(n-i)!+1数出当前i位置最小的第？个排列。k = k % (n-i)!
     复杂度： O(n) space, O(n^2) time
  
+> 26.H指数 ([Leetcode Q274](https://leetcode-cn.com/problems/h-index/))
+
+    方法1: quicksort. 当 citation.size() - i <= citation[i]时，证明已经是最大的index了，输出citation.size()-1;
+    复杂度： O(1) space, O(nlogn) time
+    
+    方法2：bucket sort。从大到小遍历每一个bucket，然后记录当前的h指数
+    复杂度： O(max_citation) space, O(n) time
+    
+    方法3：二分查找。当citation[m]<=citation.size()-m时，至少有citation.size()-m满足条件，可以向左看看是否还有更大的可能。否则向右
+          需要一个global value记录最大的h值（会一直变大）
+    复杂度： O(1) space, O(logn) time
+    
 ---
 <br />
 
@@ -1005,11 +1017,15 @@ it = s.equal_range(val)                                     ## return iter that 
 	
 	方法2： dfs。要用全局变量。dfs进行中序遍历，最先获取左下角最小的设为head。后面用cur和pre持续更新连接。
 	
-> 8.二叉树的深度 ([剑指offer Q38](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof))
+> 8_1.二叉树的深度 ([剑指offer Q38](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof))
 
 	方法1: 递归。叶节点返回深度为1.根节点返回1+max(左深度，右深度）
 	
 	方法2: dfs修改depth并回溯。记录max depth
+	
+> 8_2.二叉树的最小 ([Leetcode Q111](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/))
+
+	方法1: 递归。判断时注意子树为0的情况，这种情况下不能用1+min(l,r)只能l+r+1
 
 > 9.平衡二叉树判断 ([剑指offer Q39](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/)) ([CC150 Q17](https://www.nowcoder.com/practice/b6bbed48cd864cf09a34a6ca14a3976f?tpId=8&tqId=11011&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=1)) ([CC150 Sol](http://hawstein.com/2012/12/24/4.1/))
                  ([Leetcode Q110](https://leetcode-cn.com/problems/balanced-binary-tree/))
