@@ -395,10 +395,14 @@ arr[row][col]                           ## acces the idx
 	方法1: 从右上角开始判断，小了往下， 大了往左。
 	复杂度： O(1) space, O(n) time.
 
-> 2.顺时针打印矩阵 ([剑指offer Q19](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)) ([Leetcode Q54](https://leetcode-cn.com/problems/spiral-matrix))
+> 2_1.顺时针打印矩阵 ([剑指offer Q19](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)) ([Leetcode Q54](https://leetcode-cn.com/problems/spiral-matrix))
 
 	方法1: 每次开始都是(0,0)->(1,1)->(2,2)->...->(k,k)，直到2k>=n_row或2k>=n_col
 			对每个(k,k)开始的circle，四个方向找到头尾断点打印（但要判断各方向上是否需要打印。）
+			
+> 2_2. n^2个数顺时针输入矩阵 ([Leetcode Q59](https://leetcode-cn.com/problems/spiral-matrix-ii))
+
+	方法1: 记录四个边的界限，每次从l->r, u->d, r->l, d->u进行输入，注意到达边界时更新新的边界
 
 > 3.旋转矩阵 ([CC150 Q6](https://www.nowcoder.com/practice/17ab1e527c504df09a600e1af09d9a60?tpId=8&tqId=10999&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/08/1.6/))
             ([Leetcode Q48](https://leetcode-cn.com/problems/rotate-image))
@@ -975,7 +979,7 @@ it = s.equal_range(val)                                     ## return iter that 
           判断断开的右子树是否全部比根节点大
           再递归判断左右子树是否为二叉搜索树
 
-> 6_1.路径总和 （[Leetcode Q112](https://leetcode-cn.com/problems/path-sum/))
+> 6_1.路径总和（[Leetcode Q112](https://leetcode-cn.com/problems/path-sum/))
 
 	方法1: 递归. 为叶子节点就判断是否值为target。否则递归左右子树是否含有路径
 	复杂度：O(n) space, O(n) time
@@ -991,12 +995,12 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法1: 递归. 要加入prevsum，为叶子节点输出prevsum*10 + root->val, 否则左右子树相加
 	复杂度：O(n) space, O(n) time
 	
-> 6_4.最大路径和[Leetcode Q124](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/))
+> 6_4.最大路径和 ([Leetcode Q124](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/))
 
 	方法1: 递归. 由于路径不一定要到叶子节点，可以左右子树相连。最大和递归计算时可以把左右都加进来，但是输出给上一层时只能取左右最大的一支
 	复杂度：O(n) space, O(n) time
 	
-> 6_5.不一定从根节点开始的路径总数[Leetcode Q437](https://leetcode-cn.com/problems/path-sum-iii/))
+> 6_5.不一定从根节点开始的路径总数 ([Leetcode Q437](https://leetcode-cn.com/problems/path-sum-iii/))
 
 	方法1: 前缀和记录到节点某个父节点的和，到本节点时，查找new_sum - target是否在dict中。注意sum和dict在dfs之后都要回溯
 	复杂度：O(n) space, O(n) time
@@ -1023,7 +1027,7 @@ it = s.equal_range(val)                                     ## return iter that 
 	
 	方法2: dfs修改depth并回溯。记录max depth
 	
-> 8_2.二叉树的最小 ([Leetcode Q111](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/))
+> 8_2.二叉树的最小深度 ([Leetcode Q111](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/))
 
 	方法1: 递归。判断时注意子树为0的情况，这种情况下不能用1+min(l,r)只能l+r+1
 
@@ -1213,7 +1217,7 @@ stack.empty()                                               ## return whether th
 
 > 2.包含min函数的栈 ([剑指offer Q20](https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/)) ([Leetcode Q155](https://leetcode-cn.com/problems/min-stack/))
 
-	方法1: 用一个额外的栈保存至今最小的数，与value栈同步。若新加的数更小，推入新树，否则推入栈顶的树(事实上额外的栈不需要保存重复的最小值，如果新的值不大于栈顶的值则推入；如果pop的值==栈顶值一同pop掉)
+	方法1: 用一个额外的栈保存至今最小的数，与value栈同步。若新加的数更小，推入新数，否则推入栈顶的数(事实上额外的栈不需要保存重复的最小值，如果新的值不大于栈顶的值则推入；如果pop的值==栈顶值一同pop掉)
 	复杂度： O(n) space, O(1) time for min().
 
 > 3.栈的压入、弹出序列 ([剑指offer Q21](https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/)) ([Leetcode Q946](https://leetcode-cn.com/problems/validate-stack-sequences/))
@@ -1228,7 +1232,7 @@ stack.empty()                                               ## return whether th
 
 > 5_1.合法括号 ([CC150 Q45](https://www.nowcoder.com/practice/d8acfa0619814b2d98f12c071aef20d4?tpId=8&tqId=11039&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2013/01/12/8.5/))
               ([Leetcode Q20](https://leetcode-cn.com/problems/valid-parentheses))
->
+
 	方法1: 使用一个stack，当栈顶为'('且A字符为')'弹出栈顶，否则一次输入A的字符。如果合法，stack应为空。
 	复杂度： O(n) space, O(n) time.
 
@@ -1330,6 +1334,7 @@ dq.clear()                                                  ## clear
 
     方法1: 要记录每个状态下的最大值，通过一个双边队列进行
 	复杂度： O(1) space, O(n) time.
+	
 ---
 <br />
 
@@ -1596,7 +1601,7 @@ from bitarray import bitarray
 	方法2: n&(n-1) == 0. 任何一个1000 - 1都是0111的形式，&一定为0
 	复杂度： O(1) space, O(1) time.
 
-> 2.数组中只出现一次的两个数字 ([剑指offer Q40](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/))
+> 2_2.数组中只出现一次的两个数字 ([剑指offer Q40](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/))
 
 	方法1: 使用map记录每个数字出现的个数
 	复杂度： O(n) space, O(n) time.
@@ -1649,7 +1654,7 @@ from bitarray import bitarray
 	
 > 7.格雷编码 ([Leetcode Q89](https://leetcode-cn.com/problems/gray-code/))
 
-    方法1: 对每个i，编码为i^i/2, 一共i<<N个数
+    方法1: 对每个i，编码为i^(i>>1), 一共1<<N个数
 	复杂度： O(1) space, O(2^n) time.
 
 ---
@@ -1800,7 +1805,7 @@ from bitarray import bitarray
     复杂度： O(1) space, O(n) time
     相似题目：不同的二叉搜索树II([Leetcode Q95]): 递归的把左右子树都求出来，拼接在当前node上
     
-> 17_1.单词拆分 ([Leetcode Q64](https://leetcode-cn.com/problems/word-break))
+> 17.单词拆分 ([Leetcode Q64](https://leetcode-cn.com/problems/word-break))
 
     方法1: 用一个set保存可行的单词选择。dp[i] = dp[j] && set.contains(s.substr(j, i-j)) for all j. 某个点为true就可设置为true
     复杂度： O(n) space, O(n^2) time
@@ -1820,6 +1825,7 @@ from bitarray import bitarray
 
     方法1: 等价于取出子集中n个元素，和为整个和的一般（01背包问题）
     复杂度： O(sum) space, O(n*target) time
+    相似题目： 01背包-所有的背包问题都可以化成二维dp数组，然后可以化简为1维dp
     
 > 20_2.目标和 ([Leetcode Q494](https://leetcode-cn.com/problems/target-sum/))
 
@@ -2104,10 +2110,11 @@ sum(list)				 ## sum of all elements in list
 		}
 	}
 	int partition(vector<int>& nums,int low, int high){
-		int pivot = nums[high];
+        int pivot = rand() % (end-start+1) + start;  // increase randomness
+        swap(nums[pivot], nums[high])
 		int i=low-1;
 		for(int j=low;j<high;j++){
-			if(nums[j]<=pivot){
+			if(nums[j]<=nums[high]){
 				swap(nums[++i],nums[j]);
 			}
 		}
@@ -2191,7 +2198,7 @@ sum(list)				 ## sum of all elements in list
 > 最差时间复杂度: O(n^2) <br>
 > 稳定性: 稳定
 
-
+    Pass
 
 ---
 <br />
@@ -2217,38 +2224,38 @@ sum(list)				 ## sum of all elements in list
 9.Count-Min Sketch
 ### 问题及思路
 
-> 1.海量日志数据，提取出某日访问百度次数最多的那个IP([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.02.html))
+> 1.海量日志数据，提取出某日访问百度次数最多的那个IP ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.02.html))
 
 	数量过多，内存中无法放进全部。采用hash分而治之。
 	通过日期将ip提取，hash到每个机器上分别统计
 	取出每个机器上最大的结果（因为已经hash过了，相同ip都在同一个机器上）。可使用最大堆
 
-> 2.寻找热门查询，300万个查询字符串中统计最热门的10个查询([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.02.html))
+> 2.寻找热门查询，300万个查询字符串中统计最热门的10个查询 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.02.html))
 
 	内存中可以全部放的下。先通过O(n)扫描统计每个查询的次数。再用堆维护
 	时间为O(N) + N'*O(logk)， N'为去除重复之后的个数
 	相关问题：统计词频最高的100个词（也可使用Trie树），100万个数中最大的100个数
 
-> 3.海量数据分布在100台电脑中，想个办法高效统计出这批数据的TOP10([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.02.html))
+> 3.海量数据分布在100台电脑中，想个办法高效统计出这批数据的TOP10 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.02.html))
 
 	由于数据已经分散。
 	方法1: 重新遍历，再hash分配，再用max heap
 	方法2: map-reduce，在每块上分别统计，再统一在一起求出现次数
 
-> 4.2.5亿个整数中找出不重复的整数的个数，内存空间不足以容纳这2.5亿个整数([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.06.html))
+> 4.2.5亿个整数中找出不重复的整数的个数，内存空间不足以容纳这2.5亿个整数 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.06.html))
 
 	将数据分为多个区域（如2^8），每个中使用bitmap统计，内存够用（每个bit代表一个数字）
 
-> 5.5亿个int找它们的中位数([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.06.html))
+> 5.5亿个int找它们的中位数 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.06.html))
 
 	将数据从大到小分到不同的机器中。从小机器开始统计个数，不断累加，直到到达中位数
 
-> 6.10万个长度不超过10的单词判断前面是否出现过([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.09.html))
+> 6.10万个长度不超过10的单词判断前面是否出现过 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.09.html))
 
 	1.构建一个trie树（26叉树），每遇到一个词，插入和查询可以一起进行，都是O(1)时间（因为长度为10）
 	2.允许错误时也可以用bloom filter
 
-> 7.两个大文件是否有相同url([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.08.html))
+> 7.两个大文件是否有相同url ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/06.08.html))
 
 	1.若允许一定的错误率，可以使用bloom filter。将一个文件中的url全部映射到全部内存表示的bits（4G->340亿bit）中。在扫描第二个文件，使用filter看是否存在
 	2.可将文件1的url通过hash放到多个小文件中，然后将文件2遍历看是否在存在的小文件中
@@ -2410,7 +2417,6 @@ sum(list)				 ## sum of all elements in list
 	volatile的意思是”易变的”，因为访问寄存器比访问内存要快得多，所以编译器一般都会做减少存取内存的优化。
 	volatile 这个关键字会提醒编译器，它声明的变量随时可能发生变化(在外部被修改).
 	因此，与该变量相关的代码不要进行编译优化，以免出错。
-
 
 ---
 <br />
