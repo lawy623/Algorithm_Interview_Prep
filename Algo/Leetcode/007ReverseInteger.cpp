@@ -23,8 +23,7 @@ public:
         int result = 0;
         while (x) {
             auto prev = result;
-            result *= 10;
-            result += x % 10;
+            result = result * 10 + x % 10;  //  but it will get wrong in some case that overflow already
             if (result / 10 != prev) {  //已经溢出，才会导致此处不等
                 result = 0;
                 break;
@@ -39,15 +38,15 @@ public:
 //3. 16ms 
 class Solution {
 public:
-    int reverse(int x) {
-        int rev = 0;
-        while (x != 0) {
-            int pop = x % 10;
-            x /= 10;
-            if (rev > INT_MAX/10 || (rev == INT_MAX / 10 && pop > 7)) return 0;
-            if (rev < INT_MIN/10 || (rev == INT_MIN / 10 && pop < -8)) return 0;
-            rev = rev * 10 + pop; //只有确定不会超了才加上去变新的
+    int reverse(int x){
+        int res = 0;
+
+        while(x!=0){
+            if (res > INT_MAX / 10 || (res == INT_MAX / 10 && x % 10 > 7)) return 0;  // last digit of INT_MAX is 7
+            if (res < INT_MIN / 10 || (res == INT_MIN / 10 && x % 10 < -8)) return 0; // last digit of INT_MIN is 8
+            res = res * 10 + x % 10;   // we should ensure this will not overflow
+            x = x / 10;
         }
-        return rev;
+        return res;
     }
 };

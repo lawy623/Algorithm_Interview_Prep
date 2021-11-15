@@ -56,3 +56,23 @@ void printList(ListNode* p){
 	}
 	cout << endl;
 }
+
+
+
+// string
+#include <string>
+
+string s;  // whole line with string
+getline(cin, s);
+cout << s << endl;
+
+char ch[1000];
+cin >> ch;    // line break with space (e.g. screff 10, you need both string and num)
+string s = ch;
+cout << s << " " << s.length() << endl;
+
+
+// INT_MAX and MIN
+#include <bits/stdc++.h>
+
+cout << INT_MAX << INT_MIN << endl;
