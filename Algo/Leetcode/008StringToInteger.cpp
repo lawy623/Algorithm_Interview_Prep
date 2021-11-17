@@ -46,7 +46,7 @@ public:
         int pre = 0, res = 0; 
         for(;i<str.length() && isdigit(str[i]) ;i++){
                 res = res * 10 + sign*(str[i]-'0'); 
-                if(res / 10 != pre) return sign>0? INT_MAX:INT_MIN;
+                if(res / 10 != pre) return sign>0? INT_MAX:INT_MIN;  // This can not be used in leetcode
                 pre = res;
         }
         return res;
@@ -56,33 +56,30 @@ public:
 // more clear exit mode
 class Solution {
 public:
-    int myAtoi(string str) {
-        int n = str.length();
+    bool isNum(char c){
+        return '0' <= c && c <= '9';
+    }
+
+    int myAtoi(string s){
+        int n = s.length();
         if(n==0) return 0;
-        int move = 0;
-        while(move<n && str[move]==' ') move++;
-        if(move==n) return 0;
-        int sign = 1;
-        if(str[move] == '-'){
-            sign = -1;
-            move++;
-        } else if(str[move] == '+'){
-            move++;
-        }
-        if(move==n) return 0;
-
         int res = 0;
-        while(move<n && isNum(str[move])){
-            if(res>INT_MAX/10 || ((res==INT_MAX/10) && str[move] > '7'))
-                return sign>0?INT_MAX:INT_MIN;
-            res = 10*res + (str[move++]-'0');
+        int i = 0;
+        int sign = 1;
+        while(i < n && s[i] == ' ')
+            i++;
+        if(s[i] == '-' || s[i] == '+')
+            sign = s[i++]=='-'?-1:1;
+        while(i < n && isNum(s[i])){
+            if (res > INT_MAX / 10 || res == INT_MAX / 10 && int(s[i]-'0') > 7)
+                return INT_MAX;
+            if (res < INT_MIN / 10 || res == INT_MIN / 10 && int(s[i]-'0') > 8)
+                return INT_MIN;
+            res = res * 10 + sign * int(s[i]-'0');
+            i++;
         }
-        return sign*res;
+        return res;
     }
-
-    int isNum(char c){
-        if(c-'0' >=0 && c-'0'<=9) return true;
-        else return false;
-    }
+};
 
 };

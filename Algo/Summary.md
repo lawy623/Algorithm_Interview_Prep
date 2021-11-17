@@ -1656,6 +1656,14 @@ from bitarray import bitarray
 
     方法1: 对每个i，编码为i^(i>>1), 一共1<<N个数
 	复杂度： O(1) space, O(2^n) time.
+	
+> 8.最大单词长度乘积 ([Leetcode Q318](https://leetcode-cn.com/problems/maximum-product-of-word-lengths/submissions/))
+
+    方法1: 将每个单词使用bit编码成一个int， 查看是否有重复只需要用&即可
+	复杂度： O(L+n^2) space, O(2^n) time.
+	
+	方法2：编码成int之后， 只需要用map储存最大的单词长度即可
+	复杂度：  O(L+n^2) space, O(2^n) time.
 
 ---
 <br />
