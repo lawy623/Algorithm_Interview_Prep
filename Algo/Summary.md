@@ -62,6 +62,7 @@ vec.insert(vec.begin()+i, x)                                ## insert x at i+1 p
 vec.erase(vec.begin()+i)                                    ## remove the i+i val
 vec.erase(vec.begin()+i, vec.begin()+j)                     ## remove from i+1 to j
 reverse(vec.begin(), vec.end())                             ## reverse the vector
+vec2.assign(vec1.begin(), vec2.begin())                     ## copy vec1's value to vec2
 ```
 ### Python用法
 ```python

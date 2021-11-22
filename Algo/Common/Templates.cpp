@@ -72,7 +72,35 @@ string s = ch;
 cout << s << " " << s.length() << endl;
 
 
-// INT_MAX and MIN
+// STDC++ Lib
 #include <bits/stdc++.h>
 
 cout << INT_MAX << INT_MIN << endl;
+sort(nums.begin(), nums.end());
+
+
+// class
+class Solution {
+public:
+    Solution(vector<int> nums){
+        //TODO Init
+    }
+
+    void method1(){
+        //Implement m1
+    }
+
+    void method2(){
+        //Implement m2
+    }
+
+private:
+    vector<int> priNums;
+};
+
+Solution s = Solution([1, 2, 3]);  // 在栈中初始
+s.method1();
+
+Solution* s = new Solution([1, 2, 3]);  // 在堆中初始， 适合大对象， 要记得delete
+s -> method2();
+delete s;
