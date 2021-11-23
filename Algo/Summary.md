@@ -451,6 +451,8 @@ stoi(str)                                                    ## string to int
 stof(str)                                                    ## string to float
 sort(&str[0], &str[0]+str.length())	                         ## sort a string
 reverse(str.begin(), str.end())                              ## reverse string
+s1 == s2                                                     ## compare two string
+char c[1000]; string s = c;                                  ## input string with char array. Useful for input
 ```
 ```c++
 char* str													 ## String by char pointer. Then end is always '\0'
@@ -464,7 +466,7 @@ ostringstream os;                                            ## init ostringstre
 	while () {os << "str "}                                  ## assign values to ostringstream
 	return os.str()                                          ## change the ostringstream to string
 ```
-凡是字符串，可以考虑用 "unsigned int table[256]={0}" 来储存每个char的信息。
+凡是字符串，可以考虑用 "unsigned int table[256]={0}" 或者vector<int> table(256, 0)) 来储存每个char的信息。
 
 使用int arr[8]可以更少的使用空间。每一个char可有 arr[pos/32]<<(pos%32) 表示。
 ### Python用法
