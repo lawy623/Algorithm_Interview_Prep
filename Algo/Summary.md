@@ -1989,6 +1989,11 @@ sum(list)				 ## sum of all elements in list
     方法2：牛顿法。迭代函数为 0.5(xi + x/xi)直到xi和xi+1差距小于阈值
           牛顿法的通俗公式为 xi+1 = xi - f(xi)/f`(xi) ，带入函数x^2-C ->  xi - (xi^2-C)/2xi -> 0.5(xi + x/xi)
     复杂度： O(1) space, O(logn) time.
+
+> 14.可怜的猪 ([Leetcode Q458](https://leetcode-cn.com/problems/poor-pigs)) 
+    
+    方法1：可推导出最少的数量满足(test/Die + 1)^n >= buckets， 取值即为 ceil(log(buckets) / log(test/die+1))
+    复杂度： O(1) space, O(1) time.
     
 ---
 <br />
@@ -1999,7 +2004,7 @@ sum(list)				 ## sum of all elements in list
 
 > 1.最大的盛水容器 ([Leetcode Q11](https://leetcode-cn.com/problems/container-with-most-water/))
 
-    方法1: 双指针。每次移动较小值的指针。如果移动较大值的指针，最小高度不变，容积一定减小
+    方法1: 双指针。每次移动较小值的指针。如果移动较大值的指针，最小高度不变，容积一定减小。因此较小边不可能作为最优的边界， 需要移动
     复杂度： O(1) space, O(n) time
     
 > 2_1.跳跃游戏([Leetcode Q55](https://leetcode-cn.com/problems/jump-game))

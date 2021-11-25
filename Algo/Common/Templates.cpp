@@ -98,9 +98,15 @@ private:
     vector<int> priNums;
 };
 
-Solution s = Solution([1, 2, 3]);  // 在栈中初始
+Solution s = Solution([1, 2, 3]);  // 在栈中初始, 如果对象太大， 容易stack overflow
 s.method1();
 
 Solution* s = new Solution([1, 2, 3]);  // 在堆中初始， 适合大对象， 要记得delete
 s -> method2();
 delete s;
+
+
+// math (log, ceil, floor)
+#include <math.h>
+
+int x = ceil(log(10) / log(4));

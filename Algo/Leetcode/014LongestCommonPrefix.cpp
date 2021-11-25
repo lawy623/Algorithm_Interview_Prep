@@ -22,40 +22,36 @@ public:
 // For loops
 class Solution {
 public:
-    string longestCommonPrefix(vector<string>& strs) {
+    string longestCommonPrefix(vector<string>& strs){
         int n = strs.size();
-        if(n==0) return "";
-        if(n==1) return strs[0];
-
-        string res = "";
-        int pos = 0;
+        if(n==1) return strs[0];            // you need this otherwise it stuck.
+        int i = 0;
         while(true){
-            if(pos>=strs[0].length()) return res;
-            char c = strs[0][pos];
-            for(int i=1; i<strs.size(); i++){
-                if(pos >= strs[i].length() || strs[i][pos]!=c) return res;
+            for(int j=1; j<strs.size(); j++){
+                if(i>=strs[j].size() || i>=strs[0].size() || strs[0][i] != strs[j][i])
+                    return strs[0].substr(0, i);
             }
-            res += c;
-            pos++;
+            i++;
         }
-        return res;
+        return "";
     }
 };
 
 // sort and compare first and end
 class Solution {
 public:
-    string longestCommonPrefix(vector<string>& strs) {
+    string longestCommonPrefix(vector<string>& strs){
+        sort(strs.begin(), strs.end());   // The sort here may takes much longer time
         int n = strs.size();
-        if(n==0) return "";
         if(n==1) return strs[0];
 
-        sort(strs.begin(), strs.end());
-        int pos = 0;
-        while(true){
-            if(pos < strs[0].length() && pos < strs[strs.size()-1].length() && strs[0][pos]==strs[strs.size()-1][pos]) pos++;
-            else break;
+        int i=0;
+        while(i<strs[0].length() && i<strs[n-1].length()){
+            if(strs[0][i] == strs[n-1][i])
+                i++;
+            else
+                break;
         }
-        return strs[0].substr(0, pos);
+        return strs[0].substr(0, i);
     }
 };
