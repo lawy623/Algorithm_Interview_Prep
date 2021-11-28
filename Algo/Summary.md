@@ -638,6 +638,15 @@ s.isupper()                          ## string is all uppercases
     方法1：异位词通过sort可以变成等价(O(nlogn)time, 通过dict判断次数可以到O(n)). 通过一个dict，用sort string当作k，value是对应的数组
     复杂度： O(nk) space, O(nklogk) time
     
+> 17_2.找到所有的异位词 ([Leetcode Q438](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string))
+
+    方法1：滑动窗口， 不断更新长度为26的数组中的count， 不断地判断是否满足所有的count都为0
+    复杂度： O(26) space, O(m + (n-m) * 26) time
+    
+    方法1：滑动窗口，但是不需要每次更新完数组都计算数组是否全为0， 用一个diff变量比较即可。再每一次窗口变动的时候，需要根据进出值的情况维护
+          数组和diff变量。但是每次窗口变动， 减少了比较需要的时间
+    复杂度： O(26) space, O(n+m+ 26) time
+    
 > 18.最小覆盖子串 ([Leetcode Q76](https://leetcode-cn.com/problems/minimum-window-substring))
 
     方法1：用一个hash table c2保存目标子串的各位count。双指针滑动窗口遍历。另一个table c1记录实际遇到的情况
