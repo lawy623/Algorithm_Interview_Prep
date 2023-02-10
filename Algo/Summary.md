@@ -92,6 +92,7 @@ sum(list)				 	## sum of all elements
 	· mid == end && mid == start, 则查找[start+1, end-1] <--(注意[1,0,1,1,1]与[1,1,1,0,0]的特殊case)
 	· mid>end, 则查找[mid+1, end];
 	· 其他情况,则查找[start, mid]
+    注意的就是： 合理的左中右三种情况，只要中间比右小， 就可以往左边放缩
 	复杂度： O(1) space, O(logn) time.
 
 > 1_2.搜索排序旋转数组 ([Leetcode Q33](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/))
@@ -100,6 +101,7 @@ sum(list)				 	## sum of all elements
             如果mid>=l, 证明在左侧上升序列。只有当target的值在l和mid中间才往(l,mid-1)搜，否则往(mid+1,r)搜
             否则在右侧上升序列。只有当target的值在r和mid中间才往(mid+1，r)搜，否则往(l,mid-1)搜
             与边界值的判断都要带等号
+    将其想像成：两组上升的序列，找到mid所属哪边，再用二分法查找
 	复杂度： O(1) space, O(logn) time.
 	
 > 1_3.查找峰值 ([Leetcode Q162](https://leetcode-cn.com/problems/find-peak-element/))
@@ -2307,7 +2309,7 @@ sum(list)				 ## sum of all elements in list
 # <h2 id="17">其他（Other）</h2>
 ## 操作系统
 ### 问题及思路
-来自([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/08.04.html))
+来自[程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/08.04.html)
 
 > 1.请问死锁的条件是什么？
 
@@ -2360,7 +2362,7 @@ sum(list)				 ## sum of all elements in list
 
 ## 计算机网络
 ### 问题及思路
-来自([CC150](http://hawstein.com/2013/03/14/ctci-solutions-contents/))
+来自[CC150](http://hawstein.com/2013/03/14/ctci-solutions-contents/)
 > 1.往浏览器中输入一个URL后都发生了什么：
 
 	1.浏览器向DNS服务器查找输入URL对应的IP地址。
@@ -2372,7 +2374,7 @@ sum(list)				 ## sum of all elements in list
 
 ## 编译
 ### 问题及思路
-来自([github](https://github.com/lawy623/interview))
+来自[github](https://github.com/lawy623/interview)
 
 > 1.编译链接过程：
 
@@ -2398,7 +2400,7 @@ sum(list)				 ## sum of all elements in list
 
 ## C++
 ### 问题及思路
-来自([github](https://github.com/lawy623/interview))([CC150](http://hawstein.com/2013/03/14/ctci-solutions-contents/))
+来自[github](https://github.com/lawy623/interview))([CC150](http://hawstein.com/2013/03/14/ctci-solutions-contents/)
 
 > 1.const 作用
 

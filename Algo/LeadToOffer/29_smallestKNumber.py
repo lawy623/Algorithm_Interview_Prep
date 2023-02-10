@@ -12,40 +12,46 @@ class Solution:
             k -= 1
 
         return res
+
 ## 2. find k-th smallest and loop.  Total O(n) time.
-class Solution:
-    def GetLeastNumbers_Solution(self, tinput, k):
-        if k<=0 or len(tinput)==0 or k>len(tinput):
+class Solution(object):
+    def getLeastNumbers(self, arr, k):
+        """
+        :type arr: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        if k == 0:
             return []
-
-        res = []
-        kth = self.findKSmallest(tinput, k)
-        for x in tinput:
-            if x < kth:
-                res.append(x)
-        while len(res)<k:
-            res.append(kth)
-        res.sort()
-        return res
-
-    def findKSmallest(self, numbers, k):
-        left, right = 0, len(numbers)-1
-        while True:
-            idx = self.partition(numbers, left, right)
-            if idx == k-1:
-                return numbers[idx]
-            elif idx > k-1:
-                right = idx - 1
+        l = 0
+        r = len(arr) - 1
+        pivot = partition(arr, l, r)
+        while (pivot != k - 1):  # remember it is k + 1
+            if pivot > k - 1:
+                r = pivot - 1
             else:
-                left = idx + 1
+                l = pivot + 1
+            pivot = partition(arr, l, r)
 
-    def partition(self, numbers, left, right):
-        pivot = numbers[right]
-        pos = left-1
-        for i in range(left, right):
-            if numbers[i] <= pivot:
-                pos += 1
-                numbers[pos], numbers[i] = numbers[i], numbers[pos]
-        pos += 1
-        numbers[pos], numbers[right] = numbers[right], numbers[pos]
-        return pos
+        return arr[:k]
+
+
+def partition(arr, start, end):
+    if start >= end:
+        return start
+
+    pivot = arr[end]
+    idx = start
+    for i in range(start, end):
+        if arr[i] <= pivot:
+            swap(arr, i, idx)
+            idx += 1
+    swap(arr, idx, end)
+
+    return idx
+
+
+def swap(arr, l, r):
+    tmp = arr[l]
+    arr[l] = arr[r]
+    arr[r] = tmp
