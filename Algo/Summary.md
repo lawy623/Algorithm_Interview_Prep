@@ -148,12 +148,12 @@ sum(list)				 	## sum of all elements
 
 	方法1: 使用最小堆。构建堆，再推出直到第k个数
 	复杂度： O(n) space, O(n+klogn) time. 当n>>k时效率高
-	
+
 	方法2: QuickSelect通过找到第k小的数找到中位数。同快排，通过partition找到中间pivot的位置
 			如果pivot是第k个则返回。大于k则partition前面的数组，小于k则partition后面的数组
 	复杂度： O(1) space, O(n) time（On average, worst O(n^2)）.
 
-> 5.把数组排成最小的数 ([剑指offer Q32](https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof)
+> 5.把数组排成最小的数 ([剑指offer Q32](https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof))
 
 	方法1: 定义一种排序方式。当“前+后”比“后+前”小时，前<后。排序后返回即可
 			需要证明该排序定义的A1A2A3....An是最小的。可用反证法证明
@@ -2400,7 +2400,7 @@ sum(list)				 ## sum of all elements in list
 
 ## C++
 ### 问题及思路
-来自[github](https://github.com/lawy623/interview))([CC150](http://hawstein.com/2013/03/14/ctci-solutions-contents/)
+来自([github](https://github.com/lawy623/interview)) ([CC150](http://hawstein.com/2013/03/14/ctci-solutions-contents/))
 
 > 1.const 作用
 
