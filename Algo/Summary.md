@@ -393,10 +393,11 @@ arr[row][col]                           ## acces the idx
 
 ### 问题及思路
 
-> 1.递增二维数组中的查找 ([剑指offer Q1](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/) ([Leetcode Q240](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/))
+> 1.递增二维数组中的查找 ([剑指offer Q1](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)) ([Leetcode Q240](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/))
 
 	方法1: 从右上角开始判断，小了往下， 大了往左。
 	复杂度： O(1) space, O(n) time.
+    相关题目: [Leetcode Q74] 二分查找矩阵化的一维升序数组
 
 > 2_1.顺时针打印矩阵 ([剑指offer Q19](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)) ([Leetcode Q54](https://leetcode-cn.com/problems/spiral-matrix))
 
