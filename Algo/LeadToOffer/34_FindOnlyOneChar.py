@@ -13,3 +13,21 @@ class Solution:
             if c in dict_v and dict_v[c]==1:
                 return i
         return -1
+
+# more clear
+class Solution(object):
+    def firstUniqChar(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+
+        d = {}
+        for n in s:
+            d[n] = d.get(n, 0) + 1
+
+        for n in s:
+            if d[n] == 1:
+                return n
+
+        return " "

@@ -27,3 +27,33 @@ class Solution:
         res_.sort()
 
         return res_
+
+
+# recursion
+class Solution(object):
+
+    def __init__(self):
+        self.res = []
+        self.path = []
+
+    def permutation(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        s = sorted(s)  # avoid repeat
+        self.n = len(s)
+        self.dfs(s)
+
+        return list(set(self.res))
+
+    def dfs(self, s):
+        if len(self.path) == self.n:
+            self.res.append(''.join(self.path))
+            return
+
+        for i, n in enumerate(s):
+            tmp = s[:i] + s[i + 1:]
+            self.path.append(n)
+            self.dfs(tmp)
+            self.path.pop()

@@ -619,7 +619,7 @@ s.isupper()                          ## string is all uppercases
 	
 	方法2: 构造一个Trie树。将str所有的后缀插入树中。如果为子串，则必定在树中
 
-> 14.最长无重复子串 ([Leetcode Q3](https://leetcode.com/problems/longest-substring-without-repeating-characters/))
+> 14.最长无重复子串 ([Leetcode Q3](https://leetcode.cn/problems/longest-substring-without-repeating-characters/))
 
 	方法1: 用一个前指针记录前一个当前最前面无重复的起始点。用一个map记录重复的情况。
 	      默认初始最前无重复的前指针位置为-1. 更新的是滑动窗口的左窗，如果现在的在窗口中出现过，更新左窗位置
