@@ -18,7 +18,7 @@ public:
 
         for(int i=0; i<m; i++){
             count[p[i]-'a'] -= 1;
-            count[s[i]-'a'] -= 1;
+            count[s[i]-'a'] += 1;
         }
 
         if(checkAllZero(count)) res.push_back(0);
@@ -58,7 +58,7 @@ public:
         vector<int> count(26, 0);
         for(int i=0; i<m; i++){
             count[p[i]-'a'] -= 1;
-            count[s[i]-'a'] -= 1;
+            count[s[i]-'a'] += 1;
         }
         int diff = countDiff(count);
 
