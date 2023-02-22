@@ -39,9 +39,9 @@ public:
             return n-1;
 
         int f_n_m = 0;
-	for(int i = 2; i <= n; i++) {
-	    f_n_m = (f_n_m + m) % i;
-	}
-	return f_n_m;
+        for(int i = 2; i <= n; i++) {
+            f_n_m = (f_n_m + m) % i;
+        }
+        return f_n_m;
     }
 };

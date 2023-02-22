@@ -736,10 +736,25 @@ l.merge(l2)                                                 ## merge two sorted 
 ```
 ### Python用法
 ```python
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+def printList(l):
+	res = []
+	while l:
+		res.append(l.val)
+		l = l.next
+	return res
+
+def buildList(arr):
+    f = ListNode()
+    m = f
+    for n in arr:
+        m.next = ListNode(n)
+        m = m.next
+    return f.next
 ```
 
 ### 问题及思路
@@ -752,7 +767,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法2: 用额外的stack储存，再返回
 	复杂度： O(n) space, O(n) time.
 
-> 2.链表中倒数第k个结点 ([剑指offer Q14](https://www.nowcoder.com/practice/529d3ae5a407492994ad2a246518148a?tpId=13&tqId=11167&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.链表中倒数第k个结点 ([剑指offer Q14](https://leetcode.cn/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof))
 
 	方法1: 双指针，让头指针先走k步，再让前后指针一起走
 	复杂度： O(1) space, O(n) time.
@@ -839,7 +854,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法2: 用一个map保存是否遇到过相同指针。指针不停向前，若遇到相同map中存在证明有环且为环的入口
 	复杂度： O(n) space, O(n) time.
 
-> 9_1.删除排序链表中重复的结点 ([剑指offer Q56](https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 9_1.删除排序链表中重复的结点 ([Leetcode Q83](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/))
 
 	方法1: 递归判断是否遇到重复节点。是的话跳过这一段。注意下一节点为null的情况。
 	复杂度： O(1) space, O(n) time.
@@ -852,7 +867,7 @@ l.merge(l2)                                                 ## merge two sorted 
 	方法2: 用一个hash判断该节点是否曾经出现过
 	复杂度： O(n) space, O(n) time.
 
-> 10_1.删除链表节点 ([CC150 Q9](https://www.nowcoder.com/practice/6a668a3960e24d3ea04bba89109c6451?tpId=8&tqId=11003&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/15/2.3/))
+> 10_1.删除链表节点 ([剑指offer Q18](https://leetcode.cn/problems/shan-chu-lian-biao-de-jie-dian-lcof/)) ([CC150 Sol](http://hawstein.com/2012/12/15/2.3/))
                 
 	方法1: 将指向节点的下一个节点的值copy至指向节点。再删除下一个节点
 			如果该节点是尾节点，则必须要遍历
