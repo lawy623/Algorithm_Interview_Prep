@@ -19,6 +19,7 @@
 #### [15.排序算法（Sorting）](#15)
 #### [16.大数据问题（Big Data）](#16)
 #### [17.其他（Other）](#17)
+
 ---
 
 # <h2 id="1">数组(Array)</h2>
@@ -969,11 +970,11 @@ it = s.equal_range(val)                                     ## return iter that 
 ```
 ### Python用法
 ```python
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 ```
 
 ### 问题及思路
@@ -995,14 +996,14 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法2: 使用queue，每次互换最头上的节点的左右子树，再将左右子树的节点推入队列
 	复杂度： O(n) space, O(n) time.
 
-> 4.从上往下打印二叉树（层级遍历）([剑指offer Q22](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/))
+> 4.从上往下打印二叉树（层级遍历）([剑指offer Q22](https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/))  ([LeetCode Q102](https://leetcode.cn/problems/binary-tree-level-order-traversal/))
 
 	方法1: 使用queue，每次弹出队列的头，将左右子树推入队尾
 	复杂度： O(n) space, O(n) time.
 	相关问题：- 把二叉树打印成多行（每次要记录queue的大小，每次pop掉一层的节点）
 			- 将某一层输出成为链表 (CC150 Q20)
 
-> 5.二叉搜索树的后序遍历序列构造二叉树 ([剑指offer Q23](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof))
+> 5.二叉搜索树的后序遍历序列判断 ([剑指offer Q23](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof))
 
 	方法1: 后序遍历数组[左子树节点，右子树节点，根结点]。注意这是二叉搜索树
           每次通过根节点找到数组前面第一个比根节点大的数作为右子树开始（找不到则返回自己的位置）。
@@ -1040,7 +1041,7 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法1: dfs函数记录从root开始的最大深度。用一个global记录max(l+r+1)为最大路径（左+右最大深度+1）。和6_4十分接近
 	复杂度： O(1) space, O(n) time
 
-> 7.二叉搜索树与双向链表 ([剑指offer Q26](https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&tqId=11179&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 7.二叉搜索树与双向链表 ([剑指offer Q26](https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/))
 
 	方法1: 递归。用一个自定义的TopEndNode保存左右子树恢复的双向链表的头尾。再与root节点融合成新的双向链表
 	struct TopEndNode {
@@ -1050,7 +1051,9 @@ it = s.equal_range(val)                                     ## return iter that 
 	};
 	
 	方法2： dfs。要用全局变量。dfs进行中序遍历，最先获取左下角最小的设为head。后面用cur和pre持续更新连接。
-	
+    
+    相似题目: 有序链表转换二叉树（Leetcode Q109)	
+
 > 8_1.二叉树的深度 ([剑指offer Q38](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof))
 
 	方法1: 递归。叶节点返回深度为1.根节点返回1+max(左深度，右深度）
@@ -1125,7 +1128,7 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法2: 对比root的两个子树是否对称，可递归判断(left->right,right->left) && (left->left,right->right) 是否都对称
 	复杂度： O(1) space, O(n) time.
 
-> 13.按之字形顺序打印二叉树 ([剑指offer Q59](https://www.nowcoder.com/practice/91b69814117f4e8097390d107d2efbe0?tpId=13&tqId=11212&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 13.按之字形顺序打印二叉树 ([剑指offer Q59](https://www.nowcoder.com/practice/91b69814117f4e8097390d107d2efbe0?tpId=13&tqId=11212&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))  ([Leetcode Q103](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/))
 
 	方法1: 用两个stack记录每层结果，用一个bool记录是向左还是向右遍历。
 		  每次将一个stack中的子节点向另一个方向传输。通过方向确定先传左还是先传右
@@ -1150,6 +1153,8 @@ it = s.equal_range(val)                                     ## return iter that 
 	方法3: dfs
 	复杂度： O(1) space, O(n) time
 
+    相关题目：前序（Q144）， 后序（Q145)
+
 > 16_1.二叉树搜索树的第k个节点 ([Leetcode Q230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/))
 
 	方法1: 递归。先用一个函数递归求树的节点数目。如果左节点数目等于k-1，返回root；大于k-1则返回左子树的第k个；否则返回右子树的k-leftcount-1个节点
@@ -1169,7 +1174,7 @@ it = s.equal_range(val)                                     ## return iter that 
     方法1: 从右中序遍历就是排序。用一个global值记录即可即可
 	复杂度： O(1) space, O(n) time
 
-> 17.递增数列构建最低二叉搜索树 ([CC150 Q19](https://www.nowcoder.com/practice/01a12f94988649e39b554d95c45bfa6f?tpId=8&tqId=11013&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/26/4.3/))
+> 17.递增数列构建最低二叉搜索树 ([Leetcode Q108](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/)) ([CC150 Sol](http://hawstein.com/2012/12/26/4.3/))
 
 	方法1: 每次取mid，递归构建
 

@@ -1,19 +1,29 @@
-## Use Queue for level print
-class Solution:
-    # 返回从上到下每个节点值列表，例：[1,2,3]
-    def PrintFromTopToBottom(self, root):
-        if root is None:
-            return []
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+class Solution(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        tmp = []
         res = []
-        queue = []
-        queue.append(root)
-        while len(queue)>0:
-            x = queue[0]
-            queue.pop(0)
-            res.append(x.val)
-            if x.left is not None:
-                queue.append(x.left)
-            if x.right is not None:
-                queue.append(x.right)
+        if root is None:
+            return tmp
+
+        tmp.append(root)
+        while len(tmp) > 0:
+            n = tmp[0]
+            res.append(n.val)
+            if n.left is not None:
+                tmp.append(n.left)
+            if n.right is not None:
+                tmp.append(n.right)
+            tmp.pop(0)
+
         return res
