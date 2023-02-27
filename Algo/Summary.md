@@ -1355,7 +1355,7 @@ dq.clear()                                                  ## clear
 ```
 ### 问题及思路
 
-> 1.滑动窗口的最大值 ([剑指offer Q64](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/))
+> 1.滑动窗口的最大值 ([剑指offer Q64](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/)) ([Leetcode Q239](https://leetcode.cn/problems/sliding-window-maximum/))
 
 	方法1: 暴力搜索每个slidingwindow。可以用dp思想稍微减少一点对比
 	复杂度： O(1) space, O(nk) time.
@@ -1482,7 +1482,7 @@ s.popitem()                          ## remove the last item
 
 ### 问题及思路
 
-> 1.和为S的两个数字 ([剑指offer Q42](https://www.nowcoder.com/practice/390da4f7a00f44bea7c2f3d19491311b?tpId=13&tqId=11195&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 1.和为S的两个数字 ([剑指offer Q42](https://leetcode.cn/problems/two-sum/))
 
 	方法1: 排序后使用前后两个pointer查找
 	复杂度： O(1) space, O(nlogn) time.
@@ -1490,15 +1490,7 @@ s.popitem()                          ## remove the last item
 	方法2: 使用hash。保存遍历的数字，新数字判断差值是否在hash中
 	复杂度： O(n) space, O(n) time.
 
-> 2.数组中重复的数字 ([剑指offer Q50](https://www.nowcoder.com/practice/623a5ac0ea5b4e5f95552655361ae0a8?tpId=13&tqId=11203&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
-
-	方法1: 使用hash table储存，直到遇到第一个重复的数字
-	复杂度： O(n) space, O(n) time.
-	
-	方法2: 将每个数字i移动到第i个位置。
-	复杂度： O(1) space, O(n) time.
-
-> 3.第一个只出现一次的字符 ([剑指offer Q34](https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 2.第一个只出现一次的字符 ([剑指offer Q34](https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&tqId=11187&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
 
 	方法1: 使用hash table保存遍历结果，value为出现次数。再扫描一次字符串输出第一个value=1的字符
 	复杂度： O(n) space, O(n) time.
@@ -1506,7 +1498,7 @@ s.popitem()                          ## remove the last item
 	方法2: 因为字符个数有限，使用一个unsigned int table[256]保存每个char的出现个数。每个字符对应位置为int(str[i])。
 	复杂度： O(1) space, O(n) time.
 
-> 4.变位词排序 ([CC150 Q52](https://www.nowcoder.com/practice/764edc8f2a6147429a098f422753853b?tpId=8&tqId=11046&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+> 3.变位词排序 ([CC150 Q52](https://www.nowcoder.com/practice/764edc8f2a6147429a098f422753853b?tpId=8&tqId=11046&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
 	方法1: 所有的变位词按照字典序排序后都相同，可视为hash key。使用hash table保存看是否存在即可
 	复杂度： O(n) space, O(nlogn) time.
