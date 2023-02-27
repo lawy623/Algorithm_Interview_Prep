@@ -16,7 +16,7 @@ public:
         }
         return result;
     }
-};    
+};
 
 //My try. Memory limited failed.
 class Solution {

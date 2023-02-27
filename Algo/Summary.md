@@ -1260,7 +1260,7 @@ stack.empty()                                               ## return whether th
 	方法1: 用一个额外的栈按照压入的顺序不断推入，但当该栈顶的数等于弹出序列的头，弹出栈顶数与弹出序列的头（或移动index）
 	复杂度： O(n) space, O(n) time.
 
-> 4.双栈排序 ([CC150 Q15](https://www.nowcoder.com/practice/d0d0cddc1489476da6b782a6301e7dec?tpId=8&tqId=11009&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/23/3.6/))
+> 4.双栈排序 ([CC150 Q15](https://leetcode.cn/problems/sort-of-stacks-lcci/)) ([CC150 Sol](http://hawstein.com/2012/12/23/3.6/))
 
 	方法1: Insertion sort的方法，每次把栈顶插到temp栈对应的地方，temp栈顶大的数先push回原来的栈即可
 	复杂度： O(n) space, O(n^2) time.
@@ -1274,6 +1274,7 @@ stack.empty()                                               ## return whether th
 > 5_2.最长有效括号 ([Leetcode Q32](https://leetcode-cn.com/problems/longest-valid-parentheses))
 
     方法1: 用stack。如果遇'('就把i推入，如果遇到')'就推出顶端，如果空了就把i推入；不空的话就计算现在到顶端的长度。一开始要推入-1
+    思考： 将'(()()'通过栈转化为[1, 0, 0, 0, 0]的序列， 1为不满足的位置。 转化为找到最长的0序列
     复杂度： O(n) space, O(n) time
 	
 > 6_1.最大矩形 ([Leetcode Q84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram))
@@ -1281,7 +1282,7 @@ stack.empty()                                               ## return whether th
     方法1: 固定每个i位置的高度h，双指针向左右延申知道无法增高。
 	复杂度： O(1) space, O(n^2) time.
 	
-	方法2: 单调递增栈。单调递增栈可以找到一直向左、右最后一个比自己大的数（也就是矩形的允许最大的左边界、右边界）
+	方法2: 单调递增栈。单调递增栈可以找到一直向左、右最后一个比自己小的数（也就是矩形的允许最大的左边界、右边界）
 	             只用一次的话，入栈操作标志了左边界，出栈的时候则标志了右边界。
 	复杂度： O(1) space, O(n) time.
 	
