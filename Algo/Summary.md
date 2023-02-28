@@ -1581,7 +1581,12 @@ class Node(object):  # 临接表
 
     方法1: dfs二维数组，当每一个空的位置，尝试往里加1-9的数组，dfs判断剩余的数组是否满足条件。
           注意判断新加的时候，可以判断已存在的数是否与当前冲突。如果冲突就不需要加进去了
-    
+
+> 10.克隆图 ([Leetcode Q133](https://leetcode-cn.com/problems/clone-graph))
+
+    方法1: dfs遍历图，用一个map判断是否经历过该节点。 如果是，dfs直接返回clone节点
+    否则， 创建新的clone节点，node->clone放入map， 同时dfs放入子节点
+
 ---
 <br />
 
