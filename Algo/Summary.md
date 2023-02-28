@@ -78,6 +78,7 @@ l.count(x)				 	## count the number of x
 l.reverse()				 	## inplace reverse
 l.sort()			      	## sort list
 l.sort(cmp=lamba x,y: x-y)  ## sort by cmp (smaller first)
+l.sort(key=functools.cmp_to_key(cmp))  # sort by comp function, comp must return int num (+-)
 len(list)				 	## length
 sum(list)				 	## sum of all elements
 ```
@@ -2042,7 +2043,7 @@ sum(list)				 ## sum of all elements in list
 
 > 1.最大的盛水容器 ([Leetcode Q11](https://leetcode-cn.com/problems/container-with-most-water/))
 
-    方法1: 双指针。每次移动较小值的指针。如果移动较大值的指针，最小高度不变，容积一定减小。因此较小边不可能作为最优的边界， 需要移动
+    方法1: 双指针。每次移动较小值的指针。如果移动较大值的指针，最小高度不变，容积一定减小。因此较小边必然不可能作为最优的边界，可以跳过
     复杂度： O(1) space, O(n) time
     
 > 2_1.跳跃游戏([Leetcode Q55](https://leetcode-cn.com/problems/jump-game))
@@ -2055,7 +2056,7 @@ sum(list)				 ## sum of all elements in list
     
 > 2_2.跳跃游戏II ([Leetcode Q45](https://leetcode-cn.com/problems/jump-game-ii))
 
-    方法1: 贪心算法，每次都向前到最右边能到的边界。等真的到了这个地方，把count++
+    方法1: 贪心算法，每次都向前到最右边能到的边界。等真的到了这个地方，把count++. 需要维护两个边界
     复杂度： O(1) space, O(n) time
     
 > 3.任务管理器 ([Leetcode Q621](https://leetcode-cn.com/problems/task-scheduler/))
@@ -2073,8 +2074,7 @@ sum(list)				 ## sum of all elements in list
     
 > 5.加油站 ([Leetcode Q134](https://leetcode-cn.com/problems/gas-station/submissions/))
 
-    方法1: 从每一个i开始，往后走，记录sumGas和sumCost。任何时刻如果cost>gas说明走不下去。下一次开始必须从走不下去的新节点开始
-          由于是环状，要用余数。如果走过n个节点，那么成功
+    方法1: 能达成的条件是所有的gas-cost的和 >= 0。 同时贪心的记录以每个起点开始的val+=gas-cost， 如果val<0, 归零val并重置起点
     复杂度： O(1) space, O(n) time
     
 ---
@@ -2399,6 +2399,14 @@ sum(list)				 ## sum of all elements in list
 	5.浏览器在显示窗口内渲染HTML。
 	6.窗口关闭时，浏览器终止与服务器的连接。
 
+## 数据库
+### 问题及思路
+
+1. TBD
+
+---
+<br />
+
 ## 编译
 ### 问题及思路
 来自[github](https://github.com/lawy623/interview)
@@ -2471,6 +2479,15 @@ sum(list)				 ## sum of all elements in list
 	volatile的意思是”易变的”，因为访问寄存器比访问内存要快得多，所以编译器一般都会做减少存取内存的优化。
 	volatile 这个关键字会提醒编译器，它声明的变量随时可能发生变化(在外部被修改).
 	因此，与该变量相关的代码不要进行编译优化，以免出错。
+
+---
+<br />
+
+
+## Python
+### 问题及思路
+
+1. TBD
 
 ---
 <br />
