@@ -418,7 +418,7 @@ arr[row][col]                           ## acces the idx
 	方法2: inplace交换，两次翻转。先对角线交换，再垂直方向交换。注意左右/上下/主对角线/副对角线反转方法
 	复杂度： O(1) space, O(n^2) time.
 
-> 4.清除行列 ([CC150 Q7](https://www.nowcoder.com/practice/c95aac1506574dfc8ad44c3939c6739d?tpId=8&tqId=11000&rp=1&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2012/12/09/1.7/))
+> 4.清除行列 ([Leetcode Q73](https://leetcode.cn/problems/set-matrix-zeroes/)) ([CC150 Sol](http://hawstein.com/2012/12/09/1.7/))
 
 	方法1: 用两个一维数组分别表示这一行/列是否出现过0.再扫描一遍只要判断该点的行列是否出现过0即可
 	复杂度： O(n) space, O(n^2) time.
@@ -1521,6 +1521,13 @@ int graph[][]					# Use Adjacency matrix. You can also design Node and use Adjac
 ### Python用法
 ```python
 list = [[]]					# Use Adjacency matrix
+# Do not Use list = [[0]*n]*m, it will copy each element, and change in row affects others
+# Use [[0 for _ in range(n)] for _ in range(m)] with new creation
+
+class Node(object):  # 临接表
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
 ```
 
 ### 问题及思路
@@ -1552,6 +1559,7 @@ list = [[]]					# Use Adjacency matrix
 > 5.迷宫 ([CC150 Q46](https://www.nowcoder.com/practice/365493766c514d0da0cd774d3d40fd49?tpId=8&tqId=11040&rp=3&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=3))
 
 	方法1: bfs. 将输入的map直接当作visit table。queue每次push一个pos(x*m+y)，向四个方向进行查找。map直接保存到达该格的步数
+    注意：如果一定能走通，最短路径必然为m+n-2
 
 > 6.字符串变换最短路径 ([CC150 Q79](https://www.nowcoder.com/practice/4818ae796bbc4a85a8cdd8e155c06d46?tpId=8&tqId=11073&tPage=4&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
 
