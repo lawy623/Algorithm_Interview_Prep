@@ -1618,11 +1618,12 @@ from bitarray import bitarray
 	- a = bitarray(10)		 ## Init bitarray
 	- a[2:5] = 1			 ## Set some bits
 	- a.all()			 ## return if all are 1
+- bitmap可以用于a～z 26个字母的编码
 ```
 
 ### 问题及思路
 
-> 1_1.二进制中的1的个数 ([剑指offer Q11](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/))
+> 1_1.二进制中的1的个数 ([剑指offer Q11](https://leetcode.cn/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/))  ([Leetcode Q191](https://leetcode.cn/problems/number-of-1-bits/)) 
 
 	方法1: for loop 查看每一位的是否为1
 	复杂度： O(1) space, O(1) time.
@@ -1643,7 +1644,7 @@ from bitarray import bitarray
 	方法2: n&(n-1) == 0. 任何一个1000 - 1都是0111的形式，&一定为0
 	复杂度： O(1) space, O(1) time.
 
-> 2_2.数组中只出现一次的两个数字 ([剑指offer Q40](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/))
+> 2_2.数组中只出现一次的两个数字 ([剑指offer Q40](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/))  ([Leetcode Q136](https://leetcode.cn/problems/single-number/))
 
 	方法1: 使用map记录每个数字出现的个数
 	复杂度： O(n) space, O(n) time.
@@ -1651,11 +1652,14 @@ from bitarray import bitarray
 	方法1: 使用xor（a xor a = 0）. 将所有数字xor一遍。找到结果中不为0的一位，则两个数字在这一位必不同
 			按照该位将数字分为两组。分别进行xor并输出两个结果
 	复杂度： O(1) space, O(n) time.
-	相关问题：只出现一次的三个数字(每一位求1的个数和，如果余3为1证明唯一的数这里是1。可拓展到其他情况)
+	相关问题: - 只出现一次的三个数字[Leetcode Q137](每一位求1的个数和，如果余3为1证明唯一的数这里是1。可拓展到其他情况)
+             - 两个元素只出现一次，其他出现两次[Leetcode Q260](全部xor，找到某一位为1， 以此位分隔两组分别进行xor)
 
 > 3.最接近的数 ([CC150 Q27](https://www.nowcoder.com/practice/33ad4d168a3247b9b63f41e4eaded652?tpId=8&tqId=11021&rp=1&ru=%2Fta%2Fcracking-the-coding-interview&qru=%2Fta%2Fcracking-the-coding-interview%2Fquestion-ranking&tPage=2)) ([CC150 Sol](http://hawstein.com/2013/01/04/5.3/))
 
-	方法1: 对于0001100，更大的一个数是另左边第二次出现连续的0时成为1,后面补0->0010000
+    方法1：从n往大找到第一个count相同的， 往下找到第一个count相同的
+
+	方法2: 对于0001100，更大的一个数是另左边第二次出现连续的0时成为1,后面补0->0010000
 		再将后面多加不足的1->0010001. 整个过程为x + 1<<c_0 + 1<<(c_01-1) - 1,c_0=2,c_01=2
 		对于1100011，更小的一个数是另左边第二次出现连续的1时成为0，后面补1->1011111
 		再将后面多余的1变成0->1011100. 整个过程为x - (1<<c_1) - 1<<(c_10-1) + 1, c_1=2,c_10=3
@@ -1673,6 +1677,8 @@ from bitarray import bitarray
 	方法2: dfs。添不添加自己都做一次dfs。
 	复杂度： O(2^n) space, O(2^n) time.
 	
+    相关问题: 子集II[Leetcode Q90] (有重复数字， 先排序， 把idenity key加入set判断）
+
 > 5_2.集合数量为k的子集 ([Leetcode Q77](https://leetcode-cn.com/problems/combinations))
     
     方法1: 一个集合的全排列可以用n个1表示，则最大为2^n-1, 最小为1(非空子集)。当1的个数为k时加入
@@ -1680,6 +1686,8 @@ from bitarray import bitarray
 	
 	方法2: dfs。需要用两个start+cur保存现在的位置和当前的个数
 	复杂度： O(2^n) space, O(2^n) time.
+
+    相关题目: 组合总数III[Leetcode Q216]（同时要求数量和总数相同，添加一个剪枝条件即可）
 
 > 6_1.组合总数(有重复元素，但是不可重复挑选) ([Leetcode Q40](https://leetcode-cn.com/problems/combination-sum-ii/))
 
@@ -1702,10 +1710,10 @@ from bitarray import bitarray
 > 8.最大单词长度乘积 ([Leetcode Q318](https://leetcode-cn.com/problems/maximum-product-of-word-lengths/submissions/))
 
     方法1: 将每个单词使用bit编码成一个int， 查看是否有重复只需要用&即可
-	复杂度： O(L+n^2) space, O(2^n) time.
+	复杂度： O(L+n^2) space, O(n^2) time.
 	
 	方法2：编码成int之后， 只需要用map储存最大的单词长度即可
-	复杂度：  O(L+n^2) space, O(2^n) time.
+	复杂度：  O(L+n^2) space, O(n^2) time.
 
 ---
 <br />
