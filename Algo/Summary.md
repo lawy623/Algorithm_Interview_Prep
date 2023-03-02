@@ -1721,15 +1721,15 @@ from bitarray import bitarray
 # <h2 id="12">动态规划（Dynamic Programming）</h2>
 ### 问题及思路
 
-> 1.斐波拉契数列 ([剑指offer Q7](https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&tqId=11160&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 1.斐波拉契数列 ([剑指offer Q7](https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&tqId=11160&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)) ([Leetcode Q509](https://leetcode.cn/problems/fibonacci-number/))
 
 	方法1: for loop 动态计算后面的值，注意溢出，long long保存结果
 	复杂度： O(1) space, O(n) time.
 	相关： 青蛙跳， 矩形覆盖
 
-> 2.连续子数组的最大和 ([剑指offer Q30](https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/)) ([Leetcode 53](https://leetcode-cn.com/problems/maximum-subarray/))
+> 2.连续子数组的最大和 ([剑指offer Q30](https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/)) ([Leetcode Q53](https://leetcode-cn.com/problems/maximum-subarray/))
 
-	方法1: 使用一个额外的sum保存到该数的最大sum。如果sum为负则定义改出的sum为自身（最大sum必然不包括前面的负数和）
+	方法1: 使用一个额外的sum保存到该数的最大sum。如果sum为负则定义改出的sum为0（最大sum必然不包括前面的负数和）
 	复杂度： O(1) space, O(n) time.
 	相关问题：最大和子矩阵[CC150 Q81]: 每次将i～j行加起来，求连续字数组最大和。O(n)space，O(n^3) time.
 
@@ -1751,9 +1751,9 @@ from bitarray import bitarray
 			即 dp[i][j] = min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + (S[i]!=T[j]))
 	复杂度： O(nm) space, O(mn) time.
 
-> 5.交替字符串 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.04.html))
+> 5.交替字符串 ([程序员编程艺术](http://frank19900731.github.io/ebook/the-art-of-programming-by-july/05.04.html))  ([Leetcode Q97](https://leetcode.cn/problems/interleaving-string/))
 
-	方法1: dp[i][j]表示C[:i+j]由A[:i], B[:j]交替而得
+	方法1: dp[i][j]表示C[:i+j]由A[:i], B[:j]交替而得
 			状态转移: dp[i][j] = 1 if:
 							dp[i][j-1]==1 && C[i+j]==B[j] ||
 							dp[i-1][j]==1 && C[i+j]==A[i]
@@ -1765,22 +1765,24 @@ from bitarray import bitarray
 	方法1: dp[i]表示以A[i]结尾的序列的最长递增子序列. dp[0]=1
 			状态转移: dp[j] = max(A[i]+1 for 0<=i<j and A[i]<A[j]). If not exist. A[j]=1
 	复杂度： O(n) space, O(n^2) time.
-	相关问题：最长公共子序列([Leetcode Q1143])
+	相关问题：(1)最长公共子序列([Leetcode Q1143])
 				Xm=Yn -> LCS(m,n)=LCS(m-1,n-1)+1;
 				Xm!=Yn -> LCS(m,n)=max{LCS(m-1,n)+LCS(m,n-1)}
-		    最短删除距离([Leetcode Q583]) 等价于求出LCS之后，m+n-2*LCS(m,n)
+            (2)最短删除距离([Leetcode Q583]) 等价于求出LCS之后，m+n-2*LCS(m,n)
 		    
     方法2：dp+二分查找。维护一个动态的vector，先放入nums。每次遍历nums中的其他值。
           如果n<dp[0],替换dp[0];如果n>dp[-1]，插入最后。否则在dp中找到第一个比dp大的数，替换为n。dp数组一定是单调增加的，其大小为长的序列大小
           但是这个证明比较难理解
     复杂度： O(n) space, O(nlogn) time.      
 
-> 7.硬币组合 ([CC150 Q47](hhttps://www.nowcoder.com/practice/c0503ca0a12d4256af33fce2712d7b24?tpId=8&tqId=11041&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](https://www.cnblogs.com/python27/archive/2013/09/05/3303721.html))
+> 7.硬币组合 ([CC150 Q47](https://leetcode.cn/problems/coin-lcci/)) ([CC150 Sol](https://www.cnblogs.com/python27/archive/2013/09/05/3303721.html))
+    
+    【类似0-1背包问题】
 
 	不能直接使用dp进行规划，因为没有分硬币种类dp的时候会重复计算组合
 	方法1: dp[m][sum]表示前m个硬币组成sum的方法数。
-			状态转移: dp[m] = dp[m-1][sum-k*coins[m]] for k=0,...,sum/coins[m].
-			实际递归的时候可以用dp[m-1][sum]+dp[m][sum-coins[m]],但要保证sum>=coins
+			状态转移: dp[m][sum] = sum of (dp[m-1][sum-k*coins[m]] for k=0,...,sum/coins[m]).
+			考虑 dp[m-1][sum]+dp[m][sum-coins[m]]更容易理解, 但要保证sum>=coins
 	复杂度： O(kn) space, O(kn) time.
 	
 	方法2: 同方法1，但是可以只用一个O(n)的vec表示，每次加入新的coin只更新coins[m]~n的这部分，转移函数为
@@ -1896,7 +1898,10 @@ from bitarray import bitarray
                 }
                 return dp[sum];
     复杂度： O(sum) space, O(n*target) time
-    
+
+> 21.分割等和子集 ([Leetcode Q416](https://leetcode.cn/problems/partition-equal-subset-sum/))
+
+    是背包问题的变种
 ---
 <br />
 
