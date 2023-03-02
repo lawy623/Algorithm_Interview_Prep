@@ -12,6 +12,7 @@ Python all useful package and things:
     l.reverse()				 ## inplace reverse
     l.sort()				 ## sort list
     l.sort(cmp=lamba x,y: x-y) ## sort by cmp (smaller first)
+    l.sort(key=functools.cmp_to_key(cmp))  # sort by comp function, comp must return int num (+-)
     len(list)				 ## length
     sum(list)				 ## sum of all elements
 

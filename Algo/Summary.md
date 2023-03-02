@@ -1940,6 +1940,7 @@ sum(list)				 ## sum of all elements in list
 	方法1: 主要考察是否覆盖全部case(0^0, 0^neg, 0^pos, n^0, n^neg, n^pos).
 		  注意的是，对于c++，判断浮点数是否为0应留有error
 		  对于exp的计算，可以用二分法(x&1==1)
+          注意：其实就是递归计算就可以
 	复杂度： O(1) space, O(logn) time.
 
 > 2.从1到n整数中1出现的次数 ([剑指offer Q31](https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/)) ([Leetcode Q233](https://leetcode-cn.com/problems/number-of-digit-one))
@@ -1959,25 +1960,27 @@ sum(list)				 ## sum of all elements in list
 	}
 	return count;
 
+    方法2：转化成str， 用递归的方法判断每一位上1的次数
+    复杂度： O(1) space, O(logn) time.
+
 > 3.丑数 ([剑指offer Q33](https://leetcode-cn.com/problems/chou-shu-lcof/)) ([Leetcode Q264](https://leetcode-cn.com/problems/ugly-number-ii/))
 
 	方法1: 用三个队列分别表示x2,x3,x5的结果。每次讲三个队列最小的头推出加入输出数组（重复则一起推出）。
 			将该数x2,x3,x5之后分别推入三个队列的尾部
 			实现的时候可以只采用一个输出数组，并用3个指针指向该输出数组的位置，减少extra space。
-	复杂度： O(1) space, O(n) time.
+            注意： 其实可以理解为dp， 每次推入都是最小可能的一个
+    复杂度： O(1) space, O(n) time.
 	相似题目：超级丑数 ([剑指offer Q311]）：增加了prime的数量。用同样的方法for loop即可
 
 > 4.不使用加减乘除和判断语句求1～n的和 ([剑指offer Q47](https://leetcode-cn.com/problems/qiu-12n-lcof/))
 
 	方法1: 采用递归. n==0时 n && 不再计算直接返回。主要就是怎么样停止循环
 	复杂度： O(1) space, O(logn) time.
-	 int res = n;
-	 n && (res += Sum_Solution(n-1));
-	 return res;
+	        return n and (n + sum(n-1))
 
-> 5_1.不用加减乘除做加法 ([剑指offer Q48](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking))
+> 5_1.不用加减乘除做加法 ([剑指offer Q48](https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/))
 
-	方法1: 位运算。a=a^b， b=a&b<<1。直到b不为0
+	方法1: 位运算。两个数不进位的和位a^b， 进位的结果为(a&b)<<1。将a，b分别替换为和与进位，直到b不为0
 
 > 5_2.整数除法 ([Leetcode Q29](https://leetcode-cn.com/problems/divide-two-integers/))
 
@@ -1987,7 +1990,7 @@ sum(list)				 ## sum of all elements in list
 
 	方法1: 整数部分通过%2再/2一步步向前，小数部分对比1/2^i一步步向后
 
-> 7.无缓存交换 ([CC150 Q60](https://www.nowcoder.com/practice/845ec89145b04b2b855d020d9c3ea2ef?tpId=8&tqId=11054&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking)) ([CC150 Sol](http://hawstein.com/2013/02/20/19.1/))
+> 7.无缓存交换 ([CC150 Q60](https://leetcode.cn/problems/swap-numbers-lcci/)) ([CC150 Sol](http://hawstein.com/2013/02/20/19.1/))
 
 	方法1: b = a - b
 		  a = a - b = b
