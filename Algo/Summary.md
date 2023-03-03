@@ -1215,6 +1215,10 @@ class TreeNode:
             };
             用此结构记录每一个节点，isEnd用于记录此节点是否为终点。Root为一个isEnd为true的节点
 	复杂度： O(n) space, O(n) time
+
+> 23.不同的二叉搜索树II ([Leetcode Q95](https://leetcode.cn/problems/unique-binary-search-trees-ii/))
+
+    方法1: 以1～n每个顶点作为root， 分别递归求出左右子树， 然后combine成root的左右组合
 		
 ---
 <br />
@@ -1858,7 +1862,7 @@ from bitarray import bitarray
     
 > 16.不同的二叉搜索树 ([Leetcode Q96](https://leetcode-cn.com/problems/unique-binary-search-trees))
 
-    方法1: dp[i] = sum(dp[j-1]*dp[i-j])
+    方法1: n个node时，从1～n分别可以是root节点，剩下的分成i-1/n-i份分别在左右，总数相乘dp[n] = sum(dp[i-1]*dp[n-i]) for i in 1~n
     复杂度： O(n) space, O(n^2) time
     
     方法2: 数学归纳法。dp[i+1] = 2(2n+1)/(n+2) dp[i]
@@ -1869,12 +1873,16 @@ from bitarray import bitarray
 
     方法1: 用一个set保存可行的单词选择。dp[i] = dp[j] && set.contains(s.substr(j, i-j)) for all j. 某个点为true就可设置为true
     复杂度： O(n) space, O(n^2) time
+    相关题目: 单词拆分II(Leetcode Q140]）dp保存前面的组合list， 后序加入即可
     
 > 18.打家劫舍III ([Leetcode Q337](https://leetcode-cn.com/problems/house-robber-iii))
 
     方法1: 用一个vector<int> res(2)表示取和不取当前node的最大结果。
           res[0] = max(l[0], l[1]) + max(r[0], r[1]) 不取当前node，保证下面都是最大的
           res[1] = root->val + l[0] + r[0] 取当前node，保证下面都是没取左右孩子的
+
+    相关题目：打家劫舍 ([Leetcode Q198]: dp[i]=max(dp[i-1], dp[i-2]+nums[i])
+             打家劫舍II ([Leetcode Q213]: 拆成[1:][:-1]两个避免无环，返回最大的
     
 > 19.零钱组合 ([Leetcode Q322](https://leetcode-cn.com/problems/coin-change))
 
@@ -1883,7 +1891,10 @@ from bitarray import bitarray
     
 > 20_1.分割等和子集 ([Leetcode Q416](https://leetcode-cn.com/problems/partition-equal-subset-sum/))
 
-    方法1: 等价于取出子集中n个元素，和为整个和的一般（01背包问题）
+    转换成 0-1背包问题
+
+    方法1: 等价于取出子集中n个元素，和为整个和的一般（01背包问题）. 
+          递归函数为dp[n][sum]=dp[n-1][sum]||dp[n-1][sum-nums[n]], d[i][0]=True
     复杂度： O(sum) space, O(n*target) time
     相似题目： 01背包-所有的背包问题都可以化成二维dp数组，然后可以化简为1维dp
     
@@ -1899,9 +1910,23 @@ from bitarray import bitarray
                 return dp[sum];
     复杂度： O(sum) space, O(n*target) time
 
-> 21.分割等和子集 ([Leetcode Q416](https://leetcode.cn/problems/partition-equal-subset-sum/))
+> 21.买卖股票系列 ([Leetcode Q121](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)) ([Leetcode Q122](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/)) ([Leetcode Q123](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/)) ([Leetcode Q124](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iiii/))
+    
+    买卖1：找到最大profit。只需要keep住最小的价格，更新最大的profit即可
+    复杂度: O(1) space, O(n) time 
 
-    是背包问题的变种
+    买卖2：可以取多段的profit。可以用贪心，只有两天之间有profit就进行操作
+    复杂度: O(1) space, O(n) time 
+
+    买卖3：最多卖两次。考虑四个变量buy1/2, sell1/2，分别是在每天进行操作的最大收益。 buy初始为int_min, sell初始为0
+          buy1 = max(buy1, -p), sell1 = max(sell1, buy1+p)
+          buy2 = max(buy2, sell1-p), sell2 = max(sell2, buy2+p)
+          sell2就是最后最大的结果
+    复杂度: O(1) space, O(n) time
+
+    买卖4：最多卖k次。直接化成k组buy/sell变量计算
+    复杂度: O(k) space, O(kn) time
+
 ---
 <br />
 
