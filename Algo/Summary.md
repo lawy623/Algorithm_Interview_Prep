@@ -1789,29 +1789,29 @@ from bitarray import bitarray
 			dp[j] = (dp[j]+dp[j-coins[i]]), for j=coins[i]~n, for i=1~4. dp[0]=0
 	复杂度： O(n) space, O(kn) time.
 
-> 8.堆箱子的最大高度 ([CC150 Q48](https://www.nowcoder.com/practice/daaec37090484f4587d0e8f5b612cda1?tpId=8&tqId=11043&rp=3&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+> 8.堆箱子的最大高度 ([CC150 Q48](https://leetcode.cn/problems/pile-box-lcci/))
 
-	方法1: 先将w, l, h都按照w的降序排列，然后求l中h最大递减子序列。同6中的方法
+	方法1: 按照（w,l,h)的tuple升序排列，求一维LCS（满足三维都升序）.
 	复杂度： O(n) space, O(n^2) time.
 	相关问题：最长递增子序列
 
-> 9.最大子方阵 ([CC150 Q80](https://www.nowcoder.com/practice/008759ec032e44c6b615f7b6a5b752aa?tpId=8&tqId=11074&rp=4&ru=/ta/cracking-the-coding-interview&qru=/ta/cracking-the-coding-interview/question-ranking))
+> 9.最大子方阵 ([CC150 Q80](https://leetcode.cn/problems/max-submatrix-lcci/))
 
 	方法1: 暴力查找以每个顶点每个长度组成的方阵是否满足要求
 	复杂度： O(1) space, O(n^3) time.
 	
-	方法2: 用两个dp矩阵保存到某点的左边和上面的最长相等长度。可用dp来计算。
-	      求解时逐步遍历长度找到相对应的左和上点判断其上/左长度是否满足。
+	方法2: 利用最大子数组和，每次从i～j行相加构造一个数组计算
 	复杂度： O(^2) space, 最差O(n^3) time，但会稍好.
 
 > 10.剪绳子 ([剑指offer Q75](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/))
 
     方法1： dp记录，更新为(max(dp[i], dp[i-k]*d[k]) for all valid k). 主要记得dp[3]的输出跟状态初始并不一样
+           主要注意的是n<=3时， dp的状态与输出的数量并不一致
     复杂度: O(n) space, O(n^2) time.
 
 > 11.数字翻译成字符串 ([剑指offer Q68](https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof))
 
-    方法1：f(i) = f(i-1) + f(i-2)[i-1,i goes for valid val]
+    方法1：f(i) = f(i-1) + f(i-2)[i-1,i goes for valid val]. 需要注意的是两位组成的'0x'情况并不是valid的
     复杂度: O(1) space, O(n) time.
     
     方法2：递归  translateNum(num / 10) + translateNum(num / 100) * (translateNum(num % 100) - 1);
